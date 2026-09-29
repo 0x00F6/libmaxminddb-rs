@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 500" width="100%" height="500" class="memory-chart" data-y-min="-50.826875" data-y-max="776.90109375">
+<style>svg { background-color: #0d1117; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }text { fill: #c9d1d9; }.chart-title { fill: #f0f6fc; font-size: 20px; font-weight: 700; letter-spacing: -0.2px; }.chart-subtitle { fill: #8b949e; font-size: 14px; font-weight: 400; }.axis-line { stroke: #30363d; stroke-width: 1.5; }.grid-line { stroke: #21262d; stroke-dasharray: 4,4; stroke-width: 1; }.axis-label { fill: #8b949e; font-size: 13px; }.svg-value { fill: #f0f6fc; font-size: 13px; font-weight: 700; }.legend-text { fill: #c9d1d9; font-size: 13px; font-weight: 600; }.memory-chart .memory-series { outline: none; }.memory-chart:has(.memory-series:hover, .memory-series:focus-visible) .memory-series:not(:hover):not(:focus-visible) { opacity: .15; }</style>
+<text x="20" y="38" class="chart-title">RSS After Open (mmap)</text>
+<text x="20" y="62" class="chart-subtitle">Median of 3 isolated processes · Zoomed Y axis (not zero-based)</text>
+<line x1="85" y1="430" x2="880" y2="430" class="axis-line"/>
+<line x1="85" y1="85" x2="85" y2="430" class="axis-line"/>
+<line x1="85" y1="430" x2="880" y2="430" class="grid-line"/>
+<text x="75" y="434" class="axis-label" text-anchor="end">-50.83 MiB</text>
+<line x1="85" y1="361" x2="880" y2="361" class="grid-line"/>
+<text x="75" y="365" class="axis-label" text-anchor="end">114.72 MiB</text>
+<line x1="85" y1="292" x2="880" y2="292" class="grid-line"/>
+<text x="75" y="296" class="axis-label" text-anchor="end">280.26 MiB</text>
+<line x1="85" y1="223" x2="880" y2="223" class="grid-line"/>
+<text x="75" y="227" class="axis-label" text-anchor="end">445.81 MiB</text>
+<line x1="85" y1="154" x2="880" y2="154" class="grid-line"/>
+<text x="75" y="158" class="axis-label" text-anchor="end">611.36 MiB</text>
+<line x1="85" y1="85" x2="880" y2="85" class="grid-line"/>
+<text x="75" y="89" class="axis-label" text-anchor="end">776.90 MiB</text>
+<text x="85" y="455" class="axis-label" text-anchor="middle">1K</text>
+<text x="198" y="455" class="axis-label" text-anchor="middle">10K</text>
+<text x="312" y="455" class="axis-label" text-anchor="middle">100K</text>
+<text x="425" y="455" class="axis-label" text-anchor="middle">500K</text>
+<text x="539" y="455" class="axis-label" text-anchor="middle">1M</text>
+<text x="652" y="455" class="axis-label" text-anchor="middle">1.5M</text>
+<text x="766" y="455" class="axis-label" text-anchor="middle">2M</text>
+<text x="880" y="455" class="axis-label" text-anchor="middle">5M</text>
+<g class="memory-series" data-series="libmaxminddb-rs" tabindex="0" role="group" aria-label="libmaxminddb-rs — hover or focus to highlight">
+<polyline points="85,406 198,405 312,394 425,366 539,335 652,300 766,270 880,109" fill="none" stroke="#00f5a0" stroke-width="2.5" stroke-linejoin="round"/>
+<circle r="8" transform="translate(85 406)" fill="none" stroke="#00f5a0" stroke-width="1.8" style="cursor:pointer"><title>libmaxminddb-rs: 7.50390625 MiB (7868416 bytes) @ 1K</title></circle>
+<circle r="8" transform="translate(198 405)" fill="none" stroke="#00f5a0" stroke-width="1.8" style="cursor:pointer"><title>libmaxminddb-rs: 9.71484375 MiB (10186752 bytes) @ 10K</title></circle>
+<circle r="8" transform="translate(312 394)" fill="none" stroke="#00f5a0" stroke-width="1.8" style="cursor:pointer"><title>libmaxminddb-rs: 35.265625 MiB (36978688 bytes) @ 100K</title></circle>
+<circle r="8" transform="translate(425 366)" fill="none" stroke="#00f5a0" stroke-width="1.8" style="cursor:pointer"><title>libmaxminddb-rs: 102.2109375 MiB (107175936 bytes) @ 500K</title></circle>
+<circle r="8" transform="translate(539 335)" fill="none" stroke="#00f5a0" stroke-width="1.8" style="cursor:pointer"><title>libmaxminddb-rs: 176.12109375 MiB (184676352 bytes) @ 1M</title></circle>
+<circle r="8" transform="translate(652 300)" fill="none" stroke="#00f5a0" stroke-width="1.8" style="cursor:pointer"><title>libmaxminddb-rs: 261.390625 MiB (274087936 bytes) @ 1.5M</title></circle>
+<circle r="8" transform="translate(766 270)" fill="none" stroke="#00f5a0" stroke-width="1.8" style="cursor:pointer"><title>libmaxminddb-rs: 331.921875 MiB (348045312 bytes) @ 2M</title></circle>
+<circle r="8" transform="translate(880 109)" fill="none" stroke="#00f5a0" stroke-width="1.8" style="cursor:pointer"><title>libmaxminddb-rs: 719.81640625 MiB (754782208 bytes) @ 5M</title></circle>
+<line x1="900" y1="105" x2="932" y2="105" stroke="#00f5a0" stroke-width="2.5"/>
+<circle r="8" transform="translate(916 105)" fill="none" stroke="#00f5a0" stroke-width="1.8" style="cursor:pointer"></circle>
+<text x="942" y="109" class="legend-text">libmaxminddb-rs</text>
+</g>
+<g class="memory-series" data-series="libmaxminddb" tabindex="0" role="group" aria-label="libmaxminddb (C) — hover or focus to highlight">
+<polyline points="85,406 198,406 312,406 425,406 539,406 652,406 766,406 880,406" fill="none" stroke="#f5c542" stroke-width="2.5" stroke-linejoin="round"/>
+<rect x="-6" y="-6" width="12" height="12" transform="translate(85 406)" fill="none" stroke="#f5c542" stroke-width="1.8" style="cursor:pointer"><title>libmaxminddb (C): 6.33984375 MiB (6647808 bytes) @ 1K</title></rect>
+<rect x="-6" y="-6" width="12" height="12" transform="translate(198 406)" fill="none" stroke="#f5c542" stroke-width="1.8" style="cursor:pointer"><title>libmaxminddb (C): 6.359375 MiB (6668288 bytes) @ 10K</title></rect>
+<rect x="-6" y="-6" width="12" height="12" transform="translate(312 406)" fill="none" stroke="#f5c542" stroke-width="1.8" style="cursor:pointer"><title>libmaxminddb (C): 6.328125 MiB (6635520 bytes) @ 100K</title></rect>
+<rect x="-6" y="-6" width="12" height="12" transform="translate(425 406)" fill="none" stroke="#f5c542" stroke-width="1.8" style="cursor:pointer"><title>libmaxminddb (C): 6.44140625 MiB (6754304 bytes) @ 500K</title></rect>
+<rect x="-6" y="-6" width="12" height="12" transform="translate(539 406)" fill="none" stroke="#f5c542" stroke-width="1.8" style="cursor:pointer"><title>libmaxminddb (C): 6.2578125 MiB (6561792 bytes) @ 1M</title></rect>
+<rect x="-6" y="-6" width="12" height="12" transform="translate(652 406)" fill="none" stroke="#f5c542" stroke-width="1.8" style="cursor:pointer"><title>libmaxminddb (C): 6.38671875 MiB (6696960 bytes) @ 1.5M</title></rect>
+<rect x="-6" y="-6" width="12" height="12" transform="translate(766 406)" fill="none" stroke="#f5c542" stroke-width="1.8" style="cursor:pointer"><title>libmaxminddb (C): 6.3671875 MiB (6676480 bytes) @ 2M</title></rect>
+<rect x="-6" y="-6" width="12" height="12" transform="translate(880 406)" fill="none" stroke="#f5c542" stroke-width="1.8" style="cursor:pointer"><title>libmaxminddb (C): 6.34765625 MiB (6656000 bytes) @ 5M</title></rect>
+<line x1="900" y1="129" x2="932" y2="129" stroke="#f5c542" stroke-width="2.5"/>
+<rect x="-6" y="-6" width="12" height="12" transform="translate(916 129)" fill="none" stroke="#f5c542" stroke-width="1.8" style="cursor:pointer"></rect>
+<text x="942" y="133" class="legend-text">libmaxminddb (C)</text>
+</g>
+<g class="memory-series" data-series="maxminddb-rust" tabindex="0" role="group" aria-label="maxminddb-rust — hover or focus to highlight">
+<polyline points="85,406 198,406 312,406 425,406 539,406 652,406 766,406 880,406" fill="none" stroke="#ff8800" stroke-width="2.5" stroke-linejoin="round" stroke-dasharray="10 14"/>
+<path d="M 0 -4 L 4 0 L 0 4 L -4 0 Z" transform="translate(85 406)" fill="none" stroke="#ff8800" stroke-width="1.8" style="cursor:pointer"><title>maxminddb-rust: 6.52734375 MiB (6844416 bytes) @ 1K</title></path>
+<path d="M 0 -4 L 4 0 L 0 4 L -4 0 Z" transform="translate(198 406)" fill="none" stroke="#ff8800" stroke-width="1.8" style="cursor:pointer"><title>maxminddb-rust: 6.5234375 MiB (6840320 bytes) @ 10K</title></path>
+<path d="M 0 -4 L 4 0 L 0 4 L -4 0 Z" transform="translate(312 406)" fill="none" stroke="#ff8800" stroke-width="1.8" style="cursor:pointer"><title>maxminddb-rust: 6.4921875 MiB (6807552 bytes) @ 100K</title></path>
+<path d="M 0 -4 L 4 0 L 0 4 L -4 0 Z" transform="translate(425 406)" fill="none" stroke="#ff8800" stroke-width="1.8" style="cursor:pointer"><title>maxminddb-rust: 6.52734375 MiB (6844416 bytes) @ 500K</title></path>
+<path d="M 0 -4 L 4 0 L 0 4 L -4 0 Z" transform="translate(539 406)" fill="none" stroke="#ff8800" stroke-width="1.8" style="cursor:pointer"><title>maxminddb-rust: 6.484375 MiB (6799360 bytes) @ 1M</title></path>
+<path d="M 0 -4 L 4 0 L 0 4 L -4 0 Z" transform="translate(652 406)" fill="none" stroke="#ff8800" stroke-width="1.8" style="cursor:pointer"><title>maxminddb-rust: 6.51953125 MiB (6836224 bytes) @ 1.5M</title></path>
+<path d="M 0 -4 L 4 0 L 0 4 L -4 0 Z" transform="translate(766 406)" fill="none" stroke="#ff8800" stroke-width="1.8" style="cursor:pointer"><title>maxminddb-rust: 6.5 MiB (6815744 bytes) @ 2M</title></path>
+<path d="M 0 -4 L 4 0 L 0 4 L -4 0 Z" transform="translate(880 406)" fill="none" stroke="#ff8800" stroke-width="1.8" style="cursor:pointer"><title>maxminddb-rust: 6.51171875 MiB (6828032 bytes) @ 5M</title></path>
+<line x1="900" y1="153" x2="932" y2="153" stroke="#ff8800" stroke-width="2.5" stroke-dasharray="10 14"/>
+<path d="M 0 -4 L 4 0 L 0 4 L -4 0 Z" transform="translate(916 153)" fill="none" stroke="#ff8800" stroke-width="1.8" style="cursor:pointer"></path>
+<text x="942" y="157" class="legend-text">maxminddb-rust</text>
+</g>
+<g class="memory-series" data-series="geoip2-rs" tabindex="0" role="group" aria-label="geoip2-rs — hover or focus to highlight">
+<polyline points="85,406 198,406 312,406 425,406 539,406 652,406 766,406 880,406" fill="none" stroke="#ff3b5c" stroke-width="2.5" stroke-linejoin="round" stroke-dasharray="6 18" stroke-dashoffset="-14"/>
+<circle r="2" transform="translate(85 406)" fill="#ff3b5c" stroke="#ff3b5c" stroke-width="1.8" style="cursor:pointer"><title>geoip2-rs: 6.32421875 MiB (6631424 bytes) @ 1K</title></circle>
+<circle r="2" transform="translate(198 406)" fill="#ff3b5c" stroke="#ff3b5c" stroke-width="1.8" style="cursor:pointer"><title>geoip2-rs: 6.30078125 MiB (6606848 bytes) @ 10K</title></circle>
+<circle r="2" transform="translate(312 406)" fill="#ff3b5c" stroke="#ff3b5c" stroke-width="1.8" style="cursor:pointer"><title>geoip2-rs: 6.2890625 MiB (6594560 bytes) @ 100K</title></circle>
+<circle r="2" transform="translate(425 406)" fill="#ff3b5c" stroke="#ff3b5c" stroke-width="1.8" style="cursor:pointer"><title>geoip2-rs: 6.32421875 MiB (6631424 bytes) @ 500K</title></circle>
+<circle r="2" transform="translate(539 406)" fill="#ff3b5c" stroke="#ff3b5c" stroke-width="1.8" style="cursor:pointer"><title>geoip2-rs: 6.28125 MiB (6586368 bytes) @ 1M</title></circle>
+<circle r="2" transform="translate(652 406)" fill="#ff3b5c" stroke="#ff3b5c" stroke-width="1.8" style="cursor:pointer"><title>geoip2-rs: 6.3203125 MiB (6627328 bytes) @ 1.5M</title></circle>
+<circle r="2" transform="translate(766 406)" fill="#ff3b5c" stroke="#ff3b5c" stroke-width="1.8" style="cursor:pointer"><title>geoip2-rs: 6.29296875 MiB (6598656 bytes) @ 2M</title></circle>
+<circle r="2" transform="translate(880 406)" fill="#ff3b5c" stroke="#ff3b5c" stroke-width="1.8" style="cursor:pointer"><title>geoip2-rs: 6.30859375 MiB (6615040 bytes) @ 5M</title></circle>
+<line x1="900" y1="177" x2="932" y2="177" stroke="#ff3b5c" stroke-width="2.5" stroke-dasharray="6 18" stroke-dashoffset="-14"/>
+<circle r="2" transform="translate(916 177)" fill="#ff3b5c" stroke="#ff3b5c" stroke-width="1.8" style="cursor:pointer"></circle>
+<text x="942" y="181" class="legend-text">geoip2-rs</text>
+</g>
+<text x="85" y="485" class="axis-label">Overlapping curves use distinct lines and markers. Hover a legend or use Tab to highlight.</text>
+</svg>

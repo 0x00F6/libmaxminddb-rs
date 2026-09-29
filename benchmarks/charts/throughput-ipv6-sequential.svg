@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 350" width="100%" height="350">
+<style>svg { background-color: #0d1117; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }text { fill: #c9d1d9; }.chart-title { fill: #f0f6fc; font-size: 20px; font-weight: 700; letter-spacing: -0.2px; }.chart-subtitle { fill: #8b949e; font-size: 14px; font-weight: 400; }.svg-bar-track { fill: #161b22; }.svg-value { fill: #f0f6fc; font-size: 13px; font-weight: 700; }</style>
+<text x="20" y="38" class="chart-title">IPv6 Throughput — Sequential Lookups (1M)</text>
+<text x="20" y="62" class="chart-subtitle">Single-threaded operations/sec on sequential workload (higher is better)</text>
+<text x="170" y="103" font-size="13" font-weight="600" text-anchor="end">libmaxminddb-rs 🏆</text>
+<rect x="185" y="85" width="640" height="26" rx="4" class="svg-bar-track"/>
+<rect x="185" y="85" width="640" height="26" rx="4" fill="#00f5a0" opacity="0.9"><title>libmaxminddb-rs: 3.21 M ops/s (IPv6 Throughput — Sequential Lookups (1M))</title></rect>
+<text x="837" y="103" class="svg-value">3.21 M ops/s</text>
+<text x="170" y="151" font-size="13" font-weight="600" text-anchor="end">libmaxminddb (C)</text>
+<rect x="185" y="133" width="640" height="26" rx="4" class="svg-bar-track"/>
+<rect x="185" y="133" width="356" height="26" rx="4" fill="#f5c542" opacity="0.9"><title>libmaxminddb (C): 1.79 M ops/s (IPv6 Throughput — Sequential Lookups (1M))</title></rect>
+<text x="553" y="151" class="svg-value">1.79 M ops/s</text>
+<text x="170" y="199" font-size="13" font-weight="600" text-anchor="end">maxminddb-rust</text>
+<rect x="185" y="181" width="640" height="26" rx="4" class="svg-bar-track"/>
+<rect x="185" y="181" width="289" height="26" rx="4" fill="#ff8800" opacity="0.9"><title>maxminddb-rust: 1.45 M ops/s (IPv6 Throughput — Sequential Lookups (1M))</title></rect>
+<text x="486" y="199" class="svg-value">1.45 M ops/s</text>
+<text x="170" y="247" font-size="13" font-weight="600" text-anchor="end">geoip2-rs</text>
+<rect x="185" y="229" width="640" height="26" rx="4" class="svg-bar-track"/>
+<rect x="185" y="229" width="376" height="26" rx="4" fill="#ff3b5c" opacity="0.9"><title>geoip2-rs: 1.89 M ops/s (IPv6 Throughput — Sequential Lookups (1M))</title></rect>
+<text x="573" y="247" class="svg-value">1.89 M ops/s</text>
+<text x="170" y="295" font-size="13" font-weight="600" text-anchor="end">maxminddb-golang</text>
+<rect x="185" y="277" width="640" height="26" rx="4" class="svg-bar-track"/>
+<rect x="185" y="277" width="265" height="26" rx="4" fill="#00add8" opacity="0.9"><title>maxminddb-golang: 1.33 M ops/s (IPv6 Throughput — Sequential Lookups (1M))</title></rect>
+<text x="462" y="295" class="svg-value">1.33 M ops/s</text>
+</svg>

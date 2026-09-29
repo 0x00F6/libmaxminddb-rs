@@ -1,0 +1,9 @@
+# Nextest configuration consumed by `make test`.
+#
+# The `ci` profile is used by the test target so that results are also written
+# as a JUnit XML report to target/test_results.xml. `scripts/generate_test_report.py`
+# consumes that file and renders test-report/index.html.
+[profile.ci.junit]
+path = "../../test_results.xml"
+store-success-output = true
+store-failure-output = true

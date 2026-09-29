@@ -1,0 +1,8 @@
+.git
+**/target
+benchmark-report
+benchmarks/charts
+docs/images/benchmarks
+*.mmdb
+.codex
+.agents

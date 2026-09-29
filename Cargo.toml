@@ -1,0 +1,175 @@
+[package]
+name = "libmaxminddb-rs"
+version = "0.2.0"
+edition = "2024"
+rust-version = "1.90"
+description = "Pure Rust MaxMind DB (MMDB) reader and writer with zero-copy borrowed decoding"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/0x00F6/libmaxminddb-rs"
+homepage = "https://github.com/0x00F6/libmaxminddb-rs"
+documentation = "https://docs.rs/libmaxminddb-rs"
+readme = "README.crates.md"
+keywords = ["maxmind", "mmdb", "geoip", "ip", "database"]
+categories = ["database", "network-programming", "encoding"]
+include = [
+    "Cargo.toml",
+    "README.crates.md",
+    "LICENSE",
+    "LICENSE-MIT",
+    "LICENSE-APACHE",
+    "src/**",
+    "benches/**",
+    "examples/**",
+    "tests/**",
+]
+
+[package.metadata.docs.rs]
+all-features = true
+rustdoc-args = ["--cfg", "docsrs"]
+
+[workspace]
+members = ["derive"]
+exclude = [
+    "scripts",
+    "fuzz",
+    "tools/rust-competitor-bench",
+    "tools/rust-writer-bench",
+    "tools/gen-scaling-bench-data",
+    "tools/gen-bench-data",
+    "tools/gen-bench-workloads",
+]
+resolver = "3"
+
+[features]
+default = ["reader", "writer", "derive", "simd"]
+reader = ["dep:memmap2"]
+writer = []
+# Explicit ASCII SIMD with runtime AVX2 detection; disable for scalar comparisons.
+simd = []
+derive = ["dep:libmaxminddb-rs-derive"]
+
+[dependencies]
+memmap2 = { version = "0.9.8", optional = true }
+serde = { version = "1.0.228", features = ["derive"] }
+serde_json = "1.0.145"
+thiserror = "2.0.16"
+ipnet = { version = "2.11.0", features = ["serde"] }
+libmaxminddb-rs-derive = { version = "0.2.0", path = "derive", optional = true }
+
+[dev-dependencies]
+anyhow = "1.0.104"
+libc = "0.2"
+criterion = { version = "0.8.2", features = ["html_reports"] }
+tempfile = "3.23.0"
+serde_bytes = "0.11.19"
+pprof = { version = "0.15.0", features = ["flamegraph"] }
+reqwest = { version = "0.12", features = ["stream"] }
+tokio = { version = "1", features = ["fs", "io-util", "macros", "rt-multi-thread"] }
+futures-util = "0.3"
+
+[[bench]]
+name = "reader"
+harness = false
+required-features = ["reader", "derive"]
+
+[[bench]]
+name = "writer"
+harness = false
+required-features = ["writer", "derive"]
+
+[[bench]]
+name = "search_strategies"
+harness = false
+required-features = ["reader", "writer", "derive"]
+
+[[bench]]
+name = "million_reader"
+harness = false
+required-features = ["reader", "writer", "derive"]
+
+[[bench]]
+name = "flamegraph"
+harness = false
+required-features = ["reader", "writer", "derive"]
+
+[[example]]
+name = "quickstart"
+required-features = ["reader", "writer", "derive"]
+
+[[example]]
+name = "zero_copy_lookup"
+required-features = ["reader", "writer", "derive"]
+
+[[example]]
+name = "fast_ip_lookup"
+required-features = ["reader", "writer", "derive"]
+
+[[example]]
+name = "lookup_with_copy"
+required-features = ["reader", "writer", "derive"]
+
+[[example]]
+name = "lookup_exists"
+required-features = ["reader", "writer", "derive"]
+
+[[example]]
+name = "concurrent_lookups"
+required-features = ["reader", "writer", "derive"]
+
+[[example]]
+name = "custom_database"
+required-features = ["reader", "writer", "derive"]
+
+[[example]]
+name = "custom_record"
+required-features = ["reader", "writer", "derive"]
+
+[[example]]
+name = "generate_compat_db"
+required-features = ["writer"]
+
+[[example]]
+name = "lookup_many"
+required-features = ["reader", "writer", "derive"]
+
+[[example]]
+name = "metadata"
+required-features = ["reader", "writer"]
+
+[[example]]
+name = "read_write"
+required-features = ["reader", "writer", "derive"]
+
+[[example]]
+name = "deep_merge"
+required-features = ["reader", "writer"]
+
+[[example]]
+name = "geolite2_country"
+required-features = ["reader", "derive"]
+
+[[example]]
+name = "geolite2_city"
+required-features = ["reader", "derive"]
+
+[[example]]
+name = "geolite2_asn"
+required-features = ["reader", "derive"]
+
+[profile.bench]
+debug = true
+
+[[bench]]
+name = "lookup_borrowed"
+harness = false
+required-features = ["reader", "derive"]
+
+[[bench]]
+name = "ipv6_regression"
+harness = false
+required-features = ["reader", "writer"]
+
+[[bench]]
+name = "replay_value"
+harness = false
+required-features = ["reader"]

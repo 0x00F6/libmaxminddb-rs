@@ -1,0 +1,29 @@
+services:
+  bench-compare:
+    image: libmaxminddb-rs-bench-compare:rust-1.90-go-1.25
+    build:
+      context: .
+      dockerfile: bench-compare.Dockerfile
+    working_dir: /workspace
+    user: "${BENCH_UID:-1000}:${BENCH_GID:-1000}"
+    init: true
+    environment:
+      HOME: /workspace/target/docker-home
+      CARGO_HOME: /workspace/target/docker-cargo-home
+      CARGO_TARGET_DIR: /workspace/target/cargo
+      GOCACHE: /workspace/target/docker-go-build-cache
+      GOFLAGS: -modcacherw
+      GOMODCACHE: /workspace/target/docker-go-modcache
+      GOPATH: /workspace/target/docker-go
+    volumes:
+      # Source, benchmark-report/, benchmarks/charts/,
+      # docs/images/benchmarks/, and README.md remain on the host.
+      - type: bind
+        source: .
+        target: /workspace
+      # Keep all Docker-built binaries, datasets, JSON and CSV results on the
+      # host without mixing them with native benchmark artifacts.
+      - type: bind
+        source: ./target/docker-bench
+        target: /workspace/target
+    command: ["make", "bench-compare"]

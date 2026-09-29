@@ -1,0 +1,13 @@
+[package]
+name = "gen-scaling-bench-data"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+[dependencies]
+libmaxminddb-rs = { path = "../..", features = ["writer"] }
+ipnet = "2.9"
+serde_json = "1"
+libc = "0.2"
+
+[workspace]

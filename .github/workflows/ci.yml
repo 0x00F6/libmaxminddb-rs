@@ -1,0 +1,30 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  rust:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: '1.90.0'
+          components: rustfmt, clippy
+      - uses: Swatinem/rust-cache@v2
+      - name: Format
+        run: cargo fmt --all -- --check
+      - name: Lint all targets
+        run: cargo clippy --workspace --all-targets --all-features -- -D warnings
+      - name: Test all features
+        run: cargo test --workspace --all-features
+      - name: Test documentation
+        run: cargo test --doc --all-features
+      - name: Build documentation
+        run: RUSTDOCFLAGS='-D warnings' cargo doc --no-deps --all-features
+      - name: Package derive crate
+        run: cargo package --manifest-path derive/Cargo.toml
+      - name: Package main crate against local derive crate
+        run: cargo package --config 'patch.crates-io.libmaxminddb-rs-derive.path="derive"'

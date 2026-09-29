@@ -1,0 +1,42 @@
+[package]
+name = "bench-runner"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+libc = "0.2"
+unicode-width = "0.2"
+
+[lib]
+name = "bench_runner"
+path = "src/lib.rs"
+
+[[bin]]
+name = "run_benchmarks_compare"
+path = "src/bin/run_benchmarks_compare.rs"
+
+[[bin]]
+name = "generate_benchmark_report"
+path = "src/bin/generate_benchmark_report.rs"
+
+[[bin]]
+name = "generate_benchmark_workloads"
+path = "src/bin/generate_benchmark_workloads.rs"
+
+[[bin]]
+name = "generate_test_report"
+path = "src/bin/generate_test_report.rs"
+
+[[bin]]
+name = "update_readme_coverage"
+path = "src/bin/update_readme_coverage.rs"
+
+[[bin]]
+name = "perf_tree"
+path = "src/bin/perf_tree.rs"
+
+[[bin]]
+name = "compare_benchmarks"
+path = "src/bin/compare_benchmarks.rs"
