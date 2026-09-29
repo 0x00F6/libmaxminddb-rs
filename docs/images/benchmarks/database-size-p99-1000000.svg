@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 310" width="100%" height="310">
+<style>svg { background-color: #0d1117; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }text { fill: #c9d1d9; }.chart-title { fill: #f0f6fc; font-size: 20px; font-weight: 700; letter-spacing: -0.2px; }.chart-subtitle { fill: #8b949e; font-size: 14px; font-weight: 400; }.svg-bar-track { fill: #161b22; }.svg-value { fill: #f0f6fc; font-size: 13px; font-weight: 700; }</style>
+<text x="20" y="38" class="chart-title">p99 Latency at 1M entries</text>
+<text x="20" y="62" class="chart-subtitle">p99 tail latency at 1M entries (lower is better)</text>
+<text x="170" y="103" font-size="13" font-weight="600" text-anchor="end">libmaxminddb-rs</text>
+<rect x="185" y="85" width="440" height="26" rx="4" class="svg-bar-track"/>
+<rect x="185" y="85" width="94" height="26" rx="4" fill="#00f5a0" opacity="0.9"><title>libmaxminddb-rs: 381.0 ns (p99 Latency at 1M entries)</title></rect>
+<text x="291" y="103" class="svg-value">381.0 ns</text>
+<text x="170" y="143" font-size="13" font-weight="600" text-anchor="end">libmaxminddb (C)</text>
+<rect x="185" y="125" width="440" height="26" rx="4" class="svg-bar-track"/>
+<rect x="185" y="125" width="425" height="26" rx="4" fill="#f5c542" opacity="0.9"><title>libmaxminddb (C): 1.72 µs (p99 Latency at 1M entries)</title></rect>
+<text x="622" y="143" class="svg-value">1.72 µs</text>
+<text x="170" y="183" font-size="13" font-weight="600" text-anchor="end">maxminddb-rust</text>
+<rect x="185" y="165" width="440" height="26" rx="4" class="svg-bar-track"/>
+<rect x="185" y="165" width="284" height="26" rx="4" fill="#ff8800" opacity="0.9"><title>maxminddb-rust: 1.15 µs (p99 Latency at 1M entries)</title></rect>
+<text x="481" y="183" class="svg-value">1.15 µs</text>
+<text x="170" y="223" font-size="13" font-weight="600" text-anchor="end">geoip2-rs</text>
+<rect x="185" y="205" width="440" height="26" rx="4" class="svg-bar-track"/>
+<rect x="185" y="205" width="302" height="26" rx="4" fill="#ff3b5c" opacity="0.9"><title>geoip2-rs: 1.22 µs (p99 Latency at 1M entries)</title></rect>
+<text x="499" y="223" class="svg-value">1.22 µs</text>
+<text x="170" y="263" font-size="13" font-weight="600" text-anchor="end">maxminddb-golang 🏆</text>
+<rect x="185" y="245" width="440" height="26" rx="4" class="svg-bar-track"/>
+<rect x="185" y="245" width="440" height="26" rx="4" fill="#00add8" opacity="0.9"><title>maxminddb-golang: 1.78 µs (p99 Latency at 1M entries)</title></rect>
+<text x="637" y="263" class="svg-value">1.78 µs</text>
+</svg>

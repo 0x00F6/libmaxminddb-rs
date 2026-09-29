@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 500" width="100%" height="500">
+<style>svg { background-color: #0d1117; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }text { fill: #c9d1d9; }.chart-title { fill: #f0f6fc; font-size: 20px; font-weight: 700; letter-spacing: -0.2px; }.chart-subtitle { fill: #8b949e; font-size: 14px; font-weight: 400; }.axis-line { stroke: #30363d; stroke-width: 1.5; }.grid-line { stroke: #21262d; stroke-dasharray: 4,4; stroke-width: 1; }.axis-label { fill: #8b949e; font-size: 13px; }.svg-value { fill: #f0f6fc; font-size: 13px; font-weight: 700; }.legend-text { fill: #c9d1d9; font-size: 13px; font-weight: 600; }</style>
+<text x="20" y="38" class="chart-title">Peak Concurrent Throughput — 16 Threads (IPv6)</text>
+<text x="20" y="62" class="chart-subtitle">IPv6 throughput by thread count, 1 to 16 threads (higher is better)</text>
+<line x1="85" y1="430" x2="830" y2="430" class="axis-line"/>
+<line x1="85" y1="85" x2="85" y2="430" class="axis-line"/>
+<line x1="85" y1="430" x2="830" y2="430" class="grid-line"/>
+<text x="75" y="434" class="axis-label" text-anchor="end">0.0 M ops/s</text>
+<line x1="85" y1="361" x2="830" y2="361" class="grid-line"/>
+<text x="75" y="365" class="axis-label" text-anchor="end">65.9 M ops/s</text>
+<line x1="85" y1="292" x2="830" y2="292" class="grid-line"/>
+<text x="75" y="296" class="axis-label" text-anchor="end">131.8 M ops/s</text>
+<line x1="85" y1="223" x2="830" y2="223" class="grid-line"/>
+<text x="75" y="227" class="axis-label" text-anchor="end">197.7 M ops/s</text>
+<line x1="85" y1="154" x2="830" y2="154" class="grid-line"/>
+<text x="75" y="158" class="axis-label" text-anchor="end">263.6 M ops/s</text>
+<line x1="85" y1="85" x2="830" y2="85" class="grid-line"/>
+<text x="75" y="89" class="axis-label" text-anchor="end">329.6 M ops/s</text>
+<text x="85" y="455" class="axis-label" text-anchor="middle">1T</text>
+<text x="333" y="455" class="axis-label" text-anchor="middle">4T</text>
+<text x="581" y="455" class="axis-label" text-anchor="middle">8T</text>
+<text x="830" y="455" class="axis-label" text-anchor="middle">16T</text>
+<polyline points="85,426 333,285 581,169 830,85" fill="none" stroke="#00f5a0" stroke-width="2.5" stroke-linejoin="round"/>
+<circle class="" cx="85" cy="426" r="4" fill="#00f5a0" style="cursor:pointer;"><title>libmaxminddb-rs: 3.51 M ops/s @ 1T</title></circle>
+<circle class="" cx="333" cy="285" r="4" fill="#00f5a0" style="cursor:pointer;"><title>libmaxminddb-rs: 138.32 M ops/s @ 4T</title></circle>
+<circle class="" cx="581" cy="169" r="4" fill="#00f5a0" style="cursor:pointer;"><title>libmaxminddb-rs: 248.84 M ops/s @ 8T</title></circle>
+<circle class="" cx="830" cy="85" r="4" fill="#00f5a0" style="cursor:pointer;"><title>libmaxminddb-rs: 329.56 M ops/s @ 16T</title></circle>
+<circle class="" cx="850" cy="105" r="5" fill="#00f5a0"/>
+<text x="862" y="109" class="legend-text">libmaxminddb-rs</text>
+<polyline points="85,428 333,306 581,222 830,150" fill="none" stroke="#f5c542" stroke-width="2.5" stroke-linejoin="round"/>
+<circle class="" cx="85" cy="428" r="4" fill="#f5c542" style="cursor:pointer;"><title>libmaxminddb (C): 1.81 M ops/s @ 1T</title></circle>
+<circle class="" cx="333" cy="306" r="4" fill="#f5c542" style="cursor:pointer;"><title>libmaxminddb (C): 118.68 M ops/s @ 4T</title></circle>
+<circle class="" cx="581" cy="222" r="4" fill="#f5c542" style="cursor:pointer;"><title>libmaxminddb (C): 198.39 M ops/s @ 8T</title></circle>
+<circle class="" cx="830" cy="150" r="4" fill="#f5c542" style="cursor:pointer;"><title>libmaxminddb (C): 267.79 M ops/s @ 16T</title></circle>
+<circle class="" cx="850" cy="129" r="5" fill="#f5c542"/>
+<text x="862" y="133" class="legend-text">libmaxminddb (C)</text>
+<polyline points="85,428 333,342 581,280 830,246" fill="none" stroke="#ff8800" stroke-width="2.5" stroke-linejoin="round"/>
+<circle class="" cx="85" cy="428" r="4" fill="#ff8800" style="cursor:pointer;"><title>maxminddb-rust: 1.76 M ops/s @ 1T</title></circle>
+<circle class="" cx="333" cy="342" r="4" fill="#ff8800" style="cursor:pointer;"><title>maxminddb-rust: 84.51 M ops/s @ 4T</title></circle>
+<circle class="" cx="581" cy="280" r="4" fill="#ff8800" style="cursor:pointer;"><title>maxminddb-rust: 143.68 M ops/s @ 8T</title></circle>
+<circle class="" cx="830" cy="246" r="4" fill="#ff8800" style="cursor:pointer;"><title>maxminddb-rust: 175.97 M ops/s @ 16T</title></circle>
+<circle class="" cx="850" cy="153" r="5" fill="#ff8800"/>
+<text x="862" y="157" class="legend-text">maxminddb-rust</text>
+<polyline points="85,428 333,333 581,273 830,189" fill="none" stroke="#ff3b5c" stroke-width="2.5" stroke-linejoin="round"/>
+<circle class="" cx="85" cy="428" r="4" fill="#ff3b5c" style="cursor:pointer;"><title>geoip2-rs: 1.72 M ops/s @ 1T</title></circle>
+<circle class="" cx="333" cy="333" r="4" fill="#ff3b5c" style="cursor:pointer;"><title>geoip2-rs: 92.23 M ops/s @ 4T</title></circle>
+<circle class="" cx="581" cy="273" r="4" fill="#ff3b5c" style="cursor:pointer;"><title>geoip2-rs: 149.96 M ops/s @ 8T</title></circle>
+<circle class="" cx="830" cy="189" r="4" fill="#ff3b5c" style="cursor:pointer;"><title>geoip2-rs: 230.26 M ops/s @ 16T</title></circle>
+<circle class="" cx="850" cy="177" r="5" fill="#ff3b5c"/>
+<text x="862" y="181" class="legend-text">geoip2-rs</text>
+<polyline points="85,428 333,376 581,342 830,297" fill="none" stroke="#00add8" stroke-width="2.5" stroke-linejoin="round"/>
+<circle class="" cx="85" cy="428" r="4" fill="#00add8" style="cursor:pointer;"><title>maxminddb-golang: 1.68 M ops/s @ 1T</title></circle>
+<circle class="" cx="333" cy="376" r="4" fill="#00add8" style="cursor:pointer;"><title>maxminddb-golang: 51.74 M ops/s @ 4T</title></circle>
+<circle class="" cx="581" cy="342" r="4" fill="#00add8" style="cursor:pointer;"><title>maxminddb-golang: 84.43 M ops/s @ 8T</title></circle>
+<circle class="" cx="830" cy="297" r="4" fill="#00add8" style="cursor:pointer;"><title>maxminddb-golang: 126.57 M ops/s @ 16T</title></circle>
+<circle class="" cx="850" cy="201" r="5" fill="#00add8"/>
+<text x="862" y="205" class="legend-text">maxminddb-golang</text>
+</svg>

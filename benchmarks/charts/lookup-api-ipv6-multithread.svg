@@ -1,0 +1,127 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1300 560" width="100%" height="560" class="lookup-api-chart">
+<style>svg { background-color: #0d1117; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }text { fill: #c9d1d9; }.chart-title { fill: #f0f6fc; font-size: 20px; font-weight: 700; letter-spacing: -0.2px; }.chart-subtitle { fill: #8b949e; font-size: 14px; font-weight: 400; }.axis-line { stroke: #30363d; stroke-width: 1.5; }.grid-line { stroke: #21262d; stroke-dasharray: 4,4; stroke-width: 1; }.axis-label { fill: #8b949e; font-size: 13px; }.svg-value { fill: #f0f6fc; font-size: 13px; font-weight: 700; }.legend-text { fill: #c9d1d9; font-size: 13px; font-weight: 600; }.api-series { transition: opacity .12s ease; }.api-series.is-muted { opacity: .14; }.api-series.is-active .api-line { stroke-width: 5; }.api-series.is-active .legend-text { fill: #fff; font-weight: 800; }.api-series.is-active .api-legend-marker { stroke: #fff; stroke-width: 2; }.api-legend { cursor: pointer; outline: none; }.api-legend:focus-visible .legend-text { text-decoration: underline; }.api-hit-area { cursor: pointer; }</style>
+<text x="20" y="38" class="chart-title">ipv6 random lookup — worker scaling</text>
+<text x="20" y="62" class="chart-subtitle">Same 1M IPs and hit checksum; API work differs (lookup_many uses one IP)</text>
+<line x1="85" y1="490" x2="1018" y2="490" class="axis-line"/>
+<line x1="85" y1="85" x2="85" y2="490" class="axis-line"/>
+<line x1="85" y1="490" x2="1018" y2="490" class="grid-line"/>
+<text x="75" y="494" class="axis-label" text-anchor="end">0.0 M ops/s</text>
+<line x1="85" y1="409" x2="1018" y2="409" class="grid-line"/>
+<text x="75" y="413" class="axis-label" text-anchor="end">70.2 M ops/s</text>
+<line x1="85" y1="328" x2="1018" y2="328" class="grid-line"/>
+<text x="75" y="332" class="axis-label" text-anchor="end">140.4 M ops/s</text>
+<line x1="85" y1="247" x2="1018" y2="247" class="grid-line"/>
+<text x="75" y="251" class="axis-label" text-anchor="end">210.7 M ops/s</text>
+<line x1="85" y1="166" x2="1018" y2="166" class="grid-line"/>
+<text x="75" y="170" class="axis-label" text-anchor="end">280.9 M ops/s</text>
+<line x1="85" y1="85" x2="1018" y2="85" class="grid-line"/>
+<text x="75" y="89" class="axis-label" text-anchor="end">351.1 M ops/s</text>
+<text x="85" y="515" class="axis-label" text-anchor="middle">1T</text>
+<text x="396" y="515" class="axis-label" text-anchor="middle">4T</text>
+<text x="707" y="515" class="axis-label" text-anchor="middle">8T</text>
+<text x="1018" y="515" class="axis-label" text-anchor="middle">16T</text>
+<g class="api-series" data-series="lookup_borrowed_map">
+<polyline class="api-hit-area" points="85,448 396,330 707,203 1018,110" fill="none" stroke="transparent" stroke-width="16" pointer-events="stroke"/>
+<polyline class="api-line" points="85,448 396,330 707,203 1018,110" fill="none" stroke="#00f5a0" stroke-width="2.5" stroke-linejoin="round" pointer-events="none"/>
+<circle class="api-marker" cx="85" cy="448" r="4" fill="#00f5a0" style="cursor:pointer;"><title>lookup_borrowed_map: 36.36 M ops/s @ 1T</title></circle>
+<circle class="api-marker" cx="396" cy="330" r="4" fill="#00f5a0" style="cursor:pointer;"><title>lookup_borrowed_map: 138.32 M ops/s @ 4T</title></circle>
+<circle class="api-marker" cx="707" cy="203" r="4" fill="#00f5a0" style="cursor:pointer;"><title>lookup_borrowed_map: 248.84 M ops/s @ 8T</title></circle>
+<circle class="api-marker" cx="1018" cy="110" r="4" fill="#00f5a0" style="cursor:pointer;"><title>lookup_borrowed_map: 329.56 M ops/s @ 16T</title></circle>
+<g class="api-legend" tabindex="0" role="button" aria-pressed="false" aria-label="Highlight lookup_borrowed_map">
+<rect x="1030" y="90" width="266" height="22" fill="transparent"/>
+<circle class="api-legend-marker" cx="1038" cy="105" r="5" fill="#00f5a0"/>
+<text x="1050" y="109" class="legend-text">lookup_borrowed_map</text>
+</g>
+</g>
+<g class="api-series" data-series="lookup_borrowed">
+<polyline class="api-hit-area" points="85,448 396,333 707,206 1018,125" fill="none" stroke="transparent" stroke-width="16" pointer-events="stroke"/>
+<polyline class="api-line" points="85,448 396,333 707,206 1018,125" fill="none" stroke="#ff8800" stroke-width="2.5" stroke-linejoin="round" pointer-events="none"/>
+<circle class="api-marker" cx="85" cy="448" r="4" fill="#ff8800" style="cursor:pointer;"><title>lookup_borrowed: 36.00 M ops/s @ 1T</title></circle>
+<circle class="api-marker" cx="396" cy="333" r="4" fill="#ff8800" style="cursor:pointer;"><title>lookup_borrowed: 135.94 M ops/s @ 4T</title></circle>
+<circle class="api-marker" cx="707" cy="206" r="4" fill="#ff8800" style="cursor:pointer;"><title>lookup_borrowed: 245.81 M ops/s @ 8T</title></circle>
+<circle class="api-marker" cx="1018" cy="125" r="4" fill="#ff8800" style="cursor:pointer;"><title>lookup_borrowed: 316.63 M ops/s @ 16T</title></circle>
+<g class="api-legend" tabindex="0" role="button" aria-pressed="false" aria-label="Highlight lookup_borrowed">
+<rect x="1030" y="114" width="266" height="22" fill="transparent"/>
+<circle class="api-legend-marker" cx="1038" cy="129" r="5" fill="#ff8800"/>
+<text x="1050" y="133" class="legend-text">lookup_borrowed</text>
+</g>
+</g>
+<g class="api-series" data-series="lookup_borrowed_opt">
+<polyline class="api-hit-area" points="85,448 396,328 707,201 1018,85" fill="none" stroke="transparent" stroke-width="16" pointer-events="stroke"/>
+<polyline class="api-line" points="85,448 396,328 707,201 1018,85" fill="none" stroke="#f5c542" stroke-width="2.5" stroke-linejoin="round" pointer-events="none"/>
+<circle class="api-marker" cx="85" cy="448" r="4" fill="#f5c542" style="cursor:pointer;"><title>lookup_borrowed_opt: 36.68 M ops/s @ 1T</title></circle>
+<circle class="api-marker" cx="396" cy="328" r="4" fill="#f5c542" style="cursor:pointer;"><title>lookup_borrowed_opt: 140.32 M ops/s @ 4T</title></circle>
+<circle class="api-marker" cx="707" cy="201" r="4" fill="#f5c542" style="cursor:pointer;"><title>lookup_borrowed_opt: 250.30 M ops/s @ 8T</title></circle>
+<circle class="api-marker" cx="1018" cy="85" r="4" fill="#f5c542" style="cursor:pointer;"><title>lookup_borrowed_opt: 351.11 M ops/s @ 16T</title></circle>
+<g class="api-legend" tabindex="0" role="button" aria-pressed="false" aria-label="Highlight lookup_borrowed_opt">
+<rect x="1030" y="138" width="266" height="22" fill="transparent"/>
+<circle class="api-legend-marker" cx="1038" cy="153" r="5" fill="#f5c542"/>
+<text x="1050" y="157" class="legend-text">lookup_borrowed_opt</text>
+</g>
+</g>
+<g class="api-series" data-series="lookup_value">
+<polyline class="api-hit-area" points="85,459 396,371 707,272 1018,181" fill="none" stroke="transparent" stroke-width="16" pointer-events="stroke"/>
+<polyline class="api-line" points="85,459 396,371 707,272 1018,181" fill="none" stroke="#00add8" stroke-width="2.5" stroke-linejoin="round" pointer-events="none"/>
+<circle class="api-marker" cx="85" cy="459" r="4" fill="#00add8" style="cursor:pointer;"><title>lookup_value: 26.84 M ops/s @ 1T</title></circle>
+<circle class="api-marker" cx="396" cy="371" r="4" fill="#00add8" style="cursor:pointer;"><title>lookup_value: 103.05 M ops/s @ 4T</title></circle>
+<circle class="api-marker" cx="707" cy="272" r="4" fill="#00add8" style="cursor:pointer;"><title>lookup_value: 188.79 M ops/s @ 8T</title></circle>
+<circle class="api-marker" cx="1018" cy="181" r="4" fill="#00add8" style="cursor:pointer;"><title>lookup_value: 268.18 M ops/s @ 16T</title></circle>
+<g class="api-legend" tabindex="0" role="button" aria-pressed="false" aria-label="Highlight lookup_value">
+<rect x="1030" y="162" width="266" height="22" fill="transparent"/>
+<circle class="api-legend-marker" cx="1038" cy="177" r="5" fill="#00add8"/>
+<text x="1050" y="181" class="legend-text">lookup_value</text>
+</g>
+</g>
+<g class="api-series" data-series="lookup_value_with_prefix">
+<polyline class="api-hit-area" points="85,451 396,343 707,223 1018,136" fill="none" stroke="transparent" stroke-width="16" pointer-events="stroke"/>
+<polyline class="api-line" points="85,451 396,343 707,223 1018,136" fill="none" stroke="#4986f5" stroke-width="2.5" stroke-linejoin="round" pointer-events="none"/>
+<circle class="api-marker" cx="85" cy="451" r="4" fill="#4986f5" style="cursor:pointer;"><title>lookup_value_with_prefix: 33.87 M ops/s @ 1T</title></circle>
+<circle class="api-marker" cx="396" cy="343" r="4" fill="#4986f5" style="cursor:pointer;"><title>lookup_value_with_prefix: 127.77 M ops/s @ 4T</title></circle>
+<circle class="api-marker" cx="707" cy="223" r="4" fill="#4986f5" style="cursor:pointer;"><title>lookup_value_with_prefix: 231.70 M ops/s @ 8T</title></circle>
+<circle class="api-marker" cx="1018" cy="136" r="4" fill="#4986f5" style="cursor:pointer;"><title>lookup_value_with_prefix: 307.24 M ops/s @ 16T</title></circle>
+<g class="api-legend" tabindex="0" role="button" aria-pressed="false" aria-label="Highlight lookup_value_with_prefix">
+<rect x="1030" y="186" width="266" height="22" fill="transparent"/>
+<circle class="api-legend-marker" cx="1038" cy="201" r="5" fill="#4986f5"/>
+<text x="1050" y="205" class="legend-text">lookup_value_with_prefix</text>
+</g>
+</g>
+<g class="api-series" data-series="lookup (serde_json::Value)">
+<polyline class="api-hit-area" points="85,460 396,374 707,292 1018,199" fill="none" stroke="transparent" stroke-width="16" pointer-events="stroke"/>
+<polyline class="api-line" points="85,460 396,374 707,292 1018,199" fill="none" stroke="#ff3b5c" stroke-width="2.5" stroke-linejoin="round" pointer-events="none"/>
+<circle class="api-marker" cx="85" cy="460" r="4" fill="#ff3b5c" style="cursor:pointer;"><title>lookup (serde_json::Value): 26.12 M ops/s @ 1T</title></circle>
+<circle class="api-marker" cx="396" cy="374" r="4" fill="#ff3b5c" style="cursor:pointer;"><title>lookup (serde_json::Value): 100.73 M ops/s @ 4T</title></circle>
+<circle class="api-marker" cx="707" cy="292" r="4" fill="#ff3b5c" style="cursor:pointer;"><title>lookup (serde_json::Value): 171.22 M ops/s @ 8T</title></circle>
+<circle class="api-marker" cx="1018" cy="199" r="4" fill="#ff3b5c" style="cursor:pointer;"><title>lookup (serde_json::Value): 252.40 M ops/s @ 16T</title></circle>
+<g class="api-legend" tabindex="0" role="button" aria-pressed="false" aria-label="Highlight lookup (serde_json::Value)">
+<rect x="1030" y="210" width="266" height="22" fill="transparent"/>
+<circle class="api-legend-marker" cx="1038" cy="225" r="5" fill="#ff3b5c"/>
+<text x="1050" y="229" class="legend-text">lookup (serde_json::Value)</text>
+</g>
+</g>
+<g class="api-series" data-series="lookup_many(1)">
+<polyline class="api-hit-area" points="85,463 396,388 707,309 1018,240" fill="none" stroke="transparent" stroke-width="16" pointer-events="stroke"/>
+<polyline class="api-line" points="85,463 396,388 707,309 1018,240" fill="none" stroke="#e39d5c" stroke-width="2.5" stroke-linejoin="round" pointer-events="none"/>
+<circle class="api-marker" cx="85" cy="463" r="4" fill="#e39d5c" style="cursor:pointer;"><title>lookup_many(1): 23.83 M ops/s @ 1T</title></circle>
+<circle class="api-marker" cx="396" cy="388" r="4" fill="#e39d5c" style="cursor:pointer;"><title>lookup_many(1): 88.82 M ops/s @ 4T</title></circle>
+<circle class="api-marker" cx="707" cy="309" r="4" fill="#e39d5c" style="cursor:pointer;"><title>lookup_many(1): 157.33 M ops/s @ 8T</title></circle>
+<circle class="api-marker" cx="1018" cy="240" r="4" fill="#e39d5c" style="cursor:pointer;"><title>lookup_many(1): 216.41 M ops/s @ 16T</title></circle>
+<g class="api-legend" tabindex="0" role="button" aria-pressed="false" aria-label="Highlight lookup_many(1)">
+<rect x="1030" y="234" width="266" height="22" fill="transparent"/>
+<circle class="api-legend-marker" cx="1038" cy="249" r="5" fill="#e39d5c"/>
+<text x="1050" y="253" class="legend-text">lookup_many(1)</text>
+</g>
+</g>
+<g class="api-series" data-series="lookup_exists">
+<polyline class="api-hit-area" points="85,448 396,335 707,216 1018,108" fill="none" stroke="transparent" stroke-width="16" pointer-events="stroke"/>
+<polyline class="api-line" points="85,448 396,335 707,216 1018,108" fill="none" stroke="#d0e85e" stroke-width="2.5" stroke-linejoin="round" pointer-events="none"/>
+<circle class="api-marker" cx="85" cy="448" r="4" fill="#d0e85e" style="cursor:pointer;"><title>lookup_exists: 36.42 M ops/s @ 1T</title></circle>
+<circle class="api-marker" cx="396" cy="335" r="4" fill="#d0e85e" style="cursor:pointer;"><title>lookup_exists: 134.73 M ops/s @ 4T</title></circle>
+<circle class="api-marker" cx="707" cy="216" r="4" fill="#d0e85e" style="cursor:pointer;"><title>lookup_exists: 237.11 M ops/s @ 8T</title></circle>
+<circle class="api-marker" cx="1018" cy="108" r="4" fill="#d0e85e" style="cursor:pointer;"><title>lookup_exists: 331.18 M ops/s @ 16T</title></circle>
+<g class="api-legend" tabindex="0" role="button" aria-pressed="false" aria-label="Highlight lookup_exists">
+<rect x="1030" y="258" width="266" height="22" fill="transparent"/>
+<circle class="api-legend-marker" cx="1038" cy="273" r="5" fill="#d0e85e"/>
+<text x="1050" y="277" class="legend-text">lookup_exists</text>
+</g>
+</g>
+</svg>

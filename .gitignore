@@ -1,0 +1,20 @@
+**/target/
+/coverage/
+*.mmdb
+!tests/fixtures/doc.mmdb
+.DS_Store
+/.idea/
+/.vscode/
+/.aws/
+/benchmark-baseline/
+/benchmarks/baseline/
+/benchmarks/.baseline-*/
+/fuzz/artifacts/
+/fuzz/corpus/
+# Generated local reports.
+/test-report/
+/benchmark-report/
+**/__pycache__/
+*.py[cod]
+.codex
+.agents

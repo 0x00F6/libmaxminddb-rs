@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 500" width="100%" height="500">
+<style>svg { background-color: #0d1117; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }text { fill: #c9d1d9; }.chart-title { fill: #f0f6fc; font-size: 20px; font-weight: 700; letter-spacing: -0.2px; }.chart-subtitle { fill: #8b949e; font-size: 14px; font-weight: 400; }.axis-line { stroke: #30363d; stroke-width: 1.5; }.grid-line { stroke: #21262d; stroke-dasharray: 4,4; stroke-width: 1; }.axis-label { fill: #8b949e; font-size: 13px; }.svg-value { fill: #f0f6fc; font-size: 13px; font-weight: 700; }.legend-text { fill: #c9d1d9; font-size: 13px; font-weight: 600; }</style>
+<text x="20" y="38" class="chart-title">p99 Tail Latency vs Database Size</text>
+<text x="20" y="62" class="chart-subtitle">p99 tail latency as database grows from 1K to 5M entries (lower is better)</text>
+<line x1="85" y1="430" x2="830" y2="430" class="axis-line"/>
+<line x1="85" y1="85" x2="85" y2="430" class="axis-line"/>
+<line x1="85" y1="430" x2="830" y2="430" class="grid-line"/>
+<text x="75" y="434" class="axis-label" text-anchor="end">0.0 ns</text>
+<line x1="85" y1="361" x2="830" y2="361" class="grid-line"/>
+<text x="75" y="365" class="axis-label" text-anchor="end">1579.0 ns</text>
+<line x1="85" y1="292" x2="830" y2="292" class="grid-line"/>
+<text x="75" y="296" class="axis-label" text-anchor="end">3158.0 ns</text>
+<line x1="85" y1="223" x2="830" y2="223" class="grid-line"/>
+<text x="75" y="227" class="axis-label" text-anchor="end">4737.0 ns</text>
+<line x1="85" y1="154" x2="830" y2="154" class="grid-line"/>
+<text x="75" y="158" class="axis-label" text-anchor="end">6316.0 ns</text>
+<line x1="85" y1="85" x2="830" y2="85" class="grid-line"/>
+<text x="75" y="89" class="axis-label" text-anchor="end">7895.0 ns</text>
+<text x="85" y="455" class="axis-label" text-anchor="middle">1K</text>
+<text x="191" y="455" class="axis-label" text-anchor="middle">10K</text>
+<text x="297" y="455" class="axis-label" text-anchor="middle">100K</text>
+<text x="404" y="455" class="axis-label" text-anchor="middle">500K</text>
+<text x="510" y="455" class="axis-label" text-anchor="middle">1M</text>
+<text x="617" y="455" class="axis-label" text-anchor="middle">1.5M</text>
+<text x="723" y="455" class="axis-label" text-anchor="middle">2M</text>
+<text x="830" y="455" class="axis-label" text-anchor="middle">5M</text>
+<polyline points="85,417 191,418 297,418 404,414 510,413 617,345 723,408 830,405" fill="none" stroke="#00f5a0" stroke-width="2.5" stroke-linejoin="round"/>
+<circle class="" cx="85" cy="417" r="4" fill="#00f5a0" style="cursor:pointer;"><title>libmaxminddb-rs: 290.00 ns @ 1K</title></circle>
+<circle class="" cx="191" cy="418" r="4" fill="#00f5a0" style="cursor:pointer;"><title>libmaxminddb-rs: 281.00 ns @ 10K</title></circle>
+<circle class="" cx="297" cy="418" r="4" fill="#00f5a0" style="cursor:pointer;"><title>libmaxminddb-rs: 270.00 ns @ 100K</title></circle>
+<circle class="" cx="404" cy="414" r="4" fill="#00f5a0" style="cursor:pointer;"><title>libmaxminddb-rs: 361.00 ns @ 500K</title></circle>
+<circle class="" cx="510" cy="413" r="4" fill="#00f5a0" style="cursor:pointer;"><title>libmaxminddb-rs: 381.00 ns @ 1M</title></circle>
+<circle class="" cx="617" cy="345" r="4" fill="#00f5a0" style="cursor:pointer;"><title>libmaxminddb-rs: 1943.00 ns @ 1.5M</title></circle>
+<circle class="" cx="723" cy="408" r="4" fill="#00f5a0" style="cursor:pointer;"><title>libmaxminddb-rs: 511.00 ns @ 2M</title></circle>
+<circle class="" cx="830" cy="405" r="4" fill="#00f5a0" style="cursor:pointer;"><title>libmaxminddb-rs: 571.00 ns @ 5M</title></circle>
+<circle class="" cx="850" cy="105" r="5" fill="#00f5a0"/>
+<text x="862" y="109" class="legend-text">libmaxminddb-rs</text>
+<polyline points="85,407 191,407 297,371 404,354 510,355 617,404 723,385 830,394" fill="none" stroke="#f5c542" stroke-width="2.5" stroke-linejoin="round"/>
+<circle class="" cx="85" cy="407" r="4" fill="#f5c542" style="cursor:pointer;"><title>libmaxminddb (C): 531.00 ns @ 1K</title></circle>
+<circle class="" cx="191" cy="407" r="4" fill="#f5c542" style="cursor:pointer;"><title>libmaxminddb (C): 531.00 ns @ 10K</title></circle>
+<circle class="" cx="297" cy="371" r="4" fill="#f5c542" style="cursor:pointer;"><title>libmaxminddb (C): 1342.00 ns @ 100K</title></circle>
+<circle class="" cx="404" cy="354" r="4" fill="#f5c542" style="cursor:pointer;"><title>libmaxminddb (C): 1734.00 ns @ 500K</title></circle>
+<circle class="" cx="510" cy="355" r="4" fill="#f5c542" style="cursor:pointer;"><title>libmaxminddb (C): 1723.00 ns @ 1M</title></circle>
+<circle class="" cx="617" cy="404" r="4" fill="#f5c542" style="cursor:pointer;"><title>libmaxminddb (C): 591.00 ns @ 1.5M</title></circle>
+<circle class="" cx="723" cy="385" r="4" fill="#f5c542" style="cursor:pointer;"><title>libmaxminddb (C): 1032.00 ns @ 2M</title></circle>
+<circle class="" cx="830" cy="394" r="4" fill="#f5c542" style="cursor:pointer;"><title>libmaxminddb (C): 832.00 ns @ 5M</title></circle>
+<circle class="" cx="850" cy="129" r="5" fill="#f5c542"/>
+<text x="862" y="133" class="legend-text">libmaxminddb (C)</text>
+<polyline points="85,406 191,406 297,401 404,402 510,380 617,366 723,398 830,381" fill="none" stroke="#ff8800" stroke-width="2.5" stroke-linejoin="round"/>
+<circle class="" cx="85" cy="406" r="4" fill="#ff8800" style="cursor:pointer;"><title>maxminddb-rust: 541.00 ns @ 1K</title></circle>
+<circle class="" cx="191" cy="406" r="4" fill="#ff8800" style="cursor:pointer;"><title>maxminddb-rust: 551.00 ns @ 10K</title></circle>
+<circle class="" cx="297" cy="401" r="4" fill="#ff8800" style="cursor:pointer;"><title>maxminddb-rust: 661.00 ns @ 100K</title></circle>
+<circle class="" cx="404" cy="402" r="4" fill="#ff8800" style="cursor:pointer;"><title>maxminddb-rust: 641.00 ns @ 500K</title></circle>
+<circle class="" cx="510" cy="380" r="4" fill="#ff8800" style="cursor:pointer;"><title>maxminddb-rust: 1152.00 ns @ 1M</title></circle>
+<circle class="" cx="617" cy="366" r="4" fill="#ff8800" style="cursor:pointer;"><title>maxminddb-rust: 1473.00 ns @ 1.5M</title></circle>
+<circle class="" cx="723" cy="398" r="4" fill="#ff8800" style="cursor:pointer;"><title>maxminddb-rust: 741.00 ns @ 2M</title></circle>
+<circle class="" cx="830" cy="381" r="4" fill="#ff8800" style="cursor:pointer;"><title>maxminddb-rust: 1132.00 ns @ 5M</title></circle>
+<circle class="" cx="850" cy="153" r="5" fill="#ff8800"/>
+<text x="862" y="157" class="legend-text">maxminddb-rust</text>
+<polyline points="85,398 191,409 297,404 404,405 510,377 617,403 723,394 830,404" fill="none" stroke="#ff3b5c" stroke-width="2.5" stroke-linejoin="round"/>
+<circle class="" cx="85" cy="398" r="4" fill="#ff3b5c" style="cursor:pointer;"><title>geoip2-rs: 721.00 ns @ 1K</title></circle>
+<circle class="" cx="191" cy="409" r="4" fill="#ff3b5c" style="cursor:pointer;"><title>geoip2-rs: 481.00 ns @ 10K</title></circle>
+<circle class="" cx="297" cy="404" r="4" fill="#ff3b5c" style="cursor:pointer;"><title>geoip2-rs: 592.00 ns @ 100K</title></circle>
+<circle class="" cx="404" cy="405" r="4" fill="#ff3b5c" style="cursor:pointer;"><title>geoip2-rs: 582.00 ns @ 500K</title></circle>
+<circle class="" cx="510" cy="377" r="4" fill="#ff3b5c" style="cursor:pointer;"><title>geoip2-rs: 1222.00 ns @ 1M</title></circle>
+<circle class="" cx="617" cy="403" r="4" fill="#ff3b5c" style="cursor:pointer;"><title>geoip2-rs: 611.00 ns @ 1.5M</title></circle>
+<circle class="" cx="723" cy="394" r="4" fill="#ff3b5c" style="cursor:pointer;"><title>geoip2-rs: 821.00 ns @ 2M</title></circle>
+<circle class="" cx="830" cy="404" r="4" fill="#ff3b5c" style="cursor:pointer;"><title>geoip2-rs: 602.00 ns @ 5M</title></circle>
+<circle class="" cx="850" cy="177" r="5" fill="#ff3b5c"/>
+<text x="862" y="181" class="legend-text">geoip2-rs</text>
+<polyline points="85,391 191,391 297,377 404,85 510,352 617,382 723,391 830,391" fill="none" stroke="#00add8" stroke-width="2.5" stroke-linejoin="round"/>
+<circle class="" cx="85" cy="391" r="4" fill="#00add8" style="cursor:pointer;"><title>maxminddb-golang: 882.00 ns @ 1K</title></circle>
+<circle class="" cx="191" cy="391" r="4" fill="#00add8" style="cursor:pointer;"><title>maxminddb-golang: 882.00 ns @ 10K</title></circle>
+<circle class="" cx="297" cy="377" r="4" fill="#00add8" style="cursor:pointer;"><title>maxminddb-golang: 1202.00 ns @ 100K</title></circle>
+<circle class="" cx="404" cy="85" r="4" fill="#00add8" style="cursor:pointer;"><title>maxminddb-golang: 7895.00 ns @ 500K</title></circle>
+<circle class="" cx="510" cy="352" r="4" fill="#00add8" style="cursor:pointer;"><title>maxminddb-golang: 1783.00 ns @ 1M</title></circle>
+<circle class="" cx="617" cy="382" r="4" fill="#00add8" style="cursor:pointer;"><title>maxminddb-golang: 1102.00 ns @ 1.5M</title></circle>
+<circle class="" cx="723" cy="391" r="4" fill="#00add8" style="cursor:pointer;"><title>maxminddb-golang: 901.00 ns @ 2M</title></circle>
+<circle class="" cx="830" cy="391" r="4" fill="#00add8" style="cursor:pointer;"><title>maxminddb-golang: 882.00 ns @ 5M</title></circle>
+<circle class="" cx="850" cy="201" r="5" fill="#00add8"/>
+<text x="862" y="205" class="legend-text">maxminddb-golang</text>
+</svg>

@@ -1,0 +1,33 @@
+[package]
+name = "rust-competitor-bench"
+version = "0.2.1"
+edition = "2024"
+publish = false
+
+[features]
+default = []
+ours = ["dep:libmaxminddb-rs"]
+maxminddb-rust = ["dep:maxminddb"]
+geoip2-rs = ["dep:geoip2"]
+
+[dependencies]
+libc = "0.2"
+memmap2 = "0.9.8"
+memchr = "2.7"
+serde = { version = "1.0.228", features = ["derive"] }
+serde_json = "1.0.145"
+libmaxminddb-rs = { path = "../..", default-features = false, features = ["reader", "derive", "simd"], optional = true }
+maxminddb = { version = "=0.32.0", features = ["mmap", "unsafe-str-decode"], optional = true }
+geoip2 = { version = "=0.1.8", optional = true, features = ["unsafe-str"] }
+
+[profile.release]
+opt-level = 3
+lto = "fat"
+codegen-units = 1
+panic = "abort"
+strip = true
+
+[workspace]
+
+[dev-dependencies]
+libmaxminddb-rs = { path = "../..", default-features = false, features = ["reader", "writer", "derive"] }
