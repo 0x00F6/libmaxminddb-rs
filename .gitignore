@@ -18,3 +18,4 @@
 *.py[cod]
 .codex
 .agents
+*.data

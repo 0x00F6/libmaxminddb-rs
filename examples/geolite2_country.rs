@@ -6,6 +6,9 @@ use std::net::IpAddr;
 use std::path::PathBuf;
 use tokio::fs;
 
+const GEOLITE_REPO_URL: &str =
+    "https://github.com/P3TERX/GeoLite.mmdb/releases/latest/download/GeoLite2-Country.mmdb";
+
 #[tokio::main]
 async fn main() -> Result<()> {
     // Keep the downloaded MMDB in this example package's target directory.
@@ -17,11 +20,7 @@ async fn main() -> Result<()> {
     // download_file creates target/database automatically when it is missing.
     // Reuse an existing database file to avoid downloading it on every run.
     if !fs::try_exists(&database_file).await? {
-        download_file(
-            "https://github.com/P3TERX/GeoLite.mmdb/releases/download/2026.09.28/GeoLite2-Country.mmdb",
-            &database_file,
-        )
-        .await?;
+        download_file(GEOLITE_REPO_URL, &database_file).await?;
     }
 
     // Open the downloaded MaxMind DB with the library reader.

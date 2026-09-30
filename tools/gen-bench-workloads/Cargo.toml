@@ -5,4 +5,4 @@ edition = "2021"
 publish = false
 
 [dependencies]
-ipnet = "2.9"
+ipnet = "2.12"

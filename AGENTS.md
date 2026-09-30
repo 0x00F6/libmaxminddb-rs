@@ -32,8 +32,9 @@ archives, local reports, IDE files and tool harnesses never enter the crates.io
 package. The proc-macro crate is a separate workspace member and must be
 published first. Before it is available on crates.io, verify the main archive
 with the local `derive` registry patch used by `make publish-check` and CI.
-`make publish` and `make release` perform external publication actions; never
-invoke them as part of a validation-only task.
+`make release X.Y.Z` pushes to GitHub, publishes the derive crate and then the
+main crate to crates.io, and creates the tag and GitHub Release. Never invoke it
+as part of a validation-only task.
 
 ## Format invariants
 
@@ -266,7 +267,7 @@ make check
 Before performance-sensitive changes:
 
 ```bash
-make test-all
+make tests
 make bench-performance
 make bench-compare
 ```
@@ -282,7 +283,7 @@ If an optional tool is unavailable, state that fact. Never claim a benchmark, fu
 
 ## Benchmark policy
 
-`make micro-benchmark` adds native `native-million-v1` fixtures with exactly
+`make bench-micro` adds native `native-million-v1` fixtures with exactly
 1,000,000 distinct IPv4 /24 or IPv6 /64 routes. Every hit and miss is verified
 against the serialized reader before timing; all large-fixture lookups use
 `lookup_borrowed`. Keep query cursors across Criterion samples. The first run
@@ -380,7 +381,7 @@ Changes in these areas deserve extra review:
   actual bytes; hashes never determine serialization order. Inherited offsets are
   cached lazily so first-use data ordering stays identical.
 - `benches/reader.rs`, `benches/million_reader.rs`, `benches/search_strategies.rs`
-  and `benches/writer.rs` feed `make micro-benchmark`; `make bench-performance`
+  and `benches/writer.rs` feed `make bench-micro`; `make bench-performance`
   runs the reader and borrowed-lookup Criterion suites.
 
 
@@ -450,7 +451,7 @@ Changes in these areas deserve extra review:
   by maximum. Missing/failed repeats and unavailable peaks must stay explicit,
   never zero; never mix legacy protocols or incompatible inputs/opening modes.
 - Keep this RSS protocol distinct from the four owned/mmap scenarios reported
-  by `make micro-benchmark`.
+  by `make bench-micro`.
 
 ## Verified IPv6 absent benchmark
 

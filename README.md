@@ -8,12 +8,12 @@
   <a href="https://crates.io/crates/libmaxminddb-rs"><img src="https://img.shields.io/badge/crates.io-libmaxminddb--rs-orange" alt="crates.io"></a>
   <a href="https://docs.rs/libmaxminddb-rs"><img src="https://img.shields.io/badge/API-documentation-blue" alt="API documentation"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT%20OR%20Apache--2.0-blue" alt="MIT OR Apache-2.0"></a>
-  <a href="Cargo.toml"><img src="https://img.shields.io/badge/Rust-1.90%2B-informational" alt="Rust 1.90+"></a>
+  <a href="Cargo.toml"><img src="https://img.shields.io/badge/Rust-1.98.1%2B-informational" alt="Rust 1.98.1+"></a>
 </p>
 
 <p align="center">
-  <a href="#code-coverage--tests"><img src="https://img.shields.io/badge/tests-140%20passing-brightgreen" alt="140 workspace tests passing"></a>
-  <a href="#code-coverage--tests"><img src="https://img.shields.io/badge/code%20coverage-97.48%25-brightgreen" alt="97.48% line coverage"></a>
+  <a href="#code-coverage--tests"><img src="https://img.shields.io/badge/tests-141%20passing-brightgreen" alt="141 workspace tests passing"></a>
+  <a href="#code-coverage--tests"><img src="https://img.shields.io/badge/code%20coverage-97.55%25-brightgreen" alt="97.55% line coverage"></a>
 </p>
 
 An independent Rust implementation of the MaxMind DB (MMDB) v2 format. It reads IPv4/IPv6 databases with borrowed decoding and writes deterministic MMDB files.
@@ -97,7 +97,7 @@ Add `libmaxminddb-rs` to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-libmaxminddb-rs = "0.1"
+libmaxminddb-rs = "0.2.1"
 ```
 
 ### ⚙️ Cargo Features
@@ -678,11 +678,13 @@ The command writes the lookup-only profile to `target/flamegraph/lookup-flamegra
 
 ## Documentation and compatibility
 
-The [Rust API documentation](https://docs.rs/libmaxminddb-rs) describes the reader, writer, value types, and derive macros. Runnable usage examples are in [`examples/`](examples/README.md). The crate supports MMDB v2 files, IPv4 and IPv6, and 24-, 28-, or 32-bit tree records. Its minimum supported Rust version is **1.90** (edition 2024). `Reader::open_mmap` is `unsafe` because callers must keep the mapped file unchanged while the reader exists.
+The [Rust API documentation](https://docs.rs/libmaxminddb-rs) describes the reader, writer, value types, and derive macros. Runnable usage examples are in [`examples/`](examples/README.md). The crate supports MMDB v2 files, IPv4 and IPv6, and 24-, 28-, or 32-bit tree records. Its minimum supported Rust version is **1.98.1** (edition 2024). `Reader::open_mmap` is `unsafe` because callers must keep the mapped file unchanged while the reader exists.
 
 For implementation details and performance protocols, see [`docs/`](docs/) and [`AGENTS.md`](AGENTS.md). The `derive` proc-macro crate is a separate package and must be published before the main crate.
 
 ## Development and tests
+
+Run `make` or `make help` to see every available rule, grouped by task.
 
 ```bash
 cargo build --all-features
@@ -691,28 +693,29 @@ cargo clippy --workspace --all-targets --all-features -- -D warnings
 cargo doc --no-deps --all-features
 make bench-performance
 make bench-writer
+make bench-micro
 ```
 
-`make publish-check` checks formatting, linting, tests, documentation, and both package archives. `make publish` uploads the proc-macro crate and then the main crate; `make release` tags a clean commit and creates a GitHub Release. Run those commands only when you intend to publish. The [contribution guide](CONTRIBUTING.md) explains the development workflow.
+`make publish-check` checks formatting, linting, tests, documentation, and both package archives. `make release X.Y.Z` synchronizes version references; after those edits are committed, rerun it to push `main`, publish the proc-macro crate and main crate to crates.io, then create the Git tag and GitHub Release. Run the release command only when you intend to publish. The [contribution guide](CONTRIBUTING.md) explains the development workflow.
 
 ## Code Coverage & Tests
 
 Run the complete test suite with the Makefile target. It includes the workspace (including `derive`), documentation tests, feature-isolated builds, and the benchmark tooling crates:
 
 ```bash
-make test-all
+make tests
 ```
 
 Install [cargo-llvm-cov](https://github.com/taiki-e/cargo-llvm-cov), then generate the HTML report and per-file summary with:
 
 ```bash
-make code-coverage
+make coverage
 ```
 
-Open `target/coverage/html/index.html` in a browser. Both Makefile targets refresh this section and the test and code coverage badges; `make test-all` runs coverage after its other tests. Documentation tests are run separately and are not included in these coverage figures because instrumenting them requires a nightly Rust toolchain.
+Open `target/coverage/html/index.html` in a browser. Both Makefile targets refresh this section and the test and code coverage badges; `make tests` runs coverage after its other tests. Documentation tests are run separately and are not included in these coverage figures because instrumenting them requires a nightly Rust toolchain.
 
 <!-- coverage-summary:start -->
-The latest local coverage run measured **97.48% overall line coverage** and **95.92% region coverage**.
+The latest local coverage run measured **97.55% overall line coverage** and **96.03% region coverage**.
 <!-- coverage-summary:end -->
 
 <!-- coverage-table:start -->
@@ -721,19 +724,19 @@ The latest local coverage run measured **97.48% overall line coverage** and **95
 
 | File | Lines | Regions | Functions |
 | --- | ---: | ---: | ---: |
-| [`derive/src/lib.rs`](derive/src/lib.rs) | 99.61% (253/254) | 99.75% (403/404) | 100.00% (37/37) |
+| [`derive/src/lib.rs`](derive/src/lib.rs) | 97.01% (292/301) | 96.47% (465/482) | 100.00% (41/41) |
 | [`src/decoder/ascii.rs`](src/decoder/ascii.rs) | 97.35% (147/151) | 98.35% (298/303) | 100.00% (12/12) |
-| [`src/decoder/mod.rs`](src/decoder/mod.rs) | 96.83% (519/536) | 95.03% (898/945) | 96.55% (28/29) |
-| [`src/decoder/raw.rs`](src/decoder/raw.rs) | 98.09% (513/523) | 95.06% (1001/1053) | 94.00% (47/50) |
-| [`src/encoder.rs`](src/encoder.rs) | 100.00% (112/112) | 94.32% (216/229) | 100.00% (8/8) |
-| [`src/metadata.rs`](src/metadata.rs) | 96.58% (226/234) | 96.06% (341/355) | 100.00% (26/26) |
-| [`src/reader/marker.rs`](src/reader/marker.rs) | 95.48% (211/221) | 95.89% (420/438) | 100.00% (18/18) |
-| [`src/reader/mod.rs`](src/reader/mod.rs) | 97.50% (781/801) | 94.81% (1408/1485) | 98.53% (67/68) |
-| [`src/reader/tree.rs`](src/reader/tree.rs) | 96.31% (835/867) | 95.69% (1577/1648) | 100.00% (54/54) |
-| [`src/traits.rs`](src/traits.rs) | 100.00% (354/354) | 97.83% (631/645) | 100.00% (59/59) |
+| [`src/decoder/mod.rs`](src/decoder/mod.rs) | 96.86% (524/541) | 95.11% (895/941) | 96.55% (28/29) |
+| [`src/decoder/raw.rs`](src/decoder/raw.rs) | 98.29% (518/527) | 95.51% (999/1046) | 94.00% (47/50) |
+| [`src/encoder.rs`](src/encoder.rs) | 100.00% (113/113) | 94.30% (215/228) | 100.00% (8/8) |
+| [`src/metadata.rs`](src/metadata.rs) | 97.02% (228/235) | 96.59% (340/352) | 100.00% (26/26) |
+| [`src/reader/marker.rs`](src/reader/marker.rs) | 96.79% (211/218) | 97.00% (420/433) | 100.00% (18/18) |
+| [`src/reader/mod.rs`](src/reader/mod.rs) | 97.50% (781/801) | 94.94% (1407/1482) | 98.53% (67/68) |
+| [`src/reader/tree.rs`](src/reader/tree.rs) | 96.98% (835/861) | 96.27% (1576/1637) | 100.00% (54/54) |
+| [`src/traits.rs`](src/traits.rs) | 100.00% (354/354) | 97.82% (629/643) | 100.00% (59/59) |
 | [`src/value.rs`](src/value.rs) | 98.67% (593/601) | 97.78% (750/767) | 98.15% (106/108) |
-| [`src/writer/mod.rs`](src/writer/mod.rs) | 96.64% (863/893) | 95.35% (1416/1485) | 95.24% (60/63) |
-| **Total** | **97.48% (5407/5547)** | **95.92% (9359/9757)** | **98.12% (522/532)** |
+| [`src/writer/mod.rs`](src/writer/mod.rs) | 96.65% (865/895) | 95.34% (1412/1481) | 95.24% (60/63) |
+| **Total** | **97.55% (5461/5598)** | **96.03% (9406/9795)** | **98.13% (526/536)** |
 
 </details>
 <!-- coverage-table:end -->

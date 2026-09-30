@@ -6,6 +6,9 @@ use std::net::IpAddr;
 use std::path::PathBuf;
 use tokio::fs;
 
+const GEOLITE_REPO_URL: &str =
+    "https://github.com/P3TERX/GeoLite.mmdb/releases/latest/download/GeoLite2-ASN.mmdb";
+
 #[tokio::main]
 async fn main() -> Result<()> {
     // Use a database-specific filename so a previously downloaded Country or City
@@ -17,11 +20,7 @@ async fn main() -> Result<()> {
 
     // Download once; the shared helper creates target/database and streams to disk.
     if !fs::try_exists(&database_file).await? {
-        download_file(
-            "https://github.com/P3TERX/GeoLite.mmdb/releases/download/2026.09.28/GeoLite2-ASN.mmdb",
-            &database_file,
-        )
-        .await?;
+        download_file(GEOLITE_REPO_URL, &database_file).await?;
     }
 
     let reader = Reader::open(&database_file)?;

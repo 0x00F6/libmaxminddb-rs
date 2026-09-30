@@ -1,6 +1,6 @@
 services:
   bench-compare:
-    image: libmaxminddb-rs-bench-compare:rust-1.90-go-1.25
+    image: libmaxminddb-rs-bench-compare:rust-1.98.1-go-1.25
     build:
       context: .
       dockerfile: bench-compare.Dockerfile

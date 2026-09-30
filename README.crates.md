@@ -6,14 +6,20 @@ A pure Rust reader and writer for MaxMind DB (MMDB) v2 files. Read IPv4 and IPv6
 
 ```toml
 [dependencies]
-libmaxminddb-rs = "0.1"
+libmaxminddb-rs = "0.2.1"
 ```
 
 Default features include the reader, writer, derive macros, SIMD ASCII scanning, and the prepared search tree. For a smaller reader-only build, use `default-features = false` with `features = ["reader", "derive"]`.
 
 ## GeoLite2 examples
 
-The repository includes runnable examples for the GeoLite2 Country, City, and ASN databases. Each example downloads its database on first run, stores it under `examples/target/database`, and uses `lookup_borrowed` to borrow string data from the reader. The snippets below show the record structs and lookup for each database; they expect the corresponding `.mmdb` file in the current directory.
+The repository includes runnable examples for the GeoLite2 Country, City, and ASN databases. Each example downloads its database on first run from the latest GitHub release, stores it under `target/database`, and uses `lookup_borrowed` to borrow string data from the reader. The snippets below show the record structs and lookup for each database; they expect the corresponding `.mmdb` file in the current directory. Download those files directly with:
+
+```bash
+curl -fL -o GeoLite2-Country.mmdb https://github.com/P3TERX/GeoLite.mmdb/releases/latest/download/GeoLite2-Country.mmdb
+curl -fL -o GeoLite2-City.mmdb https://github.com/P3TERX/GeoLite.mmdb/releases/latest/download/GeoLite2-City.mmdb
+curl -fL -o GeoLite2-ASN.mmdb https://github.com/P3TERX/GeoLite.mmdb/releases/latest/download/GeoLite2-ASN.mmdb
+```
 
 Run the complete examples from a checkout with `cargo run --example geolite2_country`, `cargo run --example geolite2_city`, or `cargo run --example geolite2_asn`. More examples are available in the project's [`examples` directory](https://github.com/0x00F6/libmaxminddb-rs/tree/main/examples).
 
@@ -271,4 +277,4 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 The project's [examples directory](https://github.com/0x00F6/libmaxminddb-rs/tree/main/examples) contains runnable Reader and Writer programs, including [quickstart](https://github.com/0x00F6/libmaxminddb-rs/blob/main/examples/quickstart.rs), [fast IPv4/IPv6 lookups](https://github.com/0x00F6/libmaxminddb-rs/blob/main/examples/fast_ip_lookup.rs), and [custom database writing](https://github.com/0x00F6/libmaxminddb-rs/blob/main/examples/custom_database.rs). Run one with `cargo run --example quickstart`.
 
-See the [API documentation](https://docs.rs/libmaxminddb-rs) for all lookup and writer methods. Minimum supported Rust version: **1.90**. Licensed under **MIT or Apache-2.0**, at your option.
+See the [API documentation](https://docs.rs/libmaxminddb-rs) for all lookup and writer methods. Minimum supported Rust version: **1.98.1**. Licensed under **MIT or Apache-2.0**, at your option.

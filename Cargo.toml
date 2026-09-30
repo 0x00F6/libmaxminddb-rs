@@ -1,12 +1,11 @@
 [package]
 name = "libmaxminddb-rs"
-version = "0.2.0"
+version = "0.2.1"
 edition = "2024"
-rust-version = "1.90"
+rust-version = "1.98.1"
 description = "Pure Rust MaxMind DB (MMDB) reader and writer with zero-copy borrowed decoding"
 license = "MIT OR Apache-2.0"
 repository = "https://github.com/0x00F6/libmaxminddb-rs"
-homepage = "https://github.com/0x00F6/libmaxminddb-rs"
 documentation = "https://docs.rs/libmaxminddb-rs"
 readme = "README.crates.md"
 keywords = ["maxmind", "mmdb", "geoip", "ip", "database"]
@@ -49,21 +48,21 @@ simd = []
 derive = ["dep:libmaxminddb-rs-derive"]
 
 [dependencies]
-memmap2 = { version = "0.9.8", optional = true }
-serde = { version = "1.0.228", features = ["derive"] }
-serde_json = "1.0.145"
-thiserror = "2.0.16"
-ipnet = { version = "2.11.0", features = ["serde"] }
-libmaxminddb-rs-derive = { version = "0.2.0", path = "derive", optional = true }
+memmap2 = { version = "0.9.11", optional = true }
+serde = { version = "1.0.229", features = ["derive"] }
+serde_json = "1.0.151"
+thiserror = "2.0.21"
+ipnet = { version = "2.12.2", features = ["serde"] }
+libmaxminddb-rs-derive = { version = "0.2.1", path = "derive", optional = true }
 
 [dev-dependencies]
 anyhow = "1.0.104"
 libc = "0.2"
 criterion = { version = "0.8.2", features = ["html_reports"] }
-tempfile = "3.23.0"
+tempfile = "3.27.0"
 serde_bytes = "0.11.19"
 pprof = { version = "0.15.0", features = ["flamegraph"] }
-reqwest = { version = "0.12", features = ["stream"] }
+reqwest = { version = "0.13", features = ["stream"] }
 tokio = { version = "1", features = ["fs", "io-util", "macros", "rt-multi-thread"] }
 futures-util = "0.3"
 
