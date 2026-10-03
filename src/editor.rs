@@ -168,6 +168,33 @@ mod tests {
     }
 
     #[test]
+    fn removal_blocks_parent_inheritance_and_preserves_specific_children() {
+        let metadata = MetadataBuilder::new().ip_version(4).build().unwrap();
+        let mut writer = Writer::with_metadata(metadata);
+        writer.insert_value("10.20.0.0/16".parse().unwrap(), value(1)).unwrap();
+        writer.insert_value("10.20.2.0/24".parse().unwrap(), value(2)).unwrap();
+        let source = writer.finish().unwrap();
+
+        let mut editor = Editor::from_bytes(&source).unwrap();
+        editor.remove("10.20.1.0/24".parse().unwrap()).unwrap();
+        let rebuilt = editor.finish().unwrap();
+        let reader = Reader::from_bytes(&rebuilt).unwrap();
+
+        assert!(matches!(
+            reader.lookup_value("10.20.1.7".parse().unwrap()),
+            Err(Error::NotFound)
+        ));
+        assert_eq!(
+            reader.lookup_value("10.20.3.7".parse().unwrap()).unwrap().get("id"),
+            Some(&crate::ValueRef::Uint32(1))
+        );
+        assert_eq!(
+            reader.lookup_value("10.20.2.7".parse().unwrap()).unwrap().get("id"),
+            Some(&crate::ValueRef::Uint32(2))
+        );
+    }
+
+    #[test]
     fn rejects_ipv6_edit_for_ipv4_database() {
         let source = fixture();
         let mut editor = Editor::from_bytes(&source).unwrap();
