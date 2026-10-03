@@ -88,10 +88,12 @@ impl<'a> Editor<'a> {
         let mut writer = Writer::with_metadata_and_capacity(metadata, 1024);
 
         self.reader.visit_records(|network, borrowed| {
-            match self.edits.remove(&network) {
-                Some(Edit::Delete) => {}
-                Some(Edit::Upsert(value)) => writer.insert_value(network, value)?,
-                None => writer.insert_value(network, borrowed.to_owned_value())?,
+            // MMDB inheritance may represent one logical parent as several
+            // source ranges. Mask every source range covered by an edit, then
+            // apply the overlay after import so replace/delete semantics are
+            // independent of the source tree's particular serialization.
+            if !self.edits.keys().any(|edited| covers(*edited, network)) {
+                writer.insert_value(network, borrowed.to_owned_value())?;
             }
             Ok(())
         })?;
@@ -108,6 +110,18 @@ impl<'a> Editor<'a> {
     pub fn write_to_file(self, path: impl AsRef<Path>) -> Result<()> {
         std::fs::write(path, self.finish()?)?;
         Ok(())
+    }
+}
+
+fn covers(parent: IpNetwork, child: IpNetwork) -> bool {
+    match (parent, child) {
+        (IpNetwork::V4(parent), IpNetwork::V4(child)) => {
+            parent.prefix_len() <= child.prefix_len() && parent.contains(&child.network())
+        }
+        (IpNetwork::V6(parent), IpNetwork::V6(child)) => {
+            parent.prefix_len() <= child.prefix_len() && parent.contains(&child.network())
+        }
+        _ => false,
     }
 }
 
