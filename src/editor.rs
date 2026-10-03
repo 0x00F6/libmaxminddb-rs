@@ -2,6 +2,7 @@
 
 use std::collections::HashMap;
 use std::path::Path;
+use std::sync::Arc;
 
 use crate::{IpNetwork, Metadata, Reader, Result, Value, Writer};
 
@@ -17,7 +18,7 @@ enum Edit {
 /// unchanged source values are borrowed until the replacement database is built.
 #[derive(Debug)]
 pub struct Editor<'a> {
-    reader: Reader<'a>,
+    reader: Arc<Reader<'a>>,
     edits: HashMap<IpNetwork, Edit>,
 }
 
@@ -36,11 +37,17 @@ impl<'a> Editor<'a> {
 
     /// Creates an editor from an already validated reader.
     #[must_use]
-    pub fn from_reader(reader: Reader<'a>) -> Self {
+    pub fn from_reader(reader: impl Into<Arc<Reader<'a>>>) -> Self {
         Self {
-            reader,
+            reader: reader.into(),
             edits: HashMap::new(),
         }
+    }
+
+    /// Returns the shared immutable source, including its prepared search tree.
+    #[must_use]
+    pub fn source_reader(&self) -> &Arc<Reader<'a>> {
+        &self.reader
     }
 
     /// Returns metadata from the source database.

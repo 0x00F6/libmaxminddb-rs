@@ -75,6 +75,8 @@ pub mod editor;
 mod encoder;
 #[cfg(feature = "reader")]
 pub mod reader;
+#[cfg(feature = "reader")]
+pub mod reloadable;
 #[cfg(feature = "writer")]
 pub mod writer;
 
@@ -88,6 +90,8 @@ pub use value::{Value, ValueRef};
 pub use editor::Editor;
 #[cfg(feature = "reader")]
 pub use reader::Reader;
+#[cfg(feature = "reader")]
+pub use reloadable::ReloadableReader;
 #[cfg(feature = "writer")]
 pub use writer::{MergeStrategy, Writer};
 

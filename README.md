@@ -748,3 +748,53 @@ Issues and pull requests are welcome. Please read [CONTRIBUTING.md](CONTRIBUTING
 ## License
 
 Licensed under either [MIT](LICENSE-MIT) or [Apache-2.0](LICENSE-APACHE), at your option.
+
+
+## Atomic reader reloads
+
+`ReloadableReader` uses `arc-swap` to publish immutable `Arc<Reader>` generations.
+A query or batch holds one `load()` guard; borrowed results remain valid only
+while that guard lives. `snapshot()` returns an owned Arc for async tasks or
+long-lived work. Editors share the same bytes, metadata and prepared tree.
+
+```rust
+use libmaxminddb_rs::{Editor, Reader, ReloadableReader, Value};
+
+# fn main() -> Result<(), Box<dyn std::error::Error>> {
+let database = ReloadableReader::new(Reader::open("GeoIP.mmdb")?);
+let old = database.snapshot();
+let mut editor = Editor::from_reader(database.snapshot());
+editor.update_value("1.2.3.4/32".parse()?, Value::Uint32(42))?;
+if !database.commit(editor)? {
+    // Another publisher won: create a fresh editor and reapply the edits.
+}
+let guard = database.load();
+let record = guard.lookup_value("1.2.3.4".parse()?)?;
+// `old` still reads the original database; `guard` pins the current generation.
+# Ok(())
+# }
+```
+
+`commit` rebuilds and prepares the replacement before comparing source Arc
+identity and swapping atomically. A stale editor returns `Ok(false)` without
+replacing the active reader. Opening/rebuild errors also leave it unchanged.
+Unconditional `replace`, `replace_from_vec` and `reload` use last-publication-wins
+semantics. Publication is in memory; file persistence and watching are separate.
+Never overwrite or truncate an mmap-backed file while any snapshot uses it.
+Holding old generations retains their bytes and prepared trees. Sharing and
+publication copy no database bytes; rebuilding currently decodes unchanged
+records into owned values and serializes a new database.
+
+`cargo bench --bench editor` compares direct, guard and owned-snapshot lookups,
+shared editor creation and prepared-reader publication on a deterministic base
+of 1,000,000 IPv4 /32 entries. Rebuild benchmarks update or remove 1,000 entries.
+Fixture preparation is outside timing; these are single-thread measurements,
+not a claim of concurrent throughput or a guaranteed speedup.
+
+See [`examples/concurrent_editor.rs`](examples/concurrent_editor.rs) for four
+reading threads and a writing thread using `Editor::from_reader` and atomic
+publication. Run `cargo run --example concurrent_editor`. The concurrency tests
+cover snapshot reclamation, invalid replacements, stale editors, competing
+publishers, mixed IPv4/IPv6 consistency and concurrent editor commits. These
+stress tests complement Rust's Send/Sync checks; they are not a formal proof or
+substitute for a sanitizer run.

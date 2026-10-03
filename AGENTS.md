@@ -464,3 +464,17 @@ Changes in these areas deserve extra review:
 - Preserve scenario dimensions and diagnostics on failures; failed/unsupported runs are not measurements.
 - `run_benchmarks_compare --ipv6-absent-only` replaces only this scenario after all five
   readers succeed. Dataset/workload SHA-256 and protocol identify compatible result groups.
+
+
+## Atomic reader publication
+
+- `ReloadableReader` uses `arc-swap` 1.9.2 or newer under the reader feature.
+- Hold one load guard per query/batch; borrowed results cannot outlive it.
+- Editors own an Arc of their immutable source; bytes and PreparedTree are shared.
+- Build replacement readers before publication. Commit uses source Arc identity
+  with compare-and-swap to reject stale editors and prevent lost updates.
+- Publication does not persist files or modify existing bytes. Mmap safety rules
+  apply to every retained generation. Snapshots retain old database memory.
+- Rebuild still materializes source records. Do not claim end-to-end zero-copy.
+- `benches/editor.rs` compares direct/guard/snapshot lookup and publication on
+  one million IPv4 addresses; keep fixture creation outside timing.
