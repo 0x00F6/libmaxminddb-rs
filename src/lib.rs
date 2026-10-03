@@ -71,6 +71,8 @@ mod value;
 mod decoder;
 #[cfg(feature = "writer")]
 mod encoder;
+#[cfg(all(feature = "reader", feature = "writer"))]
+pub mod editor;
 #[cfg(feature = "reader")]
 pub mod reader;
 #[cfg(feature = "writer")]
@@ -86,6 +88,8 @@ pub use value::{Value, ValueRef};
 pub use reader::Reader;
 #[cfg(feature = "writer")]
 pub use writer::{MergeStrategy, Writer};
+#[cfg(all(feature = "reader", feature = "writer"))]
+pub use editor::Editor;
 
 #[cfg(feature = "derive")]
 pub use libmaxminddb_rs_derive::{MmdbDecode, MmdbEncode, MmdbRecord};
