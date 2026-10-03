@@ -37,7 +37,10 @@ impl<'a> Editor<'a> {
     /// Creates an editor from an already validated reader.
     #[must_use]
     pub fn from_reader(reader: Reader<'a>) -> Self {
-        Self { reader, edits: HashMap::new() }
+        Self {
+            reader,
+            edits: HashMap::new(),
+        }
     }
 
     /// Returns metadata from the source database.
@@ -47,7 +50,11 @@ impl<'a> Editor<'a> {
     }
 
     /// Inserts or replaces a prefix with a serde-serializable value.
-    pub fn insert<T: serde::Serialize + ?Sized>(&mut self, network: IpNetwork, value: &T) -> Result<()> {
+    pub fn insert<T: serde::Serialize + ?Sized>(
+        &mut self,
+        network: IpNetwork,
+        value: &T,
+    ) -> Result<()> {
         self.insert_value(network, Value::from_serialize(value)?)
     }
 
@@ -59,7 +66,11 @@ impl<'a> Editor<'a> {
     }
 
     /// Replaces a prefix. Existence is resolved while rebuilding, avoiding an eager scan.
-    pub fn update<T: serde::Serialize + ?Sized>(&mut self, network: IpNetwork, value: &T) -> Result<()> {
+    pub fn update<T: serde::Serialize + ?Sized>(
+        &mut self,
+        network: IpNetwork,
+        value: &T,
+    ) -> Result<()> {
         self.insert(network, value)
     }
 
@@ -131,8 +142,12 @@ mod tests {
     fn fixture() -> Vec<u8> {
         let metadata = MetadataBuilder::new().ip_version(4).build().unwrap();
         let mut writer = Writer::with_metadata(metadata);
-        writer.insert_value("10.0.0.0/24".parse().unwrap(), value(1)).unwrap();
-        writer.insert_value("10.0.1.0/24".parse().unwrap(), value(2)).unwrap();
+        writer
+            .insert_value("10.0.0.0/24".parse().unwrap(), value(1))
+            .unwrap();
+        writer
+            .insert_value("10.0.1.0/24".parse().unwrap(), value(2))
+            .unwrap();
         writer.finish().unwrap()
     }
 
@@ -140,18 +155,43 @@ mod tests {
     fn edits_existing_database_without_mutating_source() {
         let source = fixture();
         let mut editor = Editor::from_bytes(&source).unwrap();
-        editor.update_value("10.0.0.0/24".parse().unwrap(), value(10)).unwrap();
+        editor
+            .update_value("10.0.0.0/24".parse().unwrap(), value(10))
+            .unwrap();
         editor.remove("10.0.1.0/24".parse().unwrap()).unwrap();
-        editor.insert_value("10.0.2.0/24".parse().unwrap(), value(3)).unwrap();
+        editor
+            .insert_value("10.0.2.0/24".parse().unwrap(), value(3))
+            .unwrap();
 
         let rebuilt = editor.finish().unwrap();
         let reader = Reader::from_bytes(&rebuilt).unwrap();
-        assert_eq!(reader.lookup_value("10.0.0.7".parse().unwrap()).unwrap().get("id"), Some(&crate::ValueRef::Uint32(10)));
-        assert!(matches!(reader.lookup_value("10.0.1.7".parse().unwrap()), Err(Error::NotFound)));
-        assert_eq!(reader.lookup_value("10.0.2.7".parse().unwrap()).unwrap().get("id"), Some(&crate::ValueRef::Uint32(3)));
+        assert_eq!(
+            reader
+                .lookup_value("10.0.0.7".parse().unwrap())
+                .unwrap()
+                .get("id"),
+            Some(&crate::ValueRef::Uint32(10))
+        );
+        assert!(matches!(
+            reader.lookup_value("10.0.1.7".parse().unwrap()),
+            Err(Error::NotFound)
+        ));
+        assert_eq!(
+            reader
+                .lookup_value("10.0.2.7".parse().unwrap())
+                .unwrap()
+                .get("id"),
+            Some(&crate::ValueRef::Uint32(3))
+        );
 
         let original = Reader::from_bytes(&source).unwrap();
-        assert_eq!(original.lookup_value("10.0.0.7".parse().unwrap()).unwrap().get("id"), Some(&crate::ValueRef::Uint32(1)));
+        assert_eq!(
+            original
+                .lookup_value("10.0.0.7".parse().unwrap())
+                .unwrap()
+                .get("id"),
+            Some(&crate::ValueRef::Uint32(1))
+        );
     }
 
     #[test]
@@ -164,7 +204,13 @@ mod tests {
         assert_eq!(editor.pending_edits(), 1);
         let rebuilt = editor.finish().unwrap();
         let reader = Reader::from_bytes(&rebuilt).unwrap();
-        assert_eq!(reader.lookup_value("10.0.0.1".parse().unwrap()).unwrap().get("id"), Some(&crate::ValueRef::Uint32(42)));
+        assert_eq!(
+            reader
+                .lookup_value("10.0.0.1".parse().unwrap())
+                .unwrap()
+                .get("id"),
+            Some(&crate::ValueRef::Uint32(42))
+        );
     }
 
     #[test]
@@ -198,6 +244,9 @@ mod tests {
     fn rejects_ipv6_edit_for_ipv4_database() {
         let source = fixture();
         let mut editor = Editor::from_bytes(&source).unwrap();
-        assert!(matches!(editor.remove("2001:db8::/32".parse().unwrap()), Err(Error::InvalidIpVersion(6))));
+        assert!(matches!(
+            editor.remove("2001:db8::/32".parse().unwrap()),
+            Err(Error::InvalidIpVersion(6))
+        ));
     }
 }
