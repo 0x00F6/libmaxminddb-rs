@@ -372,7 +372,11 @@ impl<'a> Reader<'a> {
     ) -> Result<()> {
         use std::net::{IpAddr, Ipv4Addr, Ipv6Addr};
 
-        let bits = if self.metadata.ip_version == 4 { 32_u8 } else { 128_u8 };
+        let bits = if self.metadata.ip_version == 4 {
+            32_u8
+        } else {
+            128_u8
+        };
         let mut stack = Vec::with_capacity(256);
         stack.push((0_u64, 0_u128, 0_u8));
 
