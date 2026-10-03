@@ -21,7 +21,9 @@ fn million_ip_database() -> &'static [u8] {
         for i in 0..ROUTES {
             let address = Ipv4Addr::from(0x0a00_0000_u32.wrapping_add(i));
             let network = IpNetwork::new(address.into(), 32).unwrap();
-            writer.insert_value_shared(network, std::sync::Arc::clone(&shared)).unwrap();
+            writer
+                .insert_value_shared(network, std::sync::Arc::clone(&shared))
+                .unwrap();
         }
         writer.finish().unwrap()
     })
