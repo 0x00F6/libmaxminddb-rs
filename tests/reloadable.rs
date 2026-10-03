@@ -50,7 +50,11 @@ fn invalid_replacement_and_failed_reload_preserve_generation() {
     let old = database.snapshot();
     assert!(database.replace_from_vec(vec![0; 32]).is_err());
     let directory = tempfile::tempdir().unwrap();
-    assert!(database.reload(directory.path().join("missing.mmdb")).is_err());
+    assert!(
+        database
+            .reload(directory.path().join("missing.mmdb"))
+            .is_err()
+    );
     assert!(Arc::ptr_eq(&old, &database.snapshot()));
     let path = directory.path().join("replacement.mmdb");
     std::fs::write(&path, reader(2).as_bytes()).unwrap();
@@ -164,7 +168,9 @@ fn editor_commits_while_readers_hold_consistent_snapshots() {
         for generation in 1..=20 {
             let mut editor = libmaxminddb_rs::Editor::from_reader(database.snapshot());
             for network in ["10.0.0.0/8", "2001:db8::/32"] {
-                editor.update_value(network.parse().unwrap(), Value::Uint32(generation)).unwrap();
+                editor
+                    .update_value(network.parse().unwrap(), Value::Uint32(generation))
+                    .unwrap();
             }
             assert!(database.commit(editor).unwrap());
         }

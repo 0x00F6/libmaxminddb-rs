@@ -18,6 +18,10 @@ jobs:
         run: |
           cargo fmt --all
           git diff --exit-code
+      - name: Resolve dependencies
+        run: |
+          cargo metadata --format-version 1 > /dev/null
+          git diff -- Cargo.lock
       - name: Lint all targets
         run: cargo clippy --workspace --all-targets --all-features -- -D warnings
       - name: Test all features

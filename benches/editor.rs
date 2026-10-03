@@ -3,7 +3,9 @@ use std::net::Ipv4Addr;
 use std::sync::{Arc, OnceLock};
 
 use criterion::{Criterion, criterion_group, criterion_main};
-use libmaxminddb_rs::{Editor, IpNetwork, MetadataBuilder, Reader, ReloadableReader, Value, Writer};
+use libmaxminddb_rs::{
+    Editor, IpNetwork, MetadataBuilder, Reader, ReloadableReader, Value, Writer,
+};
 
 const ROUTES: u32 = 1_000_000;
 const EDITS: u32 = 1_000;
@@ -35,7 +37,10 @@ fn bench_editor(c: &mut Criterion) {
     let reader = Arc::new(Reader::from_bytes(source).unwrap());
     let database = ReloadableReader::new(Arc::clone(&reader));
     let ip = Ipv4Addr::from(0x0a00_0001).into();
-    assert_eq!(reader.lookup_value(ip).unwrap(), libmaxminddb_rs::ValueRef::Uint32(1));
+    assert_eq!(
+        reader.lookup_value(ip).unwrap(),
+        libmaxminddb_rs::ValueRef::Uint32(1)
+    );
     c.bench_function("rcu/million_direct_lookup", |b| {
         b.iter(|| black_box(reader.lookup_value(black_box(ip)).unwrap()))
     });
