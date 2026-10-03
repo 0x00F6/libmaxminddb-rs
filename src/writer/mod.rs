@@ -95,6 +95,8 @@ const NO_NODE: u32 = u32::MAX;
 struct TrieNode {
     children: [u32; 2],
     value: Option<std::sync::Arc<Value>>,
+    /// Explicitly suppress inherited parent data for this prefix.
+    blocked: bool,
     index: Option<u32>,
 }
 
@@ -104,6 +106,7 @@ impl Default for TrieNode {
         Self {
             children: [NO_NODE, NO_NODE],
             value: None,
+            blocked: false,
             index: None,
         }
     }
@@ -303,6 +306,7 @@ impl Writer {
         )?;
         let strategy = self.merge_strategy;
         let node = &mut self.nodes[node_index as usize];
+        node.blocked = false;
         node.value = Some(if strategy == MergeStrategy::Replace {
             std::sync::Arc::new(value)
         } else {
@@ -370,6 +374,7 @@ impl Writer {
         )?;
         let strategy = self.merge_strategy;
         let node = &mut self.nodes[node_index as usize];
+        node.blocked = false;
         node.value = Some(if strategy == MergeStrategy::Replace {
             value
         } else {
@@ -380,6 +385,23 @@ impl Writer {
                 None => value,
             }
         });
+        Ok(())
+    }
+
+    /// Removes data for a network while preserving more-specific child records.
+    ///
+    /// The writer records an explicit no-data boundary, preventing a parent
+    /// value from being inherited into the removed prefix.
+    pub fn remove(&mut self, network: IpNetwork) -> Result<()> {
+        let node_index = descend_network(
+            &mut self.nodes,
+            self.root,
+            network,
+            self.metadata.ip_version,
+        )?;
+        let node = &mut self.nodes[node_index as usize];
+        node.value = None;
+        node.blocked = true;
         Ok(())
     }
 
@@ -639,9 +661,13 @@ fn fill_records(
         node.index
             .ok_or_else(|| Error::EncodingError("indexed node expected".into()))? as usize;
     let mut own_offset = None;
-    let (effective, cached_offset) = match node.value.as_ref() {
-        Some(value) => (Some(value), &mut own_offset),
-        None => (inherited, inherited_offset),
+    let (effective, cached_offset) = if node.blocked {
+        (None, &mut own_offset)
+    } else {
+        match node.value.as_ref() {
+            Some(value) => (Some(value), &mut own_offset),
+            None => (inherited, inherited_offset),
+        }
     };
     let mut targets = [node_count as u32, node_count as u32];
     let c0 = node.children[0];
@@ -669,6 +695,7 @@ fn fill_records(
                         let offset = pool.intern_arc(value)?;
                         resolve_data_pointer(offset, node_count)?
                     }
+                    None if child.blocked => node_count as u32,
                     None => match effective {
                         Some(value) => {
                             let offset = match *cached_offset {
