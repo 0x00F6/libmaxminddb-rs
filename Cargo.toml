@@ -172,3 +172,8 @@ required-features = ["reader", "writer"]
 name = "replay_value"
 harness = false
 required-features = ["reader"]
+
+[[bench]]
+name = "editor"
+harness = false
+required-features = ["reader", "writer"]
