@@ -278,3 +278,27 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 The project's [examples directory](https://github.com/0x00F6/libmaxminddb-rs/tree/main/examples) contains runnable Reader and Writer programs, including [quickstart](https://github.com/0x00F6/libmaxminddb-rs/blob/main/examples/quickstart.rs), [fast IPv4/IPv6 lookups](https://github.com/0x00F6/libmaxminddb-rs/blob/main/examples/fast_ip_lookup.rs), and [custom database writing](https://github.com/0x00F6/libmaxminddb-rs/blob/main/examples/custom_database.rs). Run one with `cargo run --example quickstart`.
 
 See the [API documentation](https://docs.rs/libmaxminddb-rs) for all lookup and writer methods. Minimum supported Rust version: **1.98.1**. Licensed under **MIT or Apache-2.0**, at your option.
+
+
+## Editing an existing MMDB
+
+With both the \`reader\` and \`writer\` features enabled, \`Editor\` keeps the
+source MMDB borrowed and records changes in a copy-on-write overlay. The source
+file is never modified in place; \`finish\` or \`write_to_file\` rebuilds a valid
+MMDB atomically at the application level.
+
+\`\`\`rust
+use libmaxminddb_rs::{Editor, Value};
+
+let bytes = std::fs::read("input.mmdb")?;
+let mut editor = Editor::from_bytes(&bytes)?;
+editor.update_value("198.51.100.0/24".parse()?, Value::Uint32(64512))?;
+editor.remove("203.0.113.0/24".parse()?)?;
+editor.insert_value("192.0.2.0/24".parse()?, Value::Bool(true))?;
+std::fs::write("output.mmdb", editor.finish()?)?;
+# Ok::<(), Box<dyn std::error::Error>>(())
+\`\`\`
+
+Removal uses an explicit no-data trie boundary, so a removed child network does
+not accidentally inherit its parent's value and more-specific child records are
+preserved.
