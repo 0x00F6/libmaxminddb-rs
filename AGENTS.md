@@ -10,7 +10,8 @@ Maintain an independent, high-performance, memory-conscious Rust implementation 
 
 - `src/lib.rs`: public API and feature gates.
 - `src/reader/`: file/buffer sources, metadata discovery, search-tree traversal, lookup.
-- `src/writer/`: prefix trie, deep merge, data interning, node serialization.
+- `src/writer/`: prefix trie, deep merge, data interning, explicit no-data boundaries, node serialization.
+- `src/editor.rs`: copy-on-write overlay for rebuilding existing MMDB files; source records stay borrowed until rebuild.
 - `src/decoder/`: MMDB control-byte, pointer, scalar, map and array decoding.
 - `src/encoder.rs`: MMDB control-byte and payload encoding.
 - `src/metadata.rs`: public metadata type and builder.
