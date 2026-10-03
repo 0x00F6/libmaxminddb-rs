@@ -20,6 +20,9 @@ jobs:
         run: cargo clippy --workspace --all-targets --all-features -- -D warnings
       - name: Test all features
         run: cargo test --workspace --all-features
+      - name: Editor million-IP benchmark
+        if: github.ref == 'refs/heads/feature/mmdb-editor'
+        run: cargo bench --bench editor -- --noplot
       - name: Test documentation
         run: cargo test --doc --all-features
       - name: Build documentation
