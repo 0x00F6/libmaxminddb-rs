@@ -93,7 +93,7 @@ impl<'a> Editor<'a> {
     }
 
     /// Rebuilds the database and returns replacement MMDB bytes.
-    pub fn finish(mut self) -> Result<Vec<u8>> {
+    pub fn finish(self) -> Result<Vec<u8>> {
         let mut metadata = self.reader.metadata().clone();
         metadata.node_count = 0;
         let mut writer = Writer::with_metadata_and_capacity(metadata, 1024);
