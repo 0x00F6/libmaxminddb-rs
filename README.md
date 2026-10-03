@@ -763,14 +763,28 @@ use libmaxminddb_rs::{Editor, Reader, ReloadableReader, Value};
 # fn main() -> Result<(), Box<dyn std::error::Error>> {
 let database = ReloadableReader::new(Reader::open("GeoIP.mmdb")?);
 let old = database.snapshot();
-let mut editor = Editor::from_reader(database.snapshot());
-editor.update_value("1.2.3.4/32".parse()?, Value::Uint32(42))?;
-if !database.commit(editor)? {
-    // Another publisher won: create a fresh editor and reapply the edits.
-}
-let guard = database.load();
-let record = guard.lookup_value("1.2.3.4".parse()?)?;
-// `old` still reads the original database; `guard` pins the current generation.
+let ip = "1.2.3.4".parse()?;
+std::thread::scope(|scope| {
+    for _ in 0..4 {
+        let database = &database;
+        scope.spawn(move || {
+            for _ in 0..10_000 {
+                let guard = database.load();
+                let record = guard.lookup_value(ip);
+                // Use borrowed fields while `guard` lives. A miss is allowed.
+                std::hint::black_box(record);
+            }
+        });
+    }
+    // These edits and publication run concurrently with the reading threads.
+    let mut editor = Editor::from_reader(database.snapshot());
+    editor.update_value("1.2.3.4/32".parse().unwrap(), Value::Uint32(42))?;
+    if !database.commit(editor)? {
+        // Another publisher won: start a fresh editor and reapply the edits.
+    }
+    Ok::<(), libmaxminddb_rs::Error>(())
+})?;
+// `old` still reads the original database after publication.
 # Ok(())
 # }
 ```

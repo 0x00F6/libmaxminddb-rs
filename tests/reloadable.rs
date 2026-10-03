@@ -14,6 +14,41 @@ fn reader(version: u32) -> Reader<'static> {
     Reader::from_vec(writer.finish().unwrap()).unwrap()
 }
 
+#[test]
+fn reader_editor_and_container_are_send_sync() {
+    fn assert_send_sync<T: Send + Sync>() {}
+    assert_send_sync::<Reader<'static>>();
+    assert_send_sync::<libmaxminddb_rs::Editor<'static>>();
+    assert_send_sync::<ReloadableReader<'static>>();
+}
+
+#[test]
+fn borrowed_value_survives_publication_during_query() {
+    let mut writer = Writer::with_metadata(MetadataBuilder::new().ip_version(4).build().unwrap());
+    writer
+        .insert_value(
+            "10.0.0.0/8".parse().unwrap(),
+            Value::Utf8("original".into()),
+        )
+        .unwrap();
+    let database = ReloadableReader::new(Reader::from_vec(writer.finish().unwrap()).unwrap());
+    let barrier = Barrier::new(2);
+    std::thread::scope(|scope| {
+        scope.spawn(|| {
+            let pinned = database.load();
+            let value = pinned.lookup_value("10.1.2.3".parse().unwrap()).unwrap();
+            barrier.wait();
+            // The writer publishes while this guard and borrowed string live.
+            barrier.wait();
+            assert_eq!(value, ValueRef::Utf8("original"));
+        });
+        barrier.wait();
+        drop(database.replace(reader(2)));
+        barrier.wait();
+    });
+    assert_eq!(version(&database.load(), "10.1.2.3"), 2);
+}
+
 fn version(reader: &Reader<'_>, ip: &str) -> u32 {
     match reader.lookup_value(ip.parse().unwrap()).unwrap() {
         ValueRef::Uint32(value) => value,
