@@ -1,0 +1,1963 @@
+{
+  "context": {
+    "label": "Archived benchmark comparison",
+    "sourceCommit": "e4561b502466a6c95312719372eafc77b7a85994",
+    "sourceDate": "2026-09-30",
+    "measurementDate": null,
+    "cpu": "AMD Ryzen 7 PRO 7840U",
+    "os": "Linux x86_64",
+    "rust": "1.90.0",
+    "go": "1.23.1",
+    "dataset": "Deterministic SplitMix64 MMDB fixtures",
+    "precision": "Values transcribed programmatically from committed SVG tooltips, retaining their displayed precision. Raw samples and confidence intervals are not included in this snapshot.",
+    "notes": "Historical measurements, not a fresh benchmark of release 0.3.1. The source export was committed on 30 September 2026; the exact measurement date was not recorded. Compare only within the same chart and workload.",
+    "libraries": [
+      {
+        "name": "libmaxminddb-rs",
+        "version": "0.1.0",
+        "language": "Rust",
+        "role": "Reader + writer"
+      },
+      {
+        "name": "libmaxminddb (C)",
+        "version": "1.14.1",
+        "language": "C",
+        "role": "Reader"
+      },
+      {
+        "name": "maxminddb-rust",
+        "version": "0.32.0",
+        "language": "Rust",
+        "role": "Reader"
+      },
+      {
+        "name": "geoip2-rs",
+        "version": "0.1.8",
+        "language": "Rust",
+        "role": "Reader"
+      },
+      {
+        "name": "maxminddb-golang",
+        "version": "2.6.0",
+        "language": "Go",
+        "role": "Reader"
+      },
+      {
+        "name": "mmdbwriter",
+        "version": "1.2.0",
+        "language": "Go",
+        "role": "Writer"
+      }
+    ],
+    "chartsSha256": "f38280a161a8eb21965576bb4eab4a64fe25ba21bccb70362502996e245b3344"
+  },
+  "charts": [
+    {
+      "id": "throughput-ipv4-random",
+      "title": "IPv4 Throughput \u2014 Random Lookups (1M)",
+      "subtitle": "Single-threaded operations/sec on random workload (higher is better)",
+      "points": [
+        {
+          "library": "libmaxminddb-rs",
+          "value": 44.68,
+          "unit": "M ops/s",
+          "dimension": null,
+          "label": "libmaxminddb-rs: 44.68 M ops/s (IPv4 Throughput \u2014 Random Lookups (1M))"
+        },
+        {
+          "library": "libmaxminddb (C)",
+          "value": 21.29,
+          "unit": "M ops/s",
+          "dimension": null,
+          "label": "libmaxminddb (C): 21.29 M ops/s (IPv4 Throughput \u2014 Random Lookups (1M))"
+        },
+        {
+          "library": "maxminddb-rust",
+          "value": 13.79,
+          "unit": "M ops/s",
+          "dimension": null,
+          "label": "maxminddb-rust: 13.79 M ops/s (IPv4 Throughput \u2014 Random Lookups (1M))"
+        },
+        {
+          "library": "geoip2-rs",
+          "value": 21.93,
+          "unit": "M ops/s",
+          "dimension": null,
+          "label": "geoip2-rs: 21.93 M ops/s (IPv4 Throughput \u2014 Random Lookups (1M))"
+        },
+        {
+          "library": "maxminddb-golang",
+          "value": 12.81,
+          "unit": "M ops/s",
+          "dimension": null,
+          "label": "maxminddb-golang: 12.81 M ops/s (IPv4 Throughput \u2014 Random Lookups (1M))"
+        }
+      ],
+      "source": "https://github.com/0x00F6/libmaxminddb-rs/blob/e4561b502466a6c95312719372eafc77b7a85994/benchmarks/charts/throughput-ipv4-random.svg",
+      "sha256": "488dc46d30326bed28b66ad818ba23bfaf7b960199bc3821f03dbef1f71b0d82"
+    },
+    {
+      "id": "throughput-ipv4-hot",
+      "title": "IPv4 Throughput \u2014 Hot Lookups (1M)",
+      "subtitle": "Single-threaded operations/sec on hot workload (higher is better)",
+      "points": [
+        {
+          "library": "libmaxminddb-rs",
+          "value": 3.35,
+          "unit": "M ops/s",
+          "dimension": null,
+          "label": "libmaxminddb-rs: 3.35 M ops/s (IPv4 Throughput \u2014 Hot Lookups (1M))"
+        },
+        {
+          "library": "libmaxminddb (C)",
+          "value": 1.99,
+          "unit": "M ops/s",
+          "dimension": null,
+          "label": "libmaxminddb (C): 1.99 M ops/s (IPv4 Throughput \u2014 Hot Lookups (1M))"
+        },
+        {
+          "library": "maxminddb-rust",
+          "value": 1.6,
+          "unit": "M ops/s",
+          "dimension": null,
+          "label": "maxminddb-rust: 1.60 M ops/s (IPv4 Throughput \u2014 Hot Lookups (1M))"
+        },
+        {
+          "library": "geoip2-rs",
+          "value": 2.15,
+          "unit": "M ops/s",
+          "dimension": null,
+          "label": "geoip2-rs: 2.15 M ops/s (IPv4 Throughput \u2014 Hot Lookups (1M))"
+        },
+        {
+          "library": "maxminddb-golang",
+          "value": 1.53,
+          "unit": "M ops/s",
+          "dimension": null,
+          "label": "maxminddb-golang: 1.53 M ops/s (IPv4 Throughput \u2014 Hot Lookups (1M))"
+        }
+      ],
+      "source": "https://github.com/0x00F6/libmaxminddb-rs/blob/e4561b502466a6c95312719372eafc77b7a85994/benchmarks/charts/throughput-ipv4-hot.svg",
+      "sha256": "a20bb76ca5f98f10e1471bab555a9e03e2dd7557538b7ecbf93c742172744c39"
+    },
+    {
+      "id": "throughput-ipv4-sequential",
+      "title": "IPv4 Throughput \u2014 Sequential Lookups (1M)",
+      "subtitle": "Single-threaded operations/sec on sequential workload (higher is better)",
+      "points": [
+        {
+          "library": "libmaxminddb-rs",
+          "value": 282.57,
+          "unit": "M ops/s",
+          "dimension": null,
+          "label": "libmaxminddb-rs: 282.57 M ops/s (IPv4 Throughput \u2014 Sequential Lookups (1M))"
+        },
+        {
+          "library": "libmaxminddb (C)",
+          "value": 30.12,
+          "unit": "M ops/s",
+          "dimension": null,
+          "label": "libmaxminddb (C): 30.12 M ops/s (IPv4 Throughput \u2014 Sequential Lookups (1M))"
+        },
+        {
+          "library": "maxminddb-rust",
+          "value": 24.27,
+          "unit": "M ops/s",
+          "dimension": null,
+          "label": "maxminddb-rust: 24.27 M ops/s (IPv4 Throughput \u2014 Sequential Lookups (1M))"
+        },
+        {
+          "library": "geoip2-rs",
+          "value": 28.96,
+          "unit": "M ops/s",
+          "dimension": null,
+          "label": "geoip2-rs: 28.96 M ops/s (IPv4 Throughput \u2014 Sequential Lookups (1M))"
+        },
+        {
+          "library": "maxminddb-golang",
+          "value": 23.6,
+          "unit": "M ops/s",
+          "dimension": null,
+          "label": "maxminddb-golang: 23.60 M ops/s (IPv4 Throughput \u2014 Sequential Lookups (1M))"
+        }
+      ],
+      "source": "https://github.com/0x00F6/libmaxminddb-rs/blob/e4561b502466a6c95312719372eafc77b7a85994/benchmarks/charts/throughput-ipv4-sequential.svg",
+      "sha256": "9246d7a232a86da03b1b2def4df4af2f615f31c875ea9c34c1d2f51397175799"
+    },
+    {
+      "id": "throughput-ipv4-absent",
+      "title": "IPv4 Throughput \u2014 Absent Keys (1M)",
+      "subtitle": "Single-threaded operations/sec on absent workload (higher is better)",
+      "points": [
+        {
+          "library": "libmaxminddb-rs",
+          "value": 324.12,
+          "unit": "M ops/s",
+          "dimension": null,
+          "label": "libmaxminddb-rs: 324.12 M ops/s (IPv4 Throughput \u2014 Absent Keys (1M))"
+        },
+        {
+          "library": "libmaxminddb (C)",
+          "value": 170.11,
+          "unit": "M ops/s",
+          "dimension": null,
+          "label": "libmaxminddb (C): 170.11 M ops/s (IPv4 Throughput \u2014 Absent Keys (1M))"
+        },
+        {
+          "library": "maxminddb-rust",
+          "value": 57.69,
+          "unit": "M ops/s",
+          "dimension": null,
+          "label": "maxminddb-rust: 57.69 M ops/s (IPv4 Throughput \u2014 Absent Keys (1M))"
+        },
+        {
+          "library": "geoip2-rs",
+          "value": 167.26,
+          "unit": "M ops/s",
+          "dimension": null,
+          "label": "geoip2-rs: 167.26 M ops/s (IPv4 Throughput \u2014 Absent Keys (1M))"
+        },
+        {
+          "library": "maxminddb-golang",
+          "value": 63.24,
+          "unit": "M ops/s",
+          "dimension": null,
+          "label": "maxminddb-golang: 63.24 M ops/s (IPv4 Throughput \u2014 Absent Keys (1M))"
+        }
+      ],
+      "source": "https://github.com/0x00F6/libmaxminddb-rs/blob/e4561b502466a6c95312719372eafc77b7a85994/benchmarks/charts/throughput-ipv4-absent.svg",
+      "sha256": "f77eb8e7dcd1aa59b3195e1e3eced20ae10170c2ab3b9de8851a92030e87ddf4"
+    },
+    {
+      "id": "throughput-ipv6-random",
+      "title": "IPv6 Throughput \u2014 Random Lookups (1M)",
+      "subtitle": "Single-threaded operations/sec on random workload (higher is better)",
+      "points": [
+        {
+          "library": "libmaxminddb-rs",
+          "value": 116.69,
+          "unit": "M ops/s",
+          "dimension": null,
+          "label": "libmaxminddb-rs: 116.69 M ops/s (IPv6 Throughput \u2014 Random Lookups (1M))"
+        },
+        {
+          "library": "libmaxminddb (C)",
+          "value": 69.31,
+          "unit": "M ops/s",
+          "dimension": null,
+          "label": "libmaxminddb (C): 69.31 M ops/s (IPv6 Throughput \u2014 Random Lookups (1M))"
+        },
+        {
+          "library": "maxminddb-rust",
+          "value": 36.08,
+          "unit": "M ops/s",
+          "dimension": null,
+          "label": "maxminddb-rust: 36.08 M ops/s (IPv6 Throughput \u2014 Random Lookups (1M))"
+        },
+        {
+          "library": "geoip2-rs",
+          "value": 48.65,
+          "unit": "M ops/s",
+          "dimension": null,
+          "label": "geoip2-rs: 48.65 M ops/s (IPv6 Throughput \u2014 Random Lookups (1M))"
+        },
+        {
+          "library": "maxminddb-golang",
+          "value": 29.65,
+          "unit": "M ops/s",
+          "dimension": null,
+          "label": "maxminddb-golang: 29.65 M ops/s (IPv6 Throughput \u2014 Random Lookups (1M))"
+        }
+      ],
+      "source": "https://github.com/0x00F6/libmaxminddb-rs/blob/e4561b502466a6c95312719372eafc77b7a85994/benchmarks/charts/throughput-ipv6-random.svg",
+      "sha256": "9eac4fadab5590bd7115ac5c0a00b148c7f4dabfae7482a89cce52bb22e73a5f"
+    },
+    {
+      "id": "throughput-ipv6-hot",
+      "title": "IPv6 Throughput \u2014 Hot Lookups (1M)",
+      "subtitle": "Single-threaded operations/sec on hot workload (higher is better)",
+      "points": [
+        {
+          "library": "libmaxminddb-rs",
+          "value": 3.25,
+          "unit": "M ops/s",
+          "dimension": null,
+          "label": "libmaxminddb-rs: 3.25 M ops/s (IPv6 Throughput \u2014 Hot Lookups (1M))"
+        },
+        {
+          "library": "libmaxminddb (C)",
+          "value": 1.82,
+          "unit": "M ops/s",
+          "dimension": null,
+          "label": "libmaxminddb (C): 1.82 M ops/s (IPv6 Throughput \u2014 Hot Lookups (1M))"
+        },
+        {
+          "library": "maxminddb-rust",
+          "value": 1.46,
+          "unit": "M ops/s",
+          "dimension": null,
+          "label": "maxminddb-rust: 1.46 M ops/s (IPv6 Throughput \u2014 Hot Lookups (1M))"
+        },
+        {
+          "library": "geoip2-rs",
+          "value": 1.87,
+          "unit": "M ops/s",
+          "dimension": null,
+          "label": "geoip2-rs: 1.87 M ops/s (IPv6 Throughput \u2014 Hot Lookups (1M))"
+        },
+        {
+          "library": "maxminddb-golang",
+          "value": 1.39,
+          "unit": "M ops/s",
+          "dimension": null,
+          "label": "maxminddb-golang: 1.39 M ops/s (IPv6 Throughput \u2014 Hot Lookups (1M))"
+        }
+      ],
+      "source": "https://github.com/0x00F6/libmaxminddb-rs/blob/e4561b502466a6c95312719372eafc77b7a85994/benchmarks/charts/throughput-ipv6-hot.svg",
+      "sha256": "45aea7f97e6526b805ffee45cf2df5b4565382d8c39c0baf1fea3d2d7c1f0ed3"
+    },
+    {
+      "id": "throughput-ipv6-sequential",
+      "title": "IPv6 Throughput \u2014 Sequential Lookups (1M)",
+      "subtitle": "Single-threaded operations/sec on sequential workload (higher is better)",
+      "points": [
+        {
+          "library": "libmaxminddb-rs",
+          "value": 3.21,
+          "unit": "M ops/s",
+          "dimension": null,
+          "label": "libmaxminddb-rs: 3.21 M ops/s (IPv6 Throughput \u2014 Sequential Lookups (1M))"
+        },
+        {
+          "library": "libmaxminddb (C)",
+          "value": 1.79,
+          "unit": "M ops/s",
+          "dimension": null,
+          "label": "libmaxminddb (C): 1.79 M ops/s (IPv6 Throughput \u2014 Sequential Lookups (1M))"
+        },
+        {
+          "library": "maxminddb-rust",
+          "value": 1.45,
+          "unit": "M ops/s",
+          "dimension": null,
+          "label": "maxminddb-rust: 1.45 M ops/s (IPv6 Throughput \u2014 Sequential Lookups (1M))"
+        },
+        {
+          "library": "geoip2-rs",
+          "value": 1.89,
+          "unit": "M ops/s",
+          "dimension": null,
+          "label": "geoip2-rs: 1.89 M ops/s (IPv6 Throughput \u2014 Sequential Lookups (1M))"
+        },
+        {
+          "library": "maxminddb-golang",
+          "value": 1.33,
+          "unit": "M ops/s",
+          "dimension": null,
+          "label": "maxminddb-golang: 1.33 M ops/s (IPv6 Throughput \u2014 Sequential Lookups (1M))"
+        }
+      ],
+      "source": "https://github.com/0x00F6/libmaxminddb-rs/blob/e4561b502466a6c95312719372eafc77b7a85994/benchmarks/charts/throughput-ipv6-sequential.svg",
+      "sha256": "8746676f4f6f4116cbc27e636da1f6e98c5d34f21da7ff4451c71118bb4c1e12"
+    },
+    {
+      "id": "throughput-ipv6-absent",
+      "title": "IPv6 Throughput \u2014 Absent Keys (1M)",
+      "subtitle": "Single-threaded operations/sec on absent workload (higher is better)",
+      "points": [
+        {
+          "library": "libmaxminddb-rs",
+          "value": 4.26,
+          "unit": "M ops/s",
+          "dimension": null,
+          "label": "libmaxminddb-rs: 4.26 M ops/s (IPv6 Throughput \u2014 Absent Keys (1M))"
+        },
+        {
+          "library": "libmaxminddb (C)",
+          "value": 1.84,
+          "unit": "M ops/s",
+          "dimension": null,
+          "label": "libmaxminddb (C): 1.84 M ops/s (IPv6 Throughput \u2014 Absent Keys (1M))"
+        },
+        {
+          "library": "maxminddb-rust",
+          "value": 1.87,
+          "unit": "M ops/s",
+          "dimension": null,
+          "label": "maxminddb-rust: 1.87 M ops/s (IPv6 Throughput \u2014 Absent Keys (1M))"
+        },
+        {
+          "library": "geoip2-rs",
+          "value": 1.86,
+          "unit": "M ops/s",
+          "dimension": null,
+          "label": "geoip2-rs: 1.86 M ops/s (IPv6 Throughput \u2014 Absent Keys (1M))"
+        },
+        {
+          "library": "maxminddb-golang",
+          "value": 1.68,
+          "unit": "M ops/s",
+          "dimension": null,
+          "label": "maxminddb-golang: 1.68 M ops/s (IPv6 Throughput \u2014 Absent Keys (1M))"
+        }
+      ],
+      "source": "https://github.com/0x00F6/libmaxminddb-rs/blob/e4561b502466a6c95312719372eafc77b7a85994/benchmarks/charts/throughput-ipv6-absent.svg",
+      "sha256": "83495cae3ccf45ee6c61a65f1555d6b16a7336533194ab4ea966b768bdc70bc0"
+    },
+    {
+      "id": "lookup-latency-ipv4",
+      "title": "IPv4 Lookup Latency (p99)",
+      "subtitle": "p99 tail latency for 1M random lookups (lower is better)",
+      "points": [
+        {
+          "library": "libmaxminddb-rs",
+          "value": 471.0,
+          "unit": "ns",
+          "dimension": null,
+          "label": "libmaxminddb-rs: 471.0 ns (IPv4 Lookup Latency (p99))"
+        },
+        {
+          "library": "libmaxminddb (C)",
+          "value": 541.0,
+          "unit": "ns",
+          "dimension": null,
+          "label": "libmaxminddb (C): 541.0 ns (IPv4 Lookup Latency (p99))"
+        },
+        {
+          "library": "maxminddb-rust",
+          "value": 702.0,
+          "unit": "ns",
+          "dimension": null,
+          "label": "maxminddb-rust: 702.0 ns (IPv4 Lookup Latency (p99))"
+        },
+        {
+          "library": "geoip2-rs",
+          "value": 561.0,
+          "unit": "ns",
+          "dimension": null,
+          "label": "geoip2-rs: 561.0 ns (IPv4 Lookup Latency (p99))"
+        },
+        {
+          "library": "maxminddb-golang",
+          "value": 662.0,
+          "unit": "ns",
+          "dimension": null,
+          "label": "maxminddb-golang: 662.0 ns (IPv4 Lookup Latency (p99))"
+        }
+      ],
+      "source": "https://github.com/0x00F6/libmaxminddb-rs/blob/e4561b502466a6c95312719372eafc77b7a85994/benchmarks/charts/lookup-latency-ipv4.svg",
+      "sha256": "f7d6ee827c9c8554b1493b3d90cc01fd3791127fef336a600938f187d020e84f"
+    },
+    {
+      "id": "lookup-latency-ipv6",
+      "title": "IPv6 Lookup Latency (p99)",
+      "subtitle": "p99 tail latency for 1M random lookups (lower is better)",
+      "points": [
+        {
+          "library": "libmaxminddb-rs",
+          "value": 191.0,
+          "unit": "ns",
+          "dimension": null,
+          "label": "libmaxminddb-rs: 191.0 ns (IPv6 Lookup Latency (p99))"
+        },
+        {
+          "library": "libmaxminddb (C)",
+          "value": 60.0,
+          "unit": "ns",
+          "dimension": null,
+          "label": "libmaxminddb (C): 60.0 ns (IPv6 Lookup Latency (p99))"
+        },
+        {
+          "library": "maxminddb-rust",
+          "value": 341.0,
+          "unit": "ns",
+          "dimension": null,
+          "label": "maxminddb-rust: 341.0 ns (IPv6 Lookup Latency (p99))"
+        },
+        {
+          "library": "geoip2-rs",
+          "value": 351.0,
+          "unit": "ns",
+          "dimension": null,
+          "label": "geoip2-rs: 351.0 ns (IPv6 Lookup Latency (p99))"
+        },
+        {
+          "library": "maxminddb-golang",
+          "value": 81.0,
+          "unit": "ns",
+          "dimension": null,
+          "label": "maxminddb-golang: 81.0 ns (IPv6 Lookup Latency (p99))"
+        }
+      ],
+      "source": "https://github.com/0x00F6/libmaxminddb-rs/blob/e4561b502466a6c95312719372eafc77b7a85994/benchmarks/charts/lookup-latency-ipv6.svg",
+      "sha256": "9b2ac1e8f3ca52afb0fcbb4ea6ac9a9bb4eeeddad87805e1efd2d130af712772"
+    },
+    {
+      "id": "database-size-scaling",
+      "title": "p99 Tail Latency vs Database Size",
+      "subtitle": "p99 tail latency as database grows from 1K to 5M entries (lower is better)",
+      "points": [
+        {
+          "library": "libmaxminddb-rs",
+          "value": 531.0,
+          "unit": "ns",
+          "dimension": "1K",
+          "label": "libmaxminddb-rs: 531.00 ns @ 1K"
+        },
+        {
+          "library": "libmaxminddb-rs",
+          "value": 521.0,
+          "unit": "ns",
+          "dimension": "10K",
+          "label": "libmaxminddb-rs: 521.00 ns @ 10K"
+        },
+        {
+          "library": "libmaxminddb-rs",
+          "value": 271.0,
+          "unit": "ns",
+          "dimension": "100K",
+          "label": "libmaxminddb-rs: 271.00 ns @ 100K"
+        },
+        {
+          "library": "libmaxminddb-rs",
+          "value": 261.0,
+          "unit": "ns",
+          "dimension": "500K",
+          "label": "libmaxminddb-rs: 261.00 ns @ 500K"
+        },
+        {
+          "library": "libmaxminddb-rs",
+          "value": 270.0,
+          "unit": "ns",
+          "dimension": "1M",
+          "label": "libmaxminddb-rs: 270.00 ns @ 1M"
+        },
+        {
+          "library": "libmaxminddb-rs",
+          "value": 281.0,
+          "unit": "ns",
+          "dimension": "1.5M",
+          "label": "libmaxminddb-rs: 281.00 ns @ 1.5M"
+        },
+        {
+          "library": "libmaxminddb-rs",
+          "value": 271.0,
+          "unit": "ns",
+          "dimension": "2M",
+          "label": "libmaxminddb-rs: 271.00 ns @ 2M"
+        },
+        {
+          "library": "libmaxminddb-rs",
+          "value": 271.0,
+          "unit": "ns",
+          "dimension": "5M",
+          "label": "libmaxminddb-rs: 271.00 ns @ 5M"
+        },
+        {
+          "library": "libmaxminddb (C)",
+          "value": 551.0,
+          "unit": "ns",
+          "dimension": "1K",
+          "label": "libmaxminddb (C): 551.00 ns @ 1K"
+        },
+        {
+          "library": "libmaxminddb (C)",
+          "value": 541.0,
+          "unit": "ns",
+          "dimension": "10K",
+          "label": "libmaxminddb (C): 541.00 ns @ 10K"
+        },
+        {
+          "library": "libmaxminddb (C)",
+          "value": 511.0,
+          "unit": "ns",
+          "dimension": "100K",
+          "label": "libmaxminddb (C): 511.00 ns @ 100K"
+        },
+        {
+          "library": "libmaxminddb (C)",
+          "value": 751.0,
+          "unit": "ns",
+          "dimension": "500K",
+          "label": "libmaxminddb (C): 751.00 ns @ 500K"
+        },
+        {
+          "library": "libmaxminddb (C)",
+          "value": 1002.0,
+          "unit": "ns",
+          "dimension": "1M",
+          "label": "libmaxminddb (C): 1002.00 ns @ 1M"
+        },
+        {
+          "library": "libmaxminddb (C)",
+          "value": 932.0,
+          "unit": "ns",
+          "dimension": "1.5M",
+          "label": "libmaxminddb (C): 932.00 ns @ 1.5M"
+        },
+        {
+          "library": "libmaxminddb (C)",
+          "value": 1774.0,
+          "unit": "ns",
+          "dimension": "2M",
+          "label": "libmaxminddb (C): 1774.00 ns @ 2M"
+        },
+        {
+          "library": "libmaxminddb (C)",
+          "value": 962.0,
+          "unit": "ns",
+          "dimension": "5M",
+          "label": "libmaxminddb (C): 962.00 ns @ 5M"
+        },
+        {
+          "library": "maxminddb-rust",
+          "value": 881.0,
+          "unit": "ns",
+          "dimension": "1K",
+          "label": "maxminddb-rust: 881.00 ns @ 1K"
+        },
+        {
+          "library": "maxminddb-rust",
+          "value": 872.0,
+          "unit": "ns",
+          "dimension": "10K",
+          "label": "maxminddb-rust: 872.00 ns @ 10K"
+        },
+        {
+          "library": "maxminddb-rust",
+          "value": 782.0,
+          "unit": "ns",
+          "dimension": "100K",
+          "label": "maxminddb-rust: 782.00 ns @ 100K"
+        },
+        {
+          "library": "maxminddb-rust",
+          "value": 1322.0,
+          "unit": "ns",
+          "dimension": "500K",
+          "label": "maxminddb-rust: 1322.00 ns @ 500K"
+        },
+        {
+          "library": "maxminddb-rust",
+          "value": 762.0,
+          "unit": "ns",
+          "dimension": "1M",
+          "label": "maxminddb-rust: 762.00 ns @ 1M"
+        },
+        {
+          "library": "maxminddb-rust",
+          "value": 1002.0,
+          "unit": "ns",
+          "dimension": "1.5M",
+          "label": "maxminddb-rust: 1002.00 ns @ 1.5M"
+        },
+        {
+          "library": "maxminddb-rust",
+          "value": 1603.0,
+          "unit": "ns",
+          "dimension": "2M",
+          "label": "maxminddb-rust: 1603.00 ns @ 2M"
+        },
+        {
+          "library": "maxminddb-rust",
+          "value": 912.0,
+          "unit": "ns",
+          "dimension": "5M",
+          "label": "maxminddb-rust: 912.00 ns @ 5M"
+        },
+        {
+          "library": "geoip2-rs",
+          "value": 491.0,
+          "unit": "ns",
+          "dimension": "1K",
+          "label": "geoip2-rs: 491.00 ns @ 1K"
+        },
+        {
+          "library": "geoip2-rs",
+          "value": 581.0,
+          "unit": "ns",
+          "dimension": "10K",
+          "label": "geoip2-rs: 581.00 ns @ 10K"
+        },
+        {
+          "library": "geoip2-rs",
+          "value": 581.0,
+          "unit": "ns",
+          "dimension": "100K",
+          "label": "geoip2-rs: 581.00 ns @ 100K"
+        },
+        {
+          "library": "geoip2-rs",
+          "value": 1513.0,
+          "unit": "ns",
+          "dimension": "500K",
+          "label": "geoip2-rs: 1513.00 ns @ 500K"
+        },
+        {
+          "library": "geoip2-rs",
+          "value": 732.0,
+          "unit": "ns",
+          "dimension": "1M",
+          "label": "geoip2-rs: 732.00 ns @ 1M"
+        },
+        {
+          "library": "geoip2-rs",
+          "value": 742.0,
+          "unit": "ns",
+          "dimension": "1.5M",
+          "label": "geoip2-rs: 742.00 ns @ 1.5M"
+        },
+        {
+          "library": "geoip2-rs",
+          "value": 731.0,
+          "unit": "ns",
+          "dimension": "2M",
+          "label": "geoip2-rs: 731.00 ns @ 2M"
+        },
+        {
+          "library": "geoip2-rs",
+          "value": 582.0,
+          "unit": "ns",
+          "dimension": "5M",
+          "label": "geoip2-rs: 582.00 ns @ 5M"
+        },
+        {
+          "library": "maxminddb-golang",
+          "value": 832.0,
+          "unit": "ns",
+          "dimension": "1K",
+          "label": "maxminddb-golang: 832.00 ns @ 1K"
+        },
+        {
+          "library": "maxminddb-golang",
+          "value": 861.0,
+          "unit": "ns",
+          "dimension": "10K",
+          "label": "maxminddb-golang: 861.00 ns @ 10K"
+        },
+        {
+          "library": "maxminddb-golang",
+          "value": 882.0,
+          "unit": "ns",
+          "dimension": "100K",
+          "label": "maxminddb-golang: 882.00 ns @ 100K"
+        },
+        {
+          "library": "maxminddb-golang",
+          "value": 871.0,
+          "unit": "ns",
+          "dimension": "500K",
+          "label": "maxminddb-golang: 871.00 ns @ 500K"
+        },
+        {
+          "library": "maxminddb-golang",
+          "value": 802.0,
+          "unit": "ns",
+          "dimension": "1M",
+          "label": "maxminddb-golang: 802.00 ns @ 1M"
+        },
+        {
+          "library": "maxminddb-golang",
+          "value": 2255.0,
+          "unit": "ns",
+          "dimension": "1.5M",
+          "label": "maxminddb-golang: 2255.00 ns @ 1.5M"
+        },
+        {
+          "library": "maxminddb-golang",
+          "value": 862.0,
+          "unit": "ns",
+          "dimension": "2M",
+          "label": "maxminddb-golang: 862.00 ns @ 2M"
+        },
+        {
+          "library": "maxminddb-golang",
+          "value": 812.0,
+          "unit": "ns",
+          "dimension": "5M",
+          "label": "maxminddb-golang: 812.00 ns @ 5M"
+        }
+      ],
+      "source": "https://github.com/0x00F6/libmaxminddb-rs/blob/e4561b502466a6c95312719372eafc77b7a85994/benchmarks/charts/database-size-scaling.svg",
+      "sha256": "1f1bd4ac54cef0ce5e4e6595bbb569f814ca2b69704a9c499856f5b843ae010f"
+    },
+    {
+      "id": "memory-rss-after-open",
+      "title": "RSS After Open (mmap)",
+      "subtitle": "Median of 3 isolated processes \u00b7 Zoomed Y axis (not zero-based)",
+      "points": [
+        {
+          "library": "libmaxminddb-rs",
+          "value": 7.50390625,
+          "unit": "MiB",
+          "dimension": "1K",
+          "label": "libmaxminddb-rs: 7.50390625 MiB (7868416 bytes) @ 1K"
+        },
+        {
+          "library": "libmaxminddb-rs",
+          "value": 9.71484375,
+          "unit": "MiB",
+          "dimension": "10K",
+          "label": "libmaxminddb-rs: 9.71484375 MiB (10186752 bytes) @ 10K"
+        },
+        {
+          "library": "libmaxminddb-rs",
+          "value": 35.265625,
+          "unit": "MiB",
+          "dimension": "100K",
+          "label": "libmaxminddb-rs: 35.265625 MiB (36978688 bytes) @ 100K"
+        },
+        {
+          "library": "libmaxminddb-rs",
+          "value": 102.2109375,
+          "unit": "MiB",
+          "dimension": "500K",
+          "label": "libmaxminddb-rs: 102.2109375 MiB (107175936 bytes) @ 500K"
+        },
+        {
+          "library": "libmaxminddb-rs",
+          "value": 176.12109375,
+          "unit": "MiB",
+          "dimension": "1M",
+          "label": "libmaxminddb-rs: 176.12109375 MiB (184676352 bytes) @ 1M"
+        },
+        {
+          "library": "libmaxminddb-rs",
+          "value": 261.390625,
+          "unit": "MiB",
+          "dimension": "1.5M",
+          "label": "libmaxminddb-rs: 261.390625 MiB (274087936 bytes) @ 1.5M"
+        },
+        {
+          "library": "libmaxminddb-rs",
+          "value": 331.921875,
+          "unit": "MiB",
+          "dimension": "2M",
+          "label": "libmaxminddb-rs: 331.921875 MiB (348045312 bytes) @ 2M"
+        },
+        {
+          "library": "libmaxminddb-rs",
+          "value": 719.81640625,
+          "unit": "MiB",
+          "dimension": "5M",
+          "label": "libmaxminddb-rs: 719.81640625 MiB (754782208 bytes) @ 5M"
+        },
+        {
+          "library": "libmaxminddb (C)",
+          "value": 6.33984375,
+          "unit": "MiB",
+          "dimension": "1K",
+          "label": "libmaxminddb (C): 6.33984375 MiB (6647808 bytes) @ 1K"
+        },
+        {
+          "library": "libmaxminddb (C)",
+          "value": 6.359375,
+          "unit": "MiB",
+          "dimension": "10K",
+          "label": "libmaxminddb (C): 6.359375 MiB (6668288 bytes) @ 10K"
+        },
+        {
+          "library": "libmaxminddb (C)",
+          "value": 6.328125,
+          "unit": "MiB",
+          "dimension": "100K",
+          "label": "libmaxminddb (C): 6.328125 MiB (6635520 bytes) @ 100K"
+        },
+        {
+          "library": "libmaxminddb (C)",
+          "value": 6.44140625,
+          "unit": "MiB",
+          "dimension": "500K",
+          "label": "libmaxminddb (C): 6.44140625 MiB (6754304 bytes) @ 500K"
+        },
+        {
+          "library": "libmaxminddb (C)",
+          "value": 6.2578125,
+          "unit": "MiB",
+          "dimension": "1M",
+          "label": "libmaxminddb (C): 6.2578125 MiB (6561792 bytes) @ 1M"
+        },
+        {
+          "library": "libmaxminddb (C)",
+          "value": 6.38671875,
+          "unit": "MiB",
+          "dimension": "1.5M",
+          "label": "libmaxminddb (C): 6.38671875 MiB (6696960 bytes) @ 1.5M"
+        },
+        {
+          "library": "libmaxminddb (C)",
+          "value": 6.3671875,
+          "unit": "MiB",
+          "dimension": "2M",
+          "label": "libmaxminddb (C): 6.3671875 MiB (6676480 bytes) @ 2M"
+        },
+        {
+          "library": "libmaxminddb (C)",
+          "value": 6.34765625,
+          "unit": "MiB",
+          "dimension": "5M",
+          "label": "libmaxminddb (C): 6.34765625 MiB (6656000 bytes) @ 5M"
+        },
+        {
+          "library": "maxminddb-rust",
+          "value": 6.52734375,
+          "unit": "MiB",
+          "dimension": "1K",
+          "label": "maxminddb-rust: 6.52734375 MiB (6844416 bytes) @ 1K"
+        },
+        {
+          "library": "maxminddb-rust",
+          "value": 6.5234375,
+          "unit": "MiB",
+          "dimension": "10K",
+          "label": "maxminddb-rust: 6.5234375 MiB (6840320 bytes) @ 10K"
+        },
+        {
+          "library": "maxminddb-rust",
+          "value": 6.4921875,
+          "unit": "MiB",
+          "dimension": "100K",
+          "label": "maxminddb-rust: 6.4921875 MiB (6807552 bytes) @ 100K"
+        },
+        {
+          "library": "maxminddb-rust",
+          "value": 6.52734375,
+          "unit": "MiB",
+          "dimension": "500K",
+          "label": "maxminddb-rust: 6.52734375 MiB (6844416 bytes) @ 500K"
+        },
+        {
+          "library": "maxminddb-rust",
+          "value": 6.484375,
+          "unit": "MiB",
+          "dimension": "1M",
+          "label": "maxminddb-rust: 6.484375 MiB (6799360 bytes) @ 1M"
+        },
+        {
+          "library": "maxminddb-rust",
+          "value": 6.51953125,
+          "unit": "MiB",
+          "dimension": "1.5M",
+          "label": "maxminddb-rust: 6.51953125 MiB (6836224 bytes) @ 1.5M"
+        },
+        {
+          "library": "maxminddb-rust",
+          "value": 6.5,
+          "unit": "MiB",
+          "dimension": "2M",
+          "label": "maxminddb-rust: 6.5 MiB (6815744 bytes) @ 2M"
+        },
+        {
+          "library": "maxminddb-rust",
+          "value": 6.51171875,
+          "unit": "MiB",
+          "dimension": "5M",
+          "label": "maxminddb-rust: 6.51171875 MiB (6828032 bytes) @ 5M"
+        },
+        {
+          "library": "geoip2-rs",
+          "value": 6.32421875,
+          "unit": "MiB",
+          "dimension": "1K",
+          "label": "geoip2-rs: 6.32421875 MiB (6631424 bytes) @ 1K"
+        },
+        {
+          "library": "geoip2-rs",
+          "value": 6.30078125,
+          "unit": "MiB",
+          "dimension": "10K",
+          "label": "geoip2-rs: 6.30078125 MiB (6606848 bytes) @ 10K"
+        },
+        {
+          "library": "geoip2-rs",
+          "value": 6.2890625,
+          "unit": "MiB",
+          "dimension": "100K",
+          "label": "geoip2-rs: 6.2890625 MiB (6594560 bytes) @ 100K"
+        },
+        {
+          "library": "geoip2-rs",
+          "value": 6.32421875,
+          "unit": "MiB",
+          "dimension": "500K",
+          "label": "geoip2-rs: 6.32421875 MiB (6631424 bytes) @ 500K"
+        },
+        {
+          "library": "geoip2-rs",
+          "value": 6.28125,
+          "unit": "MiB",
+          "dimension": "1M",
+          "label": "geoip2-rs: 6.28125 MiB (6586368 bytes) @ 1M"
+        },
+        {
+          "library": "geoip2-rs",
+          "value": 6.3203125,
+          "unit": "MiB",
+          "dimension": "1.5M",
+          "label": "geoip2-rs: 6.3203125 MiB (6627328 bytes) @ 1.5M"
+        },
+        {
+          "library": "geoip2-rs",
+          "value": 6.29296875,
+          "unit": "MiB",
+          "dimension": "2M",
+          "label": "geoip2-rs: 6.29296875 MiB (6598656 bytes) @ 2M"
+        },
+        {
+          "library": "geoip2-rs",
+          "value": 6.30859375,
+          "unit": "MiB",
+          "dimension": "5M",
+          "label": "geoip2-rs: 6.30859375 MiB (6615040 bytes) @ 5M"
+        }
+      ],
+      "source": "https://github.com/0x00F6/libmaxminddb-rs/blob/e4561b502466a6c95312719372eafc77b7a85994/benchmarks/charts/memory-rss-after-open.svg",
+      "sha256": "02369a786362ba53254d1a157393e1caf8e4f51ee162ee8d9d4b1f9a779c28f6"
+    },
+    {
+      "id": "memory-rss-peak",
+      "title": "Peak RSS During Lookups (mmap)",
+      "subtitle": "Maximum of 3 kernel peaks \u00b7 reset after open \u00b7 1M lookups, 50% hits / 50% misses",
+      "points": [
+        {
+          "library": "libmaxminddb-rs",
+          "value": 7.5078125,
+          "unit": "MiB",
+          "dimension": "1K",
+          "label": "libmaxminddb-rs: 7.5078125 MiB (7872512 bytes) @ 1K"
+        },
+        {
+          "library": "libmaxminddb-rs",
+          "value": 9.71875,
+          "unit": "MiB",
+          "dimension": "10K",
+          "label": "libmaxminddb-rs: 9.71875 MiB (10190848 bytes) @ 10K"
+        },
+        {
+          "library": "libmaxminddb-rs",
+          "value": 35.265625,
+          "unit": "MiB",
+          "dimension": "100K",
+          "label": "libmaxminddb-rs: 35.265625 MiB (36978688 bytes) @ 100K"
+        },
+        {
+          "library": "libmaxminddb-rs",
+          "value": 102.2109375,
+          "unit": "MiB",
+          "dimension": "500K",
+          "label": "libmaxminddb-rs: 102.2109375 MiB (107175936 bytes) @ 500K"
+        },
+        {
+          "library": "libmaxminddb-rs",
+          "value": 176.12109375,
+          "unit": "MiB",
+          "dimension": "1M",
+          "label": "libmaxminddb-rs: 176.12109375 MiB (184676352 bytes) @ 1M"
+        },
+        {
+          "library": "libmaxminddb-rs",
+          "value": 261.390625,
+          "unit": "MiB",
+          "dimension": "1.5M",
+          "label": "libmaxminddb-rs: 261.390625 MiB (274087936 bytes) @ 1.5M"
+        },
+        {
+          "library": "libmaxminddb-rs",
+          "value": 331.92578125,
+          "unit": "MiB",
+          "dimension": "2M",
+          "label": "libmaxminddb-rs: 331.92578125 MiB (348049408 bytes) @ 2M"
+        },
+        {
+          "library": "libmaxminddb-rs",
+          "value": 719.875,
+          "unit": "MiB",
+          "dimension": "5M",
+          "label": "libmaxminddb-rs: 719.875 MiB (754843648 bytes) @ 5M"
+        },
+        {
+          "library": "libmaxminddb (C)",
+          "value": 6.34375,
+          "unit": "MiB",
+          "dimension": "1K",
+          "label": "libmaxminddb (C): 6.34375 MiB (6651904 bytes) @ 1K"
+        },
+        {
+          "library": "libmaxminddb (C)",
+          "value": 7.32421875,
+          "unit": "MiB",
+          "dimension": "10K",
+          "label": "libmaxminddb (C): 7.32421875 MiB (7680000 bytes) @ 10K"
+        },
+        {
+          "library": "libmaxminddb (C)",
+          "value": 14.9921875,
+          "unit": "MiB",
+          "dimension": "100K",
+          "label": "libmaxminddb (C): 14.9921875 MiB (15720448 bytes) @ 100K"
+        },
+        {
+          "library": "libmaxminddb (C)",
+          "value": 43.4609375,
+          "unit": "MiB",
+          "dimension": "500K",
+          "label": "libmaxminddb (C): 43.4609375 MiB (45572096 bytes) @ 500K"
+        },
+        {
+          "library": "libmaxminddb (C)",
+          "value": 75.0859375,
+          "unit": "MiB",
+          "dimension": "1M",
+          "label": "libmaxminddb (C): 75.0859375 MiB (78733312 bytes) @ 1M"
+        },
+        {
+          "library": "libmaxminddb (C)",
+          "value": 120.99609375,
+          "unit": "MiB",
+          "dimension": "1.5M",
+          "label": "libmaxminddb (C): 120.99609375 MiB (126873600 bytes) @ 1.5M"
+        },
+        {
+          "library": "libmaxminddb (C)",
+          "value": 153.9765625,
+          "unit": "MiB",
+          "dimension": "2M",
+          "label": "libmaxminddb (C): 153.9765625 MiB (161456128 bytes) @ 2M"
+        },
+        {
+          "library": "libmaxminddb (C)",
+          "value": 334.9453125,
+          "unit": "MiB",
+          "dimension": "5M",
+          "label": "libmaxminddb (C): 334.9453125 MiB (351215616 bytes) @ 5M"
+        },
+        {
+          "library": "maxminddb-rust",
+          "value": 6.609375,
+          "unit": "MiB",
+          "dimension": "1K",
+          "label": "maxminddb-rust: 6.609375 MiB (6930432 bytes) @ 1K"
+        },
+        {
+          "library": "maxminddb-rust",
+          "value": 7.54296875,
+          "unit": "MiB",
+          "dimension": "10K",
+          "label": "maxminddb-rust: 7.54296875 MiB (7909376 bytes) @ 10K"
+        },
+        {
+          "library": "maxminddb-rust",
+          "value": 15.24609375,
+          "unit": "MiB",
+          "dimension": "100K",
+          "label": "maxminddb-rust: 15.24609375 MiB (15986688 bytes) @ 100K"
+        },
+        {
+          "library": "maxminddb-rust",
+          "value": 43.72265625,
+          "unit": "MiB",
+          "dimension": "500K",
+          "label": "maxminddb-rust: 43.72265625 MiB (45846528 bytes) @ 500K"
+        },
+        {
+          "library": "maxminddb-rust",
+          "value": 75.30859375,
+          "unit": "MiB",
+          "dimension": "1M",
+          "label": "maxminddb-rust: 75.30859375 MiB (78966784 bytes) @ 1M"
+        },
+        {
+          "library": "maxminddb-rust",
+          "value": 121.21484375,
+          "unit": "MiB",
+          "dimension": "1.5M",
+          "label": "maxminddb-rust: 121.21484375 MiB (127102976 bytes) @ 1.5M"
+        },
+        {
+          "library": "maxminddb-rust",
+          "value": 154.19140625,
+          "unit": "MiB",
+          "dimension": "2M",
+          "label": "maxminddb-rust: 154.19140625 MiB (161681408 bytes) @ 2M"
+        },
+        {
+          "library": "maxminddb-rust",
+          "value": 335.2109375,
+          "unit": "MiB",
+          "dimension": "5M",
+          "label": "maxminddb-rust: 335.2109375 MiB (351494144 bytes) @ 5M"
+        },
+        {
+          "library": "geoip2-rs",
+          "value": 6.40234375,
+          "unit": "MiB",
+          "dimension": "1K",
+          "label": "geoip2-rs: 6.40234375 MiB (6713344 bytes) @ 1K"
+        },
+        {
+          "library": "geoip2-rs",
+          "value": 7.33203125,
+          "unit": "MiB",
+          "dimension": "10K",
+          "label": "geoip2-rs: 7.33203125 MiB (7688192 bytes) @ 10K"
+        },
+        {
+          "library": "geoip2-rs",
+          "value": 15.0390625,
+          "unit": "MiB",
+          "dimension": "100K",
+          "label": "geoip2-rs: 15.0390625 MiB (15769600 bytes) @ 100K"
+        },
+        {
+          "library": "geoip2-rs",
+          "value": 43.51171875,
+          "unit": "MiB",
+          "dimension": "500K",
+          "label": "geoip2-rs: 43.51171875 MiB (45625344 bytes) @ 500K"
+        },
+        {
+          "library": "geoip2-rs",
+          "value": 75.09765625,
+          "unit": "MiB",
+          "dimension": "1M",
+          "label": "geoip2-rs: 75.09765625 MiB (78745600 bytes) @ 1M"
+        },
+        {
+          "library": "geoip2-rs",
+          "value": 121.0078125,
+          "unit": "MiB",
+          "dimension": "1.5M",
+          "label": "geoip2-rs: 121.0078125 MiB (126885888 bytes) @ 1.5M"
+        },
+        {
+          "library": "geoip2-rs",
+          "value": 153.98046875,
+          "unit": "MiB",
+          "dimension": "2M",
+          "label": "geoip2-rs: 153.98046875 MiB (161460224 bytes) @ 2M"
+        },
+        {
+          "library": "geoip2-rs",
+          "value": 334.99609375,
+          "unit": "MiB",
+          "dimension": "5M",
+          "label": "geoip2-rs: 334.99609375 MiB (351268864 bytes) @ 5M"
+        }
+      ],
+      "source": "https://github.com/0x00F6/libmaxminddb-rs/blob/e4561b502466a6c95312719372eafc77b7a85994/benchmarks/charts/memory-rss-peak.svg",
+      "sha256": "7cd878096286df97410232c550244596415768e77405eca3fe2e049909fdab14"
+    },
+    {
+      "id": "writer-throughput",
+      "title": "Writer Insertion Throughput",
+      "subtitle": "Insertion rate across database sizes (higher is better)",
+      "points": [
+        {
+          "library": "libmaxminddb-rs",
+          "value": 1.21042,
+          "unit": "M ops/s",
+          "dimension": "1K",
+          "label": "libmaxminddb-rs: 1210.42 K ops/s @ 1K"
+        },
+        {
+          "library": "libmaxminddb-rs",
+          "value": 1.65246,
+          "unit": "M ops/s",
+          "dimension": "10K",
+          "label": "libmaxminddb-rs: 1652.46 K ops/s @ 10K"
+        },
+        {
+          "library": "libmaxminddb-rs",
+          "value": 1.3685399999999999,
+          "unit": "M ops/s",
+          "dimension": "100K",
+          "label": "libmaxminddb-rs: 1368.54 K ops/s @ 100K"
+        },
+        {
+          "library": "libmaxminddb-rs",
+          "value": 0.97172,
+          "unit": "M ops/s",
+          "dimension": "500K",
+          "label": "libmaxminddb-rs: 971.72 K ops/s @ 500K"
+        },
+        {
+          "library": "libmaxminddb-rs",
+          "value": 1.06252,
+          "unit": "M ops/s",
+          "dimension": "1M",
+          "label": "libmaxminddb-rs: 1062.52 K ops/s @ 1M"
+        },
+        {
+          "library": "libmaxminddb-rs",
+          "value": 1.08613,
+          "unit": "M ops/s",
+          "dimension": "1.5M",
+          "label": "libmaxminddb-rs: 1086.13 K ops/s @ 1.5M"
+        },
+        {
+          "library": "libmaxminddb-rs",
+          "value": 1.11796,
+          "unit": "M ops/s",
+          "dimension": "2M",
+          "label": "libmaxminddb-rs: 1117.96 K ops/s @ 2M"
+        },
+        {
+          "library": "libmaxminddb-rs",
+          "value": 1.0509000000000002,
+          "unit": "M ops/s",
+          "dimension": "5M",
+          "label": "libmaxminddb-rs: 1050.90 K ops/s @ 5M"
+        },
+        {
+          "library": "mmdbwriter",
+          "value": 0.21373,
+          "unit": "M ops/s",
+          "dimension": "1K",
+          "label": "mmdbwriter: 213.73 K ops/s @ 1K"
+        },
+        {
+          "library": "mmdbwriter",
+          "value": 0.21708000000000002,
+          "unit": "M ops/s",
+          "dimension": "10K",
+          "label": "mmdbwriter: 217.08 K ops/s @ 10K"
+        },
+        {
+          "library": "mmdbwriter",
+          "value": 0.17859,
+          "unit": "M ops/s",
+          "dimension": "100K",
+          "label": "mmdbwriter: 178.59 K ops/s @ 100K"
+        },
+        {
+          "library": "mmdbwriter",
+          "value": 0.15024,
+          "unit": "M ops/s",
+          "dimension": "500K",
+          "label": "mmdbwriter: 150.24 K ops/s @ 500K"
+        },
+        {
+          "library": "mmdbwriter",
+          "value": 0.17176,
+          "unit": "M ops/s",
+          "dimension": "1M",
+          "label": "mmdbwriter: 171.76 K ops/s @ 1M"
+        },
+        {
+          "library": "mmdbwriter",
+          "value": 0.20134,
+          "unit": "M ops/s",
+          "dimension": "1.5M",
+          "label": "mmdbwriter: 201.34 K ops/s @ 1.5M"
+        },
+        {
+          "library": "mmdbwriter",
+          "value": 0.22775,
+          "unit": "M ops/s",
+          "dimension": "2M",
+          "label": "mmdbwriter: 227.75 K ops/s @ 2M"
+        },
+        {
+          "library": "mmdbwriter",
+          "value": 0.40687,
+          "unit": "M ops/s",
+          "dimension": "5M",
+          "label": "mmdbwriter: 406.87 K ops/s @ 5M"
+        }
+      ],
+      "source": "https://github.com/0x00F6/libmaxminddb-rs/blob/e4561b502466a6c95312719372eafc77b7a85994/benchmarks/charts/writer-throughput.svg",
+      "sha256": "2f35e455844d7460adb6748937ef1b526fa8af7aa30866e8c08ced6bf9e98f82"
+    },
+    {
+      "id": "writer-build-time",
+      "title": "Writer Total Time",
+      "subtitle": "Total wall clock time for MMDB generation (lower is better)",
+      "points": [
+        {
+          "library": "libmaxminddb-rs",
+          "value": 0.43,
+          "unit": "s",
+          "dimension": "1K",
+          "label": "libmaxminddb-rs: 0.43 s @ 1K"
+        },
+        {
+          "library": "libmaxminddb-rs",
+          "value": 0.8,
+          "unit": "s",
+          "dimension": "10K",
+          "label": "libmaxminddb-rs: 0.80 s @ 10K"
+        },
+        {
+          "library": "libmaxminddb-rs",
+          "value": 1.02,
+          "unit": "s",
+          "dimension": "100K",
+          "label": "libmaxminddb-rs: 1.02 s @ 100K"
+        },
+        {
+          "library": "libmaxminddb-rs",
+          "value": 1.03,
+          "unit": "s",
+          "dimension": "500K",
+          "label": "libmaxminddb-rs: 1.03 s @ 500K"
+        },
+        {
+          "library": "libmaxminddb-rs",
+          "value": 1.88,
+          "unit": "s",
+          "dimension": "1M",
+          "label": "libmaxminddb-rs: 1.88 s @ 1M"
+        },
+        {
+          "library": "libmaxminddb-rs",
+          "value": 1.38,
+          "unit": "s",
+          "dimension": "1.5M",
+          "label": "libmaxminddb-rs: 1.38 s @ 1.5M"
+        },
+        {
+          "library": "libmaxminddb-rs",
+          "value": 1.79,
+          "unit": "s",
+          "dimension": "2M",
+          "label": "libmaxminddb-rs: 1.79 s @ 2M"
+        },
+        {
+          "library": "libmaxminddb-rs",
+          "value": 4.76,
+          "unit": "s",
+          "dimension": "5M",
+          "label": "libmaxminddb-rs: 4.76 s @ 5M"
+        },
+        {
+          "library": "mmdbwriter",
+          "value": 0.65,
+          "unit": "s",
+          "dimension": "1K",
+          "label": "mmdbwriter: 0.65 s @ 1K"
+        },
+        {
+          "library": "mmdbwriter",
+          "value": 0.92,
+          "unit": "s",
+          "dimension": "10K",
+          "label": "mmdbwriter: 0.92 s @ 10K"
+        },
+        {
+          "library": "mmdbwriter",
+          "value": 1.12,
+          "unit": "s",
+          "dimension": "100K",
+          "label": "mmdbwriter: 1.12 s @ 100K"
+        },
+        {
+          "library": "mmdbwriter",
+          "value": 3.33,
+          "unit": "s",
+          "dimension": "500K",
+          "label": "mmdbwriter: 3.33 s @ 500K"
+        },
+        {
+          "library": "mmdbwriter",
+          "value": 5.82,
+          "unit": "s",
+          "dimension": "1M",
+          "label": "mmdbwriter: 5.82 s @ 1M"
+        },
+        {
+          "library": "mmdbwriter",
+          "value": 7.45,
+          "unit": "s",
+          "dimension": "1.5M",
+          "label": "mmdbwriter: 7.45 s @ 1.5M"
+        },
+        {
+          "library": "mmdbwriter",
+          "value": 8.78,
+          "unit": "s",
+          "dimension": "2M",
+          "label": "mmdbwriter: 8.78 s @ 2M"
+        },
+        {
+          "library": "mmdbwriter",
+          "value": 12.29,
+          "unit": "s",
+          "dimension": "5M",
+          "label": "mmdbwriter: 12.29 s @ 5M"
+        }
+      ],
+      "source": "https://github.com/0x00F6/libmaxminddb-rs/blob/e4561b502466a6c95312719372eafc77b7a85994/benchmarks/charts/writer-build-time.svg",
+      "sha256": "64fb3e36dcbf0e2fbd60868cc938e92d849c0b1f77fb7a2aa62bcd2598f5257f"
+    },
+    {
+      "id": "writer-peak-rss",
+      "title": "Writer Peak Memory Usage (RSS)",
+      "subtitle": "Peak RSS during MMDB generation across sizes (lower is better)",
+      "points": [
+        {
+          "library": "libmaxminddb-rs",
+          "value": 3.73,
+          "unit": "MiB",
+          "dimension": "1K",
+          "label": "libmaxminddb-rs: 3.73 MiB @ 1K"
+        },
+        {
+          "library": "libmaxminddb-rs",
+          "value": 6.13,
+          "unit": "MiB",
+          "dimension": "10K",
+          "label": "libmaxminddb-rs: 6.13 MiB @ 10K"
+        },
+        {
+          "library": "libmaxminddb-rs",
+          "value": 27.01,
+          "unit": "MiB",
+          "dimension": "100K",
+          "label": "libmaxminddb-rs: 27.01 MiB @ 100K"
+        },
+        {
+          "library": "libmaxminddb-rs",
+          "value": 93.68,
+          "unit": "MiB",
+          "dimension": "500K",
+          "label": "libmaxminddb-rs: 93.68 MiB @ 500K"
+        },
+        {
+          "library": "libmaxminddb-rs",
+          "value": 162.05,
+          "unit": "MiB",
+          "dimension": "1M",
+          "label": "libmaxminddb-rs: 162.05 MiB @ 1M"
+        },
+        {
+          "library": "libmaxminddb-rs",
+          "value": 223.11,
+          "unit": "MiB",
+          "dimension": "1.5M",
+          "label": "libmaxminddb-rs: 223.11 MiB @ 1.5M"
+        },
+        {
+          "library": "libmaxminddb-rs",
+          "value": 279.76,
+          "unit": "MiB",
+          "dimension": "2M",
+          "label": "libmaxminddb-rs: 279.76 MiB @ 2M"
+        },
+        {
+          "library": "libmaxminddb-rs",
+          "value": 569.72,
+          "unit": "MiB",
+          "dimension": "5M",
+          "label": "libmaxminddb-rs: 569.72 MiB @ 5M"
+        },
+        {
+          "library": "mmdbwriter",
+          "value": 6.92,
+          "unit": "MiB",
+          "dimension": "1K",
+          "label": "mmdbwriter: 6.92 MiB @ 1K"
+        },
+        {
+          "library": "mmdbwriter",
+          "value": 15.92,
+          "unit": "MiB",
+          "dimension": "10K",
+          "label": "mmdbwriter: 15.92 MiB @ 10K"
+        },
+        {
+          "library": "mmdbwriter",
+          "value": 72.04,
+          "unit": "MiB",
+          "dimension": "100K",
+          "label": "mmdbwriter: 72.04 MiB @ 100K"
+        },
+        {
+          "library": "mmdbwriter",
+          "value": 151.67,
+          "unit": "MiB",
+          "dimension": "500K",
+          "label": "mmdbwriter: 151.67 MiB @ 500K"
+        },
+        {
+          "library": "mmdbwriter",
+          "value": 151.16,
+          "unit": "MiB",
+          "dimension": "1M",
+          "label": "mmdbwriter: 151.16 MiB @ 1M"
+        },
+        {
+          "library": "mmdbwriter",
+          "value": 150.92,
+          "unit": "MiB",
+          "dimension": "1.5M",
+          "label": "mmdbwriter: 150.92 MiB @ 1.5M"
+        },
+        {
+          "library": "mmdbwriter",
+          "value": 151.16,
+          "unit": "MiB",
+          "dimension": "2M",
+          "label": "mmdbwriter: 151.16 MiB @ 2M"
+        },
+        {
+          "library": "mmdbwriter",
+          "value": 150.54,
+          "unit": "MiB",
+          "dimension": "5M",
+          "label": "mmdbwriter: 150.54 MiB @ 5M"
+        }
+      ],
+      "source": "https://github.com/0x00F6/libmaxminddb-rs/blob/e4561b502466a6c95312719372eafc77b7a85994/benchmarks/charts/writer-peak-rss.svg",
+      "sha256": "646ac30065020f7f1621da920ace44970c708936f1ee16613a7a8b2cd23c8cb1"
+    },
+    {
+      "id": "writer-p99",
+      "title": "Writer Insertion p99 Tail Latency",
+      "subtitle": "p99 insertion latency (lower is better)",
+      "points": [
+        {
+          "library": "libmaxminddb-rs",
+          "value": 1553.0,
+          "unit": "ns",
+          "dimension": "1K",
+          "label": "libmaxminddb-rs: 1553.00 ns @ 1K"
+        },
+        {
+          "library": "libmaxminddb-rs",
+          "value": 1883.0,
+          "unit": "ns",
+          "dimension": "10K",
+          "label": "libmaxminddb-rs: 1883.00 ns @ 10K"
+        },
+        {
+          "library": "libmaxminddb-rs",
+          "value": 1743.0,
+          "unit": "ns",
+          "dimension": "100K",
+          "label": "libmaxminddb-rs: 1743.00 ns @ 100K"
+        },
+        {
+          "library": "libmaxminddb-rs",
+          "value": 2274.0,
+          "unit": "ns",
+          "dimension": "500K",
+          "label": "libmaxminddb-rs: 2274.00 ns @ 500K"
+        },
+        {
+          "library": "libmaxminddb-rs",
+          "value": 2324.0,
+          "unit": "ns",
+          "dimension": "1M",
+          "label": "libmaxminddb-rs: 2324.00 ns @ 1M"
+        },
+        {
+          "library": "libmaxminddb-rs",
+          "value": 2184.0,
+          "unit": "ns",
+          "dimension": "1.5M",
+          "label": "libmaxminddb-rs: 2184.00 ns @ 1.5M"
+        },
+        {
+          "library": "libmaxminddb-rs",
+          "value": 2114.0,
+          "unit": "ns",
+          "dimension": "2M",
+          "label": "libmaxminddb-rs: 2114.00 ns @ 2M"
+        },
+        {
+          "library": "libmaxminddb-rs",
+          "value": 2334.0,
+          "unit": "ns",
+          "dimension": "5M",
+          "label": "libmaxminddb-rs: 2334.00 ns @ 5M"
+        },
+        {
+          "library": "mmdbwriter",
+          "value": 14628.0,
+          "unit": "ns",
+          "dimension": "1K",
+          "label": "mmdbwriter: 14628.00 ns @ 1K"
+        },
+        {
+          "library": "mmdbwriter",
+          "value": 19517.0,
+          "unit": "ns",
+          "dimension": "10K",
+          "label": "mmdbwriter: 19517.00 ns @ 10K"
+        },
+        {
+          "library": "mmdbwriter",
+          "value": 33364.0,
+          "unit": "ns",
+          "dimension": "100K",
+          "label": "mmdbwriter: 33364.00 ns @ 100K"
+        },
+        {
+          "library": "mmdbwriter",
+          "value": 64423.0,
+          "unit": "ns",
+          "dimension": "500K",
+          "label": "mmdbwriter: 64423.00 ns @ 500K"
+        },
+        {
+          "library": "mmdbwriter",
+          "value": 73510.0,
+          "unit": "ns",
+          "dimension": "1M",
+          "label": "mmdbwriter: 73510.00 ns @ 1M"
+        },
+        {
+          "library": "mmdbwriter",
+          "value": 72599.0,
+          "unit": "ns",
+          "dimension": "1.5M",
+          "label": "mmdbwriter: 72599.00 ns @ 1.5M"
+        },
+        {
+          "library": "mmdbwriter",
+          "value": 67750.0,
+          "unit": "ns",
+          "dimension": "2M",
+          "label": "mmdbwriter: 67750.00 ns @ 2M"
+        },
+        {
+          "library": "mmdbwriter",
+          "value": 42200.0,
+          "unit": "ns",
+          "dimension": "5M",
+          "label": "mmdbwriter: 42200.00 ns @ 5M"
+        }
+      ],
+      "source": "https://github.com/0x00F6/libmaxminddb-rs/blob/e4561b502466a6c95312719372eafc77b7a85994/benchmarks/charts/writer-p99.svg",
+      "sha256": "759351c0ddcf357d83f3d5f4c0813c518222af5c6f5fc39ee3411064a156e54f"
+    },
+    {
+      "id": "concurrent-throughput",
+      "title": "Peak Concurrent Throughput \u2014 16 Threads",
+      "subtitle": "IPv4 throughput by thread count, 1 to 16 threads (higher is better)",
+      "points": [
+        {
+          "library": "libmaxminddb-rs",
+          "value": 81.87,
+          "unit": "M ops/s",
+          "dimension": "4T",
+          "label": "libmaxminddb-rs: 81.87 M ops/s @ 4T"
+        },
+        {
+          "library": "libmaxminddb-rs",
+          "value": 140.46,
+          "unit": "M ops/s",
+          "dimension": "8T",
+          "label": "libmaxminddb-rs: 140.46 M ops/s @ 8T"
+        },
+        {
+          "library": "libmaxminddb-rs",
+          "value": 173.71,
+          "unit": "M ops/s",
+          "dimension": "16T",
+          "label": "libmaxminddb-rs: 173.71 M ops/s @ 16T"
+        },
+        {
+          "library": "libmaxminddb (C)",
+          "value": 56.12,
+          "unit": "M ops/s",
+          "dimension": "4T",
+          "label": "libmaxminddb (C): 56.12 M ops/s @ 4T"
+        },
+        {
+          "library": "libmaxminddb (C)",
+          "value": 75.0,
+          "unit": "M ops/s",
+          "dimension": "8T",
+          "label": "libmaxminddb (C): 75.00 M ops/s @ 8T"
+        },
+        {
+          "library": "libmaxminddb (C)",
+          "value": 106.94,
+          "unit": "M ops/s",
+          "dimension": "16T",
+          "label": "libmaxminddb (C): 106.94 M ops/s @ 16T"
+        },
+        {
+          "library": "maxminddb-rust",
+          "value": 46.02,
+          "unit": "M ops/s",
+          "dimension": "4T",
+          "label": "maxminddb-rust: 46.02 M ops/s @ 4T"
+        },
+        {
+          "library": "maxminddb-rust",
+          "value": 74.51,
+          "unit": "M ops/s",
+          "dimension": "8T",
+          "label": "maxminddb-rust: 74.51 M ops/s @ 8T"
+        },
+        {
+          "library": "maxminddb-rust",
+          "value": 89.21,
+          "unit": "M ops/s",
+          "dimension": "16T",
+          "label": "maxminddb-rust: 89.21 M ops/s @ 16T"
+        },
+        {
+          "library": "geoip2-rs",
+          "value": 58.08,
+          "unit": "M ops/s",
+          "dimension": "4T",
+          "label": "geoip2-rs: 58.08 M ops/s @ 4T"
+        },
+        {
+          "library": "geoip2-rs",
+          "value": 98.78,
+          "unit": "M ops/s",
+          "dimension": "8T",
+          "label": "geoip2-rs: 98.78 M ops/s @ 8T"
+        },
+        {
+          "library": "geoip2-rs",
+          "value": 124.05,
+          "unit": "M ops/s",
+          "dimension": "16T",
+          "label": "geoip2-rs: 124.05 M ops/s @ 16T"
+        },
+        {
+          "library": "maxminddb-golang",
+          "value": 36.92,
+          "unit": "M ops/s",
+          "dimension": "4T",
+          "label": "maxminddb-golang: 36.92 M ops/s @ 4T"
+        },
+        {
+          "library": "maxminddb-golang",
+          "value": 56.56,
+          "unit": "M ops/s",
+          "dimension": "8T",
+          "label": "maxminddb-golang: 56.56 M ops/s @ 8T"
+        },
+        {
+          "library": "maxminddb-golang",
+          "value": 66.79,
+          "unit": "M ops/s",
+          "dimension": "16T",
+          "label": "maxminddb-golang: 66.79 M ops/s @ 16T"
+        }
+      ],
+      "source": "https://github.com/0x00F6/libmaxminddb-rs/blob/e4561b502466a6c95312719372eafc77b7a85994/benchmarks/charts/concurrent-throughput.svg",
+      "sha256": "fd698c7cfb3289fd956c45196b28ae27950770c0c966e74a65860c017eb7533b"
+    },
+    {
+      "id": "concurrent-throughput-ipv6",
+      "title": "Peak Concurrent Throughput \u2014 16 Threads (IPv6)",
+      "subtitle": "IPv6 throughput by thread count, 1 to 16 threads (higher is better)",
+      "points": [
+        {
+          "library": "libmaxminddb-rs",
+          "value": 138.37,
+          "unit": "M ops/s",
+          "dimension": "4T",
+          "label": "libmaxminddb-rs: 138.37 M ops/s @ 4T"
+        },
+        {
+          "library": "libmaxminddb-rs",
+          "value": 252.66,
+          "unit": "M ops/s",
+          "dimension": "8T",
+          "label": "libmaxminddb-rs: 252.66 M ops/s @ 8T"
+        },
+        {
+          "library": "libmaxminddb-rs",
+          "value": 348.24,
+          "unit": "M ops/s",
+          "dimension": "16T",
+          "label": "libmaxminddb-rs: 348.24 M ops/s @ 16T"
+        },
+        {
+          "library": "libmaxminddb (C)",
+          "value": 120.01,
+          "unit": "M ops/s",
+          "dimension": "4T",
+          "label": "libmaxminddb (C): 120.01 M ops/s @ 4T"
+        },
+        {
+          "library": "libmaxminddb (C)",
+          "value": 207.04,
+          "unit": "M ops/s",
+          "dimension": "8T",
+          "label": "libmaxminddb (C): 207.04 M ops/s @ 8T"
+        },
+        {
+          "library": "libmaxminddb (C)",
+          "value": 250.87,
+          "unit": "M ops/s",
+          "dimension": "16T",
+          "label": "libmaxminddb (C): 250.87 M ops/s @ 16T"
+        },
+        {
+          "library": "maxminddb-rust",
+          "value": 86.0,
+          "unit": "M ops/s",
+          "dimension": "4T",
+          "label": "maxminddb-rust: 86.00 M ops/s @ 4T"
+        },
+        {
+          "library": "maxminddb-rust",
+          "value": 143.76,
+          "unit": "M ops/s",
+          "dimension": "8T",
+          "label": "maxminddb-rust: 143.76 M ops/s @ 8T"
+        },
+        {
+          "library": "maxminddb-rust",
+          "value": 171.98,
+          "unit": "M ops/s",
+          "dimension": "16T",
+          "label": "maxminddb-rust: 171.98 M ops/s @ 16T"
+        },
+        {
+          "library": "geoip2-rs",
+          "value": 89.37,
+          "unit": "M ops/s",
+          "dimension": "4T",
+          "label": "geoip2-rs: 89.37 M ops/s @ 4T"
+        },
+        {
+          "library": "geoip2-rs",
+          "value": 158.33,
+          "unit": "M ops/s",
+          "dimension": "8T",
+          "label": "geoip2-rs: 158.33 M ops/s @ 8T"
+        },
+        {
+          "library": "geoip2-rs",
+          "value": 227.09,
+          "unit": "M ops/s",
+          "dimension": "16T",
+          "label": "geoip2-rs: 227.09 M ops/s @ 16T"
+        },
+        {
+          "library": "maxminddb-golang",
+          "value": 52.07,
+          "unit": "M ops/s",
+          "dimension": "4T",
+          "label": "maxminddb-golang: 52.07 M ops/s @ 4T"
+        },
+        {
+          "library": "maxminddb-golang",
+          "value": 88.53,
+          "unit": "M ops/s",
+          "dimension": "8T",
+          "label": "maxminddb-golang: 88.53 M ops/s @ 8T"
+        },
+        {
+          "library": "maxminddb-golang",
+          "value": 129.85,
+          "unit": "M ops/s",
+          "dimension": "16T",
+          "label": "maxminddb-golang: 129.85 M ops/s @ 16T"
+        }
+      ],
+      "source": "https://github.com/0x00F6/libmaxminddb-rs/blob/e4561b502466a6c95312719372eafc77b7a85994/benchmarks/charts/concurrent-throughput-ipv6.svg",
+      "sha256": "40aadc390f7f710a5e513a345b43233d7ec0989888ac0163a86ac058fe17bcc9"
+    }
+  ]
+}

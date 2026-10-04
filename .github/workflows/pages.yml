@@ -1,0 +1,72 @@
+name: Project website
+on:
+  push:
+    branches: [main, feature/github-pages]
+    paths:
+      - 'website/**'
+      - 'examples/**'
+      - 'benchmarks/charts/**'
+      - '.github/workflows/pages.yml'
+  pull_request:
+    paths:
+      - 'website/**'
+      - 'examples/**'
+      - 'benchmarks/charts/**'
+      - '.github/workflows/pages.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+concurrency:
+  group: project-website-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    outputs:
+      pages_enabled: ${{ steps.repository.outputs.pages_enabled }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: website/package-lock.json
+      - run: npm --prefix website ci
+      - run: make website-check
+        env:
+          CHROMIUM_PATH: /usr/bin/google-chrome
+      - name: Preserve browser previews
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: website-previews
+          path: website/test-results/
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: website/dist
+      - name: Check Pages availability
+        id: repository
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          enabled=$(gh api "repos/$GITHUB_REPOSITORY" --jq '.has_pages')
+          echo "pages_enabled=$enabled" >> "$GITHUB_OUTPUT"
+          if [ "$enabled" != true ]; then
+            echo 'Website built and tested. Enable GitHub Pages with GitHub Actions as the source, then rerun this workflow to publish.' >> "$GITHUB_STEP_SUMMARY"
+          fi
+  deploy:
+    if: github.event_name != 'pull_request' && needs.build.outputs.pages_enabled == 'true'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/configure-pages@v5
+      - name: Deploy the project website
+        id: deployment
+        uses: actions/deploy-pages@v4

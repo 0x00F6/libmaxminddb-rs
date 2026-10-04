@@ -1,0 +1,21 @@
+{
+  "name": "libmaxminddb-project-site",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "data": "python3 scripts/import-benchmarks.py",
+    "dev": "vite --host 0.0.0.0",
+    "build": "npm run data && vite build",
+    "preview": "vite preview --host 0.0.0.0",
+    "test": "node --test scripts/data.test.mjs",
+    "test:browser": "node scripts/browser.test.mjs"
+  },
+  "dependencies": {
+    "echarts": "6.1.0",
+    "highlight.js": "11.11.1"
+  },
+  "devDependencies": {
+    "playwright-core": "1.62.1",
+    "vite": "7.3.1"
+  }
+}

@@ -235,6 +235,24 @@ doc: ## 📚 Build API documentation with warnings denied
 doc-open: ## 🌐 Build and open API documentation
 	$(CARGO) doc $(WORKSPACE_FLAGS) --no-deps --open
 
+##@ 🌐 Project website|96
+.PHONY: website-install website-data website-build website-serve website-check
+website-install: ## 📦 Install the locked website dependencies
+	npm --prefix website ci
+
+website-data: ## 📊 Import verified comparative benchmark charts and Rust examples
+	npm --prefix website run data
+
+website-build: ## 🌐 Build the GitHub Pages single-page application
+	npm --prefix website run build
+
+website-serve: ## 👀 Preview the website locally
+	npm --prefix website run dev
+
+website-check: website-build ## 🧪 Validate site data and browser interactions
+	npm --prefix website test
+	npm --prefix website run test:browser
+
 ##@ 🚀 Release|33
 # The local patch lets Cargo verify the main crate before the derive crate has
 # appeared on crates.io. Published manifests still depend on its registry version.

@@ -1,0 +1,52 @@
+{
+  "label": "Archived benchmark comparison",
+  "sourceCommit": "e4561b502466a6c95312719372eafc77b7a85994",
+  "sourceDate": "2026-09-30",
+  "measurementDate": null,
+  "cpu": "AMD Ryzen 7 PRO 7840U",
+  "os": "Linux x86_64",
+  "rust": "1.90.0",
+  "go": "1.23.1",
+  "dataset": "Deterministic SplitMix64 MMDB fixtures",
+  "precision": "Values transcribed programmatically from committed SVG tooltips, retaining their displayed precision. Raw samples and confidence intervals are not included in this snapshot.",
+  "notes": "Historical measurements, not a fresh benchmark of release 0.3.1. The source export was committed on 30 September 2026; the exact measurement date was not recorded. Compare only within the same chart and workload.",
+  "libraries": [
+    {
+      "name": "libmaxminddb-rs",
+      "version": "0.1.0",
+      "language": "Rust",
+      "role": "Reader + writer"
+    },
+    {
+      "name": "libmaxminddb (C)",
+      "version": "1.14.1",
+      "language": "C",
+      "role": "Reader"
+    },
+    {
+      "name": "maxminddb-rust",
+      "version": "0.32.0",
+      "language": "Rust",
+      "role": "Reader"
+    },
+    {
+      "name": "geoip2-rs",
+      "version": "0.1.8",
+      "language": "Rust",
+      "role": "Reader"
+    },
+    {
+      "name": "maxminddb-golang",
+      "version": "2.6.0",
+      "language": "Go",
+      "role": "Reader"
+    },
+    {
+      "name": "mmdbwriter",
+      "version": "1.2.0",
+      "language": "Go",
+      "role": "Writer"
+    }
+  ],
+  "chartsSha256": "f38280a161a8eb21965576bb4eab4a64fe25ba21bccb70362502996e245b3344"
+}
