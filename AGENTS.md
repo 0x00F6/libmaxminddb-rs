@@ -478,3 +478,17 @@ Changes in these areas deserve extra review:
 - Rebuild still materializes source records. Do not claim end-to-end zero-copy.
 - `benches/editor.rs` compares direct/guard/snapshot lookup and publication on
   one million IPv4 addresses; keep fixture creation outside timing.
+
+
+## Editor update inputs and merge journal
+
+- `Editor::update_value(network, value, strategy)` accepts owned Value inputs
+  without cloning, or borrowed MmdbEncode records via IntoMmdbValue.
+- Validate network family and encode inputs before mutating the overlay.
+- Replay operations in call order with a per-operation Writer merge strategy.
+  Do not collapse repeated updates: DeepMerge/Append depend on earlier values.
+- Source records stay borrowed until rebuild. Merge semantics are exact-prefix
+  semantics on exported source routes, matching Writer; no inferred parent
+  insertion boundaries or implicit merges with descendants.
+- `pending_edits` reports distinct affected prefixes. Insert and serde update
+  remain Replace operations; delete clears the target before later merges.

@@ -83,7 +83,7 @@ pub mod writer;
 pub use error::{Error, Result};
 pub use metadata::{Metadata, MetadataBuilder};
 pub use network::IpNetwork;
-pub use traits::{DecodeField, EncodeField, MmdbDecode, MmdbEncode, MmdbRecord};
+pub use traits::{DecodeField, EncodeField, IntoMmdbValue, MmdbDecode, MmdbEncode, MmdbRecord};
 pub use value::{Value, ValueRef};
 
 #[cfg(all(feature = "reader", feature = "writer"))]

@@ -495,7 +495,7 @@ Configuring the writer with `MergeStrategy::DeepMerge` enables recursive hierarc
 ```rust
 use std::error::Error;
 use std::net::IpAddr;
-use libmaxminddb_rs::{MergeStrategy, MetadataBuilder, Reader, Writer};
+use libmaxminddb_rs::{MergeStrategy, MergeStrategy, MetadataBuilder, Reader, Writer};
 
 fn main() -> Result<(), Box<dyn Error>> {
     // 1. Initialize Writer configured with recursive DeepMerge strategy
@@ -758,7 +758,7 @@ while that guard lives. `snapshot()` returns an owned Arc for async tasks or
 long-lived work. Editors share the same bytes, metadata and prepared tree.
 
 ```rust
-use libmaxminddb_rs::{Editor, Reader, ReloadableReader, Value};
+use libmaxminddb_rs::{Editor, MergeStrategy, Reader, ReloadableReader, Value};
 
 # fn main() -> Result<(), Box<dyn std::error::Error>> {
 let database = ReloadableReader::new(Reader::open("GeoIP.mmdb")?);
@@ -778,7 +778,7 @@ std::thread::scope(|scope| {
     }
     // These edits and publication run concurrently with the reading threads.
     let mut editor = Editor::from_reader(database.snapshot());
-    editor.update_value("1.2.3.4/32".parse().unwrap(), Value::Uint32(42))?;
+    editor.update_value("1.2.3.4/32".parse().unwrap(), Value::Uint32(42), MergeStrategy::Replace)?;
     if !database.commit(editor)? {
         // Another publisher won: start a fresh editor and reapply the edits.
     }
@@ -812,3 +812,42 @@ cover snapshot reclamation, invalid replacements, stale editors, competing
 publishers, mixed IPv4/IPv6 consistency and concurrent editor commits. These
 stress tests complement Rust's Send/Sync checks; they are not a formal proof or
 substitute for a sanitizer run.
+
+
+### Editor updates with a merge strategy and custom records
+
+`Editor::update_value(network, value, strategy)` now requires an explicit
+`MergeStrategy`. Owned `Value` inputs move without cloning; custom structs are
+passed by reference and encoded with `MmdbEncode`, without requiring serde.
+
+```rust
+use libmaxminddb_rs::{Editor, MergeStrategy, MmdbEncode};
+
+#[derive(MmdbEncode)]
+struct Patch<'a> {
+    score: u32,
+    tags: Vec<&'a str>,
+}
+
+# fn main() -> Result<(), Box<dyn std::error::Error>> {
+let mut editor = Editor::open("input.mmdb")?;
+let patch = Patch { score: 42, tags: vec!["updated"] };
+editor.update_value("198.51.100.0/24".parse()?, &patch, MergeStrategy::DeepMerge)?;
+let replacement = editor.finish()?;
+# Ok(())
+# }
+```
+
+`Replace` discards the old value. `DeepMerge` recursively merges maps, appends
+arrays and replaces scalar conflicts. `Append` appends arrays; `AppendUnique`
+appends only new elements. Updates are replayed in call order, so successive
+updates retain their individual strategies. The source remains borrowed until
+rebuild. Merge behavior matches the Writer on the same reconstructed prefix:
+inherited parent values and more-specific child records are not merged into
+that prefix. A missing exact prefix is inserted. MMDB does not preserve the
+original writer insertion boundaries; source routes are exported from its tree.
+`insert_value` and serde-based `update` still use Replace. `pending_edits` counts
+distinct modified prefixes, rather than queued operations.
+
+Run `cargo run --example editor_merge` for a complete custom-record DeepMerge
+example with English console output and publication through `ReloadableReader`.

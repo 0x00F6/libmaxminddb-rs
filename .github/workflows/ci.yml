@@ -15,7 +15,9 @@ jobs:
           components: rustfmt, clippy
       - uses: Swatinem/rust-cache@v2
       - name: Format
-        run: cargo fmt --all -- --check
+        run: |
+          cargo fmt --all
+          git diff --exit-code
       - name: Lint all targets
         run: cargo clippy --workspace --all-targets --all-features -- -D warnings
       - name: Test all features
@@ -25,6 +27,7 @@ jobs:
           cargo test --no-default-features --features reader
           cargo test --no-default-features --features writer
           cargo run --example concurrent_editor
+          cargo run --example editor_merge
       - name: Editor million-IP benchmark
         if: github.ref == 'refs/heads/feature/mmdb-editor'
         run: |

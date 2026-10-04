@@ -4,7 +4,7 @@ use std::sync::{Arc, OnceLock};
 
 use criterion::{Criterion, criterion_group, criterion_main};
 use libmaxminddb_rs::{
-    Editor, IpNetwork, MetadataBuilder, Reader, ReloadableReader, Value, Writer,
+    Editor, IpNetwork, MergeStrategy, MetadataBuilder, Reader, ReloadableReader, Value, Writer,
 };
 
 const ROUTES: u32 = 1_000_000;
@@ -69,7 +69,7 @@ fn bench_editor(c: &mut Criterion) {
             for i in 0..EDITS {
                 let address = Ipv4Addr::from(0x0a00_0000_u32 + i * 997);
                 let network = IpNetwork::new(address.into(), 32).unwrap();
-                editor.update_value(network, Value::Uint32(2)).unwrap();
+                editor.update_value(network, Value::Uint32(2), MergeStrategy::Replace).unwrap();
             }
             black_box(editor.finish().unwrap())
         })

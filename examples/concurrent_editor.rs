@@ -2,7 +2,7 @@
 
 use std::sync::{Arc, Barrier};
 
-use libmaxminddb_rs::{Editor, MetadataBuilder, Reader, ReloadableReader, Value, ValueRef, Writer};
+use libmaxminddb_rs::{Editor, MergeStrategy, MetadataBuilder, Reader, ReloadableReader, Value, ValueRef, Writer};
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let mut writer = Writer::with_metadata(MetadataBuilder::new().ip_version(4).build()?);
@@ -43,7 +43,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             // Share the current reader and PreparedTree, without copying bytes.
             let source = database.snapshot();
             let mut editor = Editor::from_reader(source);
-            editor.update_value(network, Value::Uint32(generation))?;
+            editor.update_value(network, Value::Uint32(generation), MergeStrategy::Replace)?;
             println!("[writer] Staged generation {generation} in a private editor overlay.");
             println!("[writer] Source bytes and the prepared tree remain unchanged.");
             // Rebuild outside publication, then CAS against the source Arc.

@@ -182,3 +182,7 @@ required-features = ["reader", "writer"]
 [[example]]
 name = "concurrent_editor"
 required-features = ["reader", "writer"]
+
+[[example]]
+name = "editor_merge"
+required-features = ["reader", "writer", "derive"]

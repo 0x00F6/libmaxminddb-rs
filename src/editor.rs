@@ -1,14 +1,14 @@
 //! Copy-on-write editing of existing MaxMind DB files.
 
-use std::collections::HashMap;
+use std::collections::HashSet;
 use std::path::Path;
 use std::sync::Arc;
 
-use crate::{IpNetwork, Metadata, Reader, Result, Value, Writer};
+use crate::{IntoMmdbValue, IpNetwork, MergeStrategy, Metadata, Reader, Result, Value, Writer};
 
 #[derive(Debug)]
 enum Edit {
-    Upsert(Value),
+    Upsert(Value, MergeStrategy),
     Delete,
 }
 
@@ -19,7 +19,8 @@ enum Edit {
 #[derive(Debug)]
 pub struct Editor<'a> {
     reader: Arc<Reader<'a>>,
-    edits: HashMap<IpNetwork, Edit>,
+    edits: Vec<(IpNetwork, Edit)>,
+    pending_networks: HashSet<IpNetwork>,
 }
 
 impl Editor<'static> {
@@ -40,7 +41,8 @@ impl<'a> Editor<'a> {
     pub fn from_reader(reader: impl Into<Arc<Reader<'a>>>) -> Self {
         Self {
             reader: reader.into(),
-            edits: HashMap::new(),
+            edits: Vec::new(),
+            pending_networks: HashSet::new(),
         }
     }
 
@@ -68,7 +70,8 @@ impl<'a> Editor<'a> {
     /// Inserts or replaces a prefix with an already-typed MMDB value.
     pub fn insert_value(&mut self, network: IpNetwork, value: Value) -> Result<()> {
         validate_family(self.reader.metadata().ip_version, network)?;
-        self.edits.insert(network, Edit::Upsert(value));
+        self.pending_networks.insert(network);
+        self.edits.push((network, Edit::Upsert(value, MergeStrategy::Replace)));
         Ok(())
     }
 
@@ -81,22 +84,58 @@ impl<'a> Editor<'a> {
         self.insert(network, value)
     }
 
-    /// Replaces a prefix with an already-typed MMDB value.
-    pub fn update_value(&mut self, network: IpNetwork, value: Value) -> Result<()> {
-        self.insert_value(network, value)
+    /// Updates a prefix with an owned value or a borrowed `MmdbEncode` record.
+    ///
+    /// Each update chooses its own strategy. Updates are replayed in call order
+    /// during rebuild, using the writer's exact-prefix merge semantics on the
+    /// exported source routes. Inherited parent values and more-specific child
+    /// values are not merged into the target prefix. A missing prefix is inserted.
+    /// `Replace` discards the previous value; `DeepMerge` recursively merges maps,
+    /// appends arrays and replaces scalar conflicts. `Append` and `AppendUnique`
+    /// follow the same rules as [`MergeStrategy`]. Encoding errors leave the
+    /// overlay unchanged. Only the supplied record is encoded at this call;
+    /// source records remain borrowed until rebuild.
+    ///
+    /// ```rust
+    /// # #[cfg(feature = "derive")]
+    /// # fn main() -> Result<(), Box<dyn std::error::Error>> {
+    /// use libmaxminddb_rs::{Editor, MergeStrategy, MmdbEncode};
+    /// #[derive(MmdbEncode)]
+    /// struct Patch { score: u32 }
+    /// let source = include_bytes!(concat!(env!("CARGO_MANIFEST_DIR"),
+    ///     "/tests/fixtures/doc.mmdb"));
+    /// let mut editor = Editor::from_bytes(source)?;
+    /// editor.update_value("198.51.100.7/32".parse()?,
+    ///     &Patch { score: 42 }, MergeStrategy::DeepMerge)?;
+    /// # Ok(())
+    /// # }
+    /// # #[cfg(not(feature = "derive"))] fn main() {}
+    /// ```
+    pub fn update_value(
+        &mut self,
+        network: IpNetwork,
+        value: impl IntoMmdbValue,
+        strategy: MergeStrategy,
+    ) -> Result<()> {
+        validate_family(self.reader.metadata().ip_version, network)?;
+        let value = value.into_mmdb_value()?;
+        self.pending_networks.insert(network);
+        self.edits.push((network, Edit::Upsert(value, strategy)));
+        Ok(())
     }
 
     /// Removes exactly this CIDR prefix. More-specific child prefixes remain.
     pub fn remove(&mut self, network: IpNetwork) -> Result<()> {
         validate_family(self.reader.metadata().ip_version, network)?;
-        self.edits.insert(network, Edit::Delete);
+        self.pending_networks.insert(network);
+        self.edits.push((network, Edit::Delete));
         Ok(())
     }
 
-    /// Returns the number of pending overlay modifications.
+    /// Returns the number of distinct prefixes with pending modifications.
     #[must_use]
     pub fn pending_edits(&self) -> usize {
-        self.edits.len()
+        self.pending_networks.len()
     }
 
     /// Rebuilds the database and returns replacement MMDB bytes.
@@ -114,7 +153,10 @@ impl<'a> Editor<'a> {
         // parent does not require splitting or cloning the parent record.
         for (network, edit) in self.edits {
             match edit {
-                Edit::Upsert(value) => writer.insert_value(network, value)?,
+                Edit::Upsert(value, strategy) => {
+                    writer = writer.merge_strategy(strategy);
+                    writer.insert_value(network, value)?;
+                }
                 Edit::Delete => writer.remove(network)?,
             }
         }
@@ -163,7 +205,7 @@ mod tests {
         let source = fixture();
         let mut editor = Editor::from_bytes(&source).unwrap();
         editor
-            .update_value("10.0.0.0/24".parse().unwrap(), value(10))
+            .update_value("10.0.0.0/24".parse().unwrap(), value(10), MergeStrategy::Replace)
             .unwrap();
         editor.remove("10.0.1.0/24".parse().unwrap()).unwrap();
         editor

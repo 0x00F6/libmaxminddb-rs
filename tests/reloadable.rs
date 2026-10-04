@@ -2,7 +2,7 @@
 
 use std::sync::{Arc, Barrier};
 
-use libmaxminddb_rs::{MetadataBuilder, Reader, ReloadableReader, Value, ValueRef, Writer};
+use libmaxminddb_rs::{MergeStrategy, MetadataBuilder, Reader, ReloadableReader, Value, ValueRef, Writer};
 
 fn reader(version: u32) -> Reader<'static> {
     let mut writer = Writer::with_metadata(MetadataBuilder::new().ip_version(6).build().unwrap());
@@ -103,10 +103,10 @@ fn stale_editor_cannot_overwrite_newer_edits() {
     let mut first = database.editor();
     let mut stale = database.editor();
     first
-        .update_value("10.0.0.0/8".parse().unwrap(), Value::Uint32(2))
+        .update_value("10.0.0.0/8".parse().unwrap(), Value::Uint32(2), MergeStrategy::Replace)
         .unwrap();
     stale
-        .update_value("10.0.0.0/8".parse().unwrap(), Value::Uint32(3))
+        .update_value("10.0.0.0/8".parse().unwrap(), Value::Uint32(3), MergeStrategy::Replace)
         .unwrap();
     assert!(database.commit(first).unwrap());
     assert!(!database.commit(stale).unwrap());
@@ -204,7 +204,7 @@ fn editor_commits_while_readers_hold_consistent_snapshots() {
             let mut editor = libmaxminddb_rs::Editor::from_reader(database.snapshot());
             for network in ["10.0.0.0/8", "2001:db8::/32"] {
                 editor
-                    .update_value(network.parse().unwrap(), Value::Uint32(generation))
+                    .update_value(network.parse().unwrap(), Value::Uint32(generation), MergeStrategy::Replace)
                     .unwrap();
             }
             assert!(database.commit(editor).unwrap());
