@@ -98,7 +98,7 @@ Add `libmaxminddb-rs` to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-libmaxminddb-rs = "0.2.1"
+libmaxminddb-rs = "0.3.0"
 ```
 
 ### ⚙️ Cargo Features
