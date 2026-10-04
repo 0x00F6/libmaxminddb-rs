@@ -1,0 +1,68 @@
+name: ARM64 benchmark comparison
+on:
+  push:
+    branches: [feature/github-pages]
+    paths: ['.github/workflows/bench-arm64.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  compare:
+    runs-on: ubuntu-24.04-arm
+    timeout-minutes: 120
+    env:
+      GOTOOLCHAIN: local
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: '1.98.1'
+          components: rustfmt
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: tools/go-bench/go.mod
+          cache: false
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: |
+            . -> target
+            scripts -> target
+      - name: Verify native ARM64 and record environment
+        run: |
+          test "$(uname -m)" = aarch64
+          mkdir -p benchmark-evidence
+          git rev-parse HEAD > benchmark-evidence/commit.txt
+          date -u --iso-8601=seconds > benchmark-evidence/started.txt
+          LC_ALL=C lscpu --json > benchmark-evidence/lscpu.json
+          uname -a > benchmark-evidence/os.txt
+          cp /etc/os-release benchmark-evidence/os-release.txt
+          rustc --version --verbose > benchmark-evidence/rustc.txt
+          go version > benchmark-evidence/go.txt
+          go env GOARCH GOOS GOVERSION GOTOOLCHAIN > benchmark-evidence/go-env.txt
+          cc --version > benchmark-evidence/cc.txt
+          nproc > benchmark-evidence/available-cpus.txt
+          cat benchmark-evidence/lscpu.json
+      - name: Validate benchmark harness
+        run: |
+          cargo fmt --manifest-path scripts/Cargo.toml -- --check
+          cargo test --manifest-path scripts/Cargo.toml
+      - name: Run complete cross-library suite
+        run: |
+          set -o pipefail
+          make bench-compare 2>&1 | tee benchmark-evidence/output.log
+          date -u --iso-8601=seconds > benchmark-evidence/finished.txt
+          go version -m target/benchmark-bin/maxminddb-golang > benchmark-evidence/go-reader-build.txt
+          go version -m target/benchmark-bin/mmdbwriter > benchmark-evidence/go-writer-build.txt
+          find target/bench-data -type f -name '*.mmdb' -exec sha256sum {} + > benchmark-evidence/datasets-sha256.txt
+      - name: Preserve results and provenance
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: benchmark-arm64-${{ github.run_id }}
+          retention-days: 30
+          path: |
+            benchmark-evidence/
+            target/benchmark-results/
+            benchmark-report/
+            benchmarks/charts/
+            README.md

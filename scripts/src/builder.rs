@@ -115,7 +115,43 @@ pub fn cpu_model() -> String {
             }
         }
     }
-    "x86_64".into()
+    // ARM /proc/cpuinfo often omits the x86-style "model name" field.
+    if let Ok(output) = Command::new("lscpu")
+        .arg("--json")
+        .env("LC_ALL", "C")
+        .output()
+    {
+        if output.status.success() {
+            if let Some(model) = cpu_model_from_lscpu(&output.stdout) {
+                return model;
+            }
+        }
+    }
+    std::env::consts::ARCH.into()
+}
+
+fn cpu_model_from_lscpu(output: &[u8]) -> Option<String> {
+    let info: serde_json::Value = serde_json::from_slice(output).ok()?;
+    info.get("lscpu")?.as_array()?.iter().find_map(|entry| {
+        if entry.get("field")?.as_str()? != "Model name:" {
+            return None;
+        }
+        let model = entry.get("data")?.as_str()?.trim();
+        (!model.is_empty()).then(|| model.to_owned())
+    })
+}
+
+#[cfg(test)]
+mod cpu_tests {
+    use super::cpu_model_from_lscpu;
+
+    #[test]
+    fn arm_cpu_metadata_uses_the_reported_model() {
+        let info = br#"{"lscpu":[{"field":"Architecture:","data":"aarch64"},{"field":"Model name:","data":" Neoverse-N1 "}]}"#;
+        assert_eq!(cpu_model_from_lscpu(info).as_deref(), Some("Neoverse-N1"));
+        assert_eq!(cpu_model_from_lscpu(br#"{"lscpu":[]}"#), None);
+        assert_eq!(cpu_model_from_lscpu(b"unavailable"), None);
+    }
 }
 
 pub fn get_os_info() -> String {
