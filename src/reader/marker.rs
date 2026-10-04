@@ -110,7 +110,7 @@ fn verify(window: &[u8], i: usize) -> bool {
 /// Returns `true` and the highest set bit of `mask` if any, scanning candidates
 /// of a backward chunk from `base` downwards. Only positions `<= valid_end` can
 /// hold a full marker.
-#[cfg(all(feature = "simd", any(target_arch = "x86_64", target_arch = "aarch64")))]
+#[cfg(all(feature = "simd", target_arch = "x86_64"))]
 #[inline(always)]
 fn best_candidate(window: &[u8], base: usize, valid_end: usize, mut mask: u32) -> Option<usize> {
     while mask != 0 {
@@ -252,7 +252,9 @@ pub(crate) unsafe fn marker_neon(window: &[u8]) -> Option<usize> {
         let eq = vceqq_u8(v, needle);
         // Per-lane mask (each byte 0xff/0x00); available with NEON without an
         // x86-style movemask. Scan lanes from most significant to least.
-        let bytes: [u8; 16] = core::mem::transmute_copy(&eq);
+        // SAFETY: uint8x16_t and [u8; 16] are both 16 bytes, and every byte
+        // pattern is valid for the destination array.
+        let bytes: [u8; 16] = unsafe { core::mem::transmute_copy(&eq) };
         for bit in (0..16).rev() {
             if bytes[bit] != 0 {
                 let pos = i + bit;
