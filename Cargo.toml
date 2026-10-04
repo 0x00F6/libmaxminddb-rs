@@ -1,6 +1,6 @@
 [package]
 name = "libmaxminddb-rs"
-version = "0.2.1"
+version = "0.3.0"
 edition = "2024"
 rust-version = "1.98.1"
 description = "Pure Rust MaxMind DB (MMDB) reader and writer with zero-copy borrowed decoding"
@@ -41,19 +41,20 @@ resolver = "3"
 
 [features]
 default = ["reader", "writer", "derive", "simd"]
-reader = ["dep:memmap2"]
+reader = ["dep:memmap2", "dep:arc-swap"]
 writer = []
 # Explicit ASCII SIMD with runtime AVX2 detection; disable for scalar comparisons.
 simd = []
 derive = ["dep:libmaxminddb-rs-derive"]
 
 [dependencies]
+arc-swap = { version = "1.9.2", optional = true }
 memmap2 = { version = "0.9.11", optional = true }
 serde = { version = "1.0.229", features = ["derive"] }
 serde_json = "1.0.151"
 thiserror = "2.0.21"
 ipnet = { version = "2.12.2", features = ["serde"] }
-libmaxminddb-rs-derive = { version = "0.2.1", path = "derive", optional = true }
+libmaxminddb-rs-derive = { version = "0.3.0", path = "derive", optional = true }
 
 [dev-dependencies]
 anyhow = "1.0.104"
@@ -172,3 +173,16 @@ required-features = ["reader", "writer"]
 name = "replay_value"
 harness = false
 required-features = ["reader"]
+
+[[bench]]
+name = "editor"
+harness = false
+required-features = ["reader", "writer"]
+
+[[example]]
+name = "concurrent_editor"
+required-features = ["reader", "writer"]
+
+[[example]]
+name = "editor_merge"
+required-features = ["reader", "writer", "derive"]

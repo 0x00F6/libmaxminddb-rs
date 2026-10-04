@@ -69,21 +69,29 @@ mod traits;
 mod value;
 
 mod decoder;
+#[cfg(all(feature = "reader", feature = "writer"))]
+pub mod editor;
 #[cfg(feature = "writer")]
 mod encoder;
 #[cfg(feature = "reader")]
 pub mod reader;
+#[cfg(feature = "reader")]
+pub mod reloadable;
 #[cfg(feature = "writer")]
 pub mod writer;
 
 pub use error::{Error, Result};
 pub use metadata::{Metadata, MetadataBuilder};
 pub use network::IpNetwork;
-pub use traits::{DecodeField, EncodeField, MmdbDecode, MmdbEncode, MmdbRecord};
+pub use traits::{DecodeField, EncodeField, IntoMmdbValue, MmdbDecode, MmdbEncode, MmdbRecord};
 pub use value::{Value, ValueRef};
 
+#[cfg(all(feature = "reader", feature = "writer"))]
+pub use editor::Editor;
 #[cfg(feature = "reader")]
 pub use reader::Reader;
+#[cfg(feature = "reader")]
+pub use reloadable::ReloadableReader;
 #[cfg(feature = "writer")]
 pub use writer::{MergeStrategy, Writer};
 

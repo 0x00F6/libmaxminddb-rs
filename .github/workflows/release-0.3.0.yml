@@ -1,0 +1,85 @@
+name: Release 0.3.0
+
+on:
+  workflow_run:
+    workflows: [CI]
+    branches: [main]
+    types: [completed]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release-0.3.0
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    if: >-
+      github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.event == 'push' &&
+      github.event.workflow_run.head_repository.full_name == github.repository
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.workflow_run.head_sha }}
+          fetch-depth: 0
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: '1.98.1'
+      - uses: Swatinem/rust-cache@v2
+      - name: Check release eligibility
+        id: eligibility
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import tomllib
+          from pathlib import Path
+          for path in ('Cargo.toml', 'derive/Cargo.toml'):
+              assert tomllib.loads(Path(path).read_text())['package']['version'] == '0.3.0', path
+          PY
+          test "$(git ls-remote origin refs/heads/main | cut -f1)" = "$(git rev-parse HEAD)"
+          if gh release view v0.3.0 --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            echo 'publish=false' >> "$GITHUB_OUTPUT"
+          else
+            echo 'publish=true' >> "$GITHUB_OUTPUT"
+          fi
+      - name: Publish derive then main crate
+        if: steps.eligibility.outputs.publish == 'true'
+        env:
+          CARGO_REGISTRY_TOKEN: ${{ secrets.CARGO_REGISTRY_TOKEN }}
+        run: |
+          set -euo pipefail
+          test -n "$CARGO_REGISTRY_TOKEN" || { echo 'CARGO_REGISTRY_TOKEN is not configured'; exit 1; }
+          # Checking immutable versions makes recovery after partial publication possible.
+          for crate in libmaxminddb-rs-derive libmaxminddb-rs; do
+            status=$(curl --retry 3 --silent --show-error --output /tmp/crate-version.json --write-out '%{http_code}' "https://crates.io/api/v1/crates/$crate/0.3.0")
+            if [ "$status" = 200 ]; then
+              echo "$crate 0.3.0 is already published"
+            elif [ "$status" = 404 ]; then
+              cargo publish --locked --package "$crate"
+            else
+              echo "Registry check failed for $crate (HTTP $status)"
+              exit 1
+            fi
+          done
+      - name: Create tag and GitHub release
+        if: steps.eligibility.outputs.publish == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          if git rev-parse --verify refs/tags/v0.3.0 >/dev/null 2>&1; then
+            test "$(git rev-parse 'v0.3.0^{commit}')" = "$(git rev-parse HEAD)"
+          else
+            git tag -a v0.3.0 -m 'Release v0.3.0'
+            git push origin refs/tags/v0.3.0
+          fi
+          gh release create v0.3.0 --repo "$GITHUB_REPOSITORY" --verify-tag \
+            --title 'v0.3.0 — Hot In-Memory Database Updates' \
+            --notes-file .github/release-notes-0.3.0.md

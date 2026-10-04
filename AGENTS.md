@@ -10,7 +10,8 @@ Maintain an independent, high-performance, memory-conscious Rust implementation 
 
 - `src/lib.rs`: public API and feature gates.
 - `src/reader/`: file/buffer sources, metadata discovery, search-tree traversal, lookup.
-- `src/writer/`: prefix trie, deep merge, data interning, node serialization.
+- `src/writer/`: prefix trie, deep merge, data interning, explicit no-data boundaries, node serialization.
+- `src/editor.rs`: copy-on-write overlay for rebuilding existing MMDB files; source records stay borrowed until rebuild.
 - `src/decoder/`: MMDB control-byte, pointer, scalar, map and array decoding.
 - `src/encoder.rs`: MMDB control-byte and payload encoding.
 - `src/metadata.rs`: public metadata type and builder.
@@ -463,3 +464,31 @@ Changes in these areas deserve extra review:
 - Preserve scenario dimensions and diagnostics on failures; failed/unsupported runs are not measurements.
 - `run_benchmarks_compare --ipv6-absent-only` replaces only this scenario after all five
   readers succeed. Dataset/workload SHA-256 and protocol identify compatible result groups.
+
+
+## Atomic reader publication
+
+- `ReloadableReader` uses `arc-swap` 1.9.2 or newer under the reader feature.
+- Hold one load guard per query/batch; borrowed results cannot outlive it.
+- Editors own an Arc of their immutable source; bytes and PreparedTree are shared.
+- Build replacement readers before publication. Commit uses source Arc identity
+  with compare-and-swap to reject stale editors and prevent lost updates.
+- Publication does not persist files or modify existing bytes. Mmap safety rules
+  apply to every retained generation. Snapshots retain old database memory.
+- Rebuild still materializes source records. Do not claim end-to-end zero-copy.
+- `benches/editor.rs` compares direct/guard/snapshot lookup and publication on
+  one million IPv4 addresses; keep fixture creation outside timing.
+
+
+## Editor update inputs and merge journal
+
+- `Editor::update_value(network, value, strategy)` accepts owned Value inputs
+  without cloning, or borrowed MmdbEncode records via IntoMmdbValue.
+- Validate network family and encode inputs before mutating the overlay.
+- Replay operations in call order with a per-operation Writer merge strategy.
+  Do not collapse repeated updates: DeepMerge/Append depend on earlier values.
+- Source records stay borrowed until rebuild. Merge semantics are exact-prefix
+  semantics on exported source routes, matching Writer; no inferred parent
+  insertion boundaries or implicit merges with descendants.
+- `pending_edits` reports distinct affected prefixes. Insert and serde update
+  remain Replace operations; delete clears the target before later merges.

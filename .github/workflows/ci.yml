@@ -20,6 +20,17 @@ jobs:
         run: cargo clippy --workspace --all-targets --all-features -- -D warnings
       - name: Test all features
         run: cargo test --workspace --all-features
+      - name: Feature isolation
+        run: |
+          cargo test --no-default-features --features reader
+          cargo test --no-default-features --features writer
+          cargo run --example concurrent_editor
+          cargo run --example editor_merge
+      - name: Editor million-IP benchmark
+        if: github.ref == 'refs/heads/feature/mmdb-editor'
+        run: |
+          rm -rf target/criterion
+          cargo bench --bench editor -- --noplot
       - name: Test documentation
         run: cargo test --doc --all-features
       - name: Build documentation

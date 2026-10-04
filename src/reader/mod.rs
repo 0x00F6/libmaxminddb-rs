@@ -361,6 +361,65 @@ impl<'a> Reader<'a> {
         })
     }
 
+    /// Visits every explicit network/value pair without cloning source strings or bytes.
+    ///
+    /// This is primarily used by the copy-on-write editor. The callback receives
+    /// a borrowed value valid for the duration of the call.
+    #[cfg(feature = "writer")]
+    pub(crate) fn visit_records(
+        &self,
+        mut visitor: impl FnMut(crate::IpNetwork, ValueRef<'_>) -> Result<()>,
+    ) -> Result<()> {
+        use std::net::{IpAddr, Ipv4Addr, Ipv6Addr};
+
+        let bits = if self.metadata.ip_version == 4 {
+            32_u8
+        } else {
+            128_u8
+        };
+        let mut stack = Vec::with_capacity(256);
+        stack.push((0_u64, 0_u128, 0_u8));
+
+        while let Some((node, prefix, depth)) = stack.pop() {
+            if node >= self.metadata.node_count {
+                if node == self.metadata.node_count {
+                    continue;
+                }
+                let offset = self.record_to_file_offset(node)?;
+                let decoder = Decoder::new(
+                    self.source.bytes(),
+                    self.data_section_start,
+                    self.metadata_marker,
+                );
+                let (value, _) = decoder.decode_at(offset)?;
+                let network = if bits == 32 {
+                    let address = Ipv4Addr::from(prefix as u32);
+                    crate::IpNetwork::new(IpAddr::V4(address), depth)
+                        .map_err(|_| Error::InvalidDatabase("invalid exported IPv4 prefix"))?
+                } else if depth >= 96 && prefix >> 32 == 0 {
+                    let address = Ipv4Addr::from(prefix as u32);
+                    crate::IpNetwork::new(IpAddr::V4(address), depth - 96)
+                        .map_err(|_| Error::InvalidDatabase("invalid exported IPv4 prefix"))?
+                } else {
+                    let address = Ipv6Addr::from(prefix);
+                    crate::IpNetwork::new(IpAddr::V6(address), depth)
+                        .map_err(|_| Error::InvalidDatabase("invalid exported IPv6 prefix"))?
+                };
+                visitor(network, value)?;
+                continue;
+            }
+            if depth >= bits {
+                continue;
+            }
+            let left = self.read_record(node, 0)?;
+            let right = self.read_record(node, 1)?;
+            let shift = u32::from(bits - depth - 1);
+            stack.push((right, prefix | (1_u128 << shift), depth + 1));
+            stack.push((left, prefix, depth + 1));
+        }
+        Ok(())
+    }
+
     /// Returns parsed database metadata.
     ///
     /// # Examples

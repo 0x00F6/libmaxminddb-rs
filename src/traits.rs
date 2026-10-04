@@ -66,6 +66,27 @@ pub trait MmdbEncode {
     fn encode(&self) -> Result<Value>;
 }
 
+/// Input accepted by editor updates: an owned [`Value`] or a borrowed record.
+///
+/// Owned values are moved without cloning. Pass `&record` for structs that
+/// implement [`MmdbEncode`], including `#[derive(MmdbEncode)]` structs.
+pub trait IntoMmdbValue {
+    /// Moves or encodes this input into the owned MMDB value model.
+    fn into_mmdb_value(self) -> Result<Value>;
+}
+
+impl IntoMmdbValue for Value {
+    fn into_mmdb_value(self) -> Result<Value> {
+        Ok(self)
+    }
+}
+
+impl<T: MmdbEncode + ?Sized> IntoMmdbValue for &T {
+    fn into_mmdb_value(self) -> Result<Value> {
+        self.encode()
+    }
+}
+
 /// Trait for a custom record that carries its own network/CIDR.
 ///
 /// `#[derive(MmdbRecord)]` implements this trait when one field is annotated with
