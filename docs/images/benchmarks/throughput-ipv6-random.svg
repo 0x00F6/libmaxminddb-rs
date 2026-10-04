@@ -4,22 +4,22 @@
 <text x="20" y="62" class="chart-subtitle">Single-threaded operations/sec on random workload (higher is better)</text>
 <text x="170" y="103" font-size="13" font-weight="600" text-anchor="end">libmaxminddb-rs 🏆</text>
 <rect x="185" y="85" width="640" height="26" rx="4" class="svg-bar-track"/>
-<rect x="185" y="85" width="640" height="26" rx="4" fill="#00f5a0" opacity="0.9"><title>libmaxminddb-rs: 116.69 M ops/s (IPv6 Throughput — Random Lookups (1M))</title></rect>
-<text x="837" y="103" class="svg-value">116.69 M ops/s</text>
+<rect x="185" y="85" width="640" height="26" rx="4" fill="#00f5a0" opacity="0.9"><title>libmaxminddb-rs: 92.25 M ops/s (IPv6 Throughput — Random Lookups (1M))</title></rect>
+<text x="837" y="103" class="svg-value">92.25 M ops/s</text>
 <text x="170" y="151" font-size="13" font-weight="600" text-anchor="end">libmaxminddb (C)</text>
 <rect x="185" y="133" width="640" height="26" rx="4" class="svg-bar-track"/>
-<rect x="185" y="133" width="380" height="26" rx="4" fill="#f5c542" opacity="0.9"><title>libmaxminddb (C): 69.31 M ops/s (IPv6 Throughput — Random Lookups (1M))</title></rect>
-<text x="577" y="151" class="svg-value">69.31 M ops/s</text>
+<rect x="185" y="133" width="391" height="26" rx="4" fill="#f5c542" opacity="0.9"><title>libmaxminddb (C): 56.34 M ops/s (IPv6 Throughput — Random Lookups (1M))</title></rect>
+<text x="588" y="151" class="svg-value">56.34 M ops/s</text>
 <text x="170" y="199" font-size="13" font-weight="600" text-anchor="end">maxminddb-rust</text>
 <rect x="185" y="181" width="640" height="26" rx="4" class="svg-bar-track"/>
-<rect x="185" y="181" width="198" height="26" rx="4" fill="#ff8800" opacity="0.9"><title>maxminddb-rust: 36.08 M ops/s (IPv6 Throughput — Random Lookups (1M))</title></rect>
-<text x="395" y="199" class="svg-value">36.08 M ops/s</text>
+<rect x="185" y="181" width="220" height="26" rx="4" fill="#ff8800" opacity="0.9"><title>maxminddb-rust: 31.75 M ops/s (IPv6 Throughput — Random Lookups (1M))</title></rect>
+<text x="417" y="199" class="svg-value">31.75 M ops/s</text>
 <text x="170" y="247" font-size="13" font-weight="600" text-anchor="end">geoip2-rs</text>
 <rect x="185" y="229" width="640" height="26" rx="4" class="svg-bar-track"/>
-<rect x="185" y="229" width="267" height="26" rx="4" fill="#ff3b5c" opacity="0.9"><title>geoip2-rs: 48.65 M ops/s (IPv6 Throughput — Random Lookups (1M))</title></rect>
-<text x="464" y="247" class="svg-value">48.65 M ops/s</text>
+<rect x="185" y="229" width="291" height="26" rx="4" fill="#ff3b5c" opacity="0.9"><title>geoip2-rs: 41.99 M ops/s (IPv6 Throughput — Random Lookups (1M))</title></rect>
+<text x="488" y="247" class="svg-value">41.99 M ops/s</text>
 <text x="170" y="295" font-size="13" font-weight="600" text-anchor="end">maxminddb-golang</text>
 <rect x="185" y="277" width="640" height="26" rx="4" class="svg-bar-track"/>
-<rect x="185" y="277" width="163" height="26" rx="4" fill="#00add8" opacity="0.9"><title>maxminddb-golang: 29.65 M ops/s (IPv6 Throughput — Random Lookups (1M))</title></rect>
-<text x="360" y="295" class="svg-value">29.65 M ops/s</text>
+<rect x="185" y="277" width="167" height="26" rx="4" fill="#00add8" opacity="0.9"><title>maxminddb-golang: 24.13 M ops/s (IPv6 Throughput — Random Lookups (1M))</title></rect>
+<text x="364" y="295" class="svg-value">24.13 M ops/s</text>
 </svg>

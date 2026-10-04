@@ -672,7 +672,6 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 Run `cargo run --example editor_merge` for this example or
 `cargo run --example concurrent_editor` for concurrent readers and a writer.
-
 ## 📊 Benchmarks
 
 Reproducible cross-library benchmark suite comparing `libmaxminddb-rs` against industry standard implementations in Rust, C, and Go.
@@ -681,14 +680,17 @@ Reproducible cross-library benchmark suite comparing `libmaxminddb-rs` against i
 
 | Library Name | Language | Role | Evaluated Version | Compiler & Build Flags | Upstream Repository |
 |:---|:---:|:---:|:---:|:---|:---|
-| 🦀 **`libmaxminddb-rs`** | Rust | Reader & Writer | 0.1.0 | `rustc 1.90.0` (opt-level=3, native) | Current Repository |
+| 🦀 **`libmaxminddb-rs`** | Rust | Reader & Writer | 0.3.1 | `rustc 1.98.1` (opt-level=3, native) | Current Repository |
 | 🏛️ **`libmaxminddb`** | C | Reader | 1.14.1 | `cc` (-O3 -march=native) | [maxmind/libmaxminddb](https://github.com/maxmind/libmaxminddb) |
-| 📦 **`maxminddb-rust`** | Rust | Reader | 0.32.0 | `rustc 1.90.0` (release) | [maxminddb-rust](https://crates.io/crates/maxminddb) |
-| 🚀 **`geoip2-rs`** | Rust | Reader | 0.1.8 | `rustc 1.90.0` (release) | [geoip2-rs](https://crates.io/crates/geoip2) |
-| 🐹 **`maxminddb-golang`** | Go | Reader | v2.6.0 | `go go1.23.1 linux/amd64` (-ldflags="-s -w" -trimpath) | [oschwald/maxminddb-golang](https://github.com/oschwald/maxminddb-golang) |
-| ✍️ **`mmdbwriter`** | Go | Writer | v1.2.0 | `go go1.23.1 linux/amd64` (-ldflags="-s -w" -trimpath) | [maxmind/mmdbwriter](https://github.com/maxmind/mmdbwriter) |
+| 📦 **`maxminddb-rust`** | Rust | Reader | 0.32.0 | `rustc 1.98.1` (release) | [maxminddb-rust](https://crates.io/crates/maxminddb) |
+| 🚀 **`geoip2-rs`** | Rust | Reader | 0.1.8 | `rustc 1.98.1` (release) | [geoip2-rs](https://crates.io/crates/geoip2) |
+| 🐹 **`maxminddb-golang`** | Go | Reader | v2.6.0 | `Go ≥1.25.0 (launcher: 1.23.1)` (-ldflags="-s -w" -trimpath) | [oschwald/maxminddb-golang](https://github.com/oschwald/maxminddb-golang) |
+| ✍️ **`mmdbwriter`** | Go | Writer | v1.2.0 | `Go ≥1.25.0 (launcher: 1.23.1)` (-ldflags="-s -w" -trimpath) | [maxmind/mmdbwriter](https://github.com/maxmind/mmdbwriter) |
 
-*Environment: Linux x86_64 · AMD Ryzen 7 PRO 7840U w/ Radeon 780M Graphics · rustc 1.90.0 · Deterministic SplitMix64 datasets with pre-allocated memory.*
+*Environment: Linux x86_64 · AMD EPYC 9V74 80-Core Processor · rustc 1.98.1 · Deterministic SplitMix64 datasets with pre-allocated memory.*
+
+Measured on 4 October 2026 with `make bench-compare`: [successful Actions run](https://github.com/0x00F6/libmaxminddb-rs/actions/runs/37203873066), 4 available vCPUs (8/16-worker runs oversubscribe this runner). Raw results and environment evidence are retained in [`website/public/data/run-2026-10-04/`](website/public/data/run-2026-10-04/). The recorded Go launcher is 1.23.1; `tools/go-bench/go.mod` requires Go 1.25.0 and automatic toolchain switching was enabled. The exact compiler used by the Go binaries was not archived. These are measurements from one CI execution, not a controlled comparison with the previous Ryzen results.
+
 
 Execute all benchmarks and regenerate reports with a single command:
 ```bash
@@ -699,12 +701,7 @@ To run the same comparative suite with pinned Rust and Go toolchains in Docker, 
 
 Both benchmark commands generate an interactive HTML report at `benchmark-report/index.html` with all measured results, charts, and sortable tables. Open this local file after the run.
 
-<details>
-<summary>📊 Full HTML report preview (static image)</summary>
-
-<img src="docs/images/benchmark-report-full.png" alt="Full benchmark report preview with every section, chart, and table" width="100%">
-
-</details>
+The [full generated report](website/public/data/run-2026-10-04/report.html) is archived with this run; download it to open the interactive HTML locally. Its Go toolchain label reports the launcher version, as explained above.
 
 Database-size and writer benchmarks use 1K, 10K, 100K, 500K, 1M, 1.5M, 2M, 5M entries, with the same fixed seed, query workload and batch settings at every size.
 
@@ -712,19 +709,19 @@ Reader RSS is also compared at these eight sizes for the four Rust/C libraries, 
 
 ### 🏁 Reader Performance Summary — p99 Tail Latency & Peak Throughput
 
-*Measured on AMD Ryzen 7 PRO 7840U w/ Radeon 780M Graphics under Linux:*
+*Measured on AMD EPYC 9V74 80-Core Processor under Linux:*
 
 | Scenario | Metric | 🦀 `libmaxminddb-rs` | 🏛️ `libmaxminddb` (C) | 📦 `maxminddb-rust` | 🚀 `geoip2-rs` | 🐹 `maxminddb-golang` | ✍️ `mmdbwriter` (Go) |
 |:---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| IPv4 Random Lookup (1M) | p99 Tail Latency | 🏆 **471.0 ns** | 541.0 ns | <span style="color:#ff3b5c">702.0 ns</span> | 561.0 ns | 662.0 ns | — |
-| IPv4 Random Throughput (1M) | Peak Throughput | 🏆 **44.68 M ops/s** | 21.29 M ops/s | 13.79 M ops/s | 21.93 M ops/s | <span style="color:#ff3b5c">12.81 M ops/s</span> | — |
-| IPv6 Random Lookup (1M) | p99 Tail Latency | **191.0 ns** | 🏆 **60.0 ns** | 341.0 ns | <span style="color:#ff3b5c">351.0 ns</span> | 81.0 ns | — |
-| IPv6 Random Throughput (1M) | Peak Throughput | 🏆 **116.69 M ops/s** | 69.31 M ops/s | 36.08 M ops/s | 48.65 M ops/s | <span style="color:#ff3b5c">29.65 M ops/s</span> | — |
-| 16-Thread Concurrent IPv4 | Concurrent Throughput | 🏆 **173.71 M ops/s** | 106.94 M ops/s | 89.21 M ops/s | 124.05 M ops/s | <span style="color:#ff3b5c">66.79 M ops/s</span> | — |
-| Database Open (mmap) | Median Latency | <span style="color:#ff3b5c">97.80 µs</span> | 34.45 µs | 11.99 µs | 🏆 **10.59 µs** | 13.16 µs | — |
-| Writer Generation (5M) | Insert Throughput | 🏆 **1.05 M ops/s** | — | — | — | — | <span style="color:#ff3b5c">406.9 K ops/s</span> |
-| Writer Total Time (5M) | Total Duration | 🏆 **4.76 s** | — | — | — | — | <span style="color:#ff3b5c">12.29 s</span> |
-| Writer Peak RSS (5M) | Peak Memory (RSS) | <span style="color:#ff3b5c">569.72 MiB</span> | — | — | — | — | 🏆 **150.54 MiB** |
+| IPv4 Random Lookup (1M) | p99 Tail Latency | 🏆 **441.0 ns** | 691.0 ns | 641.0 ns | 541.0 ns | <span style="color:#ff3b5c">851.0 ns</span> | — |
+| IPv4 Random Throughput (1M) | Peak Throughput | 🏆 **35.56 M ops/s** | 16.85 M ops/s | 15.80 M ops/s | 20.42 M ops/s | <span style="color:#ff3b5c">13.20 M ops/s</span> | — |
+| IPv6 Random Lookup (1M) | p99 Tail Latency | **161.0 ns** | 🏆 **70.0 ns** | <span style="color:#ff3b5c">200.0 ns</span> | 180.0 ns | 100.0 ns | — |
+| IPv6 Random Throughput (1M) | Peak Throughput | 🏆 **92.25 M ops/s** | 56.34 M ops/s | 31.75 M ops/s | 41.99 M ops/s | <span style="color:#ff3b5c">24.13 M ops/s</span> | — |
+| 16-Thread Concurrent IPv4 | Concurrent Throughput | 🏆 **52.15 M ops/s** | 32.23 M ops/s | 30.69 M ops/s | 44.11 M ops/s | <span style="color:#ff3b5c">20.63 M ops/s</span> | — |
+| Database Open (mmap) | Median Latency | <span style="color:#ff3b5c">83.53 µs</span> | 26.37 µs | 12.72 µs | 🏆 **12.10 µs** | 14.08 µs | — |
+| Writer Generation (5M) | Insert Throughput | 🏆 **1.23 M ops/s** | — | — | — | — | <span style="color:#ff3b5c">385.8 K ops/s</span> |
+| Writer Total Time (5M) | Total Duration | 🏆 **4.07 s** | — | — | — | — | <span style="color:#ff3b5c">12.96 s</span> |
+| Writer Peak RSS (5M) | Peak Memory (RSS) | <span style="color:#ff3b5c">718.62 MiB</span> | — | — | — | — | 🏆 **157.76 MiB** |
 
 ### 📈 Visual Benchmark Charts
 

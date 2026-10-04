@@ -4,22 +4,22 @@
 <text x="20" y="62" class="chart-subtitle">p99 tail latency for 1M random lookups (lower is better)</text>
 <text x="170" y="103" font-size="13" font-weight="600" text-anchor="end">libmaxminddb-rs 🏆</text>
 <rect x="185" y="85" width="640" height="26" rx="4" class="svg-bar-track"/>
-<rect x="185" y="85" width="429" height="26" rx="4" fill="#00f5a0" opacity="0.9"><title>libmaxminddb-rs: 471.0 ns (IPv4 Lookup Latency (p99))</title></rect>
-<text x="626" y="103" class="svg-value">471.0 ns</text>
+<rect x="185" y="85" width="332" height="26" rx="4" fill="#00f5a0" opacity="0.9"><title>libmaxminddb-rs: 441.0 ns (IPv4 Lookup Latency (p99))</title></rect>
+<text x="529" y="103" class="svg-value">441.0 ns</text>
 <text x="170" y="151" font-size="13" font-weight="600" text-anchor="end">libmaxminddb (C)</text>
 <rect x="185" y="133" width="640" height="26" rx="4" class="svg-bar-track"/>
-<rect x="185" y="133" width="493" height="26" rx="4" fill="#f5c542" opacity="0.9"><title>libmaxminddb (C): 541.0 ns (IPv4 Lookup Latency (p99))</title></rect>
-<text x="690" y="151" class="svg-value">541.0 ns</text>
+<rect x="185" y="133" width="520" height="26" rx="4" fill="#f5c542" opacity="0.9"><title>libmaxminddb (C): 691.0 ns (IPv4 Lookup Latency (p99))</title></rect>
+<text x="717" y="151" class="svg-value">691.0 ns</text>
 <text x="170" y="199" font-size="13" font-weight="600" text-anchor="end">maxminddb-rust</text>
 <rect x="185" y="181" width="640" height="26" rx="4" class="svg-bar-track"/>
-<rect x="185" y="181" width="640" height="26" rx="4" fill="#ff8800" opacity="0.9"><title>maxminddb-rust: 702.0 ns (IPv4 Lookup Latency (p99))</title></rect>
-<text x="837" y="199" class="svg-value">702.0 ns</text>
+<rect x="185" y="181" width="482" height="26" rx="4" fill="#ff8800" opacity="0.9"><title>maxminddb-rust: 641.0 ns (IPv4 Lookup Latency (p99))</title></rect>
+<text x="679" y="199" class="svg-value">641.0 ns</text>
 <text x="170" y="247" font-size="13" font-weight="600" text-anchor="end">geoip2-rs</text>
 <rect x="185" y="229" width="640" height="26" rx="4" class="svg-bar-track"/>
-<rect x="185" y="229" width="511" height="26" rx="4" fill="#ff3b5c" opacity="0.9"><title>geoip2-rs: 561.0 ns (IPv4 Lookup Latency (p99))</title></rect>
-<text x="708" y="247" class="svg-value">561.0 ns</text>
+<rect x="185" y="229" width="407" height="26" rx="4" fill="#ff3b5c" opacity="0.9"><title>geoip2-rs: 541.0 ns (IPv4 Lookup Latency (p99))</title></rect>
+<text x="604" y="247" class="svg-value">541.0 ns</text>
 <text x="170" y="295" font-size="13" font-weight="600" text-anchor="end">maxminddb-golang</text>
 <rect x="185" y="277" width="640" height="26" rx="4" class="svg-bar-track"/>
-<rect x="185" y="277" width="604" height="26" rx="4" fill="#00add8" opacity="0.9"><title>maxminddb-golang: 662.0 ns (IPv4 Lookup Latency (p99))</title></rect>
-<text x="801" y="295" class="svg-value">662.0 ns</text>
+<rect x="185" y="277" width="640" height="26" rx="4" fill="#00add8" opacity="0.9"><title>maxminddb-golang: 851.0 ns (IPv4 Lookup Latency (p99))</title></rect>
+<text x="837" y="295" class="svg-value">851.0 ns</text>
 </svg>

@@ -19,76 +19,76 @@
 <line class="grid-line" x1="260" y1="130" x2="260" y2="400"/>
 <text class="axis-label" style="font-size:12px;" x="260" y="420" text-anchor="middle">0.0 ns</text>
 <line class="grid-line" x1="390" y1="130" x2="390" y2="400"/>
-<text class="axis-label" style="font-size:12px;" x="390" y="420" text-anchor="middle">201.8 ns</text>
+<text class="axis-label" style="font-size:12px;" x="390" y="420" text-anchor="middle">244.7 ns</text>
 <line class="grid-line" x1="520" y1="130" x2="520" y2="400"/>
-<text class="axis-label" style="font-size:12px;" x="520" y="420" text-anchor="middle">403.6 ns</text>
+<text class="axis-label" style="font-size:12px;" x="520" y="420" text-anchor="middle">489.3 ns</text>
 <line class="grid-line" x1="650" y1="130" x2="650" y2="400"/>
-<text class="axis-label" style="font-size:12px;" x="650" y="420" text-anchor="middle">605.5 ns</text>
+<text class="axis-label" style="font-size:12px;" x="650" y="420" text-anchor="middle">734.0 ns</text>
 <line class="grid-line" x1="780" y1="130" x2="780" y2="400"/>
-<text class="axis-label" style="font-size:12px;" x="780" y="420" text-anchor="middle">807.3 ns</text>
+<text class="axis-label" style="font-size:12px;" x="780" y="420" text-anchor="middle">978.6 ns</text>
 <rect x="28" y="138" width="46" height="24" rx="4" fill="rgba(0,245,160,0.15)" stroke="#00f5a0" stroke-width="1.5"/>
 <text x="51" y="154" text-anchor="middle" style="fill:#00f5a0;font-weight:700;font-size:12px;">#1 🏆</text>
 <text x="84" y="155" class="axis-label" style="fill:#00f5a0;font-weight:700;font-size:14px;">libmaxminddb-rs</text>
 <rect class="svg-bar-track" x="260" y="138" width="520" height="24" rx="4" opacity="0.5"/>
-<line x1="273" y1="150" x2="273" y2="150" stroke="#00f5a0" stroke-width="2" stroke-opacity="0.75"/>
-<line x1="273" y1="143" x2="273" y2="157" stroke="#00f5a0" stroke-width="2"/>
-<rect x="273" y="137" width="200" height="26" rx="4" fill="#00f5a0" fill-opacity="0.55" stroke="#00f5a0" stroke-width="2.5"/>
-<line x1="273" y1="137" x2="273" y2="163" stroke="#ffffff" stroke-width="2"/>
-<line x1="473" y1="150" x2="563" y2="150" stroke="#00f5a0" stroke-width="2" stroke-opacity="0.75"/>
-<circle cx="563" cy="150" r="5" fill="#ffffff" stroke="#00f5a0" stroke-width="2"/>
-<text x="796" y="154" class="svg-value" style="font-size:12px;">Min: 20.0 ns │ p50: 20.0 ns │ p95: 331.0 ns │ <tspan style="fill:#00f5a0;font-weight:700;">p99: 471.0 ns</tspan></text>
-<title>libmaxminddb-rs: Min=20.0 ns | p50=20.0 ns | p95=331.0 ns | p99=471.0 ns | Max=8.57 µs</title>
-<title>libmaxminddb-rs (Rank #1): Min=20.0 ns | p50=20.0 ns | p95=331.0 ns | p99=471.0 ns | Max=8.57 µs</title>
+<line x1="271" y1="150" x2="276" y2="150" stroke="#00f5a0" stroke-width="2" stroke-opacity="0.75"/>
+<line x1="271" y1="143" x2="271" y2="157" stroke="#00f5a0" stroke-width="2"/>
+<rect x="276" y="137" width="197" height="26" rx="4" fill="#00f5a0" fill-opacity="0.55" stroke="#00f5a0" stroke-width="2.5"/>
+<line x1="276" y1="137" x2="276" y2="163" stroke="#ffffff" stroke-width="2"/>
+<line x1="473" y1="150" x2="494" y2="150" stroke="#00f5a0" stroke-width="2" stroke-opacity="0.75"/>
+<circle cx="494" cy="150" r="5" fill="#ffffff" stroke="#00f5a0" stroke-width="2"/>
+<text x="796" y="154" class="svg-value" style="font-size:12px;">Min: 20.0 ns │ p50: 30.0 ns │ p95: 400.0 ns │ <tspan style="fill:#00f5a0;font-weight:700;">p99: 441.0 ns</tspan></text>
+<title>libmaxminddb-rs: Min=20.0 ns | p50=30.0 ns | p95=400.0 ns | p99=441.0 ns | Max=17.23 µs</title>
+<title>libmaxminddb-rs (Rank #1): Min=20.0 ns | p50=30.0 ns | p95=400.0 ns | p99=441.0 ns | Max=17.23 µs</title>
 <rect x="28" y="192" width="36" height="24" rx="4" fill="#21262d"/>
 <text x="46" y="208" text-anchor="middle" style="fill:#8b949e;font-weight:600;font-size:12px;">#2</text>
-<text x="84" y="209" class="axis-label" style="fill:#f5c542;font-weight:700;font-size:14px;">libmaxminddb (C)</text>
+<text x="84" y="209" class="axis-label" style="fill:#ff3b5c;font-weight:700;font-size:14px;">geoip2-rs</text>
 <rect class="svg-bar-track" x="260" y="192" width="520" height="24" rx="4" opacity="0.5"/>
-<line x1="273" y1="204" x2="279" y2="204" stroke="#f5c542" stroke-width="2" stroke-opacity="0.75"/>
-<line x1="273" y1="197" x2="273" y2="211" stroke="#f5c542" stroke-width="2"/>
-<rect x="279" y="191" width="310" height="26" rx="4" fill="#f5c542" fill-opacity="0.35" stroke="#f5c542" stroke-width="1.5"/>
-<line x1="279" y1="191" x2="279" y2="217" stroke="#ffffff" stroke-width="2"/>
-<line x1="589" y1="204" x2="608" y2="204" stroke="#f5c542" stroke-width="2" stroke-opacity="0.75"/>
-<circle cx="608" cy="204" r="4" fill="#ffffff" stroke="#f5c542" stroke-width="2"/>
-<text x="796" y="208" class="svg-value" style="font-size:12px;">Min: 20.0 ns │ p50: 30.0 ns │ p95: 511.0 ns │ <tspan style="fill:#f5c542;font-weight:700;">p99: 541.0 ns</tspan></text>
-<title>libmaxminddb (C): Min=20.0 ns | p50=30.0 ns | p95=511.0 ns | p99=541.0 ns | Max=67.37 µs</title>
-<title>libmaxminddb (C) (Rank #2): Min=20.0 ns | p50=30.0 ns | p95=511.0 ns | p99=541.0 ns | Max=67.37 µs</title>
+<line x1="271" y1="204" x2="281" y2="204" stroke="#ff3b5c" stroke-width="2" stroke-opacity="0.75"/>
+<line x1="271" y1="197" x2="271" y2="211" stroke="#ff3b5c" stroke-width="2"/>
+<rect x="281" y="191" width="240" height="26" rx="4" fill="#ff3b5c" fill-opacity="0.35" stroke="#ff3b5c" stroke-width="1.5"/>
+<line x1="281" y1="191" x2="281" y2="217" stroke="#ffffff" stroke-width="2"/>
+<line x1="521" y1="204" x2="547" y2="204" stroke="#ff3b5c" stroke-width="2" stroke-opacity="0.75"/>
+<circle cx="547" cy="204" r="4" fill="#ffffff" stroke="#ff3b5c" stroke-width="2"/>
+<text x="796" y="208" class="svg-value" style="font-size:12px;">Min: 20.0 ns │ p50: 40.0 ns │ p95: 491.0 ns │ <tspan style="fill:#ff3b5c;font-weight:700;">p99: 541.0 ns</tspan></text>
+<title>geoip2-rs: Min=20.0 ns | p50=40.0 ns | p95=491.0 ns | p99=541.0 ns | Max=14.37 µs</title>
+<title>geoip2-rs (Rank #2): Min=20.0 ns | p50=40.0 ns | p95=491.0 ns | p99=541.0 ns | Max=14.37 µs</title>
 <rect x="28" y="246" width="36" height="24" rx="4" fill="#21262d"/>
 <text x="46" y="262" text-anchor="middle" style="fill:#8b949e;font-weight:600;font-size:12px;">#3</text>
-<text x="84" y="263" class="axis-label" style="fill:#ff3b5c;font-weight:700;font-size:14px;">geoip2-rs</text>
+<text x="84" y="263" class="axis-label" style="fill:#ff8800;font-weight:700;font-size:14px;">maxminddb-rust</text>
 <rect class="svg-bar-track" x="260" y="246" width="520" height="24" rx="4" opacity="0.5"/>
-<line x1="273" y1="258" x2="279" y2="258" stroke="#ff3b5c" stroke-width="2" stroke-opacity="0.75"/>
-<line x1="273" y1="251" x2="273" y2="265" stroke="#ff3b5c" stroke-width="2"/>
-<rect x="279" y="245" width="284" height="26" rx="4" fill="#ff3b5c" fill-opacity="0.35" stroke="#ff3b5c" stroke-width="1.5"/>
-<line x1="279" y1="245" x2="279" y2="271" stroke="#ffffff" stroke-width="2"/>
-<line x1="563" y1="258" x2="621" y2="258" stroke="#ff3b5c" stroke-width="2" stroke-opacity="0.75"/>
-<circle cx="621" cy="258" r="4" fill="#ffffff" stroke="#ff3b5c" stroke-width="2"/>
-<text x="796" y="262" class="svg-value" style="font-size:12px;">Min: 20.0 ns │ p50: 30.0 ns │ p95: 470.0 ns │ <tspan style="fill:#ff3b5c;font-weight:700;">p99: 561.0 ns</tspan></text>
-<title>geoip2-rs: Min=20.0 ns | p50=30.0 ns | p95=470.0 ns | p99=561.0 ns | Max=18.30 µs</title>
-<title>geoip2-rs (Rank #3): Min=20.0 ns | p50=30.0 ns | p95=470.0 ns | p99=561.0 ns | Max=18.30 µs</title>
+<line x1="276" y1="258" x2="287" y2="258" stroke="#ff8800" stroke-width="2" stroke-opacity="0.75"/>
+<line x1="276" y1="251" x2="276" y2="265" stroke="#ff8800" stroke-width="2"/>
+<rect x="287" y="245" width="271" height="26" rx="4" fill="#ff8800" fill-opacity="0.35" stroke="#ff8800" stroke-width="1.5"/>
+<line x1="287" y1="245" x2="287" y2="271" stroke="#ffffff" stroke-width="2"/>
+<line x1="558" y1="258" x2="601" y2="258" stroke="#ff8800" stroke-width="2" stroke-opacity="0.75"/>
+<circle cx="601" cy="258" r="4" fill="#ffffff" stroke="#ff8800" stroke-width="2"/>
+<text x="796" y="262" class="svg-value" style="font-size:12px;">Min: 30.0 ns │ p50: 50.0 ns │ p95: 561.0 ns │ <tspan style="fill:#ff8800;font-weight:700;">p99: 641.0 ns</tspan></text>
+<title>maxminddb-rust: Min=30.0 ns | p50=50.0 ns | p95=561.0 ns | p99=641.0 ns | Max=16.42 µs</title>
+<title>maxminddb-rust (Rank #3): Min=30.0 ns | p50=50.0 ns | p95=561.0 ns | p99=641.0 ns | Max=16.42 µs</title>
 <rect x="28" y="300" width="36" height="24" rx="4" fill="#21262d"/>
 <text x="46" y="316" text-anchor="middle" style="fill:#8b949e;font-weight:600;font-size:12px;">#4</text>
-<text x="84" y="317" class="axis-label" style="fill:#00add8;font-weight:700;font-size:14px;">maxminddb-golang</text>
+<text x="84" y="317" class="axis-label" style="fill:#f5c542;font-weight:700;font-size:14px;">libmaxminddb (C)</text>
 <rect class="svg-bar-track" x="260" y="300" width="520" height="24" rx="4" opacity="0.5"/>
-<line x1="279" y1="312" x2="286" y2="312" stroke="#00add8" stroke-width="2" stroke-opacity="0.75"/>
-<line x1="279" y1="305" x2="279" y2="319" stroke="#00add8" stroke-width="2"/>
-<rect x="286" y="299" width="387" height="26" rx="4" fill="#00add8" fill-opacity="0.35" stroke="#00add8" stroke-width="1.5"/>
-<line x1="286" y1="299" x2="286" y2="325" stroke="#ffffff" stroke-width="2"/>
-<line x1="673" y1="312" x2="686" y2="312" stroke="#00add8" stroke-width="2" stroke-opacity="0.75"/>
-<circle cx="686" cy="312" r="4" fill="#ffffff" stroke="#00add8" stroke-width="2"/>
-<text x="796" y="316" class="svg-value" style="font-size:12px;">Min: 30.0 ns │ p50: 40.0 ns │ p95: 641.0 ns │ <tspan style="fill:#00add8;font-weight:700;">p99: 662.0 ns</tspan></text>
-<title>maxminddb-golang: Min=30.0 ns | p50=40.0 ns | p95=641.0 ns | p99=662.0 ns | Max=13.25 µs</title>
-<title>maxminddb-golang (Rank #4): Min=30.0 ns | p50=40.0 ns | p95=641.0 ns | p99=662.0 ns | Max=13.25 µs</title>
+<line x1="271" y1="312" x2="276" y2="312" stroke="#f5c542" stroke-width="2" stroke-opacity="0.75"/>
+<line x1="271" y1="305" x2="271" y2="319" stroke="#f5c542" stroke-width="2"/>
+<rect x="276" y="299" width="335" height="26" rx="4" fill="#f5c542" fill-opacity="0.35" stroke="#f5c542" stroke-width="1.5"/>
+<line x1="276" y1="299" x2="276" y2="325" stroke="#ffffff" stroke-width="2"/>
+<line x1="611" y1="312" x2="627" y2="312" stroke="#f5c542" stroke-width="2" stroke-opacity="0.75"/>
+<circle cx="627" cy="312" r="4" fill="#ffffff" stroke="#f5c542" stroke-width="2"/>
+<text x="796" y="316" class="svg-value" style="font-size:12px;">Min: 20.0 ns │ p50: 30.0 ns │ p95: 661.0 ns │ <tspan style="fill:#f5c542;font-weight:700;">p99: 691.0 ns</tspan></text>
+<title>libmaxminddb (C): Min=20.0 ns | p50=30.0 ns | p95=661.0 ns | p99=691.0 ns | Max=8.36 µs</title>
+<title>libmaxminddb (C) (Rank #4): Min=20.0 ns | p50=30.0 ns | p95=661.0 ns | p99=691.0 ns | Max=8.36 µs</title>
 <rect x="28" y="354" width="36" height="24" rx="4" fill="#21262d"/>
 <text x="46" y="370" text-anchor="middle" style="fill:#8b949e;font-weight:600;font-size:12px;">#5</text>
-<text x="84" y="371" class="axis-label" style="fill:#ff8800;font-weight:700;font-size:14px;">maxminddb-rust</text>
+<text x="84" y="371" class="axis-label" style="fill:#00add8;font-weight:700;font-size:14px;">maxminddb-golang</text>
 <rect class="svg-bar-track" x="260" y="354" width="520" height="24" rx="4" opacity="0.5"/>
-<line x1="273" y1="366" x2="286" y2="366" stroke="#ff8800" stroke-width="2" stroke-opacity="0.75"/>
-<line x1="273" y1="359" x2="273" y2="373" stroke="#ff8800" stroke-width="2"/>
-<rect x="286" y="353" width="380" height="26" rx="4" fill="#ff8800" fill-opacity="0.35" stroke="#ff8800" stroke-width="1.5"/>
-<line x1="286" y1="353" x2="286" y2="379" stroke="#ffffff" stroke-width="2"/>
-<line x1="666" y1="366" x2="712" y2="366" stroke="#ff8800" stroke-width="2" stroke-opacity="0.75"/>
-<circle cx="712" cy="366" r="4" fill="#ffffff" stroke="#ff8800" stroke-width="2"/>
-<text x="796" y="370" class="svg-value" style="font-size:12px;">Min: 20.0 ns │ p50: 40.0 ns │ p95: 631.0 ns │ <tspan style="fill:#ff8800;font-weight:700;">p99: 702.0 ns</tspan></text>
-<title>maxminddb-rust: Min=20.0 ns | p50=40.0 ns | p95=631.0 ns | p99=702.0 ns | Max=13.32 µs</title>
-<title>maxminddb-rust (Rank #5): Min=20.0 ns | p50=40.0 ns | p95=631.0 ns | p99=702.0 ns | Max=13.32 µs</title>
+<line x1="281" y1="366" x2="287" y2="366" stroke="#00add8" stroke-width="2" stroke-opacity="0.75"/>
+<line x1="281" y1="359" x2="281" y2="373" stroke="#00add8" stroke-width="2"/>
+<rect x="287" y="353" width="399" height="26" rx="4" fill="#00add8" fill-opacity="0.35" stroke="#00add8" stroke-width="1.5"/>
+<line x1="287" y1="353" x2="287" y2="379" stroke="#ffffff" stroke-width="2"/>
+<line x1="686" y1="366" x2="712" y2="366" stroke="#00add8" stroke-width="2" stroke-opacity="0.75"/>
+<circle cx="712" cy="366" r="4" fill="#ffffff" stroke="#00add8" stroke-width="2"/>
+<text x="796" y="370" class="svg-value" style="font-size:12px;">Min: 40.0 ns │ p50: 50.0 ns │ p95: 801.0 ns │ <tspan style="fill:#00add8;font-weight:700;">p99: 851.0 ns</tspan></text>
+<title>maxminddb-golang: Min=40.0 ns | p50=50.0 ns | p95=801.0 ns | p99=851.0 ns | Max=7.23 µs</title>
+<title>maxminddb-golang (Rank #5): Min=40.0 ns | p50=50.0 ns | p95=801.0 ns | p99=851.0 ns | Max=7.23 µs</title>
 </svg>

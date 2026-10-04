@@ -4,22 +4,22 @@
 <text x="20" y="62" class="chart-subtitle">p99 tail latency at 1K entries (lower is better)</text>
 <text x="170" y="103" font-size="13" font-weight="600" text-anchor="end">libmaxminddb-rs</text>
 <rect x="185" y="85" width="440" height="26" rx="4" class="svg-bar-track"/>
-<rect x="185" y="85" width="265" height="26" rx="4" fill="#00f5a0" opacity="0.9"><title>libmaxminddb-rs: 531.0 ns (p99 Latency at 1K entries)</title></rect>
-<text x="462" y="103" class="svg-value">531.0 ns</text>
-<text x="170" y="143" font-size="13" font-weight="600" text-anchor="end">libmaxminddb (C)</text>
+<rect x="185" y="85" width="254" height="26" rx="4" fill="#00f5a0" opacity="0.9"><title>libmaxminddb-rs: 370.0 ns (p99 Latency at 1K entries)</title></rect>
+<text x="451" y="103" class="svg-value">370.0 ns</text>
+<text x="170" y="143" font-size="13" font-weight="600" text-anchor="end">libmaxminddb (C) 🏆</text>
 <rect x="185" y="125" width="440" height="26" rx="4" class="svg-bar-track"/>
-<rect x="185" y="125" width="275" height="26" rx="4" fill="#f5c542" opacity="0.9"><title>libmaxminddb (C): 551.0 ns (p99 Latency at 1K entries)</title></rect>
-<text x="472" y="143" class="svg-value">551.0 ns</text>
-<text x="170" y="183" font-size="13" font-weight="600" text-anchor="end">maxminddb-rust 🏆</text>
+<rect x="185" y="125" width="440" height="26" rx="4" fill="#f5c542" opacity="0.9"><title>libmaxminddb (C): 641.0 ns (p99 Latency at 1K entries)</title></rect>
+<text x="637" y="143" class="svg-value">641.0 ns</text>
+<text x="170" y="183" font-size="13" font-weight="600" text-anchor="end">maxminddb-rust</text>
 <rect x="185" y="165" width="440" height="26" rx="4" class="svg-bar-track"/>
-<rect x="185" y="165" width="440" height="26" rx="4" fill="#ff8800" opacity="0.9"><title>maxminddb-rust: 881.0 ns (p99 Latency at 1K entries)</title></rect>
-<text x="637" y="183" class="svg-value">881.0 ns</text>
+<rect x="185" y="165" width="344" height="26" rx="4" fill="#ff8800" opacity="0.9"><title>maxminddb-rust: 501.0 ns (p99 Latency at 1K entries)</title></rect>
+<text x="541" y="183" class="svg-value">501.0 ns</text>
 <text x="170" y="223" font-size="13" font-weight="600" text-anchor="end">geoip2-rs</text>
 <rect x="185" y="205" width="440" height="26" rx="4" class="svg-bar-track"/>
-<rect x="185" y="205" width="245" height="26" rx="4" fill="#ff3b5c" opacity="0.9"><title>geoip2-rs: 491.0 ns (p99 Latency at 1K entries)</title></rect>
-<text x="442" y="223" class="svg-value">491.0 ns</text>
+<rect x="185" y="205" width="303" height="26" rx="4" fill="#ff3b5c" opacity="0.9"><title>geoip2-rs: 441.0 ns (p99 Latency at 1K entries)</title></rect>
+<text x="500" y="223" class="svg-value">441.0 ns</text>
 <text x="170" y="263" font-size="13" font-weight="600" text-anchor="end">maxminddb-golang</text>
 <rect x="185" y="245" width="440" height="26" rx="4" class="svg-bar-track"/>
-<rect x="185" y="245" width="416" height="26" rx="4" fill="#00add8" opacity="0.9"><title>maxminddb-golang: 832.0 ns (p99 Latency at 1K entries)</title></rect>
-<text x="613" y="263" class="svg-value">832.0 ns</text>
+<rect x="185" y="245" width="426" height="26" rx="4" fill="#00add8" opacity="0.9"><title>maxminddb-golang: 620.0 ns (p99 Latency at 1K entries)</title></rect>
+<text x="623" y="263" class="svg-value">620.0 ns</text>
 </svg>

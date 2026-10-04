@@ -4,22 +4,22 @@
 <text x="20" y="62" class="chart-subtitle">Single-threaded operations/sec on absent workload (higher is better)</text>
 <text x="170" y="103" font-size="13" font-weight="600" text-anchor="end">libmaxminddb-rs 🏆</text>
 <rect x="185" y="85" width="640" height="26" rx="4" class="svg-bar-track"/>
-<rect x="185" y="85" width="640" height="26" rx="4" fill="#00f5a0" opacity="0.9"><title>libmaxminddb-rs: 324.12 M ops/s (IPv4 Throughput — Absent Keys (1M))</title></rect>
-<text x="837" y="103" class="svg-value">324.12 M ops/s</text>
+<rect x="185" y="85" width="640" height="26" rx="4" fill="#00f5a0" opacity="0.9"><title>libmaxminddb-rs: 273.57 M ops/s (IPv4 Throughput — Absent Keys (1M))</title></rect>
+<text x="837" y="103" class="svg-value">273.57 M ops/s</text>
 <text x="170" y="151" font-size="13" font-weight="600" text-anchor="end">libmaxminddb (C)</text>
 <rect x="185" y="133" width="640" height="26" rx="4" class="svg-bar-track"/>
-<rect x="185" y="133" width="336" height="26" rx="4" fill="#f5c542" opacity="0.9"><title>libmaxminddb (C): 170.11 M ops/s (IPv4 Throughput — Absent Keys (1M))</title></rect>
-<text x="533" y="151" class="svg-value">170.11 M ops/s</text>
+<rect x="185" y="133" width="328" height="26" rx="4" fill="#f5c542" opacity="0.9"><title>libmaxminddb (C): 140.35 M ops/s (IPv4 Throughput — Absent Keys (1M))</title></rect>
+<text x="525" y="151" class="svg-value">140.35 M ops/s</text>
 <text x="170" y="199" font-size="13" font-weight="600" text-anchor="end">maxminddb-rust</text>
 <rect x="185" y="181" width="640" height="26" rx="4" class="svg-bar-track"/>
-<rect x="185" y="181" width="114" height="26" rx="4" fill="#ff8800" opacity="0.9"><title>maxminddb-rust: 57.69 M ops/s (IPv4 Throughput — Absent Keys (1M))</title></rect>
-<text x="311" y="199" class="svg-value">57.69 M ops/s</text>
+<rect x="185" y="181" width="113" height="26" rx="4" fill="#ff8800" opacity="0.9"><title>maxminddb-rust: 48.33 M ops/s (IPv4 Throughput — Absent Keys (1M))</title></rect>
+<text x="310" y="199" class="svg-value">48.33 M ops/s</text>
 <text x="170" y="247" font-size="13" font-weight="600" text-anchor="end">geoip2-rs</text>
 <rect x="185" y="229" width="640" height="26" rx="4" class="svg-bar-track"/>
-<rect x="185" y="229" width="330" height="26" rx="4" fill="#ff3b5c" opacity="0.9"><title>geoip2-rs: 167.26 M ops/s (IPv4 Throughput — Absent Keys (1M))</title></rect>
-<text x="527" y="247" class="svg-value">167.26 M ops/s</text>
+<rect x="185" y="229" width="303" height="26" rx="4" fill="#ff3b5c" opacity="0.9"><title>geoip2-rs: 129.56 M ops/s (IPv4 Throughput — Absent Keys (1M))</title></rect>
+<text x="500" y="247" class="svg-value">129.56 M ops/s</text>
 <text x="170" y="295" font-size="13" font-weight="600" text-anchor="end">maxminddb-golang</text>
 <rect x="185" y="277" width="640" height="26" rx="4" class="svg-bar-track"/>
-<rect x="185" y="277" width="125" height="26" rx="4" fill="#00add8" opacity="0.9"><title>maxminddb-golang: 63.24 M ops/s (IPv4 Throughput — Absent Keys (1M))</title></rect>
-<text x="322" y="295" class="svg-value">63.24 M ops/s</text>
+<rect x="185" y="277" width="123" height="26" rx="4" fill="#00add8" opacity="0.9"><title>maxminddb-golang: 52.67 M ops/s (IPv4 Throughput — Absent Keys (1M))</title></rect>
+<text x="320" y="295" class="svg-value">52.67 M ops/s</text>
 </svg>
