@@ -5,12 +5,14 @@ on:
     paths:
       - 'website/**'
       - 'examples/**'
+      - 'docs/images/ferris-maxmind.png'
       - 'benchmarks/charts/**'
       - '.github/workflows/pages.yml'
   pull_request:
     paths:
       - 'website/**'
       - 'examples/**'
+      - 'docs/images/ferris-maxmind.png'
       - 'benchmarks/charts/**'
       - '.github/workflows/pages.yml'
   workflow_dispatch:

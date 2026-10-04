@@ -20,7 +20,7 @@ if context_digest != context['chartsSha256']:
 NS = '{http://www.w3.org/2000/svg}'
 charts = []
 files = [f'throughput-{family}-{workload}.svg' for family in ['ipv4','ipv6'] for workload in ['random','hot','sequential','absent']]
-files += ['lookup-latency-ipv4.svg', 'lookup-latency-ipv6.svg', 'database-size-scaling.svg', 'memory-rss-after-open.svg', 'memory-rss-peak.svg', 'writer-throughput.svg', 'writer-build-time.svg', 'writer-peak-rss.svg', 'writer-p99.svg', 'concurrent-throughput.svg', 'concurrent-throughput-ipv6.svg']
+files += ['candlestick-percentiles-ipv4.svg', 'candlestick-percentiles-ipv6.svg', 'database-size-scaling.svg', 'memory-rss-after-open.svg', 'memory-rss-peak.svg', 'writer-throughput.svg', 'writer-build-time.svg', 'writer-peak-rss.svg', 'writer-p99.svg', 'concurrent-throughput.svg', 'concurrent-throughput-ipv6.svg']
 for filename in files:
     path = args.charts / filename
     root = ET.parse(path).getroot()
@@ -29,6 +29,29 @@ for filename in files:
     points = []
     for element in root.iter(NS+'title'):
         raw = element.text or ''
+        if filename.startswith('candlestick-'):
+            # The SVG repeats each tooltip with a rank suffix. Keep one record
+            # per library and retain all exported quantiles, including Max.
+            if re.match(r'^.+ \(Rank #\d+\):', raw):
+                continue
+            match = re.fullmatch(r'(.+?): Min=(.+) \| p50=(.+) \| p95=(.+) \| p99=(.+) \| Max=(.+)', raw)
+            if not match:
+                raise ValueError(f'Unsupported percentile label in {filename}: {raw}')
+            library, *labels = match.groups()
+            quantiles = {}
+            for key, label in zip(['min', 'p50', 'p95', 'p99', 'max'], labels):
+                value = re.fullmatch(r'([\d.]+) (ns|µs|ms|s)', label)
+                if not value:
+                    raise ValueError(f'Unsupported latency in {filename}: {label}')
+                number, unit = value.groups()
+                quantiles[key] = float(number) * {'ns': 1, 'µs': 1000, 'ms': 1000000, 's': 1000000000}[unit]
+            if list(quantiles.values()) != sorted(quantiles.values()):
+                raise ValueError(f'Unordered quantiles in {filename}: {raw}')
+            if any(p['library'] == library for p in points):
+                raise ValueError(f'Duplicate library in {filename}: {library}')
+            points.append(dict(library=library, value=quantiles['p99'], unit='ns',
+                dimension=None, label=raw, quantiles=quantiles))
+            continue
         match = re.match(r'^(.+?): ([\d.]+) (M ops/s|K ops/s|ops/s|ns|µs|ms|s|MiB)(?: \(\d+ bytes\))?(?: @ (.+)| \(.+\))?$', raw)
         if not match:
             raise ValueError(f'Unsupported measurement label in {filename}: {raw}')

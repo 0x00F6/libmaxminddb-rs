@@ -14,6 +14,7 @@ const mime = {
   ".css": "text/css",
   ".json": "application/json",
   ".svg": "image/svg+xml",
+  ".png": "image/png",
 };
 const server = createServer(async (req, res) => {
   try {
@@ -74,6 +75,10 @@ try {
   await page.waitForSelector("#example-tabs button", { state: "attached" });
   assert.equal(await page.locator("html").getAttribute("data-theme"), "dark");
   assert.equal(await page.locator("#load-error").isVisible(), false);
+  await page.locator(".project-logo").evaluate((img) => img.decode());
+  assert.ok(
+    await page.locator(".project-logo").evaluate((img) => img.naturalWidth > 0),
+  );
   const loadedDocument = await page.evaluate(() => {
     window.spaSentinel = "same document";
     return performance.timeOrigin;
@@ -94,6 +99,57 @@ try {
     path: resolve(output, "benchmarks-dark.png"),
     fullPage: true,
   });
+  await page.locator('[data-category="latency"]').click();
+  assert.equal(await page.locator("#percentile-legend").isVisible(), true);
+  for (const [family, firstLibrary, p50, p99] of [
+    ["ipv4", "libmaxminddb-rs", 30, 441],
+    ["ipv6", "libmaxminddb (C)", 30, 70],
+  ]) {
+    await page.locator(`[data-family="${family}"]`).click();
+    assert.match(
+      await page.locator("#chart-title").innerText(),
+      /Candlestick Percentile Rank/,
+    );
+    assert.match(
+      await page.locator("#chart-source").getAttribute("href"),
+      new RegExp(`candlestick-percentiles-${family}\\.svg$`),
+    );
+    assert.equal(await page.locator("#results-head th").count(), 7);
+    const firstRow = await page
+      .locator("#results-body tr")
+      .first()
+      .locator("td")
+      .allTextContents();
+    assert.match(
+      firstRow[0],
+      new RegExp(firstLibrary.replace(/[()]/g, "\\$&")),
+    );
+    assert.equal(firstRow[3], `${p50} ns`);
+    assert.equal(firstRow[5], `${p99} ns`);
+    const svgText = await page.locator("#benchmark-chart svg").textContent();
+    assert.equal((svgText.match(/p50 /g) || []).length, 5);
+    assert.equal((svgText.match(/p99 /g) || []).length, 5);
+    assert.ok(svgText.includes(`p50 ${p50}`));
+    assert.ok(svgText.includes(`p99 ${p99}`));
+  }
+  await page.locator('[data-family="ipv4"]').click();
+  await page
+    .locator("#benchmark-chart svg")
+    .getByText("p99 441", { exact: true })
+    .hover();
+  await page.waitForFunction(() =>
+    [...document.querySelectorAll("#benchmark-chart div")].some((el) =>
+      el.textContent.includes("max: 17,230 ns"),
+    ),
+  );
+  await page.mouse.move(0, 0);
+  await page.screenshot({
+    path: resolve(output, "latency-dark.png"),
+    fullPage: true,
+  });
+  await page.locator("#metric-select").selectOption("scaling");
+  assert.equal(await page.locator("#percentile-legend").isVisible(), false);
+  assert.equal(await page.locator("#results-head th").count(), 3);
   // Exercise every comparison category, workload and dimension from the public UI.
   for (const category of [
     "throughput",
@@ -165,6 +221,17 @@ try {
     );
   }
   await page.locator('nav [data-route="benchmarks"]').click();
+  const labels = page
+    .locator("#benchmark-chart svg text")
+    .filter({ hasText: /^p(?:50|99) / });
+  assert.equal(await labels.count(), 10);
+  for (const label of await labels.all()) {
+    const bounds = await label.boundingBox();
+    assert.ok(
+      bounds.x >= 0 && bounds.x + bounds.width <= 390,
+      "Percentile label is clipped on mobile",
+    );
+  }
   await page.screenshot({
     path: resolve(output, "benchmarks-mobile.png"),
     fullPage: true,

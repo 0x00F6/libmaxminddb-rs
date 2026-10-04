@@ -4,6 +4,8 @@ A static single-page application for GitHub Pages. Vite bundles ECharts and
 Highlight.js locally: charts, fonts and syntax highlighting require no CDN.
 The terminal-inspired interface defaults to dark, remembers the light-theme
 choice and uses hash navigation so direct links work on project Pages.
+The existing `docs/images/ferris-maxmind.png` logo is bundled locally for the
+homepage, navigation and favicon.
 
 ## Run and verify
 
@@ -42,6 +44,14 @@ Throughput and latency are separate measurements. Concurrency excludes the
 Reader RSS includes four Rust/C implementations; the suite does not export Go
 reader RSS. Writer comparisons include both libmaxminddb-rs and Go mmdbwriter.
 Code examples are copied verbatim from `examples/` during the build.
+
+Latency opens on **Candlestick Percentile Rank** for IPv4 or IPv6 random
+lookups. Like the suite's `candlestick-percentiles-*.svg` exports, each row
+shows a minimum wick, a p50–p95 body and a p99 tail marker, ranked by p99.
+The chart labels p50 and p99 together; tooltips and the accessible table retain
+all five exported statistics, including the maximum (not plotted). These are
+measured quantiles, not confidence intervals. Database-size scaling remains a
+separate p99-only scenario.
 
 ## Publish
 

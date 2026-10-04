@@ -28,6 +28,44 @@ test("writer, memory and concurrent comparisons retain their actual populations"
   for (const c of data.charts.filter((c) => c.id.startsWith("concurrent-")))
     assert.ok(c.points.every((p) => p.dimension !== "1T"));
 });
+test("candlesticks preserve measured random lookup quantiles without duplicate ranks", () => {
+  const raw = readFileSync(
+    new URL("../public/" + data.context.rawResults, import.meta.url),
+    "utf8",
+  )
+    .trim()
+    .split("\n")
+    .map(JSON.parse);
+  for (const family of ["ipv4", "ipv6"]) {
+    const chart = data.charts.find(
+      (c) => c.id === `candlestick-percentiles-${family}`,
+    );
+    assert.ok(chart);
+    assert.equal(chart.points.length, 5);
+    assert.equal(new Set(chart.points.map((p) => p.library)).size, 5);
+    for (const point of chart.points) {
+      const key =
+        point.library === "libmaxminddb (C)" ? "libmaxminddb" : point.library;
+      const row = raw.find(
+        (r) =>
+          r.implementation === key &&
+          r.scenario === "lookup" &&
+          r.pattern === "random" &&
+          r.family === family,
+      );
+      assert.ok(row && !row.failed && !row.unsupported);
+      assert.equal(point.value, point.quantiles.p99);
+      for (const metric of ["min", "p50", "p95", "p99", "max"]) {
+        // SVG latency labels round to two decimals in their exported unit.
+        const tolerance = point.quantiles[metric] >= 1000 ? 5.01 : 0.0051;
+        assert.ok(
+          Math.abs(point.quantiles[metric] - row[`${metric}_ns`]) < tolerance,
+          `${family} ${key} ${metric}`,
+        );
+      }
+    }
+  }
+});
 test("examples use complete main functions and match repository files", () => {
   const examples = JSON.parse(
     readFileSync(new URL("../public/data/examples.json", import.meta.url)),

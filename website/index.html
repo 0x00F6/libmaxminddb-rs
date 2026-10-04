@@ -9,7 +9,11 @@
       content="A fast, independent Rust MMDB reader and writer. Explore typed zero-copy lookups, atomic hot updates and reproducible cross-library benchmarks."
     />
     <title>libmaxminddb-rs / MMDB at native speed</title>
-    <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+    <link
+      rel="icon"
+      href="../docs/images/ferris-maxmind.png"
+      type="image/png"
+    />
     <script>
       try {
         document.documentElement.dataset.theme =
@@ -27,8 +31,14 @@
     <div class="shell">
       <aside class="sidebar">
         <a href="#overview" class="brand" aria-label="libmaxminddb-rs home"
-          ><span class="brand-mark">⌘</span
-          ><span
+          ><img
+            class="brand-mark"
+            src="../docs/images/ferris-maxmind.png"
+            alt=""
+            width="48"
+            height="36"
+          />
+          <span
             >MMDB<span class="brand-rs"> / RS</span
             ><small>THE RUST DATABASE TOOLKIT</small></span
           ></a
@@ -119,76 +129,19 @@
                   </button>
                 </div>
               </div>
-              <div class="hero-visual" aria-hidden="true">
+              <div class="hero-visual">
                 <div class="visual-top">
                   <span class="status-dot">LOOKUP ENGINE</span
                   ><span>IPv4 / IPv6</span>
                 </div>
-                <svg viewBox="0 0 440 310">
-                  <defs>
-                    <pattern
-                      id="grid"
-                      width="22"
-                      height="22"
-                      patternUnits="userSpaceOnUse"
-                    >
-                      <circle
-                        cx="1"
-                        cy="1"
-                        r=".8"
-                        fill="currentColor"
-                        opacity=".2"
-                      />
-                    </pattern>
-                    <radialGradient id="glow">
-                      <stop stop-color="#41f6ac" stop-opacity=".15" />
-                      <stop offset="1" stop-color="#41f6ac" stop-opacity="0" />
-                    </radialGradient>
-                  </defs>
-                  <rect width="440" height="310" fill="url(#grid)" />
-                  <circle cx="220" cy="148" r="140" fill="url(#glow)" />
-                  <g fill="none" stroke="currentColor" stroke-opacity=".3">
-                    <circle cx="220" cy="148" r="108" />
-                    <circle cx="220" cy="148" r="77" stroke-dasharray="3 8" />
-                    <path
-                      d="M70 70L174 130M340 48L252 125M368 250L258 174M95 249L185 174"
-                    />
-                    <path d="M220 10V42M220 255V286M80 148H112M328 148H360" />
-                  </g>
-                  <g fill="var(--surface)" stroke="var(--accent)">
-                    <rect x="164" y="111" width="112" height="74" rx="12" />
-                    <circle cx="70" cy="70" r="7" />
-                    <circle cx="340" cy="48" r="7" />
-                    <circle cx="368" cy="250" r="7" />
-                    <circle cx="95" cy="249" r="7" />
-                  </g>
-                  <g text-anchor="middle" font-family="monospace">
-                    <text
-                      x="220"
-                      y="144"
-                      fill="var(--text)"
-                      font-size="20"
-                      font-weight="700"
-                    >
-                      MMDB
-                    </text>
-                    <text x="220" y="164" fill="var(--accent)" font-size="10">
-                      IMMUTABLE CORE
-                    </text>
-                    <text x="79" y="49" fill="var(--muted)" font-size="11">
-                      198.51.100.7
-                    </text>
-                    <text x="340" y="29" fill="var(--muted)" font-size="11">
-                      2001:db8::1
-                    </text>
-                    <text x="335" y="282" fill="var(--muted)" font-size="11">
-                      borrowed record
-                    </text>
-                    <text x="97" y="280" fill="var(--muted)" font-size="11">
-                      atomic update
-                    </text>
-                  </g>
-                </svg>
+                <img
+                  class="project-logo"
+                  src="../docs/images/ferris-maxmind.png"
+                  alt="Ferris holding the MaxMind logo, with a globe and IP addresses"
+                  width="1448"
+                  height="1078"
+                  fetchpriority="high"
+                />
                 <div class="visual-bottom">
                   <span>ZERO-COPY STRINGS</span><span>↳ SAFE LIFETIMES</span>
                 </div>
@@ -327,6 +280,15 @@
                 </div>
                 <span id="direction" class="direction"></span>
               </div>
+              <div id="percentile-legend" class="percentile-legend" hidden>
+                <span><i class="wick" aria-hidden="true"></i> Min (wick)</span>
+                <span
+                  ><i class="body" aria-hidden="true"></i> p50 → p95
+                  (body)</span
+                >
+                <span><i class="tail" aria-hidden="true"></i> p99 (tail)</span>
+                <span>Ranked by p99 · lower is better</span>
+              </div>
               <div
                 id="benchmark-chart"
                 role="img"
@@ -349,7 +311,7 @@
                 <div class="table-scroll">
                   <table>
                     <thead>
-                      <tr>
+                      <tr id="results-head">
                         <th scope="col">Library</th>
                         <th scope="col">Measured version</th>
                         <th scope="col" id="value-heading">Throughput</th>

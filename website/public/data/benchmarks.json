@@ -416,92 +416,162 @@
       "sha256": "f5714a383e541859389ae2b94d5e4a15304913cf4abeea1134cc04cb951a5cd8"
     },
     {
-      "id": "lookup-latency-ipv4",
-      "title": "IPv4 Lookup Latency (p99)",
-      "subtitle": "p99 tail latency for 1M random lookups (lower is better)",
+      "id": "candlestick-percentiles-ipv4",
+      "title": "Candlestick Percentile Rank \u2014 IPv4 Lookups",
+      "subtitle": "Quantile spread: Min (lower wick) \u2192 p50/Median to p95 (body) \u2192 p99 Tail",
       "points": [
         {
           "library": "libmaxminddb-rs",
           "value": 441.0,
           "unit": "ns",
           "dimension": null,
-          "label": "libmaxminddb-rs: 441.0 ns (IPv4 Lookup Latency (p99))"
-        },
-        {
-          "library": "libmaxminddb (C)",
-          "value": 691.0,
-          "unit": "ns",
-          "dimension": null,
-          "label": "libmaxminddb (C): 691.0 ns (IPv4 Lookup Latency (p99))"
-        },
-        {
-          "library": "maxminddb-rust",
-          "value": 641.0,
-          "unit": "ns",
-          "dimension": null,
-          "label": "maxminddb-rust: 641.0 ns (IPv4 Lookup Latency (p99))"
+          "label": "libmaxminddb-rs: Min=20.0 ns | p50=30.0 ns | p95=400.0 ns | p99=441.0 ns | Max=17.23 \u00b5s",
+          "quantiles": {
+            "min": 20.0,
+            "p50": 30.0,
+            "p95": 400.0,
+            "p99": 441.0,
+            "max": 17230.0
+          }
         },
         {
           "library": "geoip2-rs",
           "value": 541.0,
           "unit": "ns",
           "dimension": null,
-          "label": "geoip2-rs: 541.0 ns (IPv4 Lookup Latency (p99))"
+          "label": "geoip2-rs: Min=20.0 ns | p50=40.0 ns | p95=491.0 ns | p99=541.0 ns | Max=14.37 \u00b5s",
+          "quantiles": {
+            "min": 20.0,
+            "p50": 40.0,
+            "p95": 491.0,
+            "p99": 541.0,
+            "max": 14370.0
+          }
+        },
+        {
+          "library": "maxminddb-rust",
+          "value": 641.0,
+          "unit": "ns",
+          "dimension": null,
+          "label": "maxminddb-rust: Min=30.0 ns | p50=50.0 ns | p95=561.0 ns | p99=641.0 ns | Max=16.42 \u00b5s",
+          "quantiles": {
+            "min": 30.0,
+            "p50": 50.0,
+            "p95": 561.0,
+            "p99": 641.0,
+            "max": 16420.0
+          }
+        },
+        {
+          "library": "libmaxminddb (C)",
+          "value": 691.0,
+          "unit": "ns",
+          "dimension": null,
+          "label": "libmaxminddb (C): Min=20.0 ns | p50=30.0 ns | p95=661.0 ns | p99=691.0 ns | Max=8.36 \u00b5s",
+          "quantiles": {
+            "min": 20.0,
+            "p50": 30.0,
+            "p95": 661.0,
+            "p99": 691.0,
+            "max": 8360.0
+          }
         },
         {
           "library": "maxminddb-golang",
           "value": 851.0,
           "unit": "ns",
           "dimension": null,
-          "label": "maxminddb-golang: 851.0 ns (IPv4 Lookup Latency (p99))"
+          "label": "maxminddb-golang: Min=40.0 ns | p50=50.0 ns | p95=801.0 ns | p99=851.0 ns | Max=7.23 \u00b5s",
+          "quantiles": {
+            "min": 40.0,
+            "p50": 50.0,
+            "p95": 801.0,
+            "p99": 851.0,
+            "max": 7230.0
+          }
         }
       ],
-      "source": "https://github.com/0x00F6/libmaxminddb-rs/blob/d01ab79c3a2951b3d45e6b2bb168bf74c2a50037/benchmarks/charts/lookup-latency-ipv4.svg",
-      "sha256": "c93a816f31685a646347569e92da6ed49be0d14446d3dc83df1460a92d0c1ab6"
+      "source": "https://github.com/0x00F6/libmaxminddb-rs/blob/d01ab79c3a2951b3d45e6b2bb168bf74c2a50037/benchmarks/charts/candlestick-percentiles-ipv4.svg",
+      "sha256": "9f396002644b70e48579ae319856952d096f75d0e8108270feee4d4912d67003"
     },
     {
-      "id": "lookup-latency-ipv6",
-      "title": "IPv6 Lookup Latency (p99)",
-      "subtitle": "p99 tail latency for 1M random lookups (lower is better)",
+      "id": "candlestick-percentiles-ipv6",
+      "title": "Candlestick Percentile Rank \u2014 IPv6 Lookups",
+      "subtitle": "Quantile spread: Min (lower wick) \u2192 p50/Median to p95 (body) \u2192 p99 Tail",
       "points": [
-        {
-          "library": "libmaxminddb-rs",
-          "value": 161.0,
-          "unit": "ns",
-          "dimension": null,
-          "label": "libmaxminddb-rs: 161.0 ns (IPv6 Lookup Latency (p99))"
-        },
         {
           "library": "libmaxminddb (C)",
           "value": 70.0,
           "unit": "ns",
           "dimension": null,
-          "label": "libmaxminddb (C): 70.0 ns (IPv6 Lookup Latency (p99))"
-        },
-        {
-          "library": "maxminddb-rust",
-          "value": 200.0,
-          "unit": "ns",
-          "dimension": null,
-          "label": "maxminddb-rust: 200.0 ns (IPv6 Lookup Latency (p99))"
-        },
-        {
-          "library": "geoip2-rs",
-          "value": 180.0,
-          "unit": "ns",
-          "dimension": null,
-          "label": "geoip2-rs: 180.0 ns (IPv6 Lookup Latency (p99))"
+          "label": "libmaxminddb (C): Min=20.0 ns | p50=30.0 ns | p95=60.0 ns | p99=70.0 ns | Max=12.91 \u00b5s",
+          "quantiles": {
+            "min": 20.0,
+            "p50": 30.0,
+            "p95": 60.0,
+            "p99": 70.0,
+            "max": 12910.0
+          }
         },
         {
           "library": "maxminddb-golang",
           "value": 100.0,
           "unit": "ns",
           "dimension": null,
-          "label": "maxminddb-golang: 100.0 ns (IPv6 Lookup Latency (p99))"
+          "label": "maxminddb-golang: Min=50.0 ns | p50=60.0 ns | p95=81.0 ns | p99=100.0 ns | Max=6.88 \u00b5s",
+          "quantiles": {
+            "min": 50.0,
+            "p50": 60.0,
+            "p95": 81.0,
+            "p99": 100.0,
+            "max": 6880.0
+          }
+        },
+        {
+          "library": "libmaxminddb-rs",
+          "value": 161.0,
+          "unit": "ns",
+          "dimension": null,
+          "label": "libmaxminddb-rs: Min=30.0 ns | p50=40.0 ns | p95=60.0 ns | p99=161.0 ns | Max=13.49 \u00b5s",
+          "quantiles": {
+            "min": 30.0,
+            "p50": 40.0,
+            "p95": 60.0,
+            "p99": 161.0,
+            "max": 13490.0
+          }
+        },
+        {
+          "library": "geoip2-rs",
+          "value": 180.0,
+          "unit": "ns",
+          "dimension": null,
+          "label": "geoip2-rs: Min=30.0 ns | p50=50.0 ns | p95=80.0 ns | p99=180.0 ns | Max=8.38 \u00b5s",
+          "quantiles": {
+            "min": 30.0,
+            "p50": 50.0,
+            "p95": 80.0,
+            "p99": 180.0,
+            "max": 8380.0
+          }
+        },
+        {
+          "library": "maxminddb-rust",
+          "value": 200.0,
+          "unit": "ns",
+          "dimension": null,
+          "label": "maxminddb-rust: Min=30.0 ns | p50=50.0 ns | p95=160.0 ns | p99=200.0 ns | Max=8.36 \u00b5s",
+          "quantiles": {
+            "min": 30.0,
+            "p50": 50.0,
+            "p95": 160.0,
+            "p99": 200.0,
+            "max": 8360.0
+          }
         }
       ],
-      "source": "https://github.com/0x00F6/libmaxminddb-rs/blob/d01ab79c3a2951b3d45e6b2bb168bf74c2a50037/benchmarks/charts/lookup-latency-ipv6.svg",
-      "sha256": "075c9abc0b9afb3c04f3a1df7a215889e97f17237c07a6ed231263cd47fb0aff"
+      "source": "https://github.com/0x00F6/libmaxminddb-rs/blob/d01ab79c3a2951b3d45e6b2bb168bf74c2a50037/benchmarks/charts/candlestick-percentiles-ipv6.svg",
+      "sha256": "b15afcaa1ad4eb659ee0f32cc5ef89177df604396c137ed0efddad22e6e8b672"
     },
     {
       "id": "database-size-scaling",

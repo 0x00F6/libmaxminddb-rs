@@ -1,6 +1,6 @@
 import "./style.css";
 import * as echarts from "echarts/core";
-import { BarChart } from "echarts/charts";
+import { BarChart, CustomChart } from "echarts/charts";
 import {
   GridComponent,
   TooltipComponent,
@@ -11,6 +11,7 @@ import hljs from "highlight.js/lib/core";
 import rust from "highlight.js/lib/languages/rust";
 echarts.use([
   BarChart,
+  CustomChart,
   GridComponent,
   TooltipComponent,
   AriaComponent,
@@ -43,7 +44,7 @@ const menus = {
     ["absent", "Absent keys"],
   ],
   latency: [
-    ["lookup", "Lookup p99"],
+    ["lookup", "Candlestick percentile rank"],
     ["scaling", "p99 by database size"],
   ],
   concurrent: [["workers", "Worker throughput"]],
@@ -144,7 +145,7 @@ function selectChart() {
       ? `throughput-${f}-${m}`
       : c === "latency"
         ? m === "lookup"
-          ? `lookup-latency-${f}`
+          ? `candlestick-percentiles-${f}`
           : "database-size-scaling"
         : c === "concurrent"
           ? `concurrent-throughput${f === "ipv6" ? "-ipv6" : ""}`
@@ -222,10 +223,80 @@ function textCell(text) {
   el.textContent = text;
   return el;
 }
+function percentileSeries(points, text, surface, mobile) {
+  return {
+    type: "custom",
+    name: "Lookup percentiles",
+    dimensions: ["rank", "min", "p50", "p95", "p99"],
+    encode: { x: [1, 2, 3, 4], y: 0, tooltip: [1, 2, 3, 4] },
+    data: points.map((p, i) => [
+      i,
+      p.quantiles.min,
+      p.quantiles.p50,
+      p.quantiles.p95,
+      p.quantiles.p99,
+    ]),
+    renderItem(params, api) {
+      const p = points[params.dataIndex];
+      const rank = api.value(0);
+      const [min, p50, p95, p99] = [1, 2, 3, 4].map((d) =>
+        api.coord([api.value(d), rank]),
+      );
+      const y = p50[1];
+      const stroke = color(p.library);
+      const segment = (x1, y1, x2, y2, ink = stroke) => ({
+        type: "line",
+        shape: { x1, y1, x2, y2 },
+        style: { stroke: ink, lineWidth: 2 },
+      });
+      return {
+        type: "group",
+        children: [
+          // Quantile geometry matches the source SVG, not financial OHLC data.
+          segment(min[0], y, p99[0], y),
+          segment(min[0], y - 7, min[0], y + 7),
+          {
+            type: "rect",
+            shape: {
+              x: p50[0],
+              y: y - 12,
+              width: Math.max(1, p95[0] - p50[0]),
+              height: 24,
+              r: 3,
+            },
+            style: { fill: stroke, fillOpacity: 0.35, stroke, lineWidth: 1.5 },
+          },
+          segment(p50[0], y - 12, p50[0], y + 12, text),
+          {
+            type: "circle",
+            shape: { cx: p99[0], cy: y, r: 4 },
+            style: { fill: surface, stroke, lineWidth: 2 },
+          },
+          ...[
+            ["p50", p50[0], y - 24, "left"],
+            ["p99", p99[0] + 9, y, "left"],
+          ].map(([key, x, labelY, align]) => ({
+            type: "text",
+            style: {
+              x,
+              y: labelY,
+              text: `${key} ${p.quantiles[key]}`,
+              fill: text,
+              font: `${mobile ? 9 : 11}px monospace`,
+              align,
+              verticalAlign: "middle",
+            },
+          })),
+        ],
+      };
+    },
+  };
+}
 function renderChart() {
   if (!benchmarkData) return;
   const data = selectChart();
   if (!data) return;
+  const percentiles = data.id.startsWith("candlestick-");
   const high =
     state.category === "throughput" ||
     state.category === "concurrent" ||
@@ -258,11 +329,31 @@ function renderChart() {
     writer:
       "Same database sizes for the Rust writer and Go mmdbwriter. Throughput, total build duration and peak resident memory describe different costs.",
   };
-  $("#metric-note").textContent = notes[state.category];
-  $("#value-heading").textContent = points[0]?.unit || "Value";
-  const rows = points.map((p) => {
+  $("#metric-note").textContent = percentiles
+    ? "Random lookup samples from the same run: p50 is the median, p95 and p99 are the 95th and 99th percentiles. The body spans p50–p95; the wick starts at the minimum and ends at the p99 marker. Ranked by p99, lowest first. Max is listed in the table and tooltip, outside the plotted range. These are measured quantiles, not confidence intervals."
+    : notes[state.category];
+  $("#percentile-legend").hidden = !percentiles;
+  $(".results-grid").classList.toggle("percentile-results", percentiles);
+  const metrics = percentiles ? ["min", "p50", "p95", "p99", "max"] : ["value"];
+  const headers = [
+    percentiles ? "Rank / Library" : "Library",
+    "Measured version",
+    ...metrics.map((m) =>
+      percentiles ? `${m} (ns)` : points[0]?.unit || "Value",
+    ),
+  ];
+  $("#results-head").replaceChildren(
+    ...headers.map((label, i) => {
+      const th = document.createElement("th");
+      th.scope = "col";
+      th.textContent = label;
+      if (i === 2) th.id = "value-heading";
+      return th;
+    }),
+  );
+  const rows = points.map((p, i) => {
     const row = document.createElement("tr");
-    const name = textCell(p.library);
+    const name = textCell(percentiles ? `#${i + 1} ${p.library}` : p.library);
     const dot = document.createElement("span");
     dot.className = "library-dot";
     dot.style.background = color(p.library);
@@ -273,7 +364,9 @@ function renderChart() {
         benchmarkData.context.libraries.find((l) => l.name === p.library)
           ?.version || "Not recorded",
       ),
-      textCell(formatValue(p.value, p.unit)),
+      ...metrics.map((m) =>
+        textCell(formatValue(percentiles ? p.quantiles[m] : p.value, p.unit)),
+      ),
     );
     return row;
   });
@@ -291,7 +384,7 @@ function renderChart() {
     row.append(
       textCell(lib.name),
       textCell(lib.version),
-      textCell("Unavailable"),
+      ...metrics.map(() => textCell("Unavailable")),
     );
     rows.push(row);
   }
@@ -310,21 +403,27 @@ function renderChart() {
       animationDuration: 350,
       aria: { enabled: true },
       grid: {
-        left: mobile ? 133 : 180,
-        right: mobile ? 65 : 120,
-        top: 20,
+        left: mobile ? (percentiles ? 140 : 133) : percentiles ? 205 : 180,
+        right: mobile ? (percentiles ? 80 : 65) : 120,
+        top: percentiles ? 36 : 20,
         bottom: 38,
       },
       tooltip: {
         trigger: "item",
+        confine: true,
         backgroundColor: surface,
         borderColor: line,
         textStyle: { color: text, fontFamily: "monospace" },
-        formatter: (params) =>
-          `${points[params.dataIndex].library}<br/>${formatValue(points[params.dataIndex].value, points[params.dataIndex].unit)}`,
+        formatter: (params) => {
+          const p = points[params.dataIndex];
+          return percentiles
+            ? `#${params.dataIndex + 1} ${p.library}<br/>${metrics.map((m) => `${m}: ${formatValue(p.quantiles[m], p.unit)}`).join("<br/>")}`
+            : `${p.library}<br/>${formatValue(p.value, p.unit)}`;
+        },
       },
       xAxis: {
         type: "value",
+        min: 0,
         splitNumber: mobile ? 2 : 4,
         axisLabel: { color: muted, fontSize: 10, hideOverlap: true },
         splitLine: { lineStyle: { color: line, type: "dashed" } },
@@ -336,7 +435,9 @@ function renderChart() {
       yAxis: {
         type: "category",
         inverse: true,
-        data: points.map((p) => p.library),
+        data: points.map((p, i) =>
+          percentiles ? `#${i + 1} ${p.library}` : p.library,
+        ),
         axisLabel: {
           color: text,
           fontFamily: "monospace",
@@ -345,29 +446,34 @@ function renderChart() {
         axisTick: { show: false },
         axisLine: { show: false },
       },
-      series: [
-        {
-          type: "bar",
-          barWidth: 22,
-          showBackground: true,
-          backgroundStyle: { color: line, opacity: 0.3, borderRadius: 3 },
-          data: points.map((p) => ({
-            value: p.value,
-            itemStyle: { color: color(p.library), borderRadius: [0, 3, 3, 0] },
-          })),
-          label: {
-            show: true,
-            position: "right",
-            color: text,
-            fontFamily: "monospace",
-            fontSize: mobile ? 9 : 11,
-            formatter: (p) =>
-              new Intl.NumberFormat("en", { maximumFractionDigits: 2 }).format(
-                p.value,
-              ),
-          },
-        },
-      ],
+      series: percentiles
+        ? [percentileSeries(points, text, surface, mobile)]
+        : [
+            {
+              type: "bar",
+              barWidth: 22,
+              showBackground: true,
+              backgroundStyle: { color: line, opacity: 0.3, borderRadius: 3 },
+              data: points.map((p) => ({
+                value: p.value,
+                itemStyle: {
+                  color: color(p.library),
+                  borderRadius: [0, 3, 3, 0],
+                },
+              })),
+              label: {
+                show: true,
+                position: "right",
+                color: text,
+                fontFamily: "monospace",
+                fontSize: mobile ? 9 : 11,
+                formatter: (p) =>
+                  new Intl.NumberFormat("en", {
+                    maximumFractionDigits: 2,
+                  }).format(p.value),
+              },
+            },
+          ],
     },
     true,
   );

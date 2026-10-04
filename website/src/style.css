@@ -98,14 +98,10 @@ button {
   line-height: 1.4;
 }
 .brand-mark {
-  border: 1px solid var(--accent);
-  background: var(--accent-bg);
-  color: var(--accent);
-  border-radius: 9px;
-  width: 39px;
-  height: 39px;
-  text-align: center;
-  font-size: 29px;
+  width: 48px;
+  height: 36px;
+  object-fit: contain;
+  flex-shrink: 0;
 }
 .brand-rs {
   font-weight: 400;
@@ -365,8 +361,11 @@ p {
   box-shadow: var(--shadow);
   color: var(--accent);
 }
-.hero-visual svg {
+.hero-visual .project-logo {
   width: 100%;
+  height: auto;
+  object-fit: contain;
+  padding: 16px;
   display: block;
 }
 .visual-top,
@@ -620,6 +619,51 @@ select {
 #benchmark-chart {
   height: 340px;
   width: 100%;
+}
+.percentile-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 22px;
+  padding: 18px 26px 0;
+  color: var(--muted);
+  font: 10px var(--mono);
+}
+.percentile-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.percentile-legend i {
+  display: inline-block;
+  width: 23px;
+  color: var(--accent);
+}
+.percentile-legend .wick {
+  height: 10px;
+  border-left: 2px solid currentColor;
+  background: linear-gradient(currentColor, currentColor) left center / 100% 2px
+    no-repeat;
+}
+.percentile-legend .body {
+  height: 13px;
+  border: 1px solid var(--accent);
+  border-left: 3px solid var(--text);
+  background: color-mix(in srgb, var(--accent) 35%, transparent);
+}
+.percentile-legend .tail {
+  width: 10px;
+  height: 10px;
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  background: var(--text);
+}
+.results-grid.percentile-results {
+  grid-template-columns: minmax(0, 1fr);
+}
+.percentile-results th,
+.percentile-results td {
+  padding-left: 16px;
+  padding-right: 16px;
 }
 .chart-foot {
   display: flex;
@@ -1143,7 +1187,7 @@ footer a {
     width: 100%;
     margin: 10px auto 0;
   }
-  .hero-visual svg {
+  .hero-visual .project-logo {
     max-height: 235px;
   }
   .eyebrow {
