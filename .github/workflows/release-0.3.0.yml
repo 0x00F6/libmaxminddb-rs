@@ -58,11 +58,11 @@ jobs:
           # A rerun can resume after one crate was successfully published.
           for crate in libmaxminddb-rs-derive libmaxminddb-rs; do
             if output=$(cargo publish --locked --package "$crate" 2>&1); then
-              printf '%s\\n' "$output"
+              printf '%s\n' "$output"
             elif [[ "$output" == *'already exists on crates.io'* ]]; then
               echo "$crate 0.3.0 is already published"
             else
-              printf '%s\\n' "$output" >&2
+              printf '%s\n' "$output" >&2
               exit 1
             fi
           done
