@@ -38,7 +38,10 @@ fn result(editor: Editor<'_>) -> Value {
 fn merges_source_nested_maps_arrays_and_scalar_conflicts() {
     let source = fixture(map(&[
         ("country", Value::Utf8("FR".into())),
-        ("risk", map(&[("score", Value::Uint32(1)), ("vpn", Value::Bool(true))])),
+        (
+            "risk",
+            map(&[("score", Value::Uint32(1)), ("vpn", Value::Bool(true))]),
+        ),
         ("tags", Value::Array(vec![Value::Uint32(1)])),
     ]));
     let mut editor = Editor::from_bytes(&source).unwrap();
@@ -56,8 +59,14 @@ fn merges_source_nested_maps_arrays_and_scalar_conflicts() {
         result(editor),
         map(&[
             ("country", Value::Utf8("FR".into())),
-            ("risk", map(&[("score", Value::Uint32(42)), ("vpn", Value::Bool(true))])),
-            ("tags", Value::Array(vec![Value::Uint32(1), Value::Uint32(2)])),
+            (
+                "risk",
+                map(&[("score", Value::Uint32(42)), ("vpn", Value::Bool(true))])
+            ),
+            (
+                "tags",
+                Value::Array(vec![Value::Uint32(1), Value::Uint32(2)])
+            ),
         ])
     );
 }
@@ -107,7 +116,10 @@ fn successive_updates_keep_their_own_strategy_and_call_order() {
             .unwrap();
     }
     assert_eq!(editor.pending_edits(), 1);
-    assert_eq!(result(editor), map(&[("c", Value::Bool(true)), ("d", Value::Bool(true))]));
+    assert_eq!(
+        result(editor),
+        map(&[("c", Value::Bool(true)), ("d", Value::Bool(true))])
+    );
 }
 
 #[test]
@@ -117,7 +129,11 @@ fn remove_then_merge_does_not_resurrect_source_fields() {
     let network = "10.0.0.0/24".parse().unwrap();
     editor.remove(network).unwrap();
     editor
-        .update_value(network, map(&[("new", Value::Bool(true))]), MergeStrategy::DeepMerge)
+        .update_value(
+            network,
+            map(&[("new", Value::Bool(true))]),
+            MergeStrategy::DeepMerge,
+        )
         .unwrap();
     assert_eq!(result(editor), map(&[("new", Value::Bool(true))]));
 }
@@ -133,11 +149,19 @@ fn encoding_or_family_errors_leave_overlay_unchanged() {
     let source = fixture(Value::Uint32(1));
     let mut editor = Editor::from_bytes(&source).unwrap();
     assert!(matches!(
-        editor.update_value("10.0.0.0/24".parse().unwrap(), &Failing, MergeStrategy::DeepMerge),
+        editor.update_value(
+            "10.0.0.0/24".parse().unwrap(),
+            &Failing,
+            MergeStrategy::DeepMerge
+        ),
         Err(Error::EncodingError(_))
     ));
     assert!(matches!(
-        editor.update_value("2001:db8::/32".parse().unwrap(), &Failing, MergeStrategy::DeepMerge),
+        editor.update_value(
+            "2001:db8::/32".parse().unwrap(),
+            &Failing,
+            MergeStrategy::DeepMerge
+        ),
         Err(Error::InvalidIpVersion(6))
     ));
     assert_eq!(editor.pending_edits(), 0);
@@ -153,6 +177,42 @@ fn owned_value_input_moves_its_string_buffer() {
         panic!("expected a string");
     };
     assert_eq!(moved.as_ptr(), address);
+}
+
+#[test]
+fn borrowed_trait_object_and_missing_prefix_are_supported() {
+    struct Patch;
+    impl MmdbEncode for Patch {
+        fn encode(&self) -> Result<Value> {
+            Ok(Value::Uint32(42))
+        }
+    }
+    let patch: &dyn MmdbEncode = &Patch;
+    let source = fixture(Value::Uint32(1));
+    let mut editor = Editor::from_bytes(&source).unwrap();
+    editor
+        .update_value(
+            "10.0.1.0/24".parse().unwrap(),
+            patch,
+            MergeStrategy::DeepMerge,
+        )
+        .unwrap();
+    let bytes = editor.finish().unwrap();
+    let reader = Reader::from_bytes(&bytes).unwrap();
+    assert_eq!(
+        reader
+            .lookup_value("10.0.1.1".parse().unwrap())
+            .unwrap()
+            .to_owned_value(),
+        Value::Uint32(42)
+    );
+    assert_eq!(
+        reader
+            .lookup_value("10.0.0.1".parse().unwrap())
+            .unwrap()
+            .to_owned_value(),
+        Value::Uint32(1)
+    );
 }
 
 #[cfg(feature = "derive")]
@@ -172,16 +232,31 @@ fn derived_custom_struct_without_serde_supports_deep_merge() {
         ("risk", map(&[("vpn", Value::Bool(true))])),
     ]));
     let mut editor = Editor::from_bytes(&source).unwrap();
-    let patch = Patch { risk: RiskPatch { score: 42, label: "custom" } };
+    let patch = Patch {
+        risk: RiskPatch {
+            score: 42,
+            label: "custom",
+        },
+    };
     editor
-        .update_value("10.0.0.0/24".parse().unwrap(), &patch, MergeStrategy::DeepMerge)
+        .update_value(
+            "10.0.0.0/24".parse().unwrap(),
+            &patch,
+            MergeStrategy::DeepMerge,
+        )
         .unwrap();
-    assert_eq!(result(editor), map(&[
-        ("country", Value::Utf8("FR".into())),
-        ("risk", map(&[
-            ("vpn", Value::Bool(true)),
-            ("score", Value::Uint32(42)),
-            ("label", Value::Utf8("custom".into())),
-        ])),
-    ]));
+    assert_eq!(
+        result(editor),
+        map(&[
+            ("country", Value::Utf8("FR".into())),
+            (
+                "risk",
+                map(&[
+                    ("vpn", Value::Bool(true)),
+                    ("score", Value::Uint32(42)),
+                    ("label", Value::Utf8("custom".into())),
+                ])
+            ),
+        ])
+    );
 }

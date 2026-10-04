@@ -2,7 +2,9 @@
 
 use std::sync::{Arc, Barrier};
 
-use libmaxminddb_rs::{Editor, MergeStrategy, MetadataBuilder, Reader, ReloadableReader, Value, ValueRef, Writer};
+use libmaxminddb_rs::{
+    Editor, MergeStrategy, MetadataBuilder, Reader, ReloadableReader, Value, ValueRef, Writer,
+};
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let mut writer = Writer::with_metadata(MetadataBuilder::new().ip_version(4).build()?);

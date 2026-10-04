@@ -71,7 +71,8 @@ impl<'a> Editor<'a> {
     pub fn insert_value(&mut self, network: IpNetwork, value: Value) -> Result<()> {
         validate_family(self.reader.metadata().ip_version, network)?;
         self.pending_networks.insert(network);
-        self.edits.push((network, Edit::Upsert(value, MergeStrategy::Replace)));
+        self.edits
+            .push((network, Edit::Upsert(value, MergeStrategy::Replace)));
         Ok(())
     }
 
@@ -205,7 +206,11 @@ mod tests {
         let source = fixture();
         let mut editor = Editor::from_bytes(&source).unwrap();
         editor
-            .update_value("10.0.0.0/24".parse().unwrap(), value(10), MergeStrategy::Replace)
+            .update_value(
+                "10.0.0.0/24".parse().unwrap(),
+                value(10),
+                MergeStrategy::Replace,
+            )
             .unwrap();
         editor.remove("10.0.1.0/24".parse().unwrap()).unwrap();
         editor
