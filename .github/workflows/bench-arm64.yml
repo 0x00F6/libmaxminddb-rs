@@ -46,6 +46,7 @@ jobs:
         run: |
           cargo fmt --manifest-path scripts/Cargo.toml -- --check
           cargo test --manifest-path scripts/Cargo.toml
+          cargo test --lib --all-features
       - name: Run complete cross-library suite
         run: |
           set -o pipefail
@@ -66,3 +67,20 @@ jobs:
             benchmark-report/
             benchmarks/charts/
             README.md
+  validate-arm:
+    runs-on: ubuntu-24.04-arm
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: '1.98.1'
+          components: rustfmt, clippy, llvm-tools-preview
+      - uses: Swatinem/rust-cache@v2
+      - run: cargo install cargo-llvm-cov --locked
+      - run: make check
+      - name: Validate parser fuzzing on ARM64
+        run: |
+          rustup toolchain install nightly --profile minimal
+          cargo +nightly install cargo-fuzz --locked
+          make fuzz
