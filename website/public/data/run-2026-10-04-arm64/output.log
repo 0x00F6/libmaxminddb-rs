@@ -1,0 +1,685 @@
+cargo run --release --manifest-path scripts/Cargo.toml --bin run_benchmarks_compare
+[1m[92m   Compiling[0m proc-macro2 v1.0.107
+[1m[92m   Compiling[0m quote v1.0.47
+[1m[92m   Compiling[0m unicode-ident v1.0.26
+[1m[92m   Compiling[0m serde_core v1.0.229
+[1m[92m   Compiling[0m zmij v1.0.23
+[1m[92m   Compiling[0m serde v1.0.229
+[1m[92m   Compiling[0m libc v0.2.189
+[1m[92m   Compiling[0m serde_json v1.0.151
+[1m[92m   Compiling[0m itoa v1.0.18
+[1m[92m   Compiling[0m syn v3.0.6
+[1m[92m   Compiling[0m memchr v2.8.3
+[1m[92m   Compiling[0m unicode-width v0.2.2
+[1m[92m   Compiling[0m serde_derive v1.0.229
+[1m[92m   Compiling[0m bench-runner v0.1.0 (/home/runner/work/libmaxminddb-rs/libmaxminddb-rs/scripts)
+[1m[92m    Finished[0m `release` profile [optimized] target(s) in 9.16s
+[1m[92m     Running[0m `scripts/target/release/run_benchmarks_compare`
+🚀 Starting comparative benchmark suite...
+🔧 Building benchmark binaries...
+checking for pkg-config... /usr/bin/pkg-config
+checking pkg-config is at least version 0.9.0... yes
+checking build system type... aarch64-unknown-linux-gnu
+checking host system type... aarch64-unknown-linux-gnu
+checking how to print strings... printf
+checking for gcc... gcc
+checking whether the C compiler works... yes
+checking for C compiler default output file name... a.out
+checking for suffix of executables... 
+checking whether we are cross compiling... no
+checking for suffix of object files... o
+checking whether the compiler supports GNU C... yes
+checking whether gcc accepts -g... yes
+checking for gcc option to enable C11 features... none needed
+checking whether gcc understands -c and -o together... yes
+checking for a sed that does not truncate output... /usr/bin/sed
+checking for grep that handles long lines and -e... /usr/bin/grep
+checking for egrep... /usr/bin/grep -E
+checking for fgrep... /usr/bin/grep -F
+checking for ld used by gcc... /usr/bin/ld
+checking if the linker (/usr/bin/ld) is GNU ld... yes
+checking for BSD- or MS-compatible name lister (nm)... /usr/bin/nm -B
+checking the name lister (/usr/bin/nm -B) interface... BSD nm
+checking whether ln -s works... yes
+checking the maximum length of command line arguments... 3145728
+checking how to convert aarch64-unknown-linux-gnu file names to aarch64-unknown-linux-gnu format... func_convert_file_noop
+checking how to convert aarch64-unknown-linux-gnu file names to toolchain format... func_convert_file_noop
+checking for /usr/bin/ld option to reload object files... -r
+checking for file... file
+checking for objdump... objdump
+checking how to recognize dependent libraries... pass_all
+checking for dlltool... no
+checking how to associate runtime and link libraries... printf %s\n
+checking for ranlib... ranlib
+checking for ar... ar
+checking for archiver @FILE support... @
+checking for strip... strip
+checking for gawk... gawk
+checking command to parse /usr/bin/nm -B output from gcc object... ok
+checking for sysroot... no
+checking for a working dd... /usr/bin/dd
+checking how to truncate binary pipes... /usr/bin/dd bs=4096 count=1
+checking for mt... mt
+checking if mt is a manifest tool... no
+checking for stdio.h... yes
+checking for stdlib.h... yes
+checking for string.h... yes
+checking for inttypes.h... yes
+checking for stdint.h... yes
+checking for strings.h... yes
+checking for sys/stat.h... yes
+checking for sys/types.h... yes
+checking for unistd.h... yes
+checking for sys/param.h... yes
+checking for dlfcn.h... yes
+checking for objdir... .libs
+checking if gcc supports -fno-rtti -fno-exceptions... no
+checking for gcc option to produce PIC... -fPIC -DPIC
+checking if gcc PIC flag -fPIC -DPIC works... yes
+checking if gcc static flag -static works... yes
+checking if gcc supports -c -o file.o... yes
+checking if gcc supports -c -o file.o... (cached) yes
+checking whether the gcc linker (/usr/bin/ld) supports shared libraries... yes
+checking dynamic linker characteristics... GNU/Linux ld.so
+checking how to hardcode library paths into programs... immediate
+checking whether stripping libraries is possible... yes
+checking if libtool supports shared libraries... yes
+checking whether to build shared libraries... no
+checking whether to build static libraries... yes
+checking for a BSD-compatible install... /usr/bin/install -c
+checking whether sleep supports fractional seconds... yes
+checking filesystem timestamp resolution... 0.01
+checking whether build environment is sane... yes
+checking for a race-free mkdir -p... /usr/bin/mkdir -p
+checking whether make sets $(MAKE)... yes
+checking whether make supports the include directive... yes (GNU style)
+checking whether make supports nested variables... yes
+checking xargs -n works... yes
+checking whether UID '1001' is supported by ustar format... yes
+checking whether GID '1001' is supported by ustar format... yes
+checking how to create a ustar tar archive... gnutar
+checking dependency style of gcc... gcc3
+checking whether compiler accepts "-fms-extensions"... yes
+checking for C/C++ restrict keyword... __restrict__
+checking for arpa/inet.h... yes
+checking for assert.h... yes
+checking for fcntl.h... yes
+checking for inttypes.h... (cached) yes
+checking for libgen.h... yes
+checking for math.h... yes
+checking for netdb.h... yes
+checking for netinet/in.h... yes
+checking for stdarg.h... yes
+checking for stdbool.h... yes
+checking for stdint.h... (cached) yes
+checking for stdio.h... (cached) yes
+checking for stdlib.h... (cached) yes
+checking for string.h... (cached) yes
+checking for sys/mman.h... yes
+checking for sys/socket.h... yes
+checking for sys/stat.h... (cached) yes
+checking for sys/time.h... yes
+checking for sys/types.h... (cached) yes
+checking for unistd.h... (cached) yes
+checking for off_t... yes
+checking for size_t... yes
+checking for ssize_t... yes
+checking for uint8_t... yes
+checking for uint32_t... yes
+checking for uint64_t... yes
+checking for unsigned __int128... yes
+checking for boolean... no
+checking for clock_gettime... yes
+checking for open_memstream... yes
+checking whether byte ordering is bigendian... no
+checking for getpagesize... yes
+checking for working mmap... yes
+checking for library containing fabs... -lm
+checking for library containing fabsf... none required
+checking for library containing getaddrinfo... none required
+checking that generated files are newer than configure... done
+configure: creating ./config.status
+config.status: creating src/libmaxminddb.pc
+config.status: creating Makefile
+config.status: creating src/Makefile
+config.status: creating bin/Makefile
+config.status: creating t/Makefile
+config.status: creating config.h
+config.status: creating include/maxminddb_config.h
+config.status: executing libtool commands
+config.status: executing depfiles commands
+make[1]: Entering directory '/home/runner/work/libmaxminddb-rs/libmaxminddb-rs/target/bench-deps/libmaxminddb-1.14.1'
+Making install in src
+make[2]: Entering directory '/home/runner/work/libmaxminddb-rs/libmaxminddb-rs/target/bench-deps/libmaxminddb-1.14.1/src'
+/bin/bash ../libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I.. -I../include  -I../include  -O2 -g -O3 -march=native -fPIC -fms-extensions -MT maxminddb.lo -MD -MP -MF .deps/maxminddb.Tpo -c -o maxminddb.lo maxminddb.c
+/bin/bash ../libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I.. -I../include  -I../include  -O2 -g -O3 -march=native -fPIC -fms-extensions -MT data-pool.lo -MD -MP -MF .deps/data-pool.Tpo -c -o data-pool.lo data-pool.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -I../include -I../include -O2 -g -O3 -march=native -fPIC -fms-extensions -MT maxminddb.lo -MD -MP -MF .deps/maxminddb.Tpo -c maxminddb.c -o maxminddb.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -I../include -I../include -O2 -g -O3 -march=native -fPIC -fms-extensions -MT data-pool.lo -MD -MP -MF .deps/data-pool.Tpo -c data-pool.c -o data-pool.o
+mv -f .deps/data-pool.Tpo .deps/data-pool.Plo
+mv -f .deps/maxminddb.Tpo .deps/maxminddb.Plo
+/bin/bash ../libtool  --tag=CC   --mode=link gcc -O2 -g -O3 -march=native -fPIC -fms-extensions -version-info 0:7:0 -export-symbols-regex '^MMDB_.*'   -o libmaxminddb.la -rpath /home/runner/work/libmaxminddb-rs/libmaxminddb-rs/target/bench-deps/libmaxminddb-1.14.1/install/lib maxminddb.lo data-pool.lo  -lm 
+libtool: link: ar cr .libs/libmaxminddb.a  maxminddb.o data-pool.o
+libtool: link: ranlib .libs/libmaxminddb.a
+libtool: link: ( cd ".libs" && rm -f "libmaxminddb.la" && ln -s "../libmaxminddb.la" "libmaxminddb.la" )
+make[3]: Entering directory '/home/runner/work/libmaxminddb-rs/libmaxminddb-rs/target/bench-deps/libmaxminddb-1.14.1/src'
+ /usr/bin/mkdir -p '/home/runner/work/libmaxminddb-rs/libmaxminddb-rs/target/bench-deps/libmaxminddb-1.14.1/install/lib'
+ /usr/bin/mkdir -p '/home/runner/work/libmaxminddb-rs/libmaxminddb-rs/target/bench-deps/libmaxminddb-1.14.1/install/include'
+ /usr/bin/mkdir -p '/home/runner/work/libmaxminddb-rs/libmaxminddb-rs/target/bench-deps/libmaxminddb-1.14.1/install/lib/pkgconfig'
+ /bin/bash ../libtool   --mode=install /usr/bin/install -c   libmaxminddb.la '/home/runner/work/libmaxminddb-rs/libmaxminddb-rs/target/bench-deps/libmaxminddb-1.14.1/install/lib'
+ /usr/bin/install -c -m 644 libmaxminddb.pc '/home/runner/work/libmaxminddb-rs/libmaxminddb-rs/target/bench-deps/libmaxminddb-1.14.1/install/lib/pkgconfig'
+ /usr/bin/install -c -m 644 ../include/maxminddb.h '/home/runner/work/libmaxminddb-rs/libmaxminddb-rs/target/bench-deps/libmaxminddb-1.14.1/install/include'
+libtool: install: /usr/bin/install -c .libs/libmaxminddb.lai /home/runner/work/libmaxminddb-rs/libmaxminddb-rs/target/bench-deps/libmaxminddb-1.14.1/install/lib/libmaxminddb.la
+libtool: install: /usr/bin/install -c .libs/libmaxminddb.a /home/runner/work/libmaxminddb-rs/libmaxminddb-rs/target/bench-deps/libmaxminddb-1.14.1/install/lib/libmaxminddb.a
+libtool: install: chmod 644 /home/runner/work/libmaxminddb-rs/libmaxminddb-rs/target/bench-deps/libmaxminddb-1.14.1/install/lib/libmaxminddb.a
+libtool: install: ranlib /home/runner/work/libmaxminddb-rs/libmaxminddb-rs/target/bench-deps/libmaxminddb-1.14.1/install/lib/libmaxminddb.a
+libtool: finish: PATH="/home/runner/go/bin:/opt/hostedtoolcache/go/1.25.0/arm64/bin:/snap/bin:/home/runner/.local/bin:/opt/pipx_bin:/home/runner/.cargo/bin:/home/runner/.config/composer/vendor/bin:/home/runner/.dotnet/tools:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/sbin" ldconfig -n /home/runner/work/libmaxminddb-rs/libmaxminddb-rs/target/bench-deps/libmaxminddb-1.14.1/install/lib
+----------------------------------------------------------------------
+Libraries have been installed in:
+   /home/runner/work/libmaxminddb-rs/libmaxminddb-rs/target/bench-deps/libmaxminddb-1.14.1/install/lib
+
+If you ever happen to want to link against installed libraries
+in a given directory, LIBDIR, you must either use libtool, and
+specify the full pathname of the library, or use the '-LLIBDIR'
+flag during linking and do at least one of the following:
+   - add LIBDIR to the 'LD_LIBRARY_PATH' environment variable
+     during execution
+   - add LIBDIR to the 'LD_RUN_PATH' environment variable
+     during linking
+   - use the '-Wl,-rpath -Wl,LIBDIR' linker flag
+   - have your system administrator add LIBDIR to '/etc/ld.so.conf'
+
+See any operating system documentation about shared libraries for
+more information, such as the ld(1) and ld.so(8) manual pages.
+----------------------------------------------------------------------
+make[3]: Leaving directory '/home/runner/work/libmaxminddb-rs/libmaxminddb-rs/target/bench-deps/libmaxminddb-1.14.1/src'
+make[2]: Leaving directory '/home/runner/work/libmaxminddb-rs/libmaxminddb-rs/target/bench-deps/libmaxminddb-1.14.1/src'
+Making install in bin
+make[2]: Entering directory '/home/runner/work/libmaxminddb-rs/libmaxminddb-rs/target/bench-deps/libmaxminddb-1.14.1/bin'
+gcc -DHAVE_CONFIG_H -I. -I.. -I../include  -I../include -pthread  -O2 -g -O3 -march=native -fPIC -fms-extensions -MT mmdblookup.o -MD -MP -MF .deps/mmdblookup.Tpo -c -o mmdblookup.o mmdblookup.c
+mv -f .deps/mmdblookup.Tpo .deps/mmdblookup.Po
+/bin/bash ../libtool  --tag=CC   --mode=link gcc -O2 -g -O3 -march=native -fPIC -fms-extensions ../src/libmaxminddb.la  -pthread  -o mmdblookup mmdblookup.o  -lm 
+libtool: link: gcc -O2 -g -O3 -march=native -fPIC -fms-extensions -o mmdblookup mmdblookup.o  ../src/.libs/libmaxminddb.a -lm -pthread
+make[3]: Entering directory '/home/runner/work/libmaxminddb-rs/libmaxminddb-rs/target/bench-deps/libmaxminddb-1.14.1/bin'
+make[3]: Nothing to be done for 'install-data-am'.
+ /usr/bin/mkdir -p '/home/runner/work/libmaxminddb-rs/libmaxminddb-rs/target/bench-deps/libmaxminddb-1.14.1/install/bin'
+  /bin/bash ../libtool   --mode=install /usr/bin/install -c mmdblookup '/home/runner/work/libmaxminddb-rs/libmaxminddb-rs/target/bench-deps/libmaxminddb-1.14.1/install/bin'
+libtool: install: /usr/bin/install -c mmdblookup /home/runner/work/libmaxminddb-rs/libmaxminddb-rs/target/bench-deps/libmaxminddb-1.14.1/install/bin/mmdblookup
+make[3]: Leaving directory '/home/runner/work/libmaxminddb-rs/libmaxminddb-rs/target/bench-deps/libmaxminddb-1.14.1/bin'
+make[2]: Leaving directory '/home/runner/work/libmaxminddb-rs/libmaxminddb-rs/target/bench-deps/libmaxminddb-1.14.1/bin'
+Making install in t
+make[2]: Entering directory '/home/runner/work/libmaxminddb-rs/libmaxminddb-rs/target/bench-deps/libmaxminddb-1.14.1/t'
+/bin/bash ../libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I.. -I../include  -I../include  -O2 -g -O3 -march=native -fPIC -fms-extensions -I../src -MT maxminddb_test_helper.lo -MD -MP -MF .deps/maxminddb_test_helper.Tpo -c -o maxminddb_test_helper.lo maxminddb_test_helper.c
+cd libtap && make  all
+make[3]: Entering directory '/home/runner/work/libmaxminddb-rs/libmaxminddb-rs/target/bench-deps/libmaxminddb-1.14.1/t/libtap'
+cc -Wall -I. -fPIC   -c tap.c  -o tap.o
+generating tap.pc
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -I../include -I../include -O2 -g -O3 -march=native -fPIC -fms-extensions -I../src -MT maxminddb_test_helper.lo -MD -MP -MF .deps/maxminddb_test_helper.Tpo -c maxminddb_test_helper.c -o maxminddb_test_helper.o
+ar rcs libtap.a tap.o
+cc -shared   tap.o  -o libtap.so
+make[3]: Leaving directory '/home/runner/work/libmaxminddb-rs/libmaxminddb-rs/target/bench-deps/libmaxminddb-1.14.1/t/libtap'
+mv -f .deps/maxminddb_test_helper.Tpo .deps/maxminddb_test_helper.Plo
+/bin/bash ../libtool  --tag=CC   --mode=link gcc -O2 -g -O3 -march=native -fPIC -fms-extensions -I../src ../src/libmaxminddb.la  -o libmmdbtest.la  maxminddb_test_helper.lo  -lm 
+libtool: link: ar cr .libs/libmmdbtest.a  maxminddb_test_helper.o
+libtool: link: ranlib .libs/libmmdbtest.a
+libtool: link: ( cd ".libs" && rm -f "libmmdbtest.la" && ln -s "../libmmdbtest.la" "libmmdbtest.la" )
+make[3]: Entering directory '/home/runner/work/libmaxminddb-rs/libmaxminddb-rs/target/bench-deps/libmaxminddb-1.14.1/t'
+make[3]: Nothing to be done for 'install-exec-am'.
+make[3]: Nothing to be done for 'install-data-am'.
+make[3]: Leaving directory '/home/runner/work/libmaxminddb-rs/libmaxminddb-rs/target/bench-deps/libmaxminddb-1.14.1/t'
+make[2]: Leaving directory '/home/runner/work/libmaxminddb-rs/libmaxminddb-rs/target/bench-deps/libmaxminddb-1.14.1/t'
+make[2]: Entering directory '/home/runner/work/libmaxminddb-rs/libmaxminddb-rs/target/bench-deps/libmaxminddb-1.14.1'
+if [ ! -f man/man1/mmdblookup.1 ]; then mkdir -p man/man1 && touch man/man1/mmdblookup.1; fi
+if [ ! -f man/man3/libmaxminddb.3 ]; then mkdir -p man/man3 && touch man/man3/libmaxminddb.3; fi
+if [ ! -f man/man3/libmaxminddb.3 ]; then mkdir -p man/man3 && touch man/man3/libmaxminddb.3; fi
+if [ ! -f man/man3/libmaxminddb.3 ]; then mkdir -p man/man3 && touch man/man3/libmaxminddb.3; fi
+if [ ! -f man/man3/libmaxminddb.3 ]; then mkdir -p man/man3 && touch man/man3/libmaxminddb.3; fi
+if [ ! -f man/man3/libmaxminddb.3 ]; then mkdir -p man/man3 && touch man/man3/libmaxminddb.3; fi
+if [ ! -f man/man3/libmaxminddb.3 ]; then mkdir -p man/man3 && touch man/man3/libmaxminddb.3; fi
+if [ ! -f man/man3/libmaxminddb.3 ]; then mkdir -p man/man3 && touch man/man3/libmaxminddb.3; fi
+if [ ! -f man/man3/libmaxminddb.3 ]; then mkdir -p man/man3 && touch man/man3/libmaxminddb.3; fi
+if [ ! -f man/man3/libmaxminddb.3 ]; then mkdir -p man/man3 && touch man/man3/libmaxminddb.3; fi
+if [ ! -f man/man3/libmaxminddb.3 ]; then mkdir -p man/man3 && touch man/man3/libmaxminddb.3; fi
+if [ ! -f man/man3/libmaxminddb.3 ]; then mkdir -p man/man3 && touch man/man3/libmaxminddb.3; fi
+if [ ! -f man/man3/libmaxminddb.3 ]; then mkdir -p man/man3 && touch man/man3/libmaxminddb.3; fi
+if [ ! -f man/man3/libmaxminddb.3 ]; then mkdir -p man/man3 && touch man/man3/libmaxminddb.3; fi
+if [ ! -f man/man3/libmaxminddb.3 ]; then mkdir -p man/man3 && touch man/man3/libmaxminddb.3; fi
+if [ ! -f man/man3/libmaxminddb.3 ]; then mkdir -p man/man3 && touch man/man3/libmaxminddb.3; fi
+make[3]: Entering directory '/home/runner/work/libmaxminddb-rs/libmaxminddb-rs/target/bench-deps/libmaxminddb-1.14.1'
+make[3]: Nothing to be done for 'install-exec-am'.
+ /usr/bin/mkdir -p '/home/runner/work/libmaxminddb-rs/libmaxminddb-rs/target/bench-deps/libmaxminddb-1.14.1/install/include'
+if [ ! -f man/man1/mmdblookup.1 ]; then mkdir -p man/man1 && touch man/man1/mmdblookup.1; fi
+if [ ! -f man/man3/libmaxminddb.3 ]; then mkdir -p man/man3 && touch man/man3/libmaxminddb.3; fi
+if [ ! -f man/man3/libmaxminddb.3 ]; then mkdir -p man/man3 && touch man/man3/libmaxminddb.3; fi
+if [ ! -f man/man3/libmaxminddb.3 ]; then mkdir -p man/man3 && touch man/man3/libmaxminddb.3; fi
+if [ ! -f man/man3/libmaxminddb.3 ]; then mkdir -p man/man3 && touch man/man3/libmaxminddb.3; fi
+ /usr/bin/install -c -m 644 include/maxminddb.h '/home/runner/work/libmaxminddb-rs/libmaxminddb-rs/target/bench-deps/libmaxminddb-1.14.1/install/include'
+if [ ! -f man/man3/libmaxminddb.3 ]; then mkdir -p man/man3 && touch man/man3/libmaxminddb.3; fi
+if [ ! -f man/man3/libmaxminddb.3 ]; then mkdir -p man/man3 && touch man/man3/libmaxminddb.3; fi
+if [ ! -f man/man3/libmaxminddb.3 ]; then mkdir -p man/man3 && touch man/man3/libmaxminddb.3; fi
+if [ ! -f man/man3/libmaxminddb.3 ]; then mkdir -p man/man3 && touch man/man3/libmaxminddb.3; fi
+if [ ! -f man/man3/libmaxminddb.3 ]; then mkdir -p man/man3 && touch man/man3/libmaxminddb.3; fi
+if [ ! -f man/man3/libmaxminddb.3 ]; then mkdir -p man/man3 && touch man/man3/libmaxminddb.3; fi
+if [ ! -f man/man3/libmaxminddb.3 ]; then mkdir -p man/man3 && touch man/man3/libmaxminddb.3; fi
+if [ ! -f man/man3/libmaxminddb.3 ]; then mkdir -p man/man3 && touch man/man3/libmaxminddb.3; fi
+if [ ! -f man/man3/libmaxminddb.3 ]; then mkdir -p man/man3 && touch man/man3/libmaxminddb.3; fi
+if [ ! -f man/man3/libmaxminddb.3 ]; then mkdir -p man/man3 && touch man/man3/libmaxminddb.3; fi
+if [ ! -f man/man3/libmaxminddb.3 ]; then mkdir -p man/man3 && touch man/man3/libmaxminddb.3; fi
+ /usr/bin/mkdir -p '/home/runner/work/libmaxminddb-rs/libmaxminddb-rs/target/bench-deps/libmaxminddb-1.14.1/install/share/man/man1'
+ /usr/bin/mkdir -p '/home/runner/work/libmaxminddb-rs/libmaxminddb-rs/target/bench-deps/libmaxminddb-1.14.1/install/share/man/man3'
+ /usr/bin/mkdir -p '/home/runner/work/libmaxminddb-rs/libmaxminddb-rs/target/bench-deps/libmaxminddb-1.14.1/install/include'
+ /usr/bin/install -c -m 644 include/maxminddb_config.h '/home/runner/work/libmaxminddb-rs/libmaxminddb-rs/target/bench-deps/libmaxminddb-1.14.1/install/include'
+ /usr/bin/install -c -m 644 man/man3/MMDB_aget_value.3 man/man3/MMDB_close.3 man/man3/MMDB_dump_entry_data_list.3 man/man3/MMDB_free_entry_data_list.3 man/man3/MMDB_get_entry_data_list.3 man/man3/MMDB_get_metadata_as_entry_data_list.3 man/man3/MMDB_get_value.3 man/man3/MMDB_lib_version.3 man/man3/MMDB_lookup_sockaddr.3 man/man3/MMDB_lookup_string.3 man/man3/MMDB_open.3 man/man3/MMDB_read_node.3 man/man3/MMDB_strerror.3 man/man3/MMDB_vget_value.3 man/man3/libmaxminddb.3 '/home/runner/work/libmaxminddb-rs/libmaxminddb-rs/target/bench-deps/libmaxminddb-1.14.1/install/share/man/man3'
+ /usr/bin/install -c -m 644 man/man1/mmdblookup.1 '/home/runner/work/libmaxminddb-rs/libmaxminddb-rs/target/bench-deps/libmaxminddb-1.14.1/install/share/man/man1'
+make[3]: Leaving directory '/home/runner/work/libmaxminddb-rs/libmaxminddb-rs/target/bench-deps/libmaxminddb-1.14.1'
+make[2]: Leaving directory '/home/runner/work/libmaxminddb-rs/libmaxminddb-rs/target/bench-deps/libmaxminddb-1.14.1'
+make[1]: Leaving directory '/home/runner/work/libmaxminddb-rs/libmaxminddb-rs/target/bench-deps/libmaxminddb-1.14.1'
+   ✅ Compiled benchmark harnesses
+📦 Preparing dependencies and datasets...
+   🗄️ Creating MMDB databases...
+   📥 Generating workload addresses...
+   ✅ Datasets ready
+
+📁 [Phase 1/5] Database Open Benchmarks
+   libmaxminddb-rs    | open_file    | 90.23 µs
+   libmaxminddb       | open_file    | 23.57 µs
+   maxminddb-rust     | open_file    | 4.74 µs
+   geoip2-rs          | open_file    | 4.64 µs
+   maxminddb-golang   | open_file    | 3.96 µs
+   libmaxminddb-rs    | open_buffer  | 84.27 µs
+   libmaxminddb       | open_buffer  | ⚠️ unsupported
+   maxminddb-rust     | open_buffer  | 576.0 ns
+   geoip2-rs          | open_buffer  | 520.0 ns
+   maxminddb-golang   | open_buffer  | 4.17 µs
+   libmaxminddb-rs    | open_mmap    | 77.88 µs
+   libmaxminddb       | open_mmap    | 22.95 µs
+   maxminddb-rust     | open_mmap    | 6.13 µs
+   geoip2-rs          | open_mmap    | 5.95 µs
+   maxminddb-golang   | open_mmap    | 11.23 µs
+
+📊 [Phase 2/5] Running Reader Single-threaded Benchmarks
+   🔍 Scenario: ipv4 (random, 1M lookups)
+     libmaxminddb-rs    | p99:   472.0 ns | throughput: 28.49 M ops/s
+     libmaxminddb       | p99:   760.0 ns | throughput: 16.69 M ops/s
+     maxminddb-rust     | p99:   664.0 ns | throughput: 14.72 M ops/s
+     geoip2-rs          | p99:   480.0 ns | throughput: 23.09 M ops/s
+     maxminddb-golang   | p99:    1.22 µs | throughput: 9.85 M ops/s
+   🔍 Scenario: ipv4 (sequential, 1M lookups)
+     libmaxminddb-rs    | p99:    48.0 ns | throughput: 92.89 M ops/s
+     libmaxminddb       | p99:    96.0 ns | throughput: 24.52 M ops/s
+     maxminddb-rust     | p99:   104.0 ns | throughput: 17.92 M ops/s
+     geoip2-rs          | p99:    96.0 ns | throughput: 23.96 M ops/s
+     maxminddb-golang   | p99:   112.0 ns | throughput: 16.38 M ops/s
+   🔍 Scenario: ipv4 (hot, 1M lookups)
+     libmaxminddb-rs    | p99:   472.0 ns | throughput: 2.40 M ops/s
+     libmaxminddb       | p99:   736.0 ns | throughput: 1.45 M ops/s
+     maxminddb-rust     | p99:   688.0 ns | throughput: 1.60 M ops/s
+     geoip2-rs          | p99:   464.0 ns | throughput: 2.49 M ops/s
+     maxminddb-golang   | p99:    1.25 µs | throughput: 928.8 K ops/s
+   🔍 Scenario: ipv4 (absent, 1M lookups)
+     libmaxminddb-rs    | p99:    40.0 ns | throughput: 114.99 M ops/s
+     libmaxminddb       | p99:    80.0 ns | throughput: 135.19 M ops/s
+     maxminddb-rust     | p99:    64.0 ns | throughput: 47.35 M ops/s
+     geoip2-rs          | p99:    40.0 ns | throughput: 139.61 M ops/s
+     maxminddb-golang   | p99:    72.0 ns | throughput: 44.67 M ops/s
+   🔍 Scenario: ipv6 (random, 1M lookups)
+     libmaxminddb-rs    | p99:    48.0 ns | throughput: 97.23 M ops/s
+     libmaxminddb       | p99:   120.0 ns | throughput: 65.97 M ops/s
+     maxminddb-rust     | p99:    96.0 ns | throughput: 31.35 M ops/s
+     geoip2-rs          | p99:    88.0 ns | throughput: 55.14 M ops/s
+     maxminddb-golang   | p99:    96.0 ns | throughput: 32.38 M ops/s
+   🔍 Scenario: ipv6 (sequential, 1M lookups)
+     libmaxminddb-rs    | p99:   496.0 ns | throughput: 2.30 M ops/s
+     libmaxminddb       | p99:   824.0 ns | throughput: 1.28 M ops/s
+     maxminddb-rust     | p99:   768.0 ns | throughput: 1.42 M ops/s
+     geoip2-rs          | p99:   544.0 ns | throughput: 2.06 M ops/s
+     maxminddb-golang   | p99:    1.33 µs | throughput: 870.9 K ops/s
+   🔍 Scenario: ipv6 (hot, 1M lookups)
+     libmaxminddb-rs    | p99:   488.0 ns | throughput: 2.35 M ops/s
+     libmaxminddb       | p99:   816.0 ns | throughput: 1.30 M ops/s
+     maxminddb-rust     | p99:   768.0 ns | throughput: 1.42 M ops/s
+     geoip2-rs          | p99:   536.0 ns | throughput: 2.10 M ops/s
+     maxminddb-golang   | p99:    1.33 µs | throughput: 866.7 K ops/s
+   🔍 Scenario: ipv6 (absent, 1M lookups)
+     libmaxminddb-rs    | p99:   640.0 ns | throughput: 4.20 M ops/s
+     libmaxminddb       | p99:   952.0 ns | throughput: 2.11 M ops/s
+     maxminddb-rust     | p99:   976.0 ns | throughput: 2.11 M ops/s
+     geoip2-rs          | p99:   960.0 ns | throughput: 2.12 M ops/s
+     maxminddb-golang   | p99:   952.0 ns | throughput: 2.10 M ops/s
+
+⚡ [Phase 3/5] Running Concurrent Multi-threaded Benchmarks
+   ⚡ 1 Threads (ipv4 random, 1M lookups)
+     libmaxminddb-rs    | throughput:  14.62 M ops/s
+     libmaxminddb-rs    | lookup_borrowed:  14.80 M ops/s
+     libmaxminddb-rs    | lookup_borrowed_opt:  14.32 M ops/s
+     libmaxminddb-rs    | lookup_value:  11.47 M ops/s
+     libmaxminddb-rs    | lookup_value_with_prefix:  12.26 M ops/s
+     libmaxminddb-rs    | lookup (serde_json::Value):   3.14 M ops/s
+     libmaxminddb-rs    | lookup_many(1):  10.15 M ops/s
+     libmaxminddb-rs    | lookup_exists:  23.59 M ops/s
+     libmaxminddb       | throughput:  10.83 M ops/s
+     maxminddb-rust     | throughput:  10.04 M ops/s
+     geoip2-rs          | throughput:  13.57 M ops/s
+     maxminddb-golang   | throughput:   5.80 M ops/s
+   ⚡ 4 Threads (ipv4 random, 1M lookups)
+     libmaxminddb-rs    | throughput:  58.24 M ops/s
+     libmaxminddb-rs    | lookup_borrowed:  59.00 M ops/s
+     libmaxminddb-rs    | lookup_borrowed_opt:  57.15 M ops/s
+     libmaxminddb-rs    | lookup_value:  45.68 M ops/s
+     libmaxminddb-rs    | lookup_value_with_prefix:  48.80 M ops/s
+     libmaxminddb-rs    | lookup (serde_json::Value):  12.35 M ops/s
+     libmaxminddb-rs    | lookup_many(1):  40.42 M ops/s
+     libmaxminddb-rs    | lookup_exists:  94.00 M ops/s
+     libmaxminddb       | throughput:  42.08 M ops/s
+     maxminddb-rust     | throughput:  40.11 M ops/s
+     geoip2-rs          | throughput:  54.06 M ops/s
+     maxminddb-golang   | throughput:  23.50 M ops/s
+   ⚡ 8 Threads (ipv4 random, 1M lookups)
+     libmaxminddb-rs    | throughput:  58.50 M ops/s
+     libmaxminddb-rs    | lookup_borrowed:  59.09 M ops/s
+     libmaxminddb-rs    | lookup_borrowed_opt:  57.29 M ops/s
+     libmaxminddb-rs    | lookup_value:  45.77 M ops/s
+     libmaxminddb-rs    | lookup_value_with_prefix:  48.94 M ops/s
+     libmaxminddb-rs    | lookup (serde_json::Value):  12.52 M ops/s
+     libmaxminddb-rs    | lookup_many(1):  40.43 M ops/s
+     libmaxminddb-rs    | lookup_exists:  93.47 M ops/s
+     libmaxminddb       | throughput:  41.14 M ops/s
+     maxminddb-rust     | throughput:  40.11 M ops/s
+     geoip2-rs          | throughput:  54.18 M ops/s
+     maxminddb-golang   | throughput:  22.38 M ops/s
+   ⚡ 16 Threads (ipv4 random, 1M lookups)
+     libmaxminddb-rs    | throughput:  58.57 M ops/s
+     libmaxminddb-rs    | lookup_borrowed:  59.05 M ops/s
+     libmaxminddb-rs    | lookup_borrowed_opt:  56.98 M ops/s
+     libmaxminddb-rs    | lookup_value:  45.75 M ops/s
+     libmaxminddb-rs    | lookup_value_with_prefix:  48.97 M ops/s
+     libmaxminddb-rs    | lookup (serde_json::Value):  12.53 M ops/s
+     libmaxminddb-rs    | lookup_many(1):  40.48 M ops/s
+     libmaxminddb-rs    | lookup_exists:  93.60 M ops/s
+     libmaxminddb       | throughput:  41.62 M ops/s
+     maxminddb-rust     | throughput:  40.11 M ops/s
+     geoip2-rs          | throughput:  54.13 M ops/s
+     maxminddb-golang   | throughput:  22.84 M ops/s
+   ⚡ 1 Threads (ipv6 random, 1M lookups)
+     libmaxminddb-rs    | throughput:  24.15 M ops/s
+     libmaxminddb-rs    | lookup_borrowed:  24.19 M ops/s
+     libmaxminddb-rs    | lookup_borrowed_opt:  24.63 M ops/s
+     libmaxminddb-rs    | lookup_value:  20.89 M ops/s
+     libmaxminddb-rs    | lookup_value_with_prefix:  23.17 M ops/s
+     libmaxminddb-rs    | lookup (serde_json::Value):  20.12 M ops/s
+     libmaxminddb-rs    | lookup_many(1):  18.02 M ops/s
+     libmaxminddb-rs    | lookup_exists:  23.88 M ops/s
+     libmaxminddb       | throughput:  23.53 M ops/s
+     maxminddb-rust     | throughput:  15.97 M ops/s
+     geoip2-rs          | throughput:  20.68 M ops/s
+     maxminddb-golang   | throughput:   9.73 M ops/s
+   ⚡ 4 Threads (ipv6 random, 1M lookups)
+     libmaxminddb-rs    | throughput:  96.37 M ops/s
+     libmaxminddb-rs    | lookup_borrowed:  96.41 M ops/s
+     libmaxminddb-rs    | lookup_borrowed_opt:  98.41 M ops/s
+     libmaxminddb-rs    | lookup_value:  83.45 M ops/s
+     libmaxminddb-rs    | lookup_value_with_prefix:  92.17 M ops/s
+     libmaxminddb-rs    | lookup (serde_json::Value):  80.38 M ops/s
+     libmaxminddb-rs    | lookup_many(1):  71.73 M ops/s
+     libmaxminddb-rs    | lookup_exists:  95.31 M ops/s
+     libmaxminddb       | throughput:  93.89 M ops/s
+     maxminddb-rust     | throughput:  63.67 M ops/s
+     geoip2-rs          | throughput:  82.83 M ops/s
+     maxminddb-golang   | throughput:  38.72 M ops/s
+   ⚡ 8 Threads (ipv6 random, 1M lookups)
+     libmaxminddb-rs    | throughput:  96.37 M ops/s
+     libmaxminddb-rs    | lookup_borrowed:  96.48 M ops/s
+     libmaxminddb-rs    | lookup_borrowed_opt:  98.51 M ops/s
+     libmaxminddb-rs    | lookup_value:  83.44 M ops/s
+     libmaxminddb-rs    | lookup_value_with_prefix:  92.43 M ops/s
+     libmaxminddb-rs    | lookup (serde_json::Value):  80.24 M ops/s
+     libmaxminddb-rs    | lookup_many(1):  71.87 M ops/s
+     libmaxminddb-rs    | lookup_exists:  94.27 M ops/s
+     libmaxminddb       | throughput:  93.94 M ops/s
+     maxminddb-rust     | throughput:  63.77 M ops/s
+     geoip2-rs          | throughput:  82.75 M ops/s
+     maxminddb-golang   | throughput:  38.09 M ops/s
+   ⚡ 16 Threads (ipv6 random, 1M lookups)
+     libmaxminddb-rs    | throughput:  96.39 M ops/s
+     libmaxminddb-rs    | lookup_borrowed:  96.35 M ops/s
+     libmaxminddb-rs    | lookup_borrowed_opt:  98.05 M ops/s
+     libmaxminddb-rs    | lookup_value:  83.47 M ops/s
+     libmaxminddb-rs    | lookup_value_with_prefix:  92.39 M ops/s
+     libmaxminddb-rs    | lookup (serde_json::Value):  80.48 M ops/s
+     libmaxminddb-rs    | lookup_many(1):  71.90 M ops/s
+     libmaxminddb-rs    | lookup_exists:  95.35 M ops/s
+     libmaxminddb       | throughput:  93.80 M ops/s
+     maxminddb-rust     | throughput:  63.72 M ops/s
+     geoip2-rs          | throughput:  82.84 M ops/s
+     maxminddb-golang   | throughput:  37.71 M ops/s
+
+📈 [Phase 4/5] Database Size Scaling Benchmarks (1K to 5M)
+   🗄️ Generating 1K (1000 entries) MMDB with batch size 5000...
+   ✅ Database ready: 130.09 KiB in 0.00s
+     libmaxminddb-rs    | p99:   360.0 ns
+     libmaxminddb       | p99:   664.0 ns
+     maxminddb-rust     | p99:   512.0 ns
+     geoip2-rs          | p99:   440.0 ns
+     maxminddb-golang   | p99:   856.0 ns
+   🗄️ Generating 10K (10000 entries) MMDB with batch size 5000...
+   ✅ Database ready: 1.08 MiB in 0.01s
+     libmaxminddb-rs    | p99:   376.0 ns
+     libmaxminddb       | p99:   688.0 ns
+     maxminddb-rust     | p99:   576.0 ns
+     geoip2-rs          | p99:   496.0 ns
+     maxminddb-golang   | p99:   928.0 ns
+   🗄️ Generating 100K (100000 entries) MMDB with batch size 5000...
+   ✅ Database ready: 8.87 MiB in 0.12s
+     libmaxminddb-rs    | p99:   376.0 ns
+     libmaxminddb       | p99:   856.0 ns
+     maxminddb-rust     | p99:   743.0 ns
+     geoip2-rs          | p99:   632.0 ns
+     maxminddb-golang   | p99:    1.04 µs
+   🗄️ Generating 500K (500000 entries) MMDB with batch size 5000...
+   ✅ Database ready: 37.70 MiB in 0.70s
+     libmaxminddb-rs    | p99:   392.0 ns
+     libmaxminddb       | p99:   984.0 ns
+     maxminddb-rust     | p99:   816.0 ns
+     geoip2-rs          | p99:   696.0 ns
+     maxminddb-golang   | p99:    1.13 µs
+   🗄️ Generating 1M (1000000 entries) MMDB with batch size 5000...
+   ✅ Database ready: 69.68 MiB in 1.46s
+     libmaxminddb-rs    | p99:   376.0 ns
+     libmaxminddb       | p99:   944.0 ns
+     maxminddb-rust     | p99:   840.0 ns
+     geoip2-rs          | p99:   728.0 ns
+     maxminddb-golang   | p99:    1.15 µs
+   🗄️ Generating 1.5M (1500000 entries) MMDB with batch size 5000...
+   ✅ Database ready: 116.09 MiB in 2.26s
+     libmaxminddb-rs    | p99:   408.0 ns
+     libmaxminddb       | p99:    1.01 µs
+     maxminddb-rust     | p99:   872.0 ns
+     geoip2-rs          | p99:   752.0 ns
+     maxminddb-golang   | p99:    1.21 µs
+   🗄️ Generating 2M (2000000 entries) MMDB with batch size 5000...
+   ✅ Database ready: 149.25 MiB in 3.12s
+     libmaxminddb-rs    | p99:   408.0 ns
+     libmaxminddb       | p99:    1.01 µs
+     maxminddb-rust     | p99:   888.0 ns
+     geoip2-rs          | p99:   752.0 ns
+     maxminddb-golang   | p99:    1.24 µs
+   🗄️ Generating 5M (5000000 entries) MMDB with batch size 5000...
+   ✅ Database ready: 329.05 MiB in 8.25s
+     libmaxminddb-rs    | p99:   440.0 ns
+     libmaxminddb       | p99:    1.04 µs
+     maxminddb-rust     | p99:   944.0 ns
+     geoip2-rs          | p99:   791.0 ns
+     maxminddb-golang   | p99:    1.26 µs
+
+✍️ [Phase 5/5] MMDB Writer Benchmarks
+   📥 Generating 1K (1000 entries) MMDB Writer comparison...
+     libmaxminddb-rs    | rate: 192.6 K ops/s | total: 851.70 ms | peak RSS:  2.84 MiB
+     mmdbwriter         | rate: 163.2 K ops/s | total: 753.75 ms | peak RSS:  6.09 MiB
+   📥 Generating 10K (10000 entries) MMDB Writer comparison...
+     libmaxminddb-rs    | rate: 1.22 M ops/s | total: 896.29 ms | peak RSS:  6.28 MiB
+     mmdbwriter         | rate: 168.9 K ops/s | total: 947.37 ms | peak RSS: 15.46 MiB
+   📥 Generating 100K (100000 entries) MMDB Writer comparison...
+     libmaxminddb-rs    | rate: 1.27 M ops/s | total:   1.02 s | peak RSS: 32.53 MiB
+     mmdbwriter         | rate: 146.4 K ops/s | total:   1.37 s | peak RSS: 73.84 MiB
+   📥 Generating 500K (500000 entries) MMDB Writer comparison...
+     libmaxminddb-rs    | rate: 1.08 M ops/s | total:   1.39 s | peak RSS: 116.66 MiB
+     mmdbwriter         | rate: 120.8 K ops/s | total:   4.14 s | peak RSS: 151.45 MiB
+   📥 Generating 1M (1000000 entries) MMDB Writer comparison...
+     libmaxminddb-rs    | rate: 1.00 M ops/s | total:   2.00 s | peak RSS: 202.91 MiB
+     mmdbwriter         | rate: 130.9 K ops/s | total:   7.64 s | peak RSS: 153.21 MiB
+   📥 Generating 1.5M (1500000 entries) MMDB Writer comparison...
+     libmaxminddb-rs    | rate: 1.01 M ops/s | total:   1.48 s | peak RSS: 279.72 MiB
+     mmdbwriter         | rate: 152.6 K ops/s | total:   9.83 s | peak RSS: 158.84 MiB
+   📥 Generating 2M (2000000 entries) MMDB Writer comparison...
+     libmaxminddb-rs    | rate: 999.8 K ops/s | total:   2.00 s | peak RSS: 351.09 MiB
+     mmdbwriter         | rate: 178.0 K ops/s | total:  11.24 s | peak RSS: 154.59 MiB
+   📥 Generating 5M (5000000 entries) MMDB Writer comparison...
+     libmaxminddb-rs    | rate: 908.7 K ops/s | total:   5.50 s | peak RSS: 716.84 MiB
+     mmdbwriter         | rate: 313.5 K ops/s | total:  15.95 s | peak RSS: 152.46 MiB
+RSS fixture 1000: ready
+RSS fixture 10000: ready
+RSS fixture 100000: ready
+RSS fixture 500000: ready
+RSS fixture 1000000: ready
+RSS fixture 1500000: ready
+RSS fixture 2000000: ready
+RSS fixture 5000000: ready
+  RSS libmaxminddb-rs    /    1000 / repeat 1: open 6.664 MiB, peak 6.664 MiB
+  RSS libmaxminddb-rs    /    1000 / repeat 2: open 6.676 MiB, peak 6.676 MiB
+  RSS libmaxminddb-rs    /    1000 / repeat 3: open 6.660 MiB, peak 6.660 MiB
+  RSS libmaxminddb       /    1000 / repeat 1: open 5.453 MiB, peak 5.453 MiB
+  RSS libmaxminddb       /    1000 / repeat 2: open 5.461 MiB, peak 5.461 MiB
+  RSS libmaxminddb       /    1000 / repeat 3: open 5.465 MiB, peak 5.465 MiB
+  RSS maxminddb-rust     /    1000 / repeat 1: open 5.836 MiB, peak 5.910 MiB
+  RSS maxminddb-rust     /    1000 / repeat 2: open 5.824 MiB, peak 5.898 MiB
+  RSS maxminddb-rust     /    1000 / repeat 3: open 5.836 MiB, peak 5.910 MiB
+  RSS geoip2-rs          /    1000 / repeat 1: open 5.648 MiB, peak 5.719 MiB
+  RSS geoip2-rs          /    1000 / repeat 2: open 5.645 MiB, peak 5.715 MiB
+  RSS geoip2-rs          /    1000 / repeat 3: open 5.645 MiB, peak 5.715 MiB
+  RSS libmaxminddb-rs    /   10000 / repeat 1: open 8.891 MiB, peak 8.891 MiB
+  RSS libmaxminddb-rs    /   10000 / repeat 2: open 8.891 MiB, peak 8.891 MiB
+  RSS libmaxminddb-rs    /   10000 / repeat 3: open 8.891 MiB, peak 8.891 MiB
+  RSS libmaxminddb       /   10000 / repeat 1: open 5.516 MiB, peak 6.395 MiB
+  RSS libmaxminddb       /   10000 / repeat 2: open 5.516 MiB, peak 6.395 MiB
+  RSS libmaxminddb       /   10000 / repeat 3: open 5.516 MiB, peak 6.395 MiB
+  RSS maxminddb-rust     /   10000 / repeat 1: open 5.832 MiB, peak 6.840 MiB
+  RSS maxminddb-rust     /   10000 / repeat 2: open 5.832 MiB, peak 6.844 MiB
+  RSS maxminddb-rust     /   10000 / repeat 3: open 5.836 MiB, peak 6.844 MiB
+  RSS geoip2-rs          /   10000 / repeat 1: open 5.648 MiB, peak 6.652 MiB
+  RSS geoip2-rs          /   10000 / repeat 2: open 5.645 MiB, peak 6.648 MiB
+  RSS geoip2-rs          /   10000 / repeat 3: open 5.633 MiB, peak 6.637 MiB
+  RSS libmaxminddb-rs    /  100000 / repeat 1: open 34.430 MiB, peak 34.430 MiB
+  RSS libmaxminddb-rs    /  100000 / repeat 2: open 34.434 MiB, peak 34.434 MiB
+  RSS libmaxminddb-rs    /  100000 / repeat 3: open 34.434 MiB, peak 34.434 MiB
+  RSS libmaxminddb       /  100000 / repeat 1: open 5.469 MiB, peak 14.094 MiB
+  RSS libmaxminddb       /  100000 / repeat 2: open 5.461 MiB, peak 14.086 MiB
+  RSS libmaxminddb       /  100000 / repeat 3: open 5.473 MiB, peak 14.098 MiB
+  RSS maxminddb-rust     /  100000 / repeat 1: open 5.789 MiB, peak 14.543 MiB
+  RSS maxminddb-rust     /  100000 / repeat 2: open 5.789 MiB, peak 14.543 MiB
+  RSS maxminddb-rust     /  100000 / repeat 3: open 5.793 MiB, peak 14.547 MiB
+  RSS geoip2-rs          /  100000 / repeat 1: open 5.602 MiB, peak 14.352 MiB
+  RSS geoip2-rs          /  100000 / repeat 2: open 5.594 MiB, peak 14.344 MiB
+  RSS geoip2-rs          /  100000 / repeat 3: open 5.602 MiB, peak 14.352 MiB
+  RSS libmaxminddb-rs    /  500000 / repeat 1: open 101.293 MiB, peak 101.293 MiB
+  RSS libmaxminddb-rs    /  500000 / repeat 2: open 101.289 MiB, peak 101.289 MiB
+  RSS libmaxminddb-rs    /  500000 / repeat 3: open 101.289 MiB, peak 101.289 MiB
+  RSS libmaxminddb       /  500000 / repeat 1: open 5.512 MiB, peak 42.574 MiB
+  RSS libmaxminddb       /  500000 / repeat 2: open 5.508 MiB, peak 42.570 MiB
+  RSS libmaxminddb       /  500000 / repeat 3: open 5.512 MiB, peak 42.574 MiB
+  RSS maxminddb-rust     /  500000 / repeat 1: open 5.824 MiB, peak 43.016 MiB
+  RSS maxminddb-rust     /  500000 / repeat 2: open 5.828 MiB, peak 43.020 MiB
+  RSS maxminddb-rust     /  500000 / repeat 3: open 5.828 MiB, peak 43.023 MiB
+  RSS geoip2-rs          /  500000 / repeat 1: open 5.637 MiB, peak 42.824 MiB
+  RSS geoip2-rs          /  500000 / repeat 2: open 5.637 MiB, peak 42.824 MiB
+  RSS geoip2-rs          /  500000 / repeat 3: open 5.641 MiB, peak 42.828 MiB
+  RSS libmaxminddb-rs    / 1000000 / repeat 1: open 175.031 MiB, peak 175.031 MiB
+  RSS libmaxminddb-rs    / 1000000 / repeat 2: open 175.027 MiB, peak 175.027 MiB
+  RSS libmaxminddb-rs    / 1000000 / repeat 3: open 175.016 MiB, peak 175.016 MiB
+  RSS libmaxminddb       / 1000000 / repeat 1: open 5.469 MiB, peak 74.156 MiB
+  RSS libmaxminddb       / 1000000 / repeat 2: open 5.469 MiB, peak 74.156 MiB
+  RSS libmaxminddb       / 1000000 / repeat 3: open 5.457 MiB, peak 74.145 MiB
+  RSS maxminddb-rust     / 1000000 / repeat 1: open 5.789 MiB, peak 74.605 MiB
+  RSS maxminddb-rust     / 1000000 / repeat 2: open 5.785 MiB, peak 74.605 MiB
+  RSS maxminddb-rust     / 1000000 / repeat 3: open 5.789 MiB, peak 74.605 MiB
+  RSS geoip2-rs          / 1000000 / repeat 1: open 5.598 MiB, peak 74.410 MiB
+  RSS geoip2-rs          / 1000000 / repeat 2: open 5.598 MiB, peak 74.410 MiB
+  RSS geoip2-rs          / 1000000 / repeat 3: open 5.598 MiB, peak 74.410 MiB
+  RSS libmaxminddb-rs    / 1500000 / repeat 1: open 260.734 MiB, peak 260.734 MiB
+  RSS libmaxminddb-rs    / 1500000 / repeat 2: open 260.719 MiB, peak 260.719 MiB
+  RSS libmaxminddb-rs    / 1500000 / repeat 3: open 260.719 MiB, peak 260.719 MiB
+  RSS libmaxminddb       / 1500000 / repeat 1: open 5.504 MiB, peak 120.066 MiB
+  RSS libmaxminddb       / 1500000 / repeat 2: open 5.504 MiB, peak 120.066 MiB
+  RSS libmaxminddb       / 1500000 / repeat 3: open 5.504 MiB, peak 120.066 MiB
+  RSS maxminddb-rust     / 1500000 / repeat 1: open 5.824 MiB, peak 120.516 MiB
+  RSS maxminddb-rust     / 1500000 / repeat 2: open 5.812 MiB, peak 120.504 MiB
+  RSS maxminddb-rust     / 1500000 / repeat 3: open 5.820 MiB, peak 120.512 MiB
+  RSS geoip2-rs          / 1500000 / repeat 1: open 5.629 MiB, peak 120.316 MiB
+  RSS geoip2-rs          / 1500000 / repeat 2: open 5.637 MiB, peak 120.324 MiB
+  RSS geoip2-rs          / 1500000 / repeat 3: open 5.633 MiB, peak 120.320 MiB
+  RSS libmaxminddb-rs    / 2000000 / repeat 1: open 331.016 MiB, peak 331.016 MiB
+  RSS libmaxminddb-rs    / 2000000 / repeat 2: open 331.012 MiB, peak 331.012 MiB
+  RSS libmaxminddb-rs    / 2000000 / repeat 3: open 331.012 MiB, peak 331.012 MiB
+  RSS libmaxminddb       / 2000000 / repeat 1: open 5.480 MiB, peak 153.043 MiB
+  RSS libmaxminddb       / 2000000 / repeat 2: open 5.480 MiB, peak 153.043 MiB
+  RSS libmaxminddb       / 2000000 / repeat 3: open 5.469 MiB, peak 153.031 MiB
+  RSS maxminddb-rust     / 2000000 / repeat 1: open 5.797 MiB, peak 153.492 MiB
+  RSS maxminddb-rust     / 2000000 / repeat 2: open 5.801 MiB, peak 153.492 MiB
+  RSS maxminddb-rust     / 2000000 / repeat 3: open 5.789 MiB, peak 153.480 MiB
+  RSS geoip2-rs          / 2000000 / repeat 1: open 5.609 MiB, peak 153.297 MiB
+  RSS geoip2-rs          / 2000000 / repeat 2: open 5.598 MiB, peak 153.285 MiB
+  RSS geoip2-rs          / 2000000 / repeat 3: open 5.613 MiB, peak 153.301 MiB
+  RSS libmaxminddb-rs    / 5000000 / repeat 1: open 718.910 MiB, peak 718.910 MiB
+  RSS libmaxminddb-rs    / 5000000 / repeat 2: open 718.910 MiB, peak 718.910 MiB
+  RSS libmaxminddb-rs    / 5000000 / repeat 3: open 718.906 MiB, peak 718.906 MiB
+  RSS libmaxminddb       / 5000000 / repeat 1: open 5.500 MiB, peak 334.062 MiB
+  RSS libmaxminddb       / 5000000 / repeat 2: open 5.500 MiB, peak 334.062 MiB
+  RSS libmaxminddb       / 5000000 / repeat 3: open 5.496 MiB, peak 334.059 MiB
+  RSS maxminddb-rust     / 5000000 / repeat 1: open 5.812 MiB, peak 334.504 MiB
+  RSS maxminddb-rust     / 5000000 / repeat 2: open 5.809 MiB, peak 334.500 MiB
+  RSS maxminddb-rust     / 5000000 / repeat 3: open 5.812 MiB, peak 334.504 MiB
+  RSS geoip2-rs          / 5000000 / repeat 1: open 5.625 MiB, peak 334.312 MiB
+  RSS geoip2-rs          / 5000000 / repeat 2: open 5.629 MiB, peak 334.316 MiB
+  RSS geoip2-rs          / 5000000 / repeat 3: open 5.617 MiB, peak 334.305 MiB
+
+✅ Comparative benchmark suite completed successfully.
+
+╔═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╗
+║                                        🏁 📊 Reader Benchmark Summary — Key Metrics & p99 Latency ⚡                                        ║
+╠═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣
+║                  🦀 libmaxminddb-rs  ·  🏛️ libmaxminddb (C)  ·  📦 maxminddb-rust  ·  🚀 geoip2-rs  ·  🐹 maxminddb-golang                   ║
+╚═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝
+Scenario                       Metric                            🦀 ours               🏛️ C      📦 maxminddb         🚀 geoip2             🐹 go
+───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+IPv4 Random Lookup (1M)        p99 Tail Latency              472.0 ns 🏆          760.0 ns          664.0 ns          480.0 ns           1.22 µs
+IPv4 Random Throughput (1M)    Peak Throughput          28.49 M ops/s 🏆     16.69 M ops/s     14.72 M ops/s     23.09 M ops/s      9.85 M ops/s
+IPv6 Random Lookup (1M)        p99 Tail Latency               48.0 ns 🏆          120.0 ns           96.0 ns           88.0 ns           96.0 ns
+IPv6 Random Throughput (1M)    Peak Throughput          97.23 M ops/s 🏆     65.97 M ops/s     31.35 M ops/s     55.14 M ops/s     32.38 M ops/s
+16-Thread Concurrent IPv4      Concurrent Throughput    58.57 M ops/s 🏆     41.62 M ops/s     40.11 M ops/s     54.13 M ops/s     22.84 M ops/s
+IPv4 Heap Allocations          Allocations / Op                        0                 0                 0                 0              0 🏆
+Database Open (mmap)           Median Latency                   77.88 µs          22.95 µs           6.13 µs        5.95 µs 🏆          11.23 µs
+═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+
+╔═══════════════════════════════════════════════════════════════════════════════════════════════════╗
+║                 ✍️ 📦 Writer Benchmark Summary — Performance & Memory Footprint 🚀                 ║
+╠═══════════════════════════════════════════════════════════════════════════════════════════════════╣
+║                             🦀 libmaxminddb-rs  ·  ✍️ mmdbwriter (Go)                              ║
+╚═══════════════════════════════════════════════════════════════════════════════════════════════════╝
+Scenario                       Metric                       🦀 libmaxminddb-rs       ✍️ mmdbwriter (Go)
+─────────────────────────────────────────────────────────────────────────────────────────────────────
+Writer Generation (5M)         Insert Throughput              908.7 K ops/s 🏆           313.5 K ops/s
+Writer Total Time (5M)         Total Duration                        5.50 s 🏆                 15.95 s
+Writer Peak RSS (5M)           Peak Memory (RSS)                    716.84 MiB           152.46 MiB 🏆
+═════════════════════════════════════════════════════════════════════════════════════════════════════
+
+🧠 Aggregating recorded memory measurements and calculating statistics...
+📈 Generating standalone SVG benchmark charts in /home/runner/work/libmaxminddb-rs/libmaxminddb-rs/benchmarks/charts...
+   ✅ Generated 33 standalone charts
+📈 Generating interactive HTML report at /home/runner/work/libmaxminddb-rs/libmaxminddb-rs/benchmark-report/index.html...
+   ✅ Report generated: /home/runner/work/libmaxminddb-rs/libmaxminddb-rs/benchmark-report/index.html
+📝 Updating benchmark tables and charts in /home/runner/work/libmaxminddb-rs/libmaxminddb-rs/README.md...
+   ✅ README.md updated successfully
+📈 Refreshing SVG benchmark charts in /home/runner/work/libmaxminddb-rs/libmaxminddb-rs/docs/images/benchmarks...
+   ✅ Refreshed 33 SVG charts
+
+🎉 Comparative benchmarks and reports completed in 780.3s
+
+🌐 HTML Report: ]8;;file:///home/runner/work/libmaxminddb-rs/libmaxminddb-rs/benchmark-report/index.html\/home/runner/work/libmaxminddb-rs/libmaxminddb-rs/benchmark-report/index.html]8;;\

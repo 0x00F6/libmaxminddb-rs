@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 500" width="100%" height="500">
+<style>svg { background-color: #0d1117; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }text { fill: #c9d1d9; }.chart-title { fill: #f0f6fc; font-size: 20px; font-weight: 700; letter-spacing: -0.2px; }.chart-subtitle { fill: #8b949e; font-size: 14px; font-weight: 400; }.axis-line { stroke: #30363d; stroke-width: 1.5; }.grid-line { stroke: #21262d; stroke-dasharray: 4,4; stroke-width: 1; }.axis-label { fill: #8b949e; font-size: 13px; }.svg-value { fill: #f0f6fc; font-size: 13px; font-weight: 700; }.legend-text { fill: #c9d1d9; font-size: 13px; font-weight: 600; }</style>
+<text x="20" y="38" class="chart-title">Writer Total Time</text>
+<text x="20" y="62" class="chart-subtitle">Total wall clock time for MMDB generation (lower is better)</text>
+<line x1="85" y1="430" x2="830" y2="430" class="axis-line"/>
+<line x1="85" y1="85" x2="85" y2="430" class="axis-line"/>
+<line x1="85" y1="430" x2="830" y2="430" class="grid-line"/>
+<text x="75" y="434" class="axis-label" text-anchor="end">0.0 s</text>
+<line x1="85" y1="361" x2="830" y2="361" class="grid-line"/>
+<text x="75" y="365" class="axis-label" text-anchor="end">3.2 s</text>
+<line x1="85" y1="292" x2="830" y2="292" class="grid-line"/>
+<text x="75" y="296" class="axis-label" text-anchor="end">6.4 s</text>
+<line x1="85" y1="223" x2="830" y2="223" class="grid-line"/>
+<text x="75" y="227" class="axis-label" text-anchor="end">9.6 s</text>
+<line x1="85" y1="154" x2="830" y2="154" class="grid-line"/>
+<text x="75" y="158" class="axis-label" text-anchor="end">12.8 s</text>
+<line x1="85" y1="85" x2="830" y2="85" class="grid-line"/>
+<text x="75" y="89" class="axis-label" text-anchor="end">15.9 s</text>
+<text x="85" y="455" class="axis-label" text-anchor="middle">1K</text>
+<text x="191" y="455" class="axis-label" text-anchor="middle">10K</text>
+<text x="297" y="455" class="axis-label" text-anchor="middle">100K</text>
+<text x="404" y="455" class="axis-label" text-anchor="middle">500K</text>
+<text x="510" y="455" class="axis-label" text-anchor="middle">1M</text>
+<text x="617" y="455" class="axis-label" text-anchor="middle">1.5M</text>
+<text x="723" y="455" class="axis-label" text-anchor="middle">2M</text>
+<text x="830" y="455" class="axis-label" text-anchor="middle">5M</text>
+<polyline points="85,412 191,411 297,408 404,400 510,387 617,398 723,387 830,311" fill="none" stroke="#00f5a0" stroke-width="2.5" stroke-linejoin="round"/>
+<circle class="" cx="85" cy="412" r="4" fill="#00f5a0" style="cursor:pointer;"><title>libmaxminddb-rs: 0.85 s @ 1K</title></circle>
+<circle class="" cx="191" cy="411" r="4" fill="#00f5a0" style="cursor:pointer;"><title>libmaxminddb-rs: 0.90 s @ 10K</title></circle>
+<circle class="" cx="297" cy="408" r="4" fill="#00f5a0" style="cursor:pointer;"><title>libmaxminddb-rs: 1.02 s @ 100K</title></circle>
+<circle class="" cx="404" cy="400" r="4" fill="#00f5a0" style="cursor:pointer;"><title>libmaxminddb-rs: 1.39 s @ 500K</title></circle>
+<circle class="" cx="510" cy="387" r="4" fill="#00f5a0" style="cursor:pointer;"><title>libmaxminddb-rs: 2.00 s @ 1M</title></circle>
+<circle class="" cx="617" cy="398" r="4" fill="#00f5a0" style="cursor:pointer;"><title>libmaxminddb-rs: 1.48 s @ 1.5M</title></circle>
+<circle class="" cx="723" cy="387" r="4" fill="#00f5a0" style="cursor:pointer;"><title>libmaxminddb-rs: 2.00 s @ 2M</title></circle>
+<circle class="" cx="830" cy="311" r="4" fill="#00f5a0" style="cursor:pointer;"><title>libmaxminddb-rs: 5.50 s @ 5M</title></circle>
+<circle class="" cx="850" cy="105" r="5" fill="#00f5a0"/>
+<text x="862" y="109" class="legend-text">libmaxminddb-rs</text>
+<polyline points="85,414 191,410 297,400 404,340 510,265 617,217 723,187 830,85" fill="none" stroke="#a06ee1" stroke-width="2.5" stroke-linejoin="round"/>
+<circle class="" cx="85" cy="414" r="4" fill="#a06ee1" style="cursor:pointer;"><title>mmdbwriter: 0.75 s @ 1K</title></circle>
+<circle class="" cx="191" cy="410" r="4" fill="#a06ee1" style="cursor:pointer;"><title>mmdbwriter: 0.95 s @ 10K</title></circle>
+<circle class="" cx="297" cy="400" r="4" fill="#a06ee1" style="cursor:pointer;"><title>mmdbwriter: 1.37 s @ 100K</title></circle>
+<circle class="" cx="404" cy="340" r="4" fill="#a06ee1" style="cursor:pointer;"><title>mmdbwriter: 4.14 s @ 500K</title></circle>
+<circle class="" cx="510" cy="265" r="4" fill="#a06ee1" style="cursor:pointer;"><title>mmdbwriter: 7.64 s @ 1M</title></circle>
+<circle class="" cx="617" cy="217" r="4" fill="#a06ee1" style="cursor:pointer;"><title>mmdbwriter: 9.83 s @ 1.5M</title></circle>
+<circle class="" cx="723" cy="187" r="4" fill="#a06ee1" style="cursor:pointer;"><title>mmdbwriter: 11.24 s @ 2M</title></circle>
+<circle class="" cx="830" cy="85" r="4" fill="#a06ee1" style="cursor:pointer;"><title>mmdbwriter: 15.95 s @ 5M</title></circle>
+<circle class="" cx="850" cy="129" r="5" fill="#a06ee1"/>
+<text x="862" y="133" class="legend-text">mmdbwriter</text>
+</svg>

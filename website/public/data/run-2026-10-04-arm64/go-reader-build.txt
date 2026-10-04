@@ -1,0 +1,16 @@
+target/benchmark-bin/maxminddb-golang: go1.25.0
+	path	go-bench/cmd/reader
+	mod	go-bench	(devel)	
+	dep	github.com/oschwald/maxminddb-golang/v2	v2.6.0	h1:pRlHCdJmc+4uxMOSthmKDt5HOw3JTX8TJZlhyP5ew0w=
+	dep	golang.org/x/sys	v0.47.0	h1:o7XGOvZQCADBQQ4Y7VNq2dRWQR7JmOUW8Kxx4ZsNgWs=
+	build	-buildmode=exe
+	build	-compiler=gc
+	build	-trimpath=true
+	build	CGO_ENABLED=1
+	build	GOARCH=arm64
+	build	GOOS=linux
+	build	GOARM64=v8.0
+	build	vcs=git
+	build	vcs.revision=07022c096d8e8011148429b228f5406d1f581267
+	build	vcs.time=2026-10-04T18:00:25Z
+	build	vcs.modified=true
