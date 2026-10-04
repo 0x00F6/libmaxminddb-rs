@@ -3,7 +3,8 @@
 use std::sync::Arc;
 
 use libmaxminddb_rs::{
-    Editor, MergeStrategy, MetadataBuilder, MmdbDecode, MmdbEncode, Reader, ReloadableReader, Writer,
+    Editor, MergeStrategy, MetadataBuilder, MmdbDecode, MmdbEncode, Reader, ReloadableReader,
+    Writer,
 };
 
 #[derive(Debug, PartialEq, MmdbDecode, MmdbEncode)]
