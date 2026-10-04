@@ -24,7 +24,17 @@ pub fn get_git_revision() -> String {
 
 pub fn detect_versions() -> HashMap<String, String> {
     let mut versions = HashMap::new();
-    versions.insert("libmaxminddb-rs".into(), "0.1.0".into());
+    let version = fs::read_to_string(ROOT.join("Cargo.toml"))
+        .ok()
+        .and_then(|manifest| {
+            manifest.lines().find_map(|line| {
+                line.strip_prefix("version = \"")
+                    .and_then(|value| value.strip_suffix('"'))
+                    .map(str::to_owned)
+            })
+        })
+        .unwrap_or_else(|| "unknown".into());
+    versions.insert("libmaxminddb-rs".into(), version);
     versions.insert("maxminddb-rust".into(), "0.32.0".into());
     versions.insert("geoip2-rs".into(), "0.1.8".into());
     let c_ver = std::env::var("LIBMAXMINDDB_BENCH_VERSION").unwrap_or_else(|_| "1.14.1".into());
