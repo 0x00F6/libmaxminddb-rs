@@ -55,9 +55,21 @@ jobs:
           if [ "$enabled" != true ]; then
             echo 'Website built and tested. Enable GitHub Pages with GitHub Actions as the source, then rerun this workflow to publish.' >> "$GITHUB_STEP_SUMMARY"
           fi
+  repository-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: '1.98.1'
+          components: rustfmt, clippy, llvm-tools-preview
+      - uses: Swatinem/rust-cache@v2
+      - name: Install coverage tool for the repository checks
+        run: cargo install cargo-llvm-cov --locked
+      - run: make check
   deploy:
     if: github.event_name != 'pull_request' && needs.build.outputs.pages_enabled == 'true'
-    needs: build
+    needs: [build, repository-check]
     runs-on: ubuntu-latest
     permissions:
       pages: write
