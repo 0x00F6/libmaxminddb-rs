@@ -25,6 +25,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       pages_enabled: ${{ steps.repository.outputs.pages_enabled }}
+      pages_artifact: ${{ steps.package.outputs.artifact_name }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -42,8 +43,12 @@ jobs:
         with:
           name: website-previews
           path: website/test-results/
+      - name: Name this build artifact
+        id: package
+        run: echo "artifact_name=github-pages-$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT" >> "$GITHUB_OUTPUT"
       - uses: actions/upload-pages-artifact@v3
         with:
+          name: ${{ steps.package.outputs.artifact_name }}
           path: website/dist
       - name: Check Pages availability
         id: repository
@@ -82,3 +87,5 @@ jobs:
       - name: Deploy the project website
         id: deployment
         uses: actions/deploy-pages@v4
+        with:
+          artifact_name: ${{ needs.build.outputs.pages_artifact }}

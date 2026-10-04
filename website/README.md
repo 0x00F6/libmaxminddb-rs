@@ -71,3 +71,7 @@ Go compiler was not archived. The site and README make this explicit; the raw
 generated report is preserved unmodified. 8/16-worker comparisons oversubscribe
 the runner, and this run should not be used to claim a regression or improvement
 against older results collected on a different CPU.
+
+Each Pages archive has a unique run/attempt name. Deployment consumes the build
+job's recorded archive name, so rerunning a build or only the deployment cannot
+select an older archive with a duplicate name.
