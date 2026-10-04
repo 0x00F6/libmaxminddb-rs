@@ -2,6 +2,12 @@
 
 All notable changes to this project are documented here. This project follows [Semantic Versioning](https://semver.org/).
 
+## [0.3.1] - 2026-10-04
+
+- Fixed escaped Markdown code fences and inline code in the crates.io README.
+- Condensed Editor documentation into one complete example with visible `main`, English comments, typed DeepMerge updates and old database reclamation.
+- Moved More examples to the end of both READMEs and synchronized the runnable example.
+
 ## [0.3.0] - 2026-10-04
 
 - Added `Editor::from_reader` and ordered updates/deletions to rebuild existing MMDB databases.

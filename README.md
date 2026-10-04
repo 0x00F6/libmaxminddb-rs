@@ -41,6 +41,7 @@ An independent Rust implementation of the MaxMind DB (MMDB) v2 format. It reads 
 - [Code Coverage & Tests](#code-coverage--tests)
 - [Contributing](#contributing)
 - [License](#license)
+- [More examples](#more-examples)
 
 ---
 
@@ -98,7 +99,7 @@ Add `libmaxminddb-rs` to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-libmaxminddb-rs = "0.3.0"
+libmaxminddb-rs = "0.3.1"
 ```
 
 ### ⚙️ Cargo Features
@@ -587,98 +588,28 @@ Executing the lookup yields the fully unified document combining both datasets:
 
 ### 🔄 4. Hot In-Memory Database Updates
 
-`ReloadableReader` updates the active MMDB in memory while other threads keep
-reading consistent, immutable generations.
+`Editor::from_reader` shares an existing reader and stages updates or deletions.
+`finish()` returns rebuilt MMDB bytes; `write_to_file()` writes them to disk.
+With `reader` and `writer` enabled, `ReloadableReader::commit` publishes the rebuilt
+database while other threads continue reading.
 
-- ⚡ **No global read lock:** lookups use `ArcSwap<Reader>` from the
-  [`arc-swap`](https://docs.rs/arc-swap/latest/arc_swap/) crate instead of a
-  global `Mutex` or `RwLock`. This avoids lock contention between readers and
-  the publisher on the lookup hot path. Atomic operations still have a cost;
-  use the benchmarks to measure it for your workload.
-- 🧩 **Shared source:** `Editor::from_reader(database.snapshot())` shares the
-  bytes, metadata and prepared tree without copying them. Edits stay in an
-  independent overlay until rebuild.
-- 🔄 **Atomic publication:** `commit(editor)` builds and prepares a replacement
-  before publishing it. Each query or batch holds one `load()` guard, so it
-  never mixes old and new generations. Typed `lookup_borrowed` results remain
-  valid while that guard lives; `snapshot()` provides an owned Arc for longer
-  tasks.
-- 🗑️ **Automatic reclamation:** a successful commit consumes the editor and
-  releases its source references. If no old guards, snapshots or other editors
-  remain, the old Reader and its owned buffers are destroyed before commit
-  returns. Otherwise, reclamation waits for the final user of that generation.
-  Keep guards scoped to queries and avoid retaining an unnecessary source Arc.
-- 🛡️ **Conflict protection:** stale editors return `Ok(false)` instead of
-  overwriting a newer publication. Reapply their edits from a fresh snapshot.
-  Opening or rebuilding errors leave the active generation unchanged.
+- ⚡ **Fast reads:** `ArcSwap` avoids a global `Mutex`/`RwLock` on the lookup path.
+  Hold one `load()` guard per query or batch; borrowed fields cannot outlive it.
+- 🧩 **Typed updates:** pass an owned `Value` or a reference to a custom
+  `MmdbEncode` struct, plus an explicit `MergeStrategy`.
+- 🔀 **Merge behavior:** `Replace` replaces values; `DeepMerge` merges maps,
+  appends arrays and replaces scalars. `Append`/`AppendUnique` append array items.
+  Updates run in order on exact prefixes exported from the MMDB tree, without
+  merging inherited parent values or more-specific children.
+- 🛡️ **Safe publication:** `commit` returns `false` for stale editors; retry with
+  a fresh snapshot. Rebuild errors leave the active reader unchanged.
+- 🗑️ **Memory:** old owned buffers are released after the last guard, snapshot
+  or editor drops. Rebuilding temporarily holds both generations; RSS may not
+  decrease immediately. Publication does not persist a file. Never overwrite
+  or truncate a mapped file while a reader still uses it.
 
-Rebuilding temporarily needs both the source and replacement, plus rebuild
-buffers. Dropping the old owned Reader returns its buffers to the allocator;
-process RSS need not decrease immediately. Externally borrowed source buffers
-remain owned by their caller. Publication itself does not persist a file.
-
-```rust
-use libmaxminddb_rs::{Editor, MergeStrategy, Reader, ReloadableReader, Value};
-
-# fn main() -> Result<(), Box<dyn std::error::Error>> {
-let database = ReloadableReader::new(Reader::open("GeoIP.mmdb")?);
-let ip = "1.2.3.4".parse()?;
-std::thread::scope(|scope| {
-    for _ in 0..4 {
-        let database = &database;
-        scope.spawn(move || {
-            for _ in 0..10_000 {
-                let guard = database.load();
-                let record = guard.lookup_value(ip);
-                // Use borrowed fields while `guard` lives. A miss is allowed.
-                std::hint::black_box(record);
-            }
-        });
-    }
-    // These edits and publication run concurrently with the reading threads.
-    let mut editor = Editor::from_reader(database.snapshot());
-    editor.update_value("1.2.3.4/32".parse().unwrap(), Value::Uint32(42), MergeStrategy::Replace)?;
-    if !database.commit(editor)? {
-        // Another publisher won: start a fresh editor and reapply the edits.
-    }
-    Ok::<(), libmaxminddb_rs::Error>(())
-})?;
-# Ok(())
-# }
-```
-
-`commit` rebuilds and prepares the replacement before comparing source Arc
-identity and swapping atomically. A stale editor returns `Ok(false)` without
-replacing the active reader. Opening/rebuild errors also leave it unchanged.
-Unconditional `replace`, `replace_from_vec` and `reload` use last-publication-wins
-semantics. Publication is in memory; file persistence and watching are separate.
-Never overwrite or truncate an mmap-backed file while any snapshot uses it.
-Holding old generations retains their bytes and prepared trees. Sharing and
-publication copy no database bytes; rebuilding currently decodes unchanged
-records into owned values and serializes a new database.
-
-`cargo bench --bench editor` compares direct, guard and owned-snapshot lookups,
-shared editor creation and prepared-reader publication on a deterministic base
-of 1,000,000 IPv4 /32 entries. Rebuild benchmarks update or remove 1,000 entries.
-Fixture preparation is outside timing; these are single-thread measurements,
-not a claim of concurrent throughput or a guaranteed speedup.
-
-See [`examples/concurrent_editor.rs`](examples/concurrent_editor.rs) for four
-reading threads and a writing thread using `Editor::from_reader` and atomic
-publication. Run `cargo run --example concurrent_editor`. The concurrency tests
-cover snapshot reclamation, invalid replacements, stale editors, competing
-publishers, mixed IPv4/IPv6 consistency and concurrent editor commits. These
-stress tests complement Rust's Send/Sync checks; they are not a formal proof or
-substitute for a sanitizer run.
-
-
-#### 🗑️ Example: release the old database after commit
-
-The following complete example retains no old guards or strong snapshots at
-publication. A `Weak` observer checks that the previous Reader was destroyed;
-it does not keep the Reader alive. Its remaining small allocation is dropped
-as well. With concurrent readers still using the old generation, destruction
-would instead happen after their final guard or snapshot is released.
+This complete example updates a custom record, preserves its country field,
+and verifies that the old database is destroyed after commit:
 
 ```rust
 use std::sync::Arc;
@@ -692,122 +623,55 @@ use libmaxminddb_rs::{
 struct Record<'a> {
     country: &'a str,
     score: u32,
-    tags: Vec<&'a str>,
 }
 
 #[derive(MmdbEncode)]
-struct Patch<'a> {
+struct Patch {
     score: u32,
-    tags: Vec<&'a str>,
 }
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let network = "198.51.100.0/24".parse()?;
     let ip = "198.51.100.7".parse()?;
-
-    let metadata = MetadataBuilder::new()
-        .ip_version(4)
-        .database_type("editor-memory-example")
-        .build()?;
+    let metadata = MetadataBuilder::new().ip_version(4).build()?;
     let mut writer = Writer::with_metadata(metadata);
     writer.insert_encoded(
         network,
         &Record {
             country: "FR",
             score: 1,
-            tags: vec!["initial"],
         },
     )?;
 
-    // Move the owned Reader directly into the container: no extra source Arc.
+    // Transfer ownership without retaining an extra Arc to the old database.
     let database = ReloadableReader::new(Reader::from_vec(writer.finish()?)?);
-
     {
         let guard = database.load();
         let record: Record<'_> = guard.lookup_borrowed(ip)?;
-        assert_eq!(record.score, 1);
-        println!("[before] {record:?}");
-    } // The borrowed record and its guard are dropped here.
+        println!("Before update: {record:?}");
+    } // Borrowed fields and their guard are dropped before publication.
 
     let mut editor = Editor::from_reader(database.snapshot());
-    // Weak observes destruction without keeping the Reader alive.
+    // Weak observes destruction without keeping the old Reader alive.
     let old_lifetime = Arc::downgrade(editor.source_reader());
-    let patch = Patch {
-        score: 42,
-        tags: vec!["updated"],
-    };
-    editor.update_value(network, &patch, MergeStrategy::DeepMerge)?;
+    editor.update_value(network, &Patch { score: 42 }, MergeStrategy::DeepMerge)?;
 
-    println!("[edit] Changes are staged; the source is still unchanged.");
-    println!("[commit] Rebuilding and atomically publishing the new database.");
-    // With only one writer, no publication conflict is expected.
+    // Rebuild, then publish atomically. A stale editor would return false.
     assert!(database.commit(editor)?, "Unexpected publication conflict");
-
-    // Commit consumed the editor. No old guard or snapshot is retained here.
-    assert!(
-        old_lifetime.upgrade().is_none(),
-        "The old Reader is unexpectedly still alive"
-    );
-    println!("[memory] Old Reader destroyed; its owned buffers were released.");
-    // Release the small allocation retained by the Weak observer as well.
+    assert!(old_lifetime.upgrade().is_none());
     drop(old_lifetime);
+    println!("Committed: the old Reader and its owned buffers were released.");
 
-    {
-        let guard = database.load();
-        let record: Record<'_> = guard.lookup_borrowed(ip)?;
-        assert_eq!(record.country, "FR");
-        assert_eq!(record.score, 42);
-        assert_eq!(record.tags, vec!["initial", "updated"]);
-        println!("[after] {record:?}");
-    }
-
-    println!("[done] Only the new database remains in the container.");
+    let guard = database.load();
+    let record: Record<'_> = guard.lookup_borrowed(ip)?;
+    assert_eq!((record.country, record.score), ("FR", 42));
+    println!("After DeepMerge: {record:?}");
     Ok(())
 }
 ```
 
-Run it with `cargo run --example editor_merge`; see
-[`examples/editor_merge.rs`](examples/editor_merge.rs).
-
-#### Editor updates with a merge strategy and custom records
-
-`Editor::update_value(network, value, strategy)` now requires an explicit
-`MergeStrategy`. Owned `Value` inputs move without cloning; custom structs are
-passed by reference and encoded with `MmdbEncode`, without requiring serde.
-
-```rust
-use libmaxminddb_rs::{Editor, MergeStrategy, MmdbEncode};
-
-#[derive(MmdbEncode)]
-struct Patch<'a> {
-    score: u32,
-    tags: Vec<&'a str>,
-}
-
-# fn main() -> Result<(), Box<dyn std::error::Error>> {
-let mut editor = Editor::open("input.mmdb")?;
-let patch = Patch { score: 42, tags: vec!["updated"] };
-editor.update_value("198.51.100.0/24".parse()?, &patch, MergeStrategy::DeepMerge)?;
-let replacement = editor.finish()?;
-# Ok(())
-# }
-```
-
-`Replace` discards the old value. `DeepMerge` recursively merges maps, appends
-arrays and replaces scalar conflicts. `Append` appends arrays; `AppendUnique`
-appends only new elements. Updates are replayed in call order, so successive
-updates retain their individual strategies. The source remains borrowed until
-rebuild. Merge behavior matches the Writer on the same reconstructed prefix:
-inherited parent values and more-specific child records are not merged into
-that prefix. A missing exact prefix is inserted. MMDB does not preserve the
-original writer insertion boundaries; source routes are exported from its tree.
-`insert_value` and serde-based `update` still use Replace. `pending_edits` counts
-distinct modified prefixes, rather than queued operations.
-
-Run `cargo run --example editor_merge` for a complete custom-record DeepMerge
-example with English console output and publication through `ReloadableReader`.
-
----
+Run `cargo run --example editor_merge` for this example or
+`cargo run --example concurrent_editor` for concurrent readers and a writer.
 
 ## 📊 Benchmarks
 
@@ -972,3 +836,15 @@ Issues and pull requests are welcome. Please read [CONTRIBUTING.md](CONTRIBUTING
 ## License
 
 Licensed under either [MIT](LICENSE-MIT) or [Apache-2.0](LICENSE-APACHE), at your option.
+
+## More examples
+
+Explore the [examples directory](https://github.com/0x00F6/libmaxminddb-rs/tree/main/examples):
+[quickstart](https://github.com/0x00F6/libmaxminddb-rs/blob/main/examples/quickstart.rs),
+[concurrent updates](https://github.com/0x00F6/libmaxminddb-rs/blob/main/examples/concurrent_editor.rs),
+[DeepMerge and memory reclamation](https://github.com/0x00F6/libmaxminddb-rs/blob/main/examples/editor_merge.rs),
+and [custom database writing](https://github.com/0x00F6/libmaxminddb-rs/blob/main/examples/custom_database.rs).
+Run one with `cargo run --example quickstart`.
+
+See the [API documentation](https://docs.rs/libmaxminddb-rs) for all methods.
+Minimum Rust version: **1.98.1**. License: **MIT or Apache-2.0**.

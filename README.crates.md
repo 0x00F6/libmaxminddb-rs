@@ -6,7 +6,7 @@ A pure Rust reader and writer for MaxMind DB (MMDB) v2 files. Read IPv4 and IPv6
 
 ```toml
 [dependencies]
-libmaxminddb-rs = "0.3.0"
+libmaxminddb-rs = "0.3.1"
 ```
 
 Default features include the reader, writer, derive macros, SIMD ASCII scanning, and the prepared search tree. For a smaller reader-only build, use `default-features = false` with `features = ["reader", "derive"]`.
@@ -257,7 +257,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 `lookup_value` returns a borrowed generic value. A missing address returns `Error::NotFound`:
 
-```rust,no_run
+```rust
 use libmaxminddb_rs::{Error, Reader};
 use std::net::IpAddr;
 
@@ -273,135 +273,101 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 }
 ```
 
-## More examples
+## 🔄 Hot In-Memory Database Updates
 
-The project's [examples directory](https://github.com/0x00F6/libmaxminddb-rs/tree/main/examples) contains runnable Reader and Writer programs, including [quickstart](https://github.com/0x00F6/libmaxminddb-rs/blob/main/examples/quickstart.rs), [fast IPv4/IPv6 lookups](https://github.com/0x00F6/libmaxminddb-rs/blob/main/examples/fast_ip_lookup.rs), and [custom database writing](https://github.com/0x00F6/libmaxminddb-rs/blob/main/examples/custom_database.rs). Run one with `cargo run --example quickstart`.
+`Editor::from_reader` shares an existing reader and stages updates or deletions.
+`finish()` returns rebuilt MMDB bytes; `write_to_file()` writes them to disk.
+With `reader` and `writer` enabled, `ReloadableReader::commit` publishes the rebuilt
+database while other threads continue reading.
 
-See the [API documentation](https://docs.rs/libmaxminddb-rs) for all lookup and writer methods. Minimum supported Rust version: **1.98.1**. Licensed under **MIT or Apache-2.0**, at your option.
+- ⚡ **Fast reads:** `ArcSwap` avoids a global `Mutex`/`RwLock` on the lookup path.
+  Hold one `load()` guard per query or batch; borrowed fields cannot outlive it.
+- 🧩 **Typed updates:** pass an owned `Value` or a reference to a custom
+  `MmdbEncode` struct, plus an explicit `MergeStrategy`.
+- 🔀 **Merge behavior:** `Replace` replaces values; `DeepMerge` merges maps,
+  appends arrays and replaces scalars. `Append`/`AppendUnique` append array items.
+  Updates run in order on exact prefixes exported from the MMDB tree, without
+  merging inherited parent values or more-specific children.
+- 🛡️ **Safe publication:** `commit` returns `false` for stale editors; retry with
+  a fresh snapshot. Rebuild errors leave the active reader unchanged.
+- 🗑️ **Memory:** old owned buffers are released after the last guard, snapshot
+  or editor drops. Rebuilding temporarily holds both generations; RSS may not
+  decrease immediately. Publication does not persist a file. Never overwrite
+  or truncate a mapped file while a reader still uses it.
 
-
-## Editing an existing MMDB
-
-With both the \`reader\` and \`writer\` features enabled, \`Editor\` keeps the
-source MMDB borrowed and records changes in a copy-on-write overlay. The source
-file is never modified in place; \`finish\` or \`write_to_file\` rebuilds a valid
-MMDB atomically at the application level.
-
-\`\`\`rust
-use libmaxminddb_rs::{Editor, MergeStrategy, Value};
-
-let bytes = std::fs::read("input.mmdb")?;
-let mut editor = Editor::from_bytes(&bytes)?;
-editor.update_value("198.51.100.0/24".parse()?, Value::Uint32(64512), MergeStrategy::Replace)?;
-editor.remove("203.0.113.0/24".parse()?)?;
-editor.insert_value("192.0.2.0/24".parse()?, Value::Bool(true))?;
-std::fs::write("output.mmdb", editor.finish()?)?;
-# Ok::<(), Box<dyn std::error::Error>>(())
-\`\`\`
-
-Removal uses an explicit no-data trie boundary, so a removed child network does
-not accidentally inherit its parent's value and more-specific child records are
-preserved.
-
-
-## Atomic reader reloads
-
-`ReloadableReader` uses `arc-swap` to publish immutable `Arc<Reader>` generations.
-A query or batch holds one `load()` guard; borrowed results remain valid only
-while that guard lives. `snapshot()` returns an owned Arc for async tasks or
-long-lived work. Editors share the same bytes, metadata and prepared tree.
+This complete example updates a custom record, preserves its country field,
+and verifies that the old database is destroyed after commit:
 
 ```rust
-use libmaxminddb_rs::{Editor, MergeStrategy, Reader, ReloadableReader, Value};
+use std::sync::Arc;
 
-# fn main() -> Result<(), Box<dyn std::error::Error>> {
-let database = ReloadableReader::new(Reader::open("GeoIP.mmdb")?);
-let old = database.snapshot();
-let ip = "1.2.3.4".parse()?;
-std::thread::scope(|scope| {
-    for _ in 0..4 {
-        let database = &database;
-        scope.spawn(move || {
-            for _ in 0..10_000 {
-                let guard = database.load();
-                let record = guard.lookup_value(ip);
-                // Use borrowed fields while `guard` lives. A miss is allowed.
-                std::hint::black_box(record);
-            }
-        });
-    }
-    // These edits and publication run concurrently with the reading threads.
-    let mut editor = Editor::from_reader(database.snapshot());
-    editor.update_value("1.2.3.4/32".parse().unwrap(), Value::Uint32(42), MergeStrategy::Replace)?;
-    if !database.commit(editor)? {
-        // Another publisher won: start a fresh editor and reapply the edits.
-    }
-    Ok::<(), libmaxminddb_rs::Error>(())
-})?;
-// `old` still reads the original database after publication.
-# Ok(())
-# }
-```
+use libmaxminddb_rs::{
+    Editor, MergeStrategy, MetadataBuilder, MmdbDecode, MmdbEncode, Reader, ReloadableReader,
+    Writer,
+};
 
-`commit` rebuilds and prepares the replacement before comparing source Arc
-identity and swapping atomically. A stale editor returns `Ok(false)` without
-replacing the active reader. Opening/rebuild errors also leave it unchanged.
-Unconditional `replace`, `replace_from_vec` and `reload` use last-publication-wins
-semantics. Publication is in memory; file persistence and watching are separate.
-Never overwrite or truncate an mmap-backed file while any snapshot uses it.
-Holding old generations retains their bytes and prepared trees. Sharing and
-publication copy no database bytes; rebuilding currently decodes unchanged
-records into owned values and serializes a new database.
-
-`cargo bench --bench editor` compares direct, guard and owned-snapshot lookups,
-shared editor creation and prepared-reader publication on a deterministic base
-of 1,000,000 IPv4 /32 entries. Rebuild benchmarks update or remove 1,000 entries.
-Fixture preparation is outside timing; these are single-thread measurements,
-not a claim of concurrent throughput or a guaranteed speedup.
-
-See [`examples/concurrent_editor.rs`](examples/concurrent_editor.rs) for four
-reading threads and a writing thread using `Editor::from_reader` and atomic
-publication. Run `cargo run --example concurrent_editor`. The concurrency tests
-cover snapshot reclamation, invalid replacements, stale editors, competing
-publishers, mixed IPv4/IPv6 consistency and concurrent editor commits. These
-stress tests complement Rust's Send/Sync checks; they are not a formal proof or
-substitute for a sanitizer run.
-
-
-### Editor updates with a merge strategy and custom records
-
-`Editor::update_value(network, value, strategy)` now requires an explicit
-`MergeStrategy`. Owned `Value` inputs move without cloning; custom structs are
-passed by reference and encoded with `MmdbEncode`, without requiring serde.
-
-```rust
-use libmaxminddb_rs::{Editor, MergeStrategy, MmdbEncode};
-
-#[derive(MmdbEncode)]
-struct Patch<'a> {
+#[derive(Debug, MmdbEncode, MmdbDecode)]
+struct Record<'a> {
+    country: &'a str,
     score: u32,
-    tags: Vec<&'a str>,
 }
 
-# fn main() -> Result<(), Box<dyn std::error::Error>> {
-let mut editor = Editor::open("input.mmdb")?;
-let patch = Patch { score: 42, tags: vec!["updated"] };
-editor.update_value("198.51.100.0/24".parse()?, &patch, MergeStrategy::DeepMerge)?;
-let replacement = editor.finish()?;
-# Ok(())
-# }
+#[derive(MmdbEncode)]
+struct Patch {
+    score: u32,
+}
+
+fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let network = "198.51.100.0/24".parse()?;
+    let ip = "198.51.100.7".parse()?;
+    let metadata = MetadataBuilder::new().ip_version(4).build()?;
+    let mut writer = Writer::with_metadata(metadata);
+    writer.insert_encoded(
+        network,
+        &Record {
+            country: "FR",
+            score: 1,
+        },
+    )?;
+
+    // Transfer ownership without retaining an extra Arc to the old database.
+    let database = ReloadableReader::new(Reader::from_vec(writer.finish()?)?);
+    {
+        let guard = database.load();
+        let record: Record<'_> = guard.lookup_borrowed(ip)?;
+        println!("Before update: {record:?}");
+    } // Borrowed fields and their guard are dropped before publication.
+
+    let mut editor = Editor::from_reader(database.snapshot());
+    // Weak observes destruction without keeping the old Reader alive.
+    let old_lifetime = Arc::downgrade(editor.source_reader());
+    editor.update_value(network, &Patch { score: 42 }, MergeStrategy::DeepMerge)?;
+
+    // Rebuild, then publish atomically. A stale editor would return false.
+    assert!(database.commit(editor)?, "Unexpected publication conflict");
+    assert!(old_lifetime.upgrade().is_none());
+    drop(old_lifetime);
+    println!("Committed: the old Reader and its owned buffers were released.");
+
+    let guard = database.load();
+    let record: Record<'_> = guard.lookup_borrowed(ip)?;
+    assert_eq!((record.country, record.score), ("FR", 42));
+    println!("After DeepMerge: {record:?}");
+    Ok(())
+}
 ```
 
-`Replace` discards the old value. `DeepMerge` recursively merges maps, appends
-arrays and replaces scalar conflicts. `Append` appends arrays; `AppendUnique`
-appends only new elements. Updates are replayed in call order, so successive
-updates retain their individual strategies. The source remains borrowed until
-rebuild. Merge behavior matches the Writer on the same reconstructed prefix:
-inherited parent values and more-specific child records are not merged into
-that prefix. A missing exact prefix is inserted. MMDB does not preserve the
-original writer insertion boundaries; source routes are exported from its tree.
-`insert_value` and serde-based `update` still use Replace. `pending_edits` counts
-distinct modified prefixes, rather than queued operations.
+Run `cargo run --example editor_merge` for this example or
+`cargo run --example concurrent_editor` for concurrent readers and a writer.
 
-Run `cargo run --example editor_merge` for a complete custom-record DeepMerge
-example with English console output and publication through `ReloadableReader`.
+## More examples
+
+Explore the [examples directory](https://github.com/0x00F6/libmaxminddb-rs/tree/main/examples):
+[quickstart](https://github.com/0x00F6/libmaxminddb-rs/blob/main/examples/quickstart.rs),
+[concurrent updates](https://github.com/0x00F6/libmaxminddb-rs/blob/main/examples/concurrent_editor.rs),
+[DeepMerge and memory reclamation](https://github.com/0x00F6/libmaxminddb-rs/blob/main/examples/editor_merge.rs),
+and [custom database writing](https://github.com/0x00F6/libmaxminddb-rs/blob/main/examples/custom_database.rs).
+Run one with `cargo run --example quickstart`.
+
+See the [API documentation](https://docs.rs/libmaxminddb-rs) for all methods.
+Minimum Rust version: **1.98.1**. License: **MIT or Apache-2.0**.

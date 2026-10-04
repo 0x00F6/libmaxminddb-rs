@@ -1,4 +1,4 @@
-name: Release 0.3.0
+name: Release 0.3.1
 
 on:
   workflow_run:
@@ -10,7 +10,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: release-0.3.0
+  group: release-0.3.1
   cancel-in-progress: false
 
 jobs:
@@ -39,10 +39,10 @@ jobs:
           import tomllib
           from pathlib import Path
           for path in ('Cargo.toml', 'derive/Cargo.toml'):
-              assert tomllib.loads(Path(path).read_text())['package']['version'] == '0.3.0', path
+              assert tomllib.loads(Path(path).read_text())['package']['version'] == '0.3.1', path
           PY
           test "$(git ls-remote origin refs/heads/main | cut -f1)" = "$(git rev-parse HEAD)"
-          if gh release view v0.3.0 --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+          if gh release view v0.3.1 --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
             echo 'publish=false' >> "$GITHUB_OUTPUT"
           else
             echo 'publish=true' >> "$GITHUB_OUTPUT"
@@ -60,7 +60,7 @@ jobs:
             if output=$(cargo publish --locked --package "$crate" 2>&1); then
               printf '%s\n' "$output"
             elif [[ "$output" == *'already exists on crates.io'* ]]; then
-              echo "$crate 0.3.0 is already published"
+              echo "$crate 0.3.1 is already published"
             else
               printf '%s\n' "$output" >&2
               exit 1
@@ -74,12 +74,12 @@ jobs:
           set -euo pipefail
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          if git rev-parse --verify refs/tags/v0.3.0 >/dev/null 2>&1; then
-            test "$(git rev-parse 'v0.3.0^{commit}')" = "$(git rev-parse HEAD)"
+          if git rev-parse --verify refs/tags/v0.3.1 >/dev/null 2>&1; then
+            test "$(git rev-parse 'v0.3.1^{commit}')" = "$(git rev-parse HEAD)"
           else
-            git tag -a v0.3.0 -m 'Release v0.3.0'
-            git push origin refs/tags/v0.3.0
+            git tag -a v0.3.1 -m 'Release v0.3.1'
+            git push origin refs/tags/v0.3.1
           fi
-          gh release create v0.3.0 --repo "$GITHUB_REPOSITORY" --verify-tag \
-            --title 'v0.3.0 — Hot In-Memory Database Updates' \
-            --notes-file .github/release-notes-0.3.0.md
+          gh release create v0.3.1 --repo "$GITHUB_REPOSITORY" --verify-tag \
+            --title 'v0.3.1 — README rendering fixes' \
+            --notes-file .github/release-notes-0.3.1.md
