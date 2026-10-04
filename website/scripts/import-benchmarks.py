@@ -3,7 +3,6 @@ import argparse
 import hashlib
 import json
 import re
-import subprocess
 import xml.etree.ElementTree as ET
 from pathlib import Path
 
@@ -45,7 +44,7 @@ for filename in files:
             continue
         points.append(dict(library=library, value=value, unit=unit, dimension=dimension, label=raw))
     charts.append(dict(id=path.stem, title=title, subtitle=subtitle, points=points,
-        source=f"https://github.com/0x00F6/libmaxminddb-rs/blob/{context['sourceCommit']}/benchmarks/charts/{filename}",
+        source=f"https://github.com/0x00F6/libmaxminddb-rs/blob/{context.get('exportCommit', context['sourceCommit'])}/benchmarks/charts/{filename}",
         sha256=hashlib.sha256(path.read_bytes()).hexdigest()))
 output = SITE / 'public/data'
 output.mkdir(parents=True, exist_ok=True)

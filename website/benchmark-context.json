@@ -1,19 +1,19 @@
 {
-  "label": "Archived benchmark comparison",
-  "sourceCommit": "e4561b502466a6c95312719372eafc77b7a85994",
-  "sourceDate": "2026-09-30",
-  "measurementDate": null,
-  "cpu": "AMD Ryzen 7 PRO 7840U",
-  "os": "Linux x86_64",
-  "rust": "1.90.0",
-  "go": "1.23.1",
-  "dataset": "Deterministic SplitMix64 MMDB fixtures",
-  "precision": "Values transcribed programmatically from committed SVG tooltips, retaining their displayed precision. Raw samples and confidence intervals are not included in this snapshot.",
-  "notes": "Historical measurements, not a fresh benchmark of release 0.3.1. The source export was committed on 30 September 2026; the exact measurement date was not recorded. Compare only within the same chart and workload.",
+  "label": "GitHub Actions benchmark comparison",
+  "sourceCommit": "33d8f1fd80edbc2dcd9af19b2de41447cd70b118",
+  "sourceDate": "2026-10-04",
+  "measurementDate": "2026-10-04",
+  "cpu": "AMD EPYC 9V74",
+  "os": "Ubuntu 24.04 x86_64 \u00b7 Linux 6.17.0-1022-azure",
+  "rust": "1.98.1",
+  "go": "\u22651.25.0; exact compiler not archived (launcher 1.23.1)",
+  "dataset": "Deterministic City / SplitMix64 scaling fixtures",
+  "precision": "Parsed from generated SVG tooltip labels at their exported precision. Raw harness result rows are archived; individual timed samples and confidence intervals are not retained.",
+  "notes": "One full make bench-compare execution on a shared CI runner with 4 available vCPUs. The 8/16-worker cases oversubscribe those CPUs. Results are not a controlled comparison with the earlier Ryzen measurements.",
   "libraries": [
     {
       "name": "libmaxminddb-rs",
-      "version": "0.1.0",
+      "version": "0.3.1",
       "language": "Rust",
       "role": "Reader + writer"
     },
@@ -48,5 +48,16 @@
       "role": "Writer"
     }
   ],
-  "chartsSha256": "f38280a161a8eb21965576bb4eab4a64fe25ba21bccb70362502996e245b3344"
+  "chartsSha256": "8f71fbffed6104d8e302aeb75b39c726a9b7b71d83666ccf82e71120c625e2fd",
+  "exportCommit": "d01ab79c3a2951b3d45e6b2bb168bf74c2a50037",
+  "availableCpus": 4,
+  "cCompiler": "GCC 13.3.0",
+  "workflowRunUrl": "https://github.com/0x00F6/libmaxminddb-rs/actions/runs/37203873066",
+  "sourceExport": "https://github.com/0x00F6/libmaxminddb-rs/tree/d01ab79c3a2951b3d45e6b2bb168bf74c2a50037/benchmarks/charts",
+  "rawResults": "data/run-2026-10-04/results.jsonl",
+  "report": "data/run-2026-10-04/report.html",
+  "compilerNote": "The recorded Go launcher is 1.23.1. The module requires 1.25.0 and GOTOOLCHAIN=auto was enabled; the effective Go compiler was not captured. The unmodified generated report records the launcher version.",
+  "durationSeconds": 743,
+  "successfulRows": 238,
+  "unsupportedRows": 1
 }

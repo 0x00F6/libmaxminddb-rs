@@ -55,3 +55,19 @@ https://0x00f6.github.io/libmaxminddb-rs/
 When Pages has not been enabled, CI keeps the tested build artifact and explains
 the missing repository setting without claiming a successful deployment.
 The full comparison workflow is separate, so site edits do not rerun benchmarks.
+
+## Published measurement set
+
+The 4 October 2026 snapshot comes from Actions run `37203873066` at benchmarked
+commit `33d8f1f`. The complete suite finished successfully in 743 seconds on an
+AMD EPYC 9V74 runner with 4 vCPUs. It produced 238 successful aggregate rows
+and one explicitly unsupported C `open_buffer` row. Source exports are pinned
+to a separate commit and hashed. The raw JSON, JSONL, CSV, full generated report
+and environment evidence are retained in `public/data/run-2026-10-04/`.
+
+Go provenance has a limitation: environment capture records launcher 1.23.1,
+but the module requires 1.25.0 and automatic switching was enabled. The exact
+Go compiler was not archived. The site and README make this explicit; the raw
+generated report is preserved unmodified. 8/16-worker comparisons oversubscribe
+the runner, and this run should not be used to claim a regression or improvement
+against older results collected on a different CPU.
