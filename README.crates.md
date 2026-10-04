@@ -6,7 +6,7 @@ A pure Rust reader and writer for MaxMind DB (MMDB) v2 files. Read IPv4 and IPv6
 
 ```toml
 [dependencies]
-libmaxminddb-rs = "0.3.1"
+libmaxminddb-rs = "0.3.2"
 ```
 
 Default features include the reader, writer, derive macros, SIMD ASCII scanning, and the prepared search tree. For a smaller reader-only build, use `default-features = false` with `features = ["reader", "derive"]`.

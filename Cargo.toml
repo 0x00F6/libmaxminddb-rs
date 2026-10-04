@@ -1,6 +1,6 @@
 [package]
 name = "libmaxminddb-rs"
-version = "0.3.1"
+version = "0.3.2"
 edition = "2024"
 rust-version = "1.98.1"
 description = "Pure Rust MaxMind DB (MMDB) reader and writer with zero-copy borrowed decoding"
@@ -54,7 +54,7 @@ serde = { version = "1.0.229", features = ["derive"] }
 serde_json = "1.0.151"
 thiserror = "2.0.21"
 ipnet = { version = "2.12.2", features = ["serde"] }
-libmaxminddb-rs-derive = { version = "0.3.1", path = "derive", optional = true }
+libmaxminddb-rs-derive = { version = "0.3.2", path = "derive", optional = true }
 
 [dev-dependencies]
 anyhow = "1.0.104"
