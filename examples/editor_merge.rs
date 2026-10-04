@@ -3,10 +3,10 @@
 use std::sync::Arc;
 
 use libmaxminddb_rs::{
-    Editor, MergeStrategy, MetadataBuilder, MmdbEncode, Reader, ReloadableReader, ValueRef, Writer,
+    Editor, MergeStrategy, MetadataBuilder, MmdbDecode, MmdbEncode, Reader, ReloadableReader, Writer,
 };
 
-#[derive(MmdbEncode)]
+#[derive(Debug, PartialEq, MmdbDecode, MmdbEncode)]
 struct Record<'a> {
     country: &'a str,
     score: u32,
@@ -34,7 +34,8 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     )?;
     let original = Arc::new(Reader::from_vec(writer.finish()?)?);
     let database = ReloadableReader::new(Arc::clone(&original));
-    println!("[before] {:?}", original.lookup_value(ip)?);
+    let before: Record<'_> = original.lookup_borrowed(ip)?;
+    println!("[before] Decoded custom Record: {before:?}");
 
     let mut editor = Editor::from_reader(database.snapshot());
     let patch = Patch {
@@ -47,20 +48,15 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     assert!(database.commit(editor)?);
 
     let guard = database.load();
-    let merged = guard.lookup_value(ip)?;
-    assert_eq!(merged.get("country"), Some(&ValueRef::Utf8("FR")));
-    assert_eq!(merged.get("score"), Some(&ValueRef::Uint32(42)));
-    assert_eq!(
-        merged.get("tags"),
-        Some(&ValueRef::Array(vec![
-            ValueRef::Utf8("original"),
-            ValueRef::Utf8("updated"),
-        ]))
-    );
+    // The struct borrows its strings from this generation; keep guard alive.
+    // Decoding the tags Vec allocates its container, while its strings borrow.
+    let merged: Record<'_> = guard.lookup_borrowed(ip)?;
+    assert_eq!(merged.country, "FR");
+    assert_eq!(merged.score, 42);
+    assert_eq!(merged.tags, vec!["original", "updated"]);
     println!("[after] {merged:?}");
-    println!(
-        "[snapshot] The original Reader is unchanged: {:?}",
-        original.lookup_value(ip)?
-    );
+    let unchanged: Record<'_> = original.lookup_borrowed(ip)?;
+    assert_eq!(unchanged, before);
+    println!("[snapshot] The original Reader still returns the same struct: {unchanged:?}");
     Ok(())
 }
