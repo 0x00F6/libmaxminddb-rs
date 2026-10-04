@@ -59,5 +59,6 @@
   "compilerNote": "The recorded Go launcher is 1.23.1. The module requires 1.25.0 and GOTOOLCHAIN=auto was enabled; the effective Go compiler was not captured. The unmodified generated report records the launcher version.",
   "durationSeconds": 743,
   "successfulRows": 238,
-  "unsupportedRows": 1
+  "unsupportedRows": 1,
+  "architecture": "x86_64"
 }

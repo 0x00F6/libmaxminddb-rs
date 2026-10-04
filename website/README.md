@@ -33,11 +33,19 @@ make website-data
 make website-check
 ```
 
-The importer validates the combined SHA-256 of the generated SVG files against
-`chartsSha256` in the context. A changed export deliberately fails until its
+`benchmark-runs.json` maps each architecture to its context, SVG directory and
+output JSON. Preserve existing runs when adding another machine. The importer
+validates the combined SHA-256 of each run's SVG files against `chartsSha256`
+in its context. A changed export deliberately fails until its
 metadata is reviewed. Copy the digest reported by the importer only after that
 review. Values come from the suite's SVG tooltip labels; they preserve the
 source's exported precision. No missing values are filled in.
+
+The architecture selector switches the complete measured snapshot: all chart
+categories, tables, source links, downloads and methodology. Its selection is
+remembered locally and encoded in shareable links such as
+`?arch=arm64#benchmarks`. Comparisons between machines also reflect their CPU,
+compiler and runtime differences; they do not isolate an architecture effect.
 
 Throughput and latency are separate measurements. Concurrency excludes the
 1-worker series because the report combines fallback single-thread scenarios.
@@ -66,7 +74,7 @@ When Pages has not been enabled, CI keeps the tested build artifact and explains
 the missing repository setting without claiming a successful deployment.
 The full comparison workflow is separate, so site edits do not rerun benchmarks.
 
-## Published measurement set
+## Published measurement sets
 
 The 4 October 2026 snapshot comes from Actions run `37203873066` at benchmarked
 commit `33d8f1f`. The complete suite finished successfully in 743 seconds on an
@@ -81,6 +89,22 @@ Go compiler was not archived. The site and README make this explicit; the raw
 generated report is preserved unmodified. 8/16-worker comparisons oversubscribe
 the runner, and this run should not be used to claim a regression or improvement
 against older results collected on a different CPU.
+
+The native ARM64 snapshot comes from Actions run `37222685709` at benchmarked
+commit `07022c0`, on a Neoverse-N2 runner with 4 vCPUs. The full suite completed
+in 780.3 seconds with 238 successful aggregate rows and the same unsupported
+C `open_buffer` case. The raw results, 33 original SVG exports, generated report,
+dataset hashes and environment evidence are preserved in
+`public/data/run-2026-10-04-arm64/`. Both architectures expose 19 comparison
+charts in the website.
+
+The ARM run used Rust 1.98.1, GCC 13.3.0 and Go 1.25.0. Go binary build metadata
+confirms the effective compiler for both reader and writer. The benchmarked
+commit includes the Rust 2024 NEON compilation fix; it is identified separately
+from the package version. Native ARM `make check` and `make fuzz` passed. The
+archived dataset and workload hashes match the x86 run for the protocols that
+record them (`memory-rss-v2` and `ipv6-absent-v1`). This does not make the two
+machines a controlled comparison of instruction-set architectures.
 
 Each Pages archive has a unique run/attempt name. Deployment consumes the build
 job's recorded archive name, so rerunning a build or only the deployment cannot

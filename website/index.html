@@ -202,7 +202,9 @@
               </div>
               <div>
                 <div class="mini-label">TRACEABLE RESULTS</div>
-                <div class="big-number">19 <span>charts</span></div>
+                <div class="big-number">
+                  19 <span>charts / architecture</span>
+                </div>
                 <p>
                   Every chart links to its source. Results include their
                   recorded environment.
@@ -225,6 +227,7 @@
               </div>
               <a
                 class="button compact"
+                id="export-data"
                 href="./data/benchmarks.json"
                 download="mmdb-benchmarks.json"
                 >↓ Export data</a
@@ -235,6 +238,20 @@
               <p>
                 <span id="snapshot-context"></span>
                 <a href="#methodology">Measurement context ↗</a>
+              </p>
+            </div>
+            <div class="architecture-switch">
+              <label
+                >ARCHITECTURE / MEASURED MACHINE
+                <select
+                  id="architecture-select"
+                  aria-label="Benchmark architecture"
+                ></select>
+              </label>
+              <p>
+                Each machine has its own measurements. Compare libraries within
+                a run; hardware and toolchain differences also affect results
+                across architectures.
               </p>
             </div>
             <div

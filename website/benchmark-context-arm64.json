@@ -1,0 +1,64 @@
+{
+  "label": "GitHub Actions native ARM64 benchmark comparison",
+  "sourceCommit": "07022c096d8e8011148429b228f5406d1f581267",
+  "sourceDate": "2026-10-04",
+  "measurementDate": "2026-10-04",
+  "cpu": "Neoverse-N2",
+  "os": "Ubuntu 24.04 aarch64 \u00b7 Linux 6.17.0-1022-azure",
+  "rust": "1.98.1",
+  "go": "1.25.0 (verified in both compiled Go binaries)",
+  "dataset": "Deterministic City / SplitMix64 scaling fixtures",
+  "precision": "Parsed from generated SVG tooltip labels at their exported precision. Raw harness result rows are archived; individual timed samples and confidence intervals are not retained.",
+  "notes": "One full make bench-compare execution on a shared native ARM64 CI runner with 4 available vCPUs. The 8/16-worker cases oversubscribe those CPUs. Comparisons with x86_64 also reflect different hardware and toolchains; they do not isolate an architecture effect.",
+  "libraries": [
+    {
+      "name": "libmaxminddb-rs",
+      "version": "0.3.1",
+      "language": "Rust",
+      "role": "Reader + writer"
+    },
+    {
+      "name": "libmaxminddb (C)",
+      "version": "1.14.1",
+      "language": "C",
+      "role": "Reader"
+    },
+    {
+      "name": "maxminddb-rust",
+      "version": "0.32.0",
+      "language": "Rust",
+      "role": "Reader"
+    },
+    {
+      "name": "geoip2-rs",
+      "version": "0.1.8",
+      "language": "Rust",
+      "role": "Reader"
+    },
+    {
+      "name": "maxminddb-golang",
+      "version": "2.6.0",
+      "language": "Go",
+      "role": "Reader"
+    },
+    {
+      "name": "mmdbwriter",
+      "version": "1.2.0",
+      "language": "Go",
+      "role": "Writer"
+    }
+  ],
+  "chartsSha256": "e7396d3cd611a279d15372f0fbbe2466463100415e431c65ca899bf6847e5528",
+  "exportCommit": "6e91b4dffa31455fff31a9265f5838573bbff36f",
+  "availableCpus": 4,
+  "cCompiler": "GCC 13.3.0",
+  "workflowRunUrl": "https://github.com/0x00F6/libmaxminddb-rs/actions/runs/37222685709",
+  "sourceExport": "https://github.com/0x00F6/libmaxminddb-rs/tree/6e91b4dffa31455fff31a9265f5838573bbff36f/website/public/data/run-2026-10-04-arm64/charts",
+  "rawResults": "data/run-2026-10-04-arm64/results.jsonl",
+  "report": "data/run-2026-10-04-arm64/report.html",
+  "compilerNote": "Rust and Go were compiled for native ARM64. GOTOOLCHAIN=local prevented automatic Go switching; archived go version -m output confirms Go 1.25.0 for both reader and writer.",
+  "durationSeconds": 780.3,
+  "successfulRows": 238,
+  "unsupportedRows": 1,
+  "architecture": "arm64"
+}

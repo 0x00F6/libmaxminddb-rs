@@ -8,6 +8,17 @@ import { chromium } from "playwright-core";
 
 const root = fileURLToPath(new URL("../dist/", import.meta.url));
 const output = fileURLToPath(new URL("../test-results/", import.meta.url));
+const datasets = JSON.parse(
+  await readFile(resolve(root, "data/benchmark-datasets.json"), "utf8"),
+);
+const measurements = new Map(
+  await Promise.all(
+    datasets.map(async (d) => [
+      d.id,
+      JSON.parse(await readFile(resolve(root, "data", d.file), "utf8")),
+    ]),
+  ),
+);
 const mime = {
   ".html": "text/html",
   ".js": "text/javascript",
@@ -150,38 +161,114 @@ try {
   await page.locator("#metric-select").selectOption("scaling");
   assert.equal(await page.locator("#percentile-legend").isVisible(), false);
   assert.equal(await page.locator("#results-head th").count(), 3);
-  // Exercise every comparison category, workload and dimension from the public UI.
-  for (const category of [
-    "throughput",
-    "latency",
-    "concurrent",
-    "memory",
-    "writer",
-  ]) {
-    await page.locator(`[data-category="${category}"]`).click();
-    const metrics = await page
-      .locator("#metric-select option")
-      .evaluateAll((els) => els.map((e) => e.value));
-    for (const metric of metrics) {
-      await page.locator("#metric-select").selectOption(metric);
-      if (await page.locator(".segmented").isVisible()) {
-        for (const family of ["ipv6", "ipv4"]) {
-          await page.locator(`[data-family="${family}"]`).click();
-          assert.ok((await page.locator("#results-body tr").count()) >= 4);
-        }
+  // Switching architecture must change data, sources and methodology together.
+  for (const dataset of datasets) {
+    await page.locator("#architecture-select").selectOption(dataset.id);
+    assert.equal(new URL(page.url()).searchParams.get("arch"), dataset.id);
+    const data = measurements.get(dataset.id);
+    assert.ok(
+      (await page.locator("#snapshot-context").innerText()).includes(
+        dataset.id,
+      ),
+    );
+    assert.equal(
+      await page.locator("#machine-label").innerText(),
+      data.context.cpu,
+    );
+    assert.ok(
+      (await page.locator("#export-data").getAttribute("href")).endsWith(
+        dataset.file,
+      ),
+    );
+    assert.ok(
+      (await page.locator("#raw-link").getAttribute("href")).endsWith(
+        data.context.rawResults,
+      ),
+    );
+    assert.ok(
+      (await page.locator("#report-link").getAttribute("href")).endsWith(
+        data.context.report,
+      ),
+    );
+    assert.equal(
+      await page.locator("#run-link").getAttribute("href"),
+      data.context.workflowRunUrl,
+    );
+    await page.locator('[data-category="throughput"]').click();
+    await page.locator('[data-family="ipv4"]').click();
+    const expectedRate = data.charts
+      .find((c) => c.id === "throughput-ipv4-random")
+      .points.find((p) => p.library === "libmaxminddb-rs").value;
+    const rateText = await page
+      .locator("#results-body tr")
+      .filter({ hasText: "libmaxminddb-rs" })
+      .locator("td")
+      .last()
+      .innerText();
+    assert.equal(Number(rateText.replace(/[^0-9.]/g, "")), expectedRate);
+    await page.locator('[data-category="latency"]').click();
+    for (const family of ["ipv4", "ipv6"]) {
+      await page.locator(`[data-family="${family}"]`).click();
+      const source = data.charts.find(
+        (c) => c.id === `candlestick-percentiles-${family}`,
+      );
+      assert.equal(
+        await page.locator("#chart-source").getAttribute("href"),
+        source.source,
+      );
+      for (const point of source.points) {
+        const cells = await page
+          .locator("#results-body tr")
+          .filter({ hasText: point.library })
+          .locator("td")
+          .allTextContents();
+        assert.equal(
+          Number(cells[3].replace(/[^0-9.]/g, "")),
+          point.quantiles.p50,
+        );
+        assert.equal(
+          Number(cells[5].replace(/[^0-9.]/g, "")),
+          point.quantiles.p99,
+        );
       }
-      const dimensions = await page
-        .locator("#dimension-select option")
-        .evaluateAll((els) => els.map((e) => e.value));
-      for (const dimension of dimensions)
-        await page.locator("#dimension-select").selectOption(dimension);
-      const text = await page.locator("#results-body").innerText();
-      assert.ok(!/NaN|undefined/.test(text));
-      assert.ok(text.includes("libmaxminddb-rs"));
     }
+    await page.screenshot({
+      path: resolve(output, `latency-${dataset.id}-dark.png`),
+      fullPage: true,
+    });
+    // Exercise every comparison category, workload and dimension from the public UI.
+    for (const category of [
+      "throughput",
+      "latency",
+      "concurrent",
+      "memory",
+      "writer",
+    ]) {
+      await page.locator(`[data-category="${category}"]`).click();
+      const metrics = await page
+        .locator("#metric-select option")
+        .evaluateAll((els) => els.map((e) => e.value));
+      for (const metric of metrics) {
+        await page.locator("#metric-select").selectOption(metric);
+        if (await page.locator(".segmented").isVisible()) {
+          for (const family of ["ipv6", "ipv4"]) {
+            await page.locator(`[data-family="${family}"]`).click();
+            assert.ok((await page.locator("#results-body tr").count()) >= 4);
+          }
+        }
+        const dimensions = await page
+          .locator("#dimension-select option")
+          .evaluateAll((els) => els.map((e) => e.value));
+        for (const dimension of dimensions)
+          await page.locator("#dimension-select").selectOption(dimension);
+        const text = await page.locator("#results-body").innerText();
+        assert.ok(!/NaN|undefined/.test(text));
+        assert.ok(text.includes("libmaxminddb-rs"));
+      }
+    }
+    assert.equal(await page.locator("#results-body tr").count(), 2);
+    assert.match(await page.locator("#results-body").innerText(), /mmdbwriter/);
   }
-  assert.equal(await page.locator("#results-body tr").count(), 2);
-  assert.match(await page.locator("#results-body").innerText(), /mmdbwriter/);
   await page.locator('nav [data-route="examples"]').click();
   for (const name of ["quickstart", "editor_merge", "concurrent_editor"]) {
     await page.locator(`[data-example="${name}"]`).click();
@@ -202,6 +289,15 @@ try {
   await page.reload();
   await page.waitForSelector("#example-tabs button", { state: "attached" });
   assert.equal(await page.locator("html").getAttribute("data-theme"), "light");
+  assert.equal(
+    await page.locator("#architecture-select").inputValue(),
+    datasets.at(-1).id,
+  );
+  assert.ok(
+    (await page.locator("#environment-details").innerText()).includes(
+      measurements.get(datasets.at(-1).id).context.cpu,
+    ),
+  );
   await page.locator('nav [data-route="benchmarks"]').click();
   await page.locator('[data-category="latency"]').click();
   await page.locator('[data-family="ipv6"]').click();
@@ -238,6 +334,15 @@ try {
   });
   await page.goBack();
   assert.equal(await page.locator("#methodology").isVisible(), true);
+  // An explicit shared link takes precedence over the remembered architecture.
+  await page.goto(
+    `http://127.0.0.1:${server.address().port}/libmaxminddb-rs/?arch=${datasets[0].id}#benchmarks`,
+  );
+  await page.waitForSelector("#example-tabs button", { state: "attached" });
+  assert.equal(
+    await page.locator("#architecture-select").inputValue(),
+    datasets[0].id,
+  );
   assert.deepEqual(errors, []);
   console.log(
     "Browser checks passed: SPA routes, all benchmark controls, typed examples, highlighting, persistent themes, mobile layout, no console/network errors.",

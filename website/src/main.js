@@ -60,6 +60,8 @@ const menus = {
   ],
 };
 let benchmarkData, examples, chart, toastTimer;
+let datasets = [];
+const benchmarkSets = new Map();
 const reducedMotion = window.matchMedia(
   "(prefers-reduced-motion: reduce)",
 ).matches;
@@ -89,6 +91,13 @@ $("#theme-toggle").addEventListener("click", () => {
 });
 updateThemeButton();
 function route() {
+  const requested = new URLSearchParams(location.search).get("arch");
+  if (
+    benchmarkSets.has(requested) &&
+    benchmarkData !== benchmarkSets.get(requested)
+  ) {
+    selectArchitecture(requested);
+  }
   const id = location.hash.slice(1);
   const active = ["benchmarks", "examples", "methodology"].includes(id)
     ? id
@@ -111,6 +120,7 @@ function route() {
   window.scrollTo({ top: 0, behavior: "instant" });
 }
 window.addEventListener("hashchange", route);
+window.addEventListener("popstate", route);
 route();
 function toast(message) {
   clearTimeout(toastTimer);
@@ -322,8 +332,7 @@ function renderChart() {
       "Throughput and p99 come from distinct benchmark measurements. Values here are the exported single-thread throughput; do not derive a latency by inverting them.",
     latency:
       "Tail latency (p99): 99% of the measured lookup samples completed at or below this value. Lower is better. Database-size scaling is a separate scenario.",
-    concurrent:
-      "4, 8 and 16-worker measurements on 4 available vCPUs: 8/16 workers oversubscribe the runner. The 1-worker export mixes fallback scenarios and is excluded; this chart does not claim linear speedup.",
+    concurrent: `4, 8 and 16-worker measurements on ${benchmarkData.context.availableCpus} available vCPUs. Worker counts above that oversubscribe the runner. The 1-worker export mixes fallback scenarios and is excluded; this chart does not claim linear speedup.`,
     memory:
       "Whole-process resident memory in mmap mode, including the prepared tree and runtime. Three isolated processes per size in the comparison protocol. Go reader RSS is not part of this export.",
     writer:
@@ -511,16 +520,17 @@ function showContext() {
       ?.points.find((p) => p.library === "libmaxminddb-rs")?.value ??
     "Unavailable";
   $("#summary-context").textContent =
-    `${c.measurementDate || "Archived"} · libmaxminddb-rs ${version} · ${c.cpu}. ${c.notes}`;
+    `${c.architecture} · ${c.measurementDate || "Archived"} · libmaxminddb-rs ${version} · ${c.cpu}. ${c.notes}`;
   $("#snapshot-label").textContent = c.measurementDate
     ? "◷ MEASURED SNAPSHOT"
     : "◷ ARCHIVED SNAPSHOT";
   $("#snapshot-context").textContent =
-    `${c.measurementDate || c.sourceDate} · Rust ${c.rust} · libmaxminddb-rs ${version}`;
+    `${c.architecture} · ${c.measurementDate || c.sourceDate} · Rust ${c.rust} · libmaxminddb-rs ${version}`;
   $("#machine-label").textContent = c.cpu;
   $("#measurement-notes").textContent = c.notes;
   $("#compiler-note").textContent = c.compilerNote || "";
   const fields = [
+    ["Architecture", c.architecture],
     ["Processor", c.cpu],
     ["Available CPUs", c.availableCpus || "Not recorded"],
     ["Platform", c.os],
@@ -557,23 +567,60 @@ function showContext() {
     $("#raw-link").hidden = false;
   }
 }
+function selectArchitecture(id) {
+  benchmarkData = benchmarkSets.get(id);
+  if (!benchmarkData) return;
+  $("#architecture-select").value = id;
+  const dataset = datasets.find((d) => d.id === id);
+  $("#export-data").href = `${import.meta.env.BASE_URL}data/${dataset.file}`;
+  $("#export-data").download = `mmdb-benchmarks-${id}.json`;
+  $("#libraries-body").replaceChildren(
+    ...benchmarkData.context.libraries.map((l) => {
+      const row = document.createElement("tr");
+      row.append(...[l.name, l.version, l.language, l.role].map(textCell));
+      return row;
+    }),
+  );
+  showContext();
+  controls(false);
+}
+$("#architecture-select").addEventListener("change", (e) => {
+  selectArchitecture(e.target.value);
+  const url = new URL(location.href);
+  url.searchParams.set("arch", e.target.value);
+  history.replaceState(null, "", url);
+  try {
+    localStorage.setItem("mmdb-architecture", e.target.value);
+  } catch {}
+});
+async function fetchData(file) {
+  const response = await fetch(`${import.meta.env.BASE_URL}data/${file}`);
+  if (!response.ok) throw new Error(`Unable to load ${file}`);
+  return response.json();
+}
 async function loadData() {
   try {
-    [benchmarkData, examples] = await Promise.all(
-      ["benchmarks", "examples"].map(async (name) => {
-        const r = await fetch(`${import.meta.env.BASE_URL}data/${name}.json`);
-        if (!r.ok) throw new Error(`Unable to load ${name}`);
-        return r.json();
+    [datasets, examples] = await Promise.all([
+      fetchData("benchmark-datasets.json"),
+      fetchData("examples.json"),
+    ]);
+    await Promise.all(
+      datasets.map(async (dataset) => {
+        benchmarkSets.set(dataset.id, await fetchData(dataset.file));
       }),
     );
-    $("#libraries-body").replaceChildren(
-      ...benchmarkData.context.libraries.map((l) => {
-        const row = document.createElement("tr");
-        row.append(...[l.name, l.version, l.language, l.role].map(textCell));
-        return row;
-      }),
+    $("#architecture-select").replaceChildren(
+      ...datasets.map((d) => option(d.id, d.label)),
     );
-    showContext();
+    let preferred;
+    try {
+      preferred = localStorage.getItem("mmdb-architecture");
+    } catch {}
+    const requested = new URLSearchParams(location.search).get("arch");
+    if (benchmarkSets.has(requested)) preferred = requested;
+    selectArchitecture(
+      benchmarkSets.has(preferred) ? preferred : datasets[0].id,
+    );
     $("#example-tabs").replaceChildren(
       ...examples.map((e) => {
         const b = document.createElement("button");

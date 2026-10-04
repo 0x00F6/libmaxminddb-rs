@@ -1,0 +1,12 @@
+[
+  {
+    "id": "x86_64",
+    "label": "x86_64 \u00b7 AMD EPYC 9V74",
+    "file": "benchmarks.json"
+  },
+  {
+    "id": "arm64",
+    "label": "arm64 \u00b7 Neoverse-N2",
+    "file": "benchmarks-arm64.json"
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "id": "x86_64",
+    "context": "benchmark-context.json",
+    "charts": "../benchmarks/charts",
+    "output": "benchmarks.json"
+  },
+  {
+    "id": "arm64",
+    "context": "benchmark-context-arm64.json",
+    "charts": "public/data/run-2026-10-04-arm64/charts",
+    "output": "benchmarks-arm64.json"
+  }
+]

@@ -628,6 +628,30 @@ select {
   color: var(--muted);
   font: 10px var(--mono);
 }
+.architecture-switch {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  margin: 24px 0;
+  flex-wrap: wrap;
+}
+.architecture-switch label {
+  display: grid;
+  gap: 8px;
+  font: 9px var(--mono);
+  color: var(--muted);
+  max-width: 100%;
+}
+.architecture-switch select {
+  width: 100%;
+  max-width: 100%;
+}
+.architecture-switch p {
+  flex: 1 1 260px;
+  color: var(--muted);
+  font-size: 11px;
+  margin: 0;
+}
 .percentile-legend span {
   display: inline-flex;
   align-items: center;
