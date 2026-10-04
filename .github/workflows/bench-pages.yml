@@ -1,4 +1,5 @@
 name: Pages benchmark comparison
+# Standalone benchmark lockfiles include the reader ArcSwap dependency.
 on:
   push:
     branches: [feature/github-pages]
