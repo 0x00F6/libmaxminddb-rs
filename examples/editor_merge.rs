@@ -7,14 +7,13 @@ use libmaxminddb_rs::{
     Writer,
 };
 
-#[derive(Debug, PartialEq, MmdbDecode, MmdbEncode)]
+#[derive(Debug, MmdbEncode, MmdbDecode)]
 struct Record<'a> {
     country: &'a str,
     score: u32,
     tags: Vec<&'a str>,
 }
 
-// No Serialize derive is needed: the editor uses MmdbEncode directly.
 #[derive(MmdbEncode)]
 struct Patch<'a> {
     score: u32,
@@ -24,40 +23,63 @@ struct Patch<'a> {
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let network = "198.51.100.0/24".parse()?;
     let ip = "198.51.100.7".parse()?;
-    let mut writer = Writer::with_metadata(MetadataBuilder::new().ip_version(4).build()?);
+
+    let metadata = MetadataBuilder::new()
+        .ip_version(4)
+        .database_type("editor-memory-example")
+        .build()?;
+    let mut writer = Writer::with_metadata(metadata);
     writer.insert_encoded(
         network,
         &Record {
             country: "FR",
             score: 1,
-            tags: vec!["original"],
+            tags: vec!["initial"],
         },
     )?;
-    let original = Arc::new(Reader::from_vec(writer.finish()?)?);
-    let database = ReloadableReader::new(Arc::clone(&original));
-    let before: Record<'_> = original.lookup_borrowed(ip)?;
-    println!("[before] Decoded custom Record: {before:?}");
+
+    // Move the owned Reader directly into the container: no extra source Arc.
+    let database = ReloadableReader::new(Reader::from_vec(writer.finish()?)?);
+
+    {
+        let guard = database.load();
+        let record: Record<'_> = guard.lookup_borrowed(ip)?;
+        assert_eq!(record.score, 1);
+        println!("[before] {record:?}");
+    } // The borrowed record and its guard are dropped here.
 
     let mut editor = Editor::from_reader(database.snapshot());
+    // Weak observes destruction without keeping the Reader alive.
+    let old_lifetime = Arc::downgrade(editor.source_reader());
     let patch = Patch {
         score: 42,
         tags: vec!["updated"],
     };
-    println!("[edit] Encoding a custom struct with MmdbEncode; no serde is required.");
     editor.update_value(network, &patch, MergeStrategy::DeepMerge)?;
-    println!("[edit] DeepMerge keeps country, replaces score and appends tags.");
-    assert!(database.commit(editor)?);
 
-    let guard = database.load();
-    // The struct borrows its strings from this generation; keep guard alive.
-    // Decoding the tags Vec allocates its container, while its strings borrow.
-    let merged: Record<'_> = guard.lookup_borrowed(ip)?;
-    assert_eq!(merged.country, "FR");
-    assert_eq!(merged.score, 42);
-    assert_eq!(merged.tags, vec!["original", "updated"]);
-    println!("[after] {merged:?}");
-    let unchanged: Record<'_> = original.lookup_borrowed(ip)?;
-    assert_eq!(unchanged, before);
-    println!("[snapshot] The original Reader still returns the same struct: {unchanged:?}");
+    println!("[edit] Changes are staged; the source is still unchanged.");
+    println!("[commit] Rebuilding and atomically publishing the new database.");
+    // With only one writer, no publication conflict is expected.
+    assert!(database.commit(editor)?, "Unexpected publication conflict");
+
+    // Commit consumed the editor. No old guard or snapshot is retained here.
+    assert!(
+        old_lifetime.upgrade().is_none(),
+        "The old Reader is unexpectedly still alive"
+    );
+    println!("[memory] Old Reader destroyed; its owned buffers were released.");
+    // Release the small allocation retained by the Weak observer as well.
+    drop(old_lifetime);
+
+    {
+        let guard = database.load();
+        let record: Record<'_> = guard.lookup_borrowed(ip)?;
+        assert_eq!(record.country, "FR");
+        assert_eq!(record.score, 42);
+        assert_eq!(record.tags, vec!["initial", "updated"]);
+        println!("[after] {record:?}");
+    }
+
+    println!("[done] Only the new database remains in the container.");
     Ok(())
 }
