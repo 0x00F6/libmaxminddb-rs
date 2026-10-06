@@ -7,6 +7,7 @@
 //! - Full zero-copy decoding with fast ASCII validation and direct memory-mapped access.
 
 mod marker;
+mod scan;
 mod tree;
 
 use memmap2::Mmap;
@@ -471,73 +472,6 @@ impl<'a> Reader<'a> {
             );
             visitor(network, T::decode_raw(&mut decoder)?)
         })
-    }
-
-    /// Shares checked traversal between generic and schema-directed scans.
-    fn visit_record_offsets(
-        &self,
-        mut visitor: impl FnMut(crate::IpNetwork, usize) -> Result<()>,
-    ) -> Result<()> {
-        use std::net::{IpAddr, Ipv4Addr, Ipv6Addr};
-
-        let bits = if self.metadata.ip_version == 4 {
-            32_u8
-        } else {
-            128_u8
-        };
-        // At most one pending sibling per address bit plus the current node.
-        // A fixed stack avoids heap allocation without changing decoded values.
-        let mut stack = [(0_u64, 0_u128, 0_u8); 129];
-        let mut stack_len = 1;
-        let mut ancestors = [0_u64; 128];
-        let mut remaining = self
-            .metadata
-            .node_count
-            .saturating_add(1)
-            .saturating_mul(256);
-
-        while stack_len != 0 {
-            stack_len -= 1;
-            let (node, prefix, depth) = stack[stack_len];
-            if remaining == 0 {
-                return Err(Error::ResourceLimit("MMDB scan tree-entry budget exceeded"));
-            }
-            remaining -= 1;
-            if node >= self.metadata.node_count {
-                if node == self.metadata.node_count {
-                    continue;
-                }
-                let offset = self.record_to_file_offset(node)?;
-                let network = if bits == 32 {
-                    crate::IpNetwork::new(IpAddr::V4(Ipv4Addr::from(prefix as u32)), depth)
-                } else if depth >= 96 && prefix >> 32 == 0 {
-                    crate::IpNetwork::new(IpAddr::V4(Ipv4Addr::from(prefix as u32)), depth - 96)
-                } else {
-                    crate::IpNetwork::new(IpAddr::V6(Ipv6Addr::from(prefix)), depth)
-                }
-                .map_err(|_| Error::InvalidDatabase("invalid scanned network prefix"))?;
-                visitor(network, offset)?;
-                continue;
-            }
-            if ancestors[..usize::from(depth)].contains(&node) {
-                return Err(Error::InvalidDatabase("cyclic search tree"));
-            }
-            if depth >= bits {
-                return Err(Error::InvalidDatabase("search tree exceeds address width"));
-            }
-            // DFS preserves the active ancestor prefix when a right sibling is
-            // popped. Descendant entries are overwritten as the next branch grows.
-            ancestors[usize::from(depth)] = node;
-            let left = self.read_record(node, 0)?;
-            let right = self.read_record(node, 1)?;
-            let shift = u32::from(bits - depth - 1);
-            // Expanding an internal node is allowed only before bit 32/128,
-            // so stack_len + 1 remains below the 129-entry capacity.
-            stack[stack_len] = (right, prefix | (1_u128 << shift), depth + 1);
-            stack[stack_len + 1] = (left, prefix, depth + 1);
-            stack_len += 2;
-        }
-        Ok(())
     }
 
     /// Returns parsed database metadata.
@@ -1213,6 +1147,28 @@ mod reader_tests {
         )
     }
 
+    struct ScanText<'a>(&'a str);
+
+    impl<'a> MmdbDecode<'a> for ScanText<'a> {
+        fn decode(value: &ValueRef<'a>) -> Result<Self> {
+            match value {
+                ValueRef::Utf8(text) => Ok(Self(text)),
+                _ => Err(Error::InvalidDatabase("expected scan text")),
+            }
+        }
+    }
+
+    fn parallel_text_scan(reader: &Reader<'_>, calls: &std::sync::atomic::AtomicU64) -> Result<()> {
+        reader.visit_borrowed_records_parallel_with_workers(
+            std::num::NonZeroUsize::new(4).unwrap(),
+            |_, text: ScanText<'_>| {
+                assert_eq!(text.0, "ab");
+                calls.fetch_add(1, std::sync::atomic::Ordering::Relaxed);
+                Ok(())
+            },
+        )
+    }
+
     #[test]
     fn scan_rejects_cycles_before_expanding_repeated_branches() {
         for version in [4, 6] {
@@ -1228,6 +1184,12 @@ mod reader_tests {
                 Err(Error::InvalidDatabase("cyclic search tree"))
             ));
             assert_eq!(calls, 0);
+            let calls = std::sync::atomic::AtomicU64::new(0);
+            assert!(matches!(
+                parallel_text_scan(&reader, &calls),
+                Err(Error::InvalidDatabase("cyclic search tree"))
+            ));
+            assert_eq!(calls.into_inner(), 0);
         }
     }
 
@@ -1240,6 +1202,10 @@ mod reader_tests {
                 crafted_reader(24, count, node_stream(24, &nodes), vec![], version, Some(0));
             assert!(matches!(
                 reader.visit_records(|_, _| Ok(())),
+                Err(Error::InvalidDatabase("search tree exceeds address width"))
+            ));
+            assert!(matches!(
+                parallel_text_scan(&reader, &std::sync::atomic::AtomicU64::new(0)),
                 Err(Error::InvalidDatabase("search tree exceeds address width"))
             ));
         }
@@ -1279,6 +1245,54 @@ mod reader_tests {
                 ));
                 assert!(calls <= 256 * (layers + 1));
             }
+            let calls = std::sync::atomic::AtomicU64::new(0);
+            let result = parallel_text_scan(&reader, &calls);
+            if layers == 3 {
+                result.unwrap();
+                assert_eq!(calls.into_inner(), 8);
+            } else {
+                assert!(matches!(
+                    result,
+                    Err(Error::ResourceLimit("MMDB scan tree-entry budget exceeded"))
+                ));
+                assert!(calls.into_inner() <= 256 * (layers + 1));
+            }
+        }
+    }
+
+    #[test]
+    fn parallel_scan_checks_ancestors_beyond_the_frontier_and_reserved_pointers() {
+        // A shared branching chain produces 32 frontier tasks before workers
+        // encounter a back-edge to the root. Its cycle crosses the task boundary.
+        let count = 7;
+        let nodes: Vec<_> = (0..count)
+            .map(|n| {
+                let next = if n + 1 < count { n + 1 } else { 0 };
+                (next, next)
+            })
+            .collect();
+        let reader = crafted_reader(24, count, node_stream(24, &nodes), vec![], 4, None);
+        assert!(matches!(
+            parallel_text_scan(&reader, &std::sync::atomic::AtomicU64::new(0)),
+            Err(Error::InvalidDatabase("cyclic search tree"))
+        ));
+        for size in [24_u16, 28, 32, 36, 64] {
+            let reader = crafted_reader(
+                size,
+                1,
+                node_stream(size as u8, &[(2, 1)]),
+                vec![0x42, b'a', b'b'],
+                4,
+                None,
+            );
+            assert!(matches!(
+                parallel_text_scan(&reader, &std::sync::atomic::AtomicU64::new(0)),
+                Err(Error::InvalidOffset(_))
+            ));
+            let reader = scalar_reader(size);
+            let calls = std::sync::atomic::AtomicU64::new(0);
+            parallel_text_scan(&reader, &calls).unwrap();
+            assert_eq!(calls.into_inner(), 2);
         }
     }
 

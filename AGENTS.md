@@ -486,6 +486,36 @@ Changes in these areas deserve extra review:
   before timing; fixture generation/opening and allocator samples are outside
   Criterion timing. Compare generic and typed scans on the same borrowed input.
 
+## Parallel full database scans
+
+- `visit_borrowed_records_parallel` is a separate unordered, adaptive API with
+  an `Fn + Sync` callback. Keep the sequential API ordered and `FnMut`.
+  Trees below 24,000 nodes or with one available CPU stay sequential. This
+  measured scalar-workload heuristic is not a universal performance guarantee.
+- `visit_borrowed_records_parallel_with_workers` bypasses the size heuristic
+  with a NonZeroUsize worker limit (capped at 256). One worker stays sequential.
+- Split a bounded frontier (eight tasks per worker), skipping no-data branches
+  and retaining each task's full ancestor path. Never collect all record offsets.
+- Share the checked fixed-stack DFS between sequential and parallel scans.
+  Each worker decodes and consumes its own records: `T` needs neither Send nor Sync.
+- Frontier and workers share one saturating tree-entry budget. Reserve worker
+  credits in blocks of 256; do not grant the full budget separately to threads.
+  Unused reserved credits may conservatively reject highly aliased DAGs earlier.
+- Cancel cooperatively on errors or panics and join every started worker before
+  returning/unwinding. Do not promise callback ordering or immediate cancellation.
+- The scan adds bounded scheduling/thread allocations, not per-record traversal
+  allocations. Keep the prepared lookup tree and accelerator layout unchanged.
+- `parallel_record_scan_v1` verifies counts and checksums before timing 1/2/4/8/16
+  workers on 1k/100k/1M IPv4/IPv6 routes. Thread creation, frontier construction and
+  reduction are included; writer generation, opening and correctness are excluded.
+  Worker-local checksums publish once on thread exit, avoiding per-record atomics.
+- `parallel_record_scan_crossover_v1` measures 1k/2k/4k/8k/12k/16k/24k/32k/64k
+  routes with 1/2/4/8 workers and the adaptive API. Verify counts/checksums first;
+  include thread setup and retain node counts, fixture hashes, samples and CIs.
+  Repeat around the crossover before changing the threshold. Compare workers-1
+  and multi-worker cases for identical callback bookkeeping, as well as the
+  cheaper direct sequential reference. Never hide scheduling outliers.
+
 ## Atomic reader publication
 
 - `ReloadableReader` uses `arc-swap` 1.9.2 or newer under the reader feature.

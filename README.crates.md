@@ -289,6 +289,7 @@ IPv4/IPv6 addresses, and scan its unique files/categories with assertions
 use libmaxminddb_rs::{MergeStrategy, MetadataBuilder, MmdbDecode, Reader, Writer};
 use serde_json::json;
 use std::collections::BTreeSet;
+use std::sync::Mutex;
 
 #[derive(MmdbDecode)]
 struct Record<'a> {
@@ -334,6 +335,15 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     assert_eq!(seen, BTreeSet::from(networks));
     assert_eq!(files, BTreeSet::from(["base.ipset", "malware.ipset"]));
     assert_eq!(categories, BTreeSet::from(["malware", "other"]));
+    // Parallel callbacks use Fn + Sync; borrowed fields can be retained.
+    // This tiny demo uses the adaptive sequential fallback. On larger trees,
+    // decoding runs concurrently and the callback order is unspecified.
+    let parallel_files = Mutex::new(BTreeSet::new());
+    reader.visit_borrowed_records_parallel(|_network, record: Record<'_>| {
+        parallel_files.lock().unwrap().extend(record.files);
+        Ok(())
+    })?;
+    assert_eq!(parallel_files.into_inner().unwrap(), files);
     println!("Files: {files:?}");
     println!("Categories: {categories:?}");
     Ok(())
@@ -344,8 +354,22 @@ Run [the complete example](https://github.com/0x00F6/libmaxminddb-rs/blob/main/e
 It builds and scans its own in-memory database. Strings borrow the reader;
 containers and database construction allocate.
 
-Scans visit stored ranges and stop on errors. See [scan details](https://github.com/0x00F6/libmaxminddb-rs/blob/main/docs/record-scan.md) for
-feature requirements, safety limits and benchmarks.
+`visit_borrowed_records_parallel` uses scoped threads from 24,000 tree nodes;
+smaller trees or one CPU use a sequential scan. Set a worker limit and bypass
+the size heuristic with `visit_borrowed_records_parallel_with_workers(NonZeroUsize, visitor)`.
+Callbacks require `Fn + Sync` and run in unspecified order. Errors cancel
+cooperatively: in-flight callbacks may finish before all workers are joined.
+
+Records stream without collection; strings/bytes stay borrowed, and `T` needs
+neither `Send` nor `Sync`. Setup allocates, but borrowed scalar decoding has no
+per-record allocations. Prefer worker-local accumulation for throughput.
+
+Two synthetic IPv4/IPv6 benchmark passes on an 8-CPU Xeon VM measured
+**3.26–3.41x faster scans at 100k ranges** and **4.14–4.26x at 1M ranges**,
+including thread setup. Gains depend on the schema and callback. See
+[scan details](https://github.com/0x00F6/libmaxminddb-rs/blob/feature/parallel-borrowed-record-scan/docs/record-scan.md)
+for requirements, safety limits, full results and the small sequential
+generic-IPv6 tradeoff.
 
 ## 🔄 Hot In-Memory Database Updates
 

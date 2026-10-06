@@ -31,7 +31,7 @@ echo -e "\033[0;90m└────┘└────┘└──────┘�
 endef
 
 .PHONY: help build build-release tests check coverage compatibility fuzz fmt fmt-check clippy audit doc doc-open \
-        bench-reader bench-writer bench-scan bench-performance bench-compare bench-compare-docker bench-micro \
+        bench-reader bench-writer bench-scan bench-scan-crossover bench-performance bench-compare bench-compare-docker bench-micro \
         flamegraph callgrind perf perf-tree upgrade-deps publish-check release clean --force
 
 # `##@ Emoji Section|ANSI-code` groups help entries; `target: ## text` documents them.
@@ -143,9 +143,13 @@ audit: ## 🔍 Check dependency advisories
 check: fmt-check clippy tests doc ## ✅ Run formatting, lint, tests and documentation checks
 
 ##@ 📈 Benchmark|95
-# Measure full range scans and borrowed scalar decoding on identical fixtures.
-bench-scan: ## 🔎 Benchmark generic and borrowed full-database scans
+# Measure generic, borrowed and parallel range scans on identical fixtures.
+bench-scan: ## 🔎 Benchmark generic, borrowed and parallel full-database scans
 	$(CARGO) bench --bench record_scan
+
+# Include scoped-thread setup when locating the sequential/parallel crossover.
+bench-scan-crossover: ## 🔎 Measure the parallel scan crossover on small trees
+	$(CARGO) bench --bench record_scan -- parallel_record_scan_crossover_v1 --noplot
 
 # Prepare the same fixtures as the comparison harness without competitor tools.
 bench-performance: ## ⚡ Prepare fixtures and benchmark reader and borrowed lookups

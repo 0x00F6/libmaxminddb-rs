@@ -4,6 +4,7 @@
 //! Run without arguments; reader,writer,derive are required.
 
 use std::collections::{BTreeMap, BTreeSet};
+use std::sync::Mutex;
 
 use anyhow::{Result, bail};
 use libmaxminddb_rs::{MergeStrategy, MetadataBuilder, MmdbDecode, Reader, Writer};
@@ -15,6 +16,7 @@ struct Record<'a> {
     categories: Vec<&'a str>,
 }
 
+#[derive(Debug, PartialEq, Eq)]
 struct Inventory<'a> {
     ranges: u64,
     files: BTreeSet<&'a str>,
@@ -36,6 +38,29 @@ fn inventory<'a>(reader: &'a Reader<'_>) -> libmaxminddb_rs::Result<Inventory<'a
         Ok(())
     })?;
     Ok(result)
+}
+
+fn parallel_inventory<'a>(reader: &'a Reader<'_>) -> libmaxminddb_rs::Result<Inventory<'a>> {
+    let result = Mutex::new(Inventory {
+        ranges: 0,
+        files: BTreeSet::new(),
+        categories: BTreeSet::new(),
+    });
+    reader.visit_borrowed_records_parallel(|_network, record: Record<'_>| {
+        // Fn + Sync can run on several workers. Decode outside the lock; keep
+        // borrowed strings in the protected inventory. For heavier scans,
+        // prefer worker-local aggregation to avoid one shared lock per record.
+        let mut result = result
+            .lock()
+            .map_err(|_| libmaxminddb_rs::Error::InvalidDatabase("inventory lock poisoned"))?;
+        result.files.extend(record.files);
+        result.categories.extend(record.categories);
+        result.ranges += 1;
+        Ok(())
+    })?;
+    result
+        .into_inner()
+        .map_err(|_| libmaxminddb_rs::Error::InvalidDatabase("inventory lock poisoned"))
 }
 
 fn print_inventory(result: &Inventory<'_>) {
@@ -117,7 +142,19 @@ fn run_demo() -> Result<()> {
         BTreeSet::from(["abuse", "malware", "other"])
     );
 
-    println!("Synthetic DeepMerge database: all scan assertions passed.");
+    assert_eq!(parallel_inventory(&reader)?, result);
+    // Force two workers even for this tiny fixture, to demonstrate the explicit
+    // limit API. Each decoded record stays on the worker that produced it.
+    let parallel_ranges = std::sync::atomic::AtomicU64::new(0);
+    reader.visit_borrowed_records_parallel_with_workers(
+        std::num::NonZeroUsize::new(2).unwrap(),
+        |_network, _record: Record<'_>| {
+            parallel_ranges.fetch_add(1, std::sync::atomic::Ordering::Relaxed);
+            Ok(())
+        },
+    )?;
+    assert_eq!(parallel_ranges.into_inner(), result.ranges);
+    println!("Synthetic DeepMerge database: sequential and parallel scan assertions passed.");
     print_inventory(&result);
     Ok(())
 }
@@ -157,6 +194,7 @@ mod tests {
         let bytes = writer.finish().unwrap();
         let reader = Reader::from_bytes(&bytes).unwrap();
         let result = inventory(&reader).unwrap();
+        assert_eq!(parallel_inventory(&reader).unwrap(), result);
         assert_eq!(result.ranges, 2);
         assert_eq!(result.files.len(), 65);
         assert_eq!(
@@ -183,5 +221,6 @@ mod tests {
         let bytes = writer.finish().unwrap();
         let reader = Reader::from_bytes(&bytes).unwrap();
         assert!(inventory(&reader).is_err());
+        assert!(parallel_inventory(&reader).is_err());
     }
 }

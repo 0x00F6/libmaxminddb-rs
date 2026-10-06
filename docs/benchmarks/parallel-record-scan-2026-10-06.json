@@ -1,0 +1,7201 @@
+{
+  "sequential_ab_cpu_affinity": "0",
+  "sequential_ab": [
+    {
+      "run": "scan-before",
+      "benchmark": {
+        "group_id": "record_scan_v1",
+        "function_id": "generic",
+        "value_str": "ipv4",
+        "throughput": {
+          "Elements": 100000
+        },
+        "full_id": "record_scan_v1/generic/ipv4",
+        "directory_name": "record_scan_v1/generic/ipv4",
+        "title": "record_scan_v1/generic/ipv4"
+      },
+      "estimates_ns": {
+        "mean": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 10049620.898751596,
+            "upper_bound": 10713481.663682643
+          },
+          "point_estimate": 10315031.499887906,
+          "standard_error": 177373.15146490402
+        },
+        "median": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 9959191.442307692,
+            "upper_bound": 10192539.791666668
+          },
+          "point_estimate": 10087985.083333332,
+          "standard_error": 61480.95243490643
+        },
+        "median_abs_dev": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 102916.34509786963,
+            "upper_bound": 402781.77613101347
+          },
+          "point_estimate": 219484.67152211862,
+          "standard_error": 82650.66672475041
+        },
+        "slope": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 10124314.148860231,
+            "upper_bound": 11076104.790721644
+          },
+          "point_estimate": 10472669.786759581,
+          "standard_error": 259825.76742854415
+        },
+        "std_dev": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 173880.2020169818,
+            "upper_bound": 1282099.478792415
+          },
+          "point_estimate": 814443.2318917236,
+          "standard_error": 345357.64309911046
+        }
+      },
+      "samples_ns": {
+        "sampling_mode": "Linear",
+        "iters": [
+          2.0,
+          4.0,
+          6.0,
+          8.0,
+          10.0,
+          12.0,
+          14.0,
+          16.0,
+          18.0,
+          20.0,
+          22.0,
+          24.0,
+          26.0,
+          28.0,
+          30.0,
+          32.0,
+          34.0,
+          36.0,
+          38.0,
+          40.0
+        ],
+        "times": [
+          19768083.0,
+          39857374.0,
+          60948999.0,
+          80826885.0,
+          98388243.0,
+          120232011.0,
+          156286674.0,
+          158893317.0,
+          180817654.0,
+          197714225.0,
+          216954417.0,
+          241742629.0,
+          258805024.0,
+          293564904.0,
+          405362527.0,
+          338083750.0,
+          344530058.0,
+          368168871.0,
+          394078475.0,
+          405069792.0
+        ]
+      }
+    },
+    {
+      "run": "scan-before",
+      "benchmark": {
+        "group_id": "record_scan_v1",
+        "function_id": "generic",
+        "value_str": "ipv6",
+        "throughput": {
+          "Elements": 100000
+        },
+        "full_id": "record_scan_v1/generic/ipv6",
+        "directory_name": "record_scan_v1/generic/ipv6",
+        "title": "record_scan_v1/generic/ipv6"
+      },
+      "estimates_ns": {
+        "mean": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 10658984.502432978,
+            "upper_bound": 10774145.243070576
+          },
+          "point_estimate": 10716720.175757535,
+          "standard_error": 29383.316550141153
+        },
+        "median": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 10643025.175,
+            "upper_bound": 10803400.665789474
+          },
+          "point_estimate": 10711937.7,
+          "standard_error": 44875.7352286068
+        },
+        "median_abs_dev": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 68128.00980215176,
+            "upper_bound": 198921.09367870187
+          },
+          "point_estimate": 148949.87454508414,
+          "standard_error": 33020.996998742434
+        },
+        "slope": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 10709369.937398968,
+            "upper_bound": 10815092.202465283
+          },
+          "point_estimate": 10766018.798083624,
+          "standard_error": 27015.81357068356
+        },
+        "std_dev": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 92792.30158810045,
+            "upper_bound": 165801.59813843432
+          },
+          "point_estimate": 134001.45953790966,
+          "standard_error": 18660.129562174647
+        }
+      },
+      "samples_ns": {
+        "sampling_mode": "Linear",
+        "iters": [
+          2.0,
+          4.0,
+          6.0,
+          8.0,
+          10.0,
+          12.0,
+          14.0,
+          16.0,
+          18.0,
+          20.0,
+          22.0,
+          24.0,
+          26.0,
+          28.0,
+          30.0,
+          32.0,
+          34.0,
+          36.0,
+          38.0,
+          40.0
+        ],
+        "times": [
+          20879835.0,
+          42376815.0,
+          63209442.0,
+          86575102.0,
+          107258419.0,
+          127809283.0,
+          148109616.0,
+          175712714.0,
+          191937067.0,
+          215867254.0,
+          235356737.0,
+          254700192.0,
+          280473146.0,
+          304834624.0,
+          319058303.0,
+          346727825.0,
+          362959862.0,
+          386178487.0,
+          410910668.0,
+          435107392.0
+        ]
+      }
+    },
+    {
+      "run": "scan-before",
+      "benchmark": {
+        "group_id": "record_scan_v1",
+        "function_id": "typed",
+        "value_str": "ipv4",
+        "throughput": {
+          "Elements": 100000
+        },
+        "full_id": "record_scan_v1/typed/ipv4",
+        "directory_name": "record_scan_v1/typed/ipv4",
+        "title": "record_scan_v1/typed/ipv4"
+      },
+      "estimates_ns": {
+        "mean": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 5063576.567401058,
+            "upper_bound": 5188926.166657634
+          },
+          "point_estimate": 5123477.983320814,
+          "standard_error": 32110.482073775118
+        },
+        "median": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 5010818.375490196,
+            "upper_bound": 5200562.405555556
+          },
+          "point_estimate": 5067950.19047619,
+          "standard_error": 49514.75436902761
+        },
+        "median_abs_dev": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 53488.423028822515,
+            "upper_bound": 228323.91617105564
+          },
+          "point_estimate": 127890.18567949533,
+          "standard_error": 46909.16983061081
+        },
+        "slope": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 5096629.45347805,
+            "upper_bound": 5280064.579682166
+          },
+          "point_estimate": 5191643.243786295,
+          "standard_error": 46963.47696640931
+        },
+        "std_dev": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 100969.84146269616,
+            "upper_bound": 177233.46946423096
+          },
+          "point_estimate": 147122.65708894798,
+          "standard_error": 19528.44768040603
+        }
+      },
+      "samples_ns": {
+        "sampling_mode": "Linear",
+        "iters": [
+          3.0,
+          6.0,
+          9.0,
+          12.0,
+          15.0,
+          18.0,
+          21.0,
+          24.0,
+          27.0,
+          30.0,
+          33.0,
+          36.0,
+          39.0,
+          42.0,
+          45.0,
+          48.0,
+          51.0,
+          54.0,
+          57.0,
+          60.0
+        ],
+        "times": [
+          15199187.0,
+          29900178.0,
+          44631109.0,
+          61323490.0,
+          75708533.0,
+          90618007.0,
+          106459599.0,
+          119093579.0,
+          139349343.0,
+          150781059.0,
+          164788894.0,
+          189202766.0,
+          208854371.0,
+          223656650.0,
+          237969696.0,
+          239739728.0,
+          254775674.0,
+          278417763.0,
+          310428759.0,
+          314402282.0
+        ]
+      }
+    },
+    {
+      "run": "scan-before",
+      "benchmark": {
+        "group_id": "record_scan_v1",
+        "function_id": "typed",
+        "value_str": "ipv6",
+        "throughput": {
+          "Elements": 100000
+        },
+        "full_id": "record_scan_v1/typed/ipv6",
+        "directory_name": "record_scan_v1/typed/ipv6",
+        "title": "record_scan_v1/typed/ipv6"
+      },
+      "estimates_ns": {
+        "mean": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 6017938.049694144,
+            "upper_bound": 6414862.235282441
+          },
+          "point_estimate": 6191993.057950554,
+          "standard_error": 102335.03855842385
+        },
+        "median": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 5931063.381481482,
+            "upper_bound": 6249716.166666666
+          },
+          "point_estimate": 6021054.673611111,
+          "standard_error": 93249.85782165854
+        },
+        "median_abs_dev": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 78216.06200949827,
+            "upper_bound": 409307.8672858331
+          },
+          "point_estimate": 229046.0647994525,
+          "standard_error": 91491.16565886822
+        },
+        "slope": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 5912988.940139996,
+            "upper_bound": 6742931.708860732
+          },
+          "point_estimate": 6289840.994192799,
+          "standard_error": 221669.85528826507
+        },
+        "std_dev": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 175853.7007273473,
+            "upper_bound": 672867.7448270796
+          },
+          "point_estimate": 468992.2264492722,
+          "standard_error": 136047.3126510725
+        }
+      },
+      "samples_ns": {
+        "sampling_mode": "Linear",
+        "iters": [
+          3.0,
+          6.0,
+          9.0,
+          12.0,
+          15.0,
+          18.0,
+          21.0,
+          24.0,
+          27.0,
+          30.0,
+          33.0,
+          36.0,
+          39.0,
+          42.0,
+          45.0,
+          48.0,
+          51.0,
+          54.0,
+          57.0,
+          60.0
+        ],
+        "times": [
+          18710509.0,
+          37575576.0,
+          54725279.0,
+          74407321.0,
+          95723751.0,
+          108776443.0,
+          135477801.0,
+          151541824.0,
+          160384610.0,
+          178911911.0,
+          194868169.0,
+          211637304.0,
+          232126975.0,
+          241379752.0,
+          266488021.0,
+          287950734.0,
+          300424256.0,
+          383159539.0,
+          440071917.0,
+          351258986.0
+        ]
+      }
+    },
+    {
+      "run": "new",
+      "benchmark": {
+        "group_id": "record_scan_v1",
+        "function_id": "generic",
+        "value_str": "ipv4",
+        "throughput": {
+          "Elements": 100000
+        },
+        "full_id": "record_scan_v1/generic/ipv4",
+        "directory_name": "record_scan_v1/generic/ipv4",
+        "title": "record_scan_v1/generic/ipv4"
+      },
+      "estimates_ns": {
+        "mean": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 10307758.12810428,
+            "upper_bound": 10559154.03011128
+          },
+          "point_estimate": 10425863.014660936,
+          "standard_error": 64021.68212993922
+        },
+        "median": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 10296191.020833332,
+            "upper_bound": 10504612.514610391
+          },
+          "point_estimate": 10382659.55392157,
+          "standard_error": 62259.18851082919
+        },
+        "median_abs_dev": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 102059.32947569175,
+            "upper_bound": 280517.7686075059
+          },
+          "point_estimate": 180807.45630727205,
+          "standard_error": 47023.74086383376
+        },
+        "slope": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 10299596.610964434,
+            "upper_bound": 10648609.531391677
+          },
+          "point_estimate": 10434147.925609756,
+          "standard_error": 91162.42536949296
+        },
+        "std_dev": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 132721.05102426533,
+            "upper_bound": 425589.9874848486
+          },
+          "point_estimate": 293885.98728371115,
+          "standard_error": 79386.74871634913
+        }
+      },
+      "samples_ns": {
+        "sampling_mode": "Linear",
+        "iters": [
+          2.0,
+          4.0,
+          6.0,
+          8.0,
+          10.0,
+          12.0,
+          14.0,
+          16.0,
+          18.0,
+          20.0,
+          22.0,
+          24.0,
+          26.0,
+          28.0,
+          30.0,
+          32.0,
+          34.0,
+          36.0,
+          38.0,
+          40.0
+        ],
+        "times": [
+          19625692.0,
+          42527481.0,
+          62475646.0,
+          82163571.0,
+          102166124.0,
+          126776679.0,
+          146953908.0,
+          165586491.0,
+          185794842.0,
+          208966467.0,
+          231160273.0,
+          256037015.0,
+          275470668.0,
+          294054317.0,
+          340738177.0,
+          330908818.0,
+          351992189.0,
+          369654663.0,
+          385676104.0,
+          410018591.0
+        ]
+      }
+    },
+    {
+      "run": "new",
+      "benchmark": {
+        "group_id": "record_scan_v1",
+        "function_id": "generic",
+        "value_str": "ipv6",
+        "throughput": {
+          "Elements": 100000
+        },
+        "full_id": "record_scan_v1/generic/ipv6",
+        "directory_name": "record_scan_v1/generic/ipv6",
+        "title": "record_scan_v1/generic/ipv6"
+      },
+      "estimates_ns": {
+        "mean": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 10926491.747217406,
+            "upper_bound": 10994772.537783286
+          },
+          "point_estimate": 10959335.043837443,
+          "standard_error": 17318.059435414285
+        },
+        "median": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 10915516.805397727,
+            "upper_bound": 10976222.754761904
+          },
+          "point_estimate": 10945290.44642857,
+          "standard_error": 15410.806111314667
+        },
+        "median_abs_dev": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 41370.529793192676,
+            "upper_bound": 93811.91746256988
+          },
+          "point_estimate": 69965.2765178684,
+          "standard_error": 13800.473231737355
+        },
+        "slope": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 10924226.8372733,
+            "upper_bound": 10965592.319040185
+          },
+          "point_estimate": 10944132.921996387,
+          "standard_error": 10537.55674799182
+        },
+        "std_dev": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 60832.40087648482,
+            "upper_bound": 151158.46924054608
+          },
+          "point_estimate": 111079.66227878396,
+          "standard_error": 22756.087274419115
+        }
+      },
+      "samples_ns": {
+        "sampling_mode": "Linear",
+        "iters": [
+          1.0,
+          2.0,
+          3.0,
+          4.0,
+          5.0,
+          6.0,
+          7.0,
+          8.0,
+          9.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0,
+          16.0,
+          17.0,
+          18.0,
+          19.0,
+          20.0,
+          21.0,
+          22.0,
+          23.0,
+          24.0,
+          25.0,
+          26.0,
+          27.0,
+          28.0,
+          29.0,
+          30.0,
+          31.0,
+          32.0,
+          33.0,
+          34.0,
+          35.0,
+          36.0,
+          37.0,
+          38.0,
+          39.0,
+          40.0
+        ],
+        "times": [
+          10637770.0,
+          22722592.0,
+          33148558.0,
+          44054197.0,
+          54539024.0,
+          65967704.0,
+          76640017.0,
+          89929112.0,
+          98566805.0,
+          109821167.0,
+          120085575.0,
+          132057229.0,
+          140918595.0,
+          155080436.0,
+          163503532.0,
+          175273971.0,
+          183875110.0,
+          196072317.0,
+          208278771.0,
+          217848382.0,
+          230376905.0,
+          243106075.0,
+          253942607.0,
+          263641916.0,
+          273111708.0,
+          283491895.0,
+          293913777.0,
+          306376197.0,
+          315849330.0,
+          328144699.0,
+          341588059.0,
+          349253221.0,
+          360134399.0,
+          374955834.0,
+          383926053.0,
+          393545185.0,
+          403808936.0,
+          418216365.0,
+          425968736.0,
+          435155579.0
+        ]
+      }
+    },
+    {
+      "run": "new",
+      "benchmark": {
+        "group_id": "record_scan_v1",
+        "function_id": "typed",
+        "value_str": "ipv4",
+        "throughput": {
+          "Elements": 100000
+        },
+        "full_id": "record_scan_v1/typed/ipv4",
+        "directory_name": "record_scan_v1/typed/ipv4",
+        "title": "record_scan_v1/typed/ipv4"
+      },
+      "estimates_ns": {
+        "mean": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 5092283.949056648,
+            "upper_bound": 5196756.399170814
+          },
+          "point_estimate": 5140610.168131657,
+          "standard_error": 26677.694035789882
+        },
+        "median": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 5092787.100250626,
+            "upper_bound": 5159501.5
+          },
+          "point_estimate": 5122486.666666667,
+          "standard_error": 16711.89100755931
+        },
+        "median_abs_dev": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 27320.989901623027,
+            "upper_bound": 134035.51193911905
+          },
+          "point_estimate": 59991.44486271729,
+          "standard_error": 29766.81791891436
+        },
+        "slope": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 5100641.0490770275,
+            "upper_bound": 5195115.357744095
+          },
+          "point_estimate": 5138851.050754936,
+          "standard_error": 24081.765879954124
+        },
+        "std_dev": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 61953.38240579672,
+            "upper_bound": 172308.54492683712
+          },
+          "point_estimate": 122786.10745460103,
+          "standard_error": 29875.36952720586
+        }
+      },
+      "samples_ns": {
+        "sampling_mode": "Linear",
+        "iters": [
+          3.0,
+          6.0,
+          9.0,
+          12.0,
+          15.0,
+          18.0,
+          21.0,
+          24.0,
+          27.0,
+          30.0,
+          33.0,
+          36.0,
+          39.0,
+          42.0,
+          45.0,
+          48.0,
+          51.0,
+          54.0,
+          57.0,
+          60.0
+        ],
+        "times": [
+          14949380.0,
+          29589723.0,
+          45967902.0,
+          61459052.0,
+          79434415.0,
+          92220942.0,
+          106901965.0,
+          126371972.0,
+          137279062.0,
+          153739834.0,
+          182019007.0,
+          185952134.0,
+          203194793.0,
+          218727712.0,
+          229606702.0,
+          241803372.0,
+          261662766.0,
+          278297961.0,
+          290415253.0,
+          303955604.0
+        ]
+      }
+    },
+    {
+      "run": "new",
+      "benchmark": {
+        "group_id": "record_scan_v1",
+        "function_id": "typed",
+        "value_str": "ipv6",
+        "throughput": {
+          "Elements": 100000
+        },
+        "full_id": "record_scan_v1/typed/ipv6",
+        "directory_name": "record_scan_v1/typed/ipv6",
+        "title": "record_scan_v1/typed/ipv6"
+      },
+      "estimates_ns": {
+        "mean": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 5896096.30278643,
+            "upper_bound": 6029847.068813303
+          },
+          "point_estimate": 5959718.043805506,
+          "standard_error": 34234.1434388372
+        },
+        "median": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 5853876.990430621,
+            "upper_bound": 6028650.640740741
+          },
+          "point_estimate": 5926235.0574229695,
+          "standard_error": 49030.00413538943
+        },
+        "median_abs_dev": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 65868.04619359496,
+            "upper_bound": 239383.42653620616
+          },
+          "point_estimate": 151841.34113120474,
+          "standard_error": 39888.67888539028
+        },
+        "slope": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 5890438.033735063,
+            "upper_bound": 6000236.594908595
+          },
+          "point_estimate": 5940467.175725901,
+          "standard_error": 28147.98646465
+        },
+        "std_dev": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 99227.44897586944,
+            "upper_bound": 197116.61379642485
+          },
+          "point_estimate": 157471.99212062667,
+          "standard_error": 25080.108524641142
+        }
+      },
+      "samples_ns": {
+        "sampling_mode": "Linear",
+        "iters": [
+          3.0,
+          6.0,
+          9.0,
+          12.0,
+          15.0,
+          18.0,
+          21.0,
+          24.0,
+          27.0,
+          30.0,
+          33.0,
+          36.0,
+          39.0,
+          42.0,
+          45.0,
+          48.0,
+          51.0,
+          54.0,
+          57.0,
+          60.0
+        ],
+        "times": [
+          18717316.0,
+          34737054.0,
+          51765997.0,
+          69677627.0,
+          90870775.0,
+          111140274.0,
+          125184957.0,
+          152002379.0,
+          156669122.0,
+          178857550.0,
+          192862971.0,
+          215302221.0,
+          229452900.0,
+          246861856.0,
+          270536536.0,
+          291597462.0,
+          300455366.0,
+          326450426.0,
+          334215027.0,
+          350575038.0
+        ]
+      }
+    }
+  ],
+  "protocol": "parallel-record-scan-v1",
+  "date": "2026-10-06",
+  "base_commit": "ba0bc348a3ff0b8ee1826a38cde09a60fd8db268",
+  "environment": {
+    "rustc": "1.98.1 (48a229cea 2026-09-01)",
+    "cpu": "Intel Xeon Platinum 8573C (KVM VM)",
+    "architecture": "x86_64",
+    "kernel": "Linux 6.18.44",
+    "visible_cpus": 9,
+    "affinity": "0-7",
+    "cpu_quota": "800000/100000 us (8 CPUs)",
+    "profile": "Cargo bench: optimized, debug=true",
+    "features": "default (reader,writer,derive,simd)",
+    "rustflags": ""
+  },
+  "measurement": {
+    "sample_size": 20,
+    "warm_up_seconds": 1,
+    "target_measurement_seconds": 3,
+    "confidence_level": 0.95,
+    "statistic": "arithmetic mean of per-sample scan times",
+    "setup_included": [
+      "frontier",
+      "thread creation",
+      "callbacks",
+      "join",
+      "reduction"
+    ],
+    "setup_excluded": [
+      "fixture generation",
+      "file IO",
+      "Reader opening",
+      "verification"
+    ],
+    "sequential_callback": "local count and checksum",
+    "parallel_callback": "thread-local count/checksum, one publication per worker at exit"
+  },
+  "source_sha256": {
+    "src/reader/mod.rs": "5c2674a0c3a14287e7d89a24cc33930bde6aa5ac10c9ec3e2022e3b7df51d6ac",
+    "src/reader/scan.rs": "54ca7af9edc4ba53458fb0baca6652ab046b14d90d000ccf4e325d300e76f53d",
+    "benches/record_scan.rs": "a1fc0b4079a2abca0a96cf4ecc8d3c0d48e2c7c43c85ca4f6fd26ef5fd0d36a7"
+  },
+  "fixtures": [
+    {
+      "file": "ipv4-1000.mmdb",
+      "ip_version": 4,
+      "routes": 1000,
+      "bytes": 54539,
+      "sha256": "3c06efdcd61af777d3178e601459980d9a69912fc50f18d15c0e11ef239947da"
+    },
+    {
+      "file": "ipv4-100000.mmdb",
+      "ip_version": 4,
+      "routes": 100000,
+      "bytes": 5484492,
+      "sha256": "43fba4d5fe6dc1b88b11183457c5ef8503d6e5e9d39f3d2cf5befa46ef1fc4b8"
+    },
+    {
+      "file": "ipv4-1000000.mmdb",
+      "ip_version": 4,
+      "routes": 1000000,
+      "bytes": 56434512,
+      "sha256": "dda6fc7473474308ad3e63340ae9b936f19fecb13a64036d326df292a2e97f91"
+    },
+    {
+      "file": "ipv6-1000.mmdb",
+      "ip_version": 6,
+      "routes": 1000,
+      "bytes": 54779,
+      "sha256": "f57099b4f930f9894c2e0ba8ed826cdc1d7799536cb721dba4d721b89f5b7366"
+    },
+    {
+      "file": "ipv6-100000.mmdb",
+      "ip_version": 6,
+      "routes": 100000,
+      "bytes": 5484732,
+      "sha256": "689874afaf6c6bf72644a0e2ee0a6c743ef119ae909060323df50eefc879540b"
+    },
+    {
+      "file": "ipv6-1000000.mmdb",
+      "ip_version": 6,
+      "routes": 1000000,
+      "bytes": 56434771,
+      "sha256": "58bffacebe769b94383de7c767959b5e5010657f9bbbab983dde0b5aef44fcf4"
+    }
+  ],
+  "cases": [
+    {
+      "run": "parallel-run-1",
+      "benchmark": {
+        "group_id": "parallel_record_scan_v1/1000",
+        "function_id": "adaptive",
+        "value_str": "ipv4",
+        "throughput": {
+          "Elements": 1000
+        },
+        "full_id": "parallel_record_scan_v1/1000/adaptive/ipv4",
+        "directory_name": "parallel_record_scan_v1_1000/adaptive/ipv4",
+        "title": "parallel_record_scan_v1/1000/adaptive/ipv4"
+      },
+      "estimates_ns": {
+        "mean": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 64924.204720158006,
+            "upper_bound": 67140.1116743904
+          },
+          "point_estimate": 65936.1671855841,
+          "standard_error": 570.2187584374252
+        },
+        "median": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 64436.55007489107,
+            "upper_bound": 65676.91109006734
+          },
+          "point_estimate": 64856.33726851852,
+          "standard_error": 405.59405571038087
+        },
+        "slope": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 64911.534268727366,
+            "upper_bound": 66071.88443730891
+          },
+          "point_estimate": 65370.68088624338,
+          "standard_error": 297.5230135465874
+        }
+      },
+      "samples_ns": {
+        "sampling_mode": "Linear",
+        "iters": [
+          216.0,
+          432.0,
+          648.0,
+          864.0,
+          1080.0,
+          1296.0,
+          1512.0,
+          1728.0,
+          1944.0,
+          2160.0,
+          2376.0,
+          2592.0,
+          2808.0,
+          3024.0,
+          3240.0,
+          3456.0,
+          3672.0,
+          3888.0,
+          4104.0,
+          4320.0
+        ],
+        "times": [
+          13692690.0,
+          27624593.0,
+          41665634.0,
+          55619105.0,
+          74371610.0,
+          94866094.0,
+          107696991.0,
+          118916485.0,
+          123947116.0,
+          139665632.0,
+          155610962.0,
+          167107509.0,
+          188641205.0,
+          197216614.0,
+          211644785.0,
+          224821992.0,
+          236486386.0,
+          256067541.0,
+          264902996.0,
+          279244384.0
+        ]
+      }
+    },
+    {
+      "run": "parallel-run-1",
+      "benchmark": {
+        "group_id": "parallel_record_scan_v1/1000",
+        "function_id": "adaptive",
+        "value_str": "ipv6",
+        "throughput": {
+          "Elements": 1000
+        },
+        "full_id": "parallel_record_scan_v1/1000/adaptive/ipv6",
+        "directory_name": "parallel_record_scan_v1_1000/adaptive/ipv6",
+        "title": "parallel_record_scan_v1/1000/adaptive/ipv6"
+      },
+      "estimates_ns": {
+        "mean": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 72756.3924295075,
+            "upper_bound": 73617.5720947726
+          },
+          "point_estimate": 73163.17758437328,
+          "standard_error": 220.53141993442392
+        },
+        "median": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 72374.62261904762,
+            "upper_bound": 73569.67297657699
+          },
+          "point_estimate": 72875.82180059524,
+          "standard_error": 296.6513146649862
+        },
+        "slope": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 73055.5261365167,
+            "upper_bound": 73865.35377672726
+          },
+          "point_estimate": 73454.7743155799,
+          "standard_error": 206.33348474442354
+        }
+      },
+      "samples_ns": {
+        "sampling_mode": "Linear",
+        "iters": [
+          196.0,
+          392.0,
+          588.0,
+          784.0,
+          980.0,
+          1176.0,
+          1372.0,
+          1568.0,
+          1764.0,
+          1960.0,
+          2156.0,
+          2352.0,
+          2548.0,
+          2744.0,
+          2940.0,
+          3136.0,
+          3332.0,
+          3528.0,
+          3724.0,
+          3920.0
+        ],
+        "times": [
+          14145012.0,
+          28289190.0,
+          42428384.0,
+          56640719.0,
+          70898377.0,
+          89242235.0,
+          99156903.0,
+          115175557.0,
+          128325149.0,
+          142240176.0,
+          158866039.0,
+          171355795.0,
+          189384707.0,
+          203875662.0,
+          212867650.0,
+          228602761.0,
+          244065952.0,
+          263427443.0,
+          274517717.0,
+          286753246.0
+        ]
+      }
+    },
+    {
+      "run": "parallel-run-1",
+      "benchmark": {
+        "group_id": "parallel_record_scan_v1/1000",
+        "function_id": "sequential",
+        "value_str": "ipv4",
+        "throughput": {
+          "Elements": 1000
+        },
+        "full_id": "parallel_record_scan_v1/1000/sequential/ipv4",
+        "directory_name": "parallel_record_scan_v1_1000/sequential/ipv4",
+        "title": "parallel_record_scan_v1/1000/sequential/ipv4"
+      },
+      "estimates_ns": {
+        "mean": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 53037.2440723353,
+            "upper_bound": 57399.660970055906
+          },
+          "point_estimate": 54695.70228438302,
+          "standard_error": 1213.7033920434303
+        },
+        "median": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 52470.359104938274,
+            "upper_bound": 54552.61064814815
+          },
+          "point_estimate": 52980.60421810699,
+          "standard_error": 541.7676471565387
+        },
+        "slope": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 52847.83320029118,
+            "upper_bound": 56528.33934207076
+          },
+          "point_estimate": 54056.487229319915,
+          "standard_error": 986.0229617287278
+        }
+      },
+      "samples_ns": {
+        "sampling_mode": "Linear",
+        "iters": [
+          270.0,
+          540.0,
+          810.0,
+          1080.0,
+          1350.0,
+          1620.0,
+          1890.0,
+          2160.0,
+          2430.0,
+          2700.0,
+          2970.0,
+          3240.0,
+          3510.0,
+          3780.0,
+          4050.0,
+          4320.0,
+          4590.0,
+          4860.0,
+          5130.0,
+          5400.0
+        ],
+        "times": [
+          14731571.0,
+          28808248.0,
+          41852444.0,
+          56392943.0,
+          70418878.0,
+          84979135.0,
+          106933793.0,
+          116124283.0,
+          133850112.0,
+          209114361.0,
+          166450449.0,
+          176722065.0,
+          194757542.0,
+          199709636.0,
+          213851628.0,
+          226732876.0,
+          240029616.0,
+          258201941.0,
+          270224965.0,
+          282614215.0
+        ]
+      }
+    },
+    {
+      "run": "parallel-run-1",
+      "benchmark": {
+        "group_id": "parallel_record_scan_v1/1000",
+        "function_id": "sequential",
+        "value_str": "ipv6",
+        "throughput": {
+          "Elements": 1000
+        },
+        "full_id": "parallel_record_scan_v1/1000/sequential/ipv6",
+        "directory_name": "parallel_record_scan_v1_1000/sequential/ipv6",
+        "title": "parallel_record_scan_v1/1000/sequential/ipv6"
+      },
+      "estimates_ns": {
+        "mean": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 59216.160772251875,
+            "upper_bound": 60254.21792943303
+          },
+          "point_estimate": 59714.73713946504,
+          "standard_error": 264.9819989847171
+        },
+        "median": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 59083.850015782824,
+            "upper_bound": 59939.70598958334
+          },
+          "point_estimate": 59509.53601190476,
+          "standard_error": 214.0494034331109
+        },
+        "slope": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 59340.41773887552,
+            "upper_bound": 60509.12754167408
+          },
+          "point_estimate": 59872.47301974448,
+          "standard_error": 301.6728100364273
+        }
+      },
+      "samples_ns": {
+        "sampling_mode": "Linear",
+        "iters": [
+          240.0,
+          480.0,
+          720.0,
+          960.0,
+          1200.0,
+          1440.0,
+          1680.0,
+          1920.0,
+          2160.0,
+          2400.0,
+          2640.0,
+          2880.0,
+          3120.0,
+          3360.0,
+          3600.0,
+          3840.0,
+          4080.0,
+          4320.0,
+          4560.0,
+          4800.0
+        ],
+        "times": [
+          13827182.0,
+          29254664.0,
+          42111733.0,
+          56235647.0,
+          71713031.0,
+          89891407.0,
+          100097041.0,
+          114902631.0,
+          126221281.0,
+          142650000.0,
+          156172600.0,
+          169952867.0,
+          187952699.0,
+          200387651.0,
+          221850222.0,
+          228039396.0,
+          252263858.0,
+          259348140.0,
+          270844919.0,
+          282545261.0
+        ]
+      }
+    },
+    {
+      "run": "parallel-run-1",
+      "benchmark": {
+        "group_id": "parallel_record_scan_v1/1000",
+        "function_id": "workers-1",
+        "value_str": "ipv4",
+        "throughput": {
+          "Elements": 1000
+        },
+        "full_id": "parallel_record_scan_v1/1000/workers-1/ipv4",
+        "directory_name": "parallel_record_scan_v1_1000/workers-1/ipv4",
+        "title": "parallel_record_scan_v1/1000/workers-1/ipv4"
+      },
+      "estimates_ns": {
+        "mean": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 62280.633941615844,
+            "upper_bound": 71040.0601126952
+          },
+          "point_estimate": 65907.30947410731,
+          "standard_error": 2304.0678765096063
+        },
+        "median": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 61057.11742557431,
+            "upper_bound": 64125.16463771627
+          },
+          "point_estimate": 62146.031528363805,
+          "standard_error": 862.557624314758
+        },
+        "slope": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 61484.63366069038,
+            "upper_bound": 63719.58670676956
+          },
+          "point_estimate": 62417.87566415266,
+          "standard_error": 573.9439829503893
+        }
+      },
+      "samples_ns": {
+        "sampling_mode": "Linear",
+        "iters": [
+          237.0,
+          474.0,
+          711.0,
+          948.0,
+          1185.0,
+          1422.0,
+          1659.0,
+          1896.0,
+          2133.0,
+          2370.0,
+          2607.0,
+          2844.0,
+          3081.0,
+          3318.0,
+          3555.0,
+          3792.0,
+          4029.0,
+          4266.0,
+          4503.0,
+          4740.0
+        ],
+        "times": [
+          14585280.0,
+          31742263.0,
+          50055823.0,
+          99505226.0,
+          98490205.0,
+          88270490.0,
+          100422426.0,
+          120667974.0,
+          130047428.0,
+          156889463.0,
+          166788227.0,
+          173376250.0,
+          192771964.0,
+          200585923.0,
+          213987024.0,
+          231861751.0,
+          242979260.0,
+          265418471.0,
+          289422477.0,
+          292191808.0
+        ]
+      }
+    },
+    {
+      "run": "parallel-run-1",
+      "benchmark": {
+        "group_id": "parallel_record_scan_v1/1000",
+        "function_id": "workers-1",
+        "value_str": "ipv6",
+        "throughput": {
+          "Elements": 1000
+        },
+        "full_id": "parallel_record_scan_v1/1000/workers-1/ipv6",
+        "directory_name": "parallel_record_scan_v1_1000/workers-1/ipv6",
+        "title": "parallel_record_scan_v1/1000/workers-1/ipv6"
+      },
+      "estimates_ns": {
+        "mean": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 68952.87313091038,
+            "upper_bound": 73376.86895679994
+          },
+          "point_estimate": 70898.05569044201,
+          "standard_error": 1141.5065729669575
+        },
+        "median": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 68303.56129368805,
+            "upper_bound": 70253.15082159624
+          },
+          "point_estimate": 68877.0406885759,
+          "standard_error": 573.6154781157949
+        },
+        "slope": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 68499.81242292878,
+            "upper_bound": 74066.88194880377
+          },
+          "point_estimate": 70833.67442377844,
+          "standard_error": 1507.022040038304
+        }
+      },
+      "samples_ns": {
+        "sampling_mode": "Linear",
+        "iters": [
+          213.0,
+          426.0,
+          639.0,
+          852.0,
+          1065.0,
+          1278.0,
+          1491.0,
+          1704.0,
+          1917.0,
+          2130.0,
+          2343.0,
+          2556.0,
+          2769.0,
+          2982.0,
+          3195.0,
+          3408.0,
+          3621.0,
+          3834.0,
+          4047.0,
+          4260.0
+        ],
+        "times": [
+          14670387.0,
+          29072741.0,
+          44013697.0,
+          62589220.0,
+          72150963.0,
+          88571299.0,
+          131370384.0,
+          119635050.0,
+          146601533.0,
+          148442786.0,
+          158405066.0,
+          182325032.0,
+          186732088.0,
+          198840484.0,
+          219056931.0,
+          233059043.0,
+          254548837.0,
+          262097039.0,
+          274410316.0,
+          342905535.0
+        ]
+      }
+    },
+    {
+      "run": "parallel-run-1",
+      "benchmark": {
+        "group_id": "parallel_record_scan_v1/1000",
+        "function_id": "workers-16",
+        "value_str": "ipv4",
+        "throughput": {
+          "Elements": 1000
+        },
+        "full_id": "parallel_record_scan_v1/1000/workers-16/ipv4",
+        "directory_name": "parallel_record_scan_v1_1000/workers-16/ipv4",
+        "title": "parallel_record_scan_v1/1000/workers-16/ipv4"
+      },
+      "estimates_ns": {
+        "mean": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 1050834.1803276092,
+            "upper_bound": 1155420.7773124957
+          },
+          "point_estimate": 1098707.634261053,
+          "standard_error": 26776.18697109533
+        },
+        "median": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 1014805.53125,
+            "upper_bound": 1134752.4820512822
+          },
+          "point_estimate": 1061658.5897435897,
+          "standard_error": 31647.820135819464
+        },
+        "slope": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 1007978.1622688301,
+            "upper_bound": 1083692.0419712514
+          },
+          "point_estimate": 1033361.6157330475,
+          "standard_error": 19912.965994619695
+        }
+      },
+      "samples_ns": {
+        "sampling_mode": "Linear",
+        "iters": [
+          13.0,
+          26.0,
+          39.0,
+          52.0,
+          65.0,
+          78.0,
+          91.0,
+          104.0,
+          117.0,
+          130.0,
+          143.0,
+          156.0,
+          169.0,
+          182.0,
+          195.0,
+          208.0,
+          221.0,
+          234.0,
+          247.0,
+          260.0
+        ],
+        "times": [
+          16830068.0,
+          32943239.0,
+          43708711.0,
+          60273818.0,
+          74669971.0,
+          82638002.0,
+          100810076.0,
+          110640984.0,
+          136252708.0,
+          189370914.0,
+          153264908.0,
+          158845118.0,
+          175987359.0,
+          184069935.0,
+          192564248.0,
+          211793461.0,
+          219251594.0,
+          234549322.0,
+          245513682.0,
+          258593502.0
+        ]
+      }
+    },
+    {
+      "run": "parallel-run-1",
+      "benchmark": {
+        "group_id": "parallel_record_scan_v1/1000",
+        "function_id": "workers-16",
+        "value_str": "ipv6",
+        "throughput": {
+          "Elements": 1000
+        },
+        "full_id": "parallel_record_scan_v1/1000/workers-16/ipv6",
+        "directory_name": "parallel_record_scan_v1_1000/workers-16/ipv6",
+        "title": "parallel_record_scan_v1/1000/workers-16/ipv6"
+      },
+      "estimates_ns": {
+        "mean": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 1061034.8881142747,
+            "upper_bound": 1283428.005122854
+          },
+          "point_estimate": 1158808.1697312314,
+          "standard_error": 57561.17875441174
+        },
+        "median": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 1018505.7908333333,
+            "upper_bound": 1143507.446153846
+          },
+          "point_estimate": 1040962.2134502924,
+          "standard_error": 32139.597317351792
+        },
+        "slope": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 1044784.7989060486,
+            "upper_bound": 1150852.5038072234
+          },
+          "point_estimate": 1083972.1109639953,
+          "standard_error": 27250.634070904627
+        }
+      },
+      "samples_ns": {
+        "sampling_mode": "Linear",
+        "iters": [
+          15.0,
+          30.0,
+          45.0,
+          60.0,
+          75.0,
+          90.0,
+          105.0,
+          120.0,
+          135.0,
+          150.0,
+          165.0,
+          180.0,
+          195.0,
+          210.0,
+          225.0,
+          240.0,
+          255.0,
+          270.0,
+          285.0,
+          300.0
+        ],
+        "times": [
+          15152757.0,
+          28641415.0,
+          46634837.0,
+          100754672.0,
+          89404835.0,
+          181225549.0,
+          139764810.0,
+          121832455.0,
+          138847567.0,
+          152751566.0,
+          177164329.0,
+          246074479.0,
+          226035217.0,
+          236850586.0,
+          228331494.0,
+          244480274.0,
+          267954755.0,
+          274597219.0,
+          297994494.0,
+          306625285.0
+        ]
+      }
+    },
+    {
+      "run": "parallel-run-1",
+      "benchmark": {
+        "group_id": "parallel_record_scan_v1/1000",
+        "function_id": "workers-2",
+        "value_str": "ipv4",
+        "throughput": {
+          "Elements": 1000
+        },
+        "full_id": "parallel_record_scan_v1/1000/workers-2/ipv4",
+        "directory_name": "parallel_record_scan_v1_1000/workers-2/ipv4",
+        "title": "parallel_record_scan_v1/1000/workers-2/ipv4"
+      },
+      "estimates_ns": {
+        "mean": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 102274.5577645982,
+            "upper_bound": 106358.76932996314
+          },
+          "point_estimate": 104321.1162232667,
+          "standard_error": 1040.0390949287023
+        },
+        "median": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 102188.73124477861,
+            "upper_bound": 106112.87194548872
+          },
+          "point_estimate": 103660.74649122807,
+          "standard_error": 962.9572063307135
+        },
+        "slope": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 103077.96202176323,
+            "upper_bound": 107045.20742148925
+          },
+          "point_estimate": 105063.28581645752,
+          "standard_error": 1018.1855050736684
+        }
+      },
+      "samples_ns": {
+        "sampling_mode": "Linear",
+        "iters": [
+          133.0,
+          266.0,
+          399.0,
+          532.0,
+          665.0,
+          798.0,
+          931.0,
+          1064.0,
+          1197.0,
+          1330.0,
+          1463.0,
+          1596.0,
+          1729.0,
+          1862.0,
+          1995.0,
+          2128.0,
+          2261.0,
+          2394.0,
+          2527.0,
+          2660.0
+        ],
+        "times": [
+          12347727.0,
+          29829652.0,
+          41396315.0,
+          54097193.0,
+          65865505.0,
+          83591157.0,
+          104818085.0,
+          110879140.0,
+          122343853.0,
+          137749869.0,
+          156194808.0,
+          174035006.0,
+          171554410.0,
+          192015839.0,
+          203826616.0,
+          224423935.0,
+          230636394.0,
+          265488529.0,
+          260185184.0,
+          287229479.0
+        ]
+      }
+    },
+    {
+      "run": "parallel-run-1",
+      "benchmark": {
+        "group_id": "parallel_record_scan_v1/1000",
+        "function_id": "workers-2",
+        "value_str": "ipv6",
+        "throughput": {
+          "Elements": 1000
+        },
+        "full_id": "parallel_record_scan_v1/1000/workers-2/ipv6",
+        "directory_name": "parallel_record_scan_v1_1000/workers-2/ipv6",
+        "title": "parallel_record_scan_v1/1000/workers-2/ipv6"
+      },
+      "estimates_ns": {
+        "mean": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 108285.64318829405,
+            "upper_bound": 112974.80884597257
+          },
+          "point_estimate": 110510.79282166253,
+          "standard_error": 1200.2806337135253
+        },
+        "median": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 106518.85520361991,
+            "upper_bound": 113669.18237179487
+          },
+          "point_estimate": 109804.33104118104,
+          "standard_error": 1752.9015526234716
+        },
+        "slope": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 106846.65881543787,
+            "upper_bound": 111877.22209144049
+          },
+          "point_estimate": 109222.46021709997,
+          "standard_error": 1289.614674262224
+        }
+      },
+      "samples_ns": {
+        "sampling_mode": "Linear",
+        "iters": [
+          130.0,
+          260.0,
+          390.0,
+          520.0,
+          650.0,
+          780.0,
+          910.0,
+          1040.0,
+          1170.0,
+          1300.0,
+          1430.0,
+          1560.0,
+          1690.0,
+          1820.0,
+          1950.0,
+          2080.0,
+          2210.0,
+          2340.0,
+          2470.0,
+          2600.0
+        ],
+        "times": [
+          14106724.0,
+          29893373.0,
+          43934525.0,
+          59636583.0,
+          72554798.0,
+          90259612.0,
+          105098545.0,
+          106898541.0,
+          129113567.0,
+          163981289.0,
+          156234916.0,
+          163350656.0,
+          177535629.0,
+          196763324.0,
+          206460317.0,
+          220321984.0,
+          236721232.0,
+          245659753.0,
+          275254426.0,
+          298507149.0
+        ]
+      }
+    },
+    {
+      "run": "parallel-run-1",
+      "benchmark": {
+        "group_id": "parallel_record_scan_v1/1000",
+        "function_id": "workers-4",
+        "value_str": "ipv4",
+        "throughput": {
+          "Elements": 1000
+        },
+        "full_id": "parallel_record_scan_v1/1000/workers-4/ipv4",
+        "directory_name": "parallel_record_scan_v1_1000/workers-4/ipv4",
+        "title": "parallel_record_scan_v1/1000/workers-4/ipv4"
+      },
+      "estimates_ns": {
+        "mean": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 166526.20772570663,
+            "upper_bound": 174493.4720623387
+          },
+          "point_estimate": 170110.26105976378,
+          "standard_error": 2038.454030807627
+        },
+        "median": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 166742.62083333335,
+            "upper_bound": 172177.66659745295
+          },
+          "point_estimate": 168588.52695560252,
+          "standard_error": 1231.4085296296544
+        },
+        "slope": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 166016.7255037684,
+            "upper_bound": 173946.2230275631
+          },
+          "point_estimate": 169199.54843205574,
+          "standard_error": 2031.2103273171965
+        }
+      },
+      "samples_ns": {
+        "sampling_mode": "Linear",
+        "iters": [
+          86.0,
+          172.0,
+          258.0,
+          344.0,
+          430.0,
+          516.0,
+          602.0,
+          688.0,
+          774.0,
+          860.0,
+          946.0,
+          1032.0,
+          1118.0,
+          1204.0,
+          1290.0,
+          1376.0,
+          1462.0,
+          1548.0,
+          1634.0,
+          1720.0
+        ],
+        "times": [
+          14497669.0,
+          29841664.0,
+          43202821.0,
+          54307338.0,
+          73026257.0,
+          81322745.0,
+          103771175.0,
+          116185746.0,
+          134433803.0,
+          172833144.0,
+          159495134.0,
+          177481261.0,
+          196891330.0,
+          219705983.0,
+          216246469.0,
+          222424546.0,
+          246185097.0,
+          256344740.0,
+          266346081.0,
+          285575809.0
+        ]
+      }
+    },
+    {
+      "run": "parallel-run-1",
+      "benchmark": {
+        "group_id": "parallel_record_scan_v1/1000",
+        "function_id": "workers-4",
+        "value_str": "ipv6",
+        "throughput": {
+          "Elements": 1000
+        },
+        "full_id": "parallel_record_scan_v1/1000/workers-4/ipv6",
+        "directory_name": "parallel_record_scan_v1_1000/workers-4/ipv6",
+        "title": "parallel_record_scan_v1/1000/workers-4/ipv6"
+      },
+      "estimates_ns": {
+        "mean": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 159763.1922301766,
+            "upper_bound": 165276.53965536822
+          },
+          "point_estimate": 162721.4696135407,
+          "standard_error": 1410.7173960096522
+        },
+        "median": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 161451.28735632185,
+            "upper_bound": 166321.88107869143
+          },
+          "point_estimate": 164402.31939655173,
+          "standard_error": 1248.7772112291354
+        },
+        "slope": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 162360.74218205307,
+            "upper_bound": 166933.22497124612
+          },
+          "point_estimate": 164745.22863550804,
+          "standard_error": 1169.1772242270386
+        }
+      },
+      "samples_ns": {
+        "sampling_mode": "Linear",
+        "iters": [
+          87.0,
+          174.0,
+          261.0,
+          348.0,
+          435.0,
+          522.0,
+          609.0,
+          696.0,
+          783.0,
+          870.0,
+          957.0,
+          1044.0,
+          1131.0,
+          1218.0,
+          1305.0,
+          1392.0,
+          1479.0,
+          1566.0,
+          1653.0,
+          1740.0
+        ],
+        "times": [
+          12527529.0,
+          28042710.0,
+          42213507.0,
+          53041346.0,
+          71005565.0,
+          87459331.0,
+          102773360.0,
+          114216807.0,
+          122398633.0,
+          143289027.0,
+          158354118.0,
+          163431215.0,
+          188222363.0,
+          206664164.0,
+          219988805.0,
+          227166807.0,
+          252178951.0,
+          260304552.0,
+          262979193.0,
+          286675944.0
+        ]
+      }
+    },
+    {
+      "run": "parallel-run-1",
+      "benchmark": {
+        "group_id": "parallel_record_scan_v1/1000",
+        "function_id": "workers-8",
+        "value_str": "ipv4",
+        "throughput": {
+          "Elements": 1000
+        },
+        "full_id": "parallel_record_scan_v1/1000/workers-8/ipv4",
+        "directory_name": "parallel_record_scan_v1_1000/workers-8/ipv4",
+        "title": "parallel_record_scan_v1/1000/workers-8/ipv4"
+      },
+      "estimates_ns": {
+        "mean": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 422779.70931490266,
+            "upper_bound": 448404.6182872895
+          },
+          "point_estimate": 435039.3370926639,
+          "standard_error": 6544.2996018809
+        },
+        "median": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 413380.0893772894,
+            "upper_bound": 441847.911292517
+          },
+          "point_estimate": 426297.71341991343,
+          "standard_error": 7495.804134825943
+        },
+        "slope": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 437040.95065994194,
+            "upper_bound": 471397.3318295256
+          },
+          "point_estimate": 457034.39035340963,
+          "standard_error": 8826.884171380498
+        }
+      },
+      "samples_ns": {
+        "sampling_mode": "Linear",
+        "iters": [
+          35.0,
+          70.0,
+          105.0,
+          140.0,
+          175.0,
+          210.0,
+          245.0,
+          280.0,
+          315.0,
+          350.0,
+          385.0,
+          420.0,
+          455.0,
+          490.0,
+          525.0,
+          560.0,
+          595.0,
+          630.0,
+          665.0,
+          700.0
+        ],
+        "times": [
+          14831577.0,
+          28474965.0,
+          43393462.0,
+          55068834.0,
+          71464270.0,
+          89238868.0,
+          107143795.0,
+          118873545.0,
+          128895855.0,
+          142129850.0,
+          164644648.0,
+          186466122.0,
+          188137546.0,
+          217297820.0,
+          231121214.0,
+          244626743.0,
+          291294367.0,
+          306660540.0,
+          328516323.0,
+          334028212.0
+        ]
+      }
+    },
+    {
+      "run": "parallel-run-1",
+      "benchmark": {
+        "group_id": "parallel_record_scan_v1/1000",
+        "function_id": "workers-8",
+        "value_str": "ipv6",
+        "throughput": {
+          "Elements": 1000
+        },
+        "full_id": "parallel_record_scan_v1/1000/workers-8/ipv6",
+        "directory_name": "parallel_record_scan_v1_1000/workers-8/ipv6",
+        "title": "parallel_record_scan_v1/1000/workers-8/ipv6"
+      },
+      "estimates_ns": {
+        "mean": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 391882.8246632043,
+            "upper_bound": 412128.02391834947
+          },
+          "point_estimate": 401295.8824267025,
+          "standard_error": 5180.390699289283
+        },
+        "median": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 391529.30787037034,
+            "upper_bound": 406839.4572935235
+          },
+          "point_estimate": 396632.45568347955,
+          "standard_error": 3853.3117979377175
+        },
+        "slope": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 393062.41747439746,
+            "upper_bound": 411700.9087474694
+          },
+          "point_estimate": 402292.7143728223,
+          "standard_error": 4819.961378136695
+        }
+      },
+      "samples_ns": {
+        "sampling_mode": "Linear",
+        "iters": [
+          36.0,
+          72.0,
+          108.0,
+          144.0,
+          180.0,
+          216.0,
+          252.0,
+          288.0,
+          324.0,
+          360.0,
+          396.0,
+          432.0,
+          468.0,
+          504.0,
+          540.0,
+          576.0,
+          612.0,
+          648.0,
+          684.0,
+          720.0
+        ],
+        "times": [
+          14042738.0,
+          28392510.0,
+          45463669.0,
+          68197624.0,
+          74603970.0,
+          84542122.0,
+          97757180.0,
+          105359552.0,
+          120990159.0,
+          140997565.0,
+          160714570.0,
+          159841259.0,
+          196617600.0,
+          198962724.0,
+          216377628.0,
+          229187346.0,
+          249594433.0,
+          258306238.0,
+          270433226.0,
+          310378222.0
+        ]
+      }
+    },
+    {
+      "run": "parallel-run-1",
+      "benchmark": {
+        "group_id": "parallel_record_scan_v1/100000",
+        "function_id": "adaptive",
+        "value_str": "ipv4",
+        "throughput": {
+          "Elements": 100000
+        },
+        "full_id": "parallel_record_scan_v1/100000/adaptive/ipv4",
+        "directory_name": "parallel_record_scan_v1_100000/adaptive/ipv4",
+        "title": "parallel_record_scan_v1/100000/adaptive/ipv4"
+      },
+      "estimates_ns": {
+        "mean": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 1530101.093858569,
+            "upper_bound": 1579429.3452590697
+          },
+          "point_estimate": 1552376.9392362977,
+          "standard_error": 12704.468900646945
+        },
+        "median": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 1521967.5166666666,
+            "upper_bound": 1546509.9743589745
+          },
+          "point_estimate": 1533213.9114285714,
+          "standard_error": 7010.87404763123
+        },
+        "slope": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 1528981.7305594082,
+            "upper_bound": 1587349.1196315405
+          },
+          "point_estimate": 1554988.6869686411,
+          "standard_error": 15068.202367298443
+        }
+      },
+      "samples_ns": {
+        "sampling_mode": "Linear",
+        "iters": [
+          10.0,
+          20.0,
+          30.0,
+          40.0,
+          50.0,
+          60.0,
+          70.0,
+          80.0,
+          90.0,
+          100.0,
+          110.0,
+          120.0,
+          130.0,
+          140.0,
+          150.0,
+          160.0,
+          170.0,
+          180.0,
+          190.0,
+          200.0
+        ],
+        "times": [
+          15235457.0,
+          30793517.0,
+          46450837.0,
+          60105330.0,
+          75434021.0,
+          91223360.0,
+          110501142.0,
+          132839732.0,
+          143601382.0,
+          149014084.0,
+          167850193.0,
+          207229811.0,
+          200805633.0,
+          214807914.0,
+          229812837.0,
+          241936210.0,
+          261057508.0,
+          272971032.0,
+          291066426.0,
+          323875275.0
+        ]
+      }
+    },
+    {
+      "run": "parallel-run-1",
+      "benchmark": {
+        "group_id": "parallel_record_scan_v1/100000",
+        "function_id": "adaptive",
+        "value_str": "ipv6",
+        "throughput": {
+          "Elements": 100000
+        },
+        "full_id": "parallel_record_scan_v1/100000/adaptive/ipv6",
+        "directory_name": "parallel_record_scan_v1_100000/adaptive/ipv6",
+        "title": "parallel_record_scan_v1/100000/adaptive/ipv6"
+      },
+      "estimates_ns": {
+        "mean": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 1750817.8568528234,
+            "upper_bound": 1826704.1482017057
+          },
+          "point_estimate": 1787336.380826415,
+          "standard_error": 19344.83533302232
+        },
+        "median": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 1739549.7833333332,
+            "upper_bound": 1796624.2700892857
+          },
+          "point_estimate": 1771958.4831656348,
+          "standard_error": 18151.7652534866
+        },
+        "slope": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 1756406.6630295499,
+            "upper_bound": 1821216.8049948988
+          },
+          "point_estimate": 1786402.2156358885,
+          "standard_error": 16884.86288638895
+        }
+      },
+      "samples_ns": {
+        "sampling_mode": "Linear",
+        "iters": [
+          8.0,
+          16.0,
+          24.0,
+          32.0,
+          40.0,
+          48.0,
+          56.0,
+          64.0,
+          72.0,
+          80.0,
+          88.0,
+          96.0,
+          104.0,
+          112.0,
+          120.0,
+          128.0,
+          136.0,
+          144.0,
+          152.0,
+          160.0
+        ],
+        "times": [
+          13200113.0,
+          26500880.0,
+          48147573.0,
+          57665993.0,
+          69748496.0,
+          92682424.0,
+          106215522.0,
+          112014358.0,
+          124963701.0,
+          138785226.0,
+          156458894.0,
+          178474798.0,
+          180273352.0,
+          200612861.0,
+          209219113.0,
+          228706868.0,
+          240329611.0,
+          247763359.0,
+          270071696.0,
+          301415925.0
+        ]
+      }
+    },
+    {
+      "run": "parallel-run-1",
+      "benchmark": {
+        "group_id": "parallel_record_scan_v1/100000",
+        "function_id": "sequential",
+        "value_str": "ipv4",
+        "throughput": {
+          "Elements": 100000
+        },
+        "full_id": "parallel_record_scan_v1/100000/sequential/ipv4",
+        "directory_name": "parallel_record_scan_v1_100000/sequential/ipv4",
+        "title": "parallel_record_scan_v1/100000/sequential/ipv4"
+      },
+      "estimates_ns": {
+        "mean": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 5029593.185376534,
+            "upper_bound": 5093309.148091223
+          },
+          "point_estimate": 5057381.401156135,
+          "standard_error": 16533.777411879088
+        },
+        "median": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 5013255.4375,
+            "upper_bound": 5060707.550427351
+          },
+          "point_estimate": 5042746.93125,
+          "standard_error": 9903.974583724894
+        },
+        "slope": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 5033924.169059734,
+            "upper_bound": 5092172.828254629
+          },
+          "point_estimate": 5060065.326829269,
+          "standard_error": 15045.364301868363
+        }
+      },
+      "samples_ns": {
+        "sampling_mode": "Linear",
+        "iters": [
+          3.0,
+          6.0,
+          9.0,
+          12.0,
+          15.0,
+          18.0,
+          21.0,
+          24.0,
+          27.0,
+          30.0,
+          33.0,
+          36.0,
+          39.0,
+          42.0,
+          45.0,
+          48.0,
+          51.0,
+          54.0,
+          57.0,
+          60.0
+        ],
+        "times": [
+          15015239.0,
+          29854222.0,
+          47861293.0,
+          60122071.0,
+          75663290.0,
+          90841770.0,
+          106756834.0,
+          120392119.0,
+          135036171.0,
+          150129344.0,
+          166299252.0,
+          181482373.0,
+          196997993.0,
+          213536038.0,
+          228158303.0,
+          242114627.0,
+          264268246.0,
+          274482080.0,
+          285327049.0,
+          302486348.0
+        ]
+      }
+    },
+    {
+      "run": "parallel-run-1",
+      "benchmark": {
+        "group_id": "parallel_record_scan_v1/100000",
+        "function_id": "sequential",
+        "value_str": "ipv6",
+        "throughput": {
+          "Elements": 100000
+        },
+        "full_id": "parallel_record_scan_v1/100000/sequential/ipv6",
+        "directory_name": "parallel_record_scan_v1_100000/sequential/ipv6",
+        "title": "parallel_record_scan_v1/100000/sequential/ipv6"
+      },
+      "estimates_ns": {
+        "mean": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 5838379.426535732,
+            "upper_bound": 6383360.816786365
+          },
+          "point_estimate": 6032506.902287718,
+          "standard_error": 163440.29573264223
+        },
+        "median": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 5830528.078571429,
+            "upper_bound": 5889570.086805556
+          },
+          "point_estimate": 5845696.836700337,
+          "standard_error": 16649.236533580653
+        },
+        "slope": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 5839869.14616889,
+            "upper_bound": 6159203.5942488955
+          },
+          "point_estimate": 5949415.335888502,
+          "standard_error": 85216.04135705049
+        }
+      },
+      "samples_ns": {
+        "sampling_mode": "Linear",
+        "iters": [
+          3.0,
+          6.0,
+          9.0,
+          12.0,
+          15.0,
+          18.0,
+          21.0,
+          24.0,
+          27.0,
+          30.0,
+          33.0,
+          36.0,
+          39.0,
+          42.0,
+          45.0,
+          48.0,
+          51.0,
+          54.0,
+          57.0,
+          60.0
+        ],
+        "times": [
+          17147041.0,
+          35901193.0,
+          52733313.0,
+          69419900.0,
+          87612074.0,
+          105152370.0,
+          128136649.0,
+          220669083.0,
+          157899511.0,
+          174615059.0,
+          192827700.0,
+          212623000.0,
+          226642372.0,
+          245303276.0,
+          264228118.0,
+          281901395.0,
+          295014166.0,
+          312766153.0,
+          338499416.0,
+          359878256.0
+        ]
+      }
+    },
+    {
+      "run": "parallel-run-1",
+      "benchmark": {
+        "group_id": "parallel_record_scan_v1/100000",
+        "function_id": "workers-1",
+        "value_str": "ipv4",
+        "throughput": {
+          "Elements": 100000
+        },
+        "full_id": "parallel_record_scan_v1/100000/workers-1/ipv4",
+        "directory_name": "parallel_record_scan_v1_100000/workers-1/ipv4",
+        "title": "parallel_record_scan_v1/100000/workers-1/ipv4"
+      },
+      "estimates_ns": {
+        "mean": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 5757595.189906622,
+            "upper_bound": 5793231.928419491
+          },
+          "point_estimate": 5775380.639007188,
+          "standard_error": 9119.096219706922
+        },
+        "median": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 5758887.566666666,
+            "upper_bound": 5792143.75
+          },
+          "point_estimate": 5783576.946296297,
+          "standard_error": 10561.68515507285
+        },
+        "slope": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 5759929.73975399,
+            "upper_bound": 5800450.505038309
+          },
+          "point_estimate": 5779461.080023229,
+          "standard_error": 10396.256784562383
+        }
+      },
+      "samples_ns": {
+        "sampling_mode": "Linear",
+        "iters": [
+          3.0,
+          6.0,
+          9.0,
+          12.0,
+          15.0,
+          18.0,
+          21.0,
+          24.0,
+          27.0,
+          30.0,
+          33.0,
+          36.0,
+          39.0,
+          42.0,
+          45.0,
+          48.0,
+          51.0,
+          54.0,
+          57.0,
+          60.0
+        ],
+        "times": [
+          17126098.0,
+          34718835.0,
+          52157745.0,
+          70178054.0,
+          86765312.0,
+          102863478.0,
+          122041910.0,
+          137083526.0,
+          156628865.0,
+          172817311.0,
+          189504964.0,
+          208403370.0,
+          225681084.0,
+          241982319.0,
+          257600487.0,
+          281169460.0,
+          294226719.0,
+          312271187.0,
+          331395537.0,
+          345431886.0
+        ]
+      }
+    },
+    {
+      "run": "parallel-run-1",
+      "benchmark": {
+        "group_id": "parallel_record_scan_v1/100000",
+        "function_id": "workers-1",
+        "value_str": "ipv6",
+        "throughput": {
+          "Elements": 100000
+        },
+        "full_id": "parallel_record_scan_v1/100000/workers-1/ipv6",
+        "directory_name": "parallel_record_scan_v1_100000/workers-1/ipv6",
+        "title": "parallel_record_scan_v1/100000/workers-1/ipv6"
+      },
+      "estimates_ns": {
+        "mean": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 6488967.211715961,
+            "upper_bound": 6606577.952319346
+          },
+          "point_estimate": 6539376.205352496,
+          "standard_error": 30420.451159374297
+        },
+        "median": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 6484687.971078431,
+            "upper_bound": 6544877.229166667
+          },
+          "point_estimate": 6510620.677192982,
+          "standard_error": 17416.168392388885
+        },
+        "slope": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 6492801.495721124,
+            "upper_bound": 6553836.580642192
+          },
+          "point_estimate": 6518075.723925668,
+          "standard_error": 15660.329656212678
+        }
+      },
+      "samples_ns": {
+        "sampling_mode": "Linear",
+        "iters": [
+          3.0,
+          6.0,
+          9.0,
+          12.0,
+          15.0,
+          18.0,
+          21.0,
+          24.0,
+          27.0,
+          30.0,
+          33.0,
+          36.0,
+          39.0,
+          42.0,
+          45.0,
+          48.0,
+          51.0,
+          54.0,
+          57.0,
+          60.0
+        ],
+        "times": [
+          21107743.0,
+          39314614.0,
+          59244480.0,
+          77059507.0,
+          95863525.0,
+          117389862.0,
+          134925739.0,
+          157724036.0,
+          175196735.0,
+          194099243.0,
+          214058986.0,
+          243430691.0,
+          254518689.0,
+          271757889.0,
+          293232252.0,
+          313791302.0,
+          330702040.0,
+          353892957.0,
+          370783238.0,
+          389101333.0
+        ]
+      }
+    },
+    {
+      "run": "parallel-run-1",
+      "benchmark": {
+        "group_id": "parallel_record_scan_v1/100000",
+        "function_id": "workers-16",
+        "value_str": "ipv4",
+        "throughput": {
+          "Elements": 100000
+        },
+        "full_id": "parallel_record_scan_v1/100000/workers-16/ipv4",
+        "directory_name": "parallel_record_scan_v1_100000/workers-16/ipv4",
+        "title": "parallel_record_scan_v1/100000/workers-16/ipv4"
+      },
+      "estimates_ns": {
+        "mean": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 2126536.1669182903,
+            "upper_bound": 2237034.587065681
+          },
+          "point_estimate": 2169867.6351765585,
+          "standard_error": 29990.8540473439
+        },
+        "median": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 2115795.8285714285,
+            "upper_bound": 2180404.124716553
+          },
+          "point_estimate": 2131622.1178571433,
+          "standard_error": 14831.167093196716
+        },
+        "slope": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 2147474.8675588965,
+            "upper_bound": 2308907.86168762
+          },
+          "point_estimate": 2206401.7730711796,
+          "standard_error": 44199.02642960998
+        }
+      },
+      "samples_ns": {
+        "sampling_mode": "Linear",
+        "iters": [
+          7.0,
+          14.0,
+          21.0,
+          28.0,
+          35.0,
+          42.0,
+          49.0,
+          56.0,
+          63.0,
+          70.0,
+          77.0,
+          84.0,
+          91.0,
+          98.0,
+          105.0,
+          112.0,
+          119.0,
+          126.0,
+          133.0,
+          140.0
+        ],
+        "times": [
+          14654858.0,
+          29480693.0,
+          44117153.0,
+          59266520.0,
+          73130822.0,
+          89456799.0,
+          101959369.0,
+          119770263.0,
+          133916249.0,
+          148045116.0,
+          170212529.0,
+          188258265.0,
+          192847252.0,
+          213869822.0,
+          285859372.0,
+          238974631.0,
+          260278149.0,
+          274486354.0,
+          291616538.0,
+          298664863.0
+        ]
+      }
+    },
+    {
+      "run": "parallel-run-1",
+      "benchmark": {
+        "group_id": "parallel_record_scan_v1/100000",
+        "function_id": "workers-16",
+        "value_str": "ipv6",
+        "throughput": {
+          "Elements": 100000
+        },
+        "full_id": "parallel_record_scan_v1/100000/workers-16/ipv6",
+        "directory_name": "parallel_record_scan_v1_100000/workers-16/ipv6",
+        "title": "parallel_record_scan_v1/100000/workers-16/ipv6"
+      },
+      "estimates_ns": {
+        "mean": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 2361488.2319794134,
+            "upper_bound": 2498714.6914236797
+          },
+          "point_estimate": 2422265.240216271,
+          "standard_error": 35429.98875252715
+        },
+        "median": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 2342158.1587301586,
+            "upper_bound": 2443905.2632783884
+          },
+          "point_estimate": 2389775.9503437737,
+          "standard_error": 31545.7667332039
+        },
+        "slope": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 2383440.0664651133,
+            "upper_bound": 2474194.238134033
+          },
+          "point_estimate": 2426410.517869587,
+          "standard_error": 23162.72031968397
+        }
+      },
+      "samples_ns": {
+        "sampling_mode": "Linear",
+        "iters": [
+          7.0,
+          14.0,
+          21.0,
+          28.0,
+          35.0,
+          42.0,
+          49.0,
+          56.0,
+          63.0,
+          70.0,
+          77.0,
+          84.0,
+          91.0,
+          98.0,
+          105.0,
+          112.0,
+          119.0,
+          126.0,
+          133.0,
+          140.0
+        ],
+        "times": [
+          15750641.0,
+          31832170.0,
+          49338320.0,
+          66152516.0,
+          80853757.0,
+          124721301.0,
+          115707924.0,
+          138207009.0,
+          143184592.0,
+          188136660.0,
+          185670841.0,
+          205167815.0,
+          222525625.0,
+          238639355.0,
+          243463951.0,
+          275038747.0,
+          281820831.0,
+          294193936.0,
+          321529318.0,
+          351502644.0
+        ]
+      }
+    },
+    {
+      "run": "parallel-run-1",
+      "benchmark": {
+        "group_id": "parallel_record_scan_v1/100000",
+        "function_id": "workers-2",
+        "value_str": "ipv4",
+        "throughput": {
+          "Elements": 100000
+        },
+        "full_id": "parallel_record_scan_v1/100000/workers-2/ipv4",
+        "directory_name": "parallel_record_scan_v1_100000/workers-2/ipv4",
+        "title": "parallel_record_scan_v1/100000/workers-2/ipv4"
+      },
+      "estimates_ns": {
+        "mean": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 3444160.9655375453,
+            "upper_bound": 3617607.0554619757
+          },
+          "point_estimate": 3530119.6035929313,
+          "standard_error": 44217.96329942014
+        },
+        "median": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 3371458.841111111,
+            "upper_bound": 3691252.7979166666
+          },
+          "point_estimate": 3500559.376923077,
+          "standard_error": 85903.83420145597
+        },
+        "slope": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 3472653.1318131303,
+            "upper_bound": 3649646.330319149
+          },
+          "point_estimate": 3564816.987595819,
+          "standard_error": 45558.933791503114
+        }
+      },
+      "samples_ns": {
+        "sampling_mode": "Linear",
+        "iters": [
+          5.0,
+          10.0,
+          15.0,
+          20.0,
+          25.0,
+          30.0,
+          35.0,
+          40.0,
+          45.0,
+          50.0,
+          55.0,
+          60.0,
+          65.0,
+          70.0,
+          75.0,
+          80.0,
+          85.0,
+          90.0,
+          95.0,
+          100.0
+        ],
+        "times": [
+          15995666.0,
+          34978346.0,
+          51947608.0,
+          64227981.0,
+          92551990.0,
+          117842431.0,
+          117825256.0,
+          134456353.0,
+          151600834.0,
+          181281169.0,
+          207845285.0,
+          224584277.0,
+          227713470.0,
+          241071969.0,
+          248350521.0,
+          295090925.0,
+          315757901.0,
+          332448213.0,
+          344509363.0,
+          337401026.0
+        ]
+      }
+    },
+    {
+      "run": "parallel-run-1",
+      "benchmark": {
+        "group_id": "parallel_record_scan_v1/100000",
+        "function_id": "workers-2",
+        "value_str": "ipv6",
+        "throughput": {
+          "Elements": 100000
+        },
+        "full_id": "parallel_record_scan_v1/100000/workers-2/ipv6",
+        "directory_name": "parallel_record_scan_v1_100000/workers-2/ipv6",
+        "title": "parallel_record_scan_v1/100000/workers-2/ipv6"
+      },
+      "estimates_ns": {
+        "mean": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 3964891.7528729476,
+            "upper_bound": 4358264.125905299
+          },
+          "point_estimate": 4152830.467324041,
+          "standard_error": 100924.89450213376
+        },
+        "median": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 3905040.993452381,
+            "upper_bound": 4260510.121527778
+          },
+          "point_estimate": 4015065.475,
+          "standard_error": 98470.82705289341
+        },
+        "slope": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 3944556.1950195325,
+            "upper_bound": 4154201.4653848344
+          },
+          "point_estimate": 4036509.863937282,
+          "standard_error": 53252.46656013752
+        }
+      },
+      "samples_ns": {
+        "sampling_mode": "Linear",
+        "iters": [
+          4.0,
+          8.0,
+          12.0,
+          16.0,
+          20.0,
+          24.0,
+          28.0,
+          32.0,
+          36.0,
+          40.0,
+          44.0,
+          48.0,
+          52.0,
+          56.0,
+          60.0,
+          64.0,
+          68.0,
+          72.0,
+          76.0,
+          80.0
+        ],
+        "times": [
+          14179391.0,
+          28187125.0,
+          54896895.0,
+          68731173.0,
+          105385080.0,
+          108970695.0,
+          132907016.0,
+          158761622.0,
+          134229680.0,
+          160701638.0,
+          185280246.0,
+          191808945.0,
+          194917654.0,
+          222283701.0,
+          230443811.0,
+          254238409.0,
+          272856120.0,
+          304223179.0,
+          290995991.0,
+          323951545.0
+        ]
+      }
+    },
+    {
+      "run": "parallel-run-1",
+      "benchmark": {
+        "group_id": "parallel_record_scan_v1/100000",
+        "function_id": "workers-4",
+        "value_str": "ipv4",
+        "throughput": {
+          "Elements": 100000
+        },
+        "full_id": "parallel_record_scan_v1/100000/workers-4/ipv4",
+        "directory_name": "parallel_record_scan_v1_100000/workers-4/ipv4",
+        "title": "parallel_record_scan_v1/100000/workers-4/ipv4"
+      },
+      "estimates_ns": {
+        "mean": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 1995004.2666661516,
+            "upper_bound": 2105561.879824559
+          },
+          "point_estimate": 2049415.5431864175,
+          "standard_error": 28242.078432361526
+        },
+        "median": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 1960067.4761904762,
+            "upper_bound": 2143345.2472527474
+          },
+          "point_estimate": 2041962.4375,
+          "standard_error": 39439.35878465326
+        },
+        "slope": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 1983659.004005757,
+            "upper_bound": 2110363.5674353708
+          },
+          "point_estimate": 2038659.2094076655,
+          "standard_error": 32243.28383181163
+        }
+      },
+      "samples_ns": {
+        "sampling_mode": "Linear",
+        "iters": [
+          7.0,
+          14.0,
+          21.0,
+          28.0,
+          35.0,
+          42.0,
+          49.0,
+          56.0,
+          63.0,
+          70.0,
+          77.0,
+          84.0,
+          91.0,
+          98.0,
+          105.0,
+          112.0,
+          119.0,
+          126.0,
+          133.0,
+          140.0
+        ],
+        "times": [
+          15146833.0,
+          27026561.0,
+          37828168.0,
+          57237788.0,
+          68414530.0,
+          86859030.0,
+          94365372.0,
+          114856574.0,
+          145871820.0,
+          140924063.0,
+          173964795.0,
+          179264328.0,
+          195885813.0,
+          211835541.0,
+          227089444.0,
+          228448434.0,
+          239434823.0,
+          247644696.0,
+          252245777.0,
+          271056158.0
+        ]
+      }
+    },
+    {
+      "run": "parallel-run-1",
+      "benchmark": {
+        "group_id": "parallel_record_scan_v1/100000",
+        "function_id": "workers-4",
+        "value_str": "ipv6",
+        "throughput": {
+          "Elements": 100000
+        },
+        "full_id": "parallel_record_scan_v1/100000/workers-4/ipv6",
+        "directory_name": "parallel_record_scan_v1_100000/workers-4/ipv6",
+        "title": "parallel_record_scan_v1/100000/workers-4/ipv6"
+      },
+      "estimates_ns": {
+        "mean": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 2191338.1322674244,
+            "upper_bound": 2458189.3790728124
+          },
+          "point_estimate": 2304720.4799521747,
+          "standard_error": 69084.11179400756
+        },
+        "median": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 2229191.946103896,
+            "upper_bound": 2346743.5966386553
+          },
+          "point_estimate": 2284446.480952381,
+          "standard_error": 30981.05982210476
+        },
+        "slope": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 2255776.814441018,
+            "upper_bound": 2739917.0567308874
+          },
+          "point_estimate": 2452087.4278745647,
+          "standard_error": 135478.35923878028
+        }
+      },
+      "samples_ns": {
+        "sampling_mode": "Linear",
+        "iters": [
+          7.0,
+          14.0,
+          21.0,
+          28.0,
+          35.0,
+          42.0,
+          49.0,
+          56.0,
+          63.0,
+          70.0,
+          77.0,
+          84.0,
+          91.0,
+          98.0,
+          105.0,
+          112.0,
+          119.0,
+          126.0,
+          133.0,
+          140.0
+        ],
+        "times": [
+          16749584.0,
+          27303045.0,
+          48011697.0,
+          65935885.0,
+          66850430.0,
+          96803036.0,
+          99371120.0,
+          118242621.0,
+          143118369.0,
+          156367497.0,
+          171291313.0,
+          188759540.0,
+          191838793.0,
+          240557659.0,
+          239675276.0,
+          262908048.0,
+          279185175.0,
+          308547601.0,
+          464108403.0,
+          322209992.0
+        ]
+      }
+    },
+    {
+      "run": "parallel-run-1",
+      "benchmark": {
+        "group_id": "parallel_record_scan_v1/100000",
+        "function_id": "workers-8",
+        "value_str": "ipv4",
+        "throughput": {
+          "Elements": 100000
+        },
+        "full_id": "parallel_record_scan_v1/100000/workers-8/ipv4",
+        "directory_name": "parallel_record_scan_v1_100000/workers-8/ipv4",
+        "title": "parallel_record_scan_v1/100000/workers-8/ipv4"
+      },
+      "estimates_ns": {
+        "mean": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 1528316.479733852,
+            "upper_bound": 1615638.000210391
+          },
+          "point_estimate": 1565119.0277663858,
+          "standard_error": 22671.12106219186
+        },
+        "median": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 1510538.4188888888,
+            "upper_bound": 1578498.4725000001
+          },
+          "point_estimate": 1540840.0541666667,
+          "standard_error": 16082.10793956761
+        },
+        "slope": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 1525023.4595784375,
+            "upper_bound": 1576980.1187680997
+          },
+          "point_estimate": 1549196.3959930313,
+          "standard_error": 13300.79894641243
+        }
+      },
+      "samples_ns": {
+        "sampling_mode": "Linear",
+        "iters": [
+          10.0,
+          20.0,
+          30.0,
+          40.0,
+          50.0,
+          60.0,
+          70.0,
+          80.0,
+          90.0,
+          100.0,
+          110.0,
+          120.0,
+          130.0,
+          140.0,
+          150.0,
+          160.0,
+          170.0,
+          180.0,
+          190.0,
+          200.0
+        ],
+        "times": [
+          16418916.0,
+          29475039.0,
+          44839651.0,
+          61688725.0,
+          79500606.0,
+          92367719.0,
+          136255012.0,
+          133311796.0,
+          137049816.0,
+          149644939.0,
+          170073762.0,
+          192558954.0,
+          193205027.0,
+          209847175.0,
+          227010429.0,
+          248035025.0,
+          258793634.0,
+          271381316.0,
+          302439524.0,
+          313396965.0
+        ]
+      }
+    },
+    {
+      "run": "parallel-run-1",
+      "benchmark": {
+        "group_id": "parallel_record_scan_v1/100000",
+        "function_id": "workers-8",
+        "value_str": "ipv6",
+        "throughput": {
+          "Elements": 100000
+        },
+        "full_id": "parallel_record_scan_v1/100000/workers-8/ipv6",
+        "directory_name": "parallel_record_scan_v1_100000/workers-8/ipv6",
+        "title": "parallel_record_scan_v1/100000/workers-8/ipv6"
+      },
+      "estimates_ns": {
+        "mean": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 1740925.992830446,
+            "upper_bound": 1825854.1365883
+          },
+          "point_estimate": 1781400.6023714342,
+          "standard_error": 21753.14741281861
+        },
+        "median": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 1722381.300595238,
+            "upper_bound": 1808503.1171875
+          },
+          "point_estimate": 1770889.572172619,
+          "standard_error": 26006.702069677194
+        },
+        "slope": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 1749894.9903952796,
+            "upper_bound": 1810710.4001372831
+          },
+          "point_estimate": 1779873.994250871,
+          "standard_error": 15558.655608631241
+        }
+      },
+      "samples_ns": {
+        "sampling_mode": "Linear",
+        "iters": [
+          8.0,
+          16.0,
+          24.0,
+          32.0,
+          40.0,
+          48.0,
+          56.0,
+          64.0,
+          72.0,
+          80.0,
+          88.0,
+          96.0,
+          104.0,
+          112.0,
+          120.0,
+          128.0,
+          136.0,
+          144.0,
+          152.0,
+          160.0
+        ],
+        "times": [
+          12741965.0,
+          27192971.0,
+          41211905.0,
+          57302474.0,
+          82058438.0,
+          91929462.0,
+          96745594.0,
+          115386131.0,
+          123161030.0,
+          146355639.0,
+          169944707.0,
+          169703011.0,
+          180100260.0,
+          198692418.0,
+          207471689.0,
+          218855631.0,
+          243165760.0,
+          247194115.0,
+          277933400.0,
+          290255670.0
+        ]
+      }
+    },
+    {
+      "run": "parallel-run-1",
+      "benchmark": {
+        "group_id": "parallel_record_scan_v1/1000000",
+        "function_id": "adaptive",
+        "value_str": "ipv4",
+        "throughput": {
+          "Elements": 1000000
+        },
+        "full_id": "parallel_record_scan_v1/1000000/adaptive/ipv4",
+        "directory_name": "parallel_record_scan_v1_1000000/adaptive/ipv4",
+        "title": "parallel_record_scan_v1/1000000/adaptive/ipv4"
+      },
+      "estimates_ns": {
+        "mean": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 12743267.659820098,
+            "upper_bound": 13115788.364444014
+          },
+          "point_estimate": 12924484.91221065,
+          "standard_error": 95280.24219991575
+        },
+        "median": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 12619667.545673076,
+            "upper_bound": 13181749.424603175
+          },
+          "point_estimate": 12785486.873529412,
+          "standard_error": 171132.5758980921
+        },
+        "slope": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 12660246.73229918,
+            "upper_bound": 13035664.55731939
+          },
+          "point_estimate": 12836093.017595818,
+          "standard_error": 96269.62959064876
+        }
+      },
+      "samples_ns": {
+        "sampling_mode": "Linear",
+        "iters": [
+          2.0,
+          4.0,
+          6.0,
+          8.0,
+          10.0,
+          12.0,
+          14.0,
+          16.0,
+          18.0,
+          20.0,
+          22.0,
+          24.0,
+          26.0,
+          28.0,
+          30.0,
+          32.0,
+          34.0,
+          36.0,
+          38.0,
+          40.0
+        ],
+        "times": [
+          26907678.0,
+          50221816.0,
+          81165431.0,
+          97960322.0,
+          128119206.0,
+          164778229.0,
+          184477231.0,
+          202012679.0,
+          237357968.0,
+          270412155.0,
+          279675421.0,
+          299757828.0,
+          327952109.0,
+          354120702.0,
+          403592869.0,
+          410786120.0,
+          433807807.0,
+          447925182.0,
+          476851607.0,
+          526040301.0
+        ]
+      }
+    },
+    {
+      "run": "parallel-run-1",
+      "benchmark": {
+        "group_id": "parallel_record_scan_v1/1000000",
+        "function_id": "adaptive",
+        "value_str": "ipv6",
+        "throughput": {
+          "Elements": 1000000
+        },
+        "full_id": "parallel_record_scan_v1/1000000/adaptive/ipv6",
+        "directory_name": "parallel_record_scan_v1_1000000/adaptive/ipv6",
+        "title": "parallel_record_scan_v1/1000000/adaptive/ipv6"
+      },
+      "estimates_ns": {
+        "mean": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 14144862.800381374,
+            "upper_bound": 14625838.790372457
+          },
+          "point_estimate": 14372095.713829,
+          "standard_error": 122931.05272152668
+        },
+        "median": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 14000052.76068376,
+            "upper_bound": 14688252.378947368
+          },
+          "point_estimate": 14106693.5,
+          "standard_error": 173665.93022591303
+        },
+        "slope": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 14154084.43002028,
+            "upper_bound": 14689355.518901758
+          },
+          "point_estimate": 14413123.997560976,
+          "standard_error": 137834.54772028947
+        }
+      },
+      "samples_ns": {
+        "sampling_mode": "Linear",
+        "iters": [
+          1.0,
+          2.0,
+          3.0,
+          4.0,
+          5.0,
+          6.0,
+          7.0,
+          8.0,
+          9.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0,
+          16.0,
+          17.0,
+          18.0,
+          19.0,
+          20.0
+        ],
+        "times": [
+          13849315.0,
+          27764547.0,
+          41295122.0,
+          57405408.0,
+          73733028.0,
+          93876656.0,
+          103601526.0,
+          112515998.0,
+          124542473.0,
+          140377637.0,
+          170173313.0,
+          178731085.0,
+          182236185.0,
+          195683319.0,
+          210940391.0,
+          226382196.0,
+          240922942.0,
+          251674874.0,
+          277968084.0,
+          302104471.0
+        ]
+      }
+    },
+    {
+      "run": "parallel-run-1",
+      "benchmark": {
+        "group_id": "parallel_record_scan_v1/1000000",
+        "function_id": "sequential",
+        "value_str": "ipv4",
+        "throughput": {
+          "Elements": 1000000
+        },
+        "full_id": "parallel_record_scan_v1/1000000/sequential/ipv4",
+        "directory_name": "parallel_record_scan_v1_1000000/sequential/ipv4",
+        "title": "parallel_record_scan_v1/1000000/sequential/ipv4"
+      },
+      "estimates_ns": {
+        "mean": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 51239755.725,
+            "upper_bound": 56394530.67875
+          },
+          "point_estimate": 53523303.650000006,
+          "standard_error": 1339006.0057831376
+        },
+        "median": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 50575697.833333336,
+            "upper_bound": 51249544.166666664
+          },
+          "point_estimate": 50859385.0,
+          "standard_error": 325331.7055094684
+        },
+        "slope": null
+      },
+      "samples_ns": {
+        "sampling_mode": "Flat",
+        "iters": [
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0
+        ],
+        "times": [
+          150685191.0,
+          171467551.0,
+          216003947.0,
+          150293467.0,
+          150608029.0,
+          151688083.0,
+          153272131.0,
+          152610101.0,
+          151093211.0,
+          151943477.0,
+          153835904.0,
+          152893159.0,
+          153661361.0,
+          152546209.0,
+          150938764.0,
+          151766104.0,
+          157410795.0,
+          195294140.0,
+          191098975.0,
+          152287620.0
+        ]
+      }
+    },
+    {
+      "run": "parallel-run-1",
+      "benchmark": {
+        "group_id": "parallel_record_scan_v1/1000000",
+        "function_id": "sequential",
+        "value_str": "ipv6",
+        "throughput": {
+          "Elements": 1000000
+        },
+        "full_id": "parallel_record_scan_v1/1000000/sequential/ipv6",
+        "directory_name": "parallel_record_scan_v1_1000000/sequential/ipv6",
+        "title": "parallel_record_scan_v1/1000000/sequential/ipv6"
+      },
+      "estimates_ns": {
+        "mean": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 59214972.06916667,
+            "upper_bound": 60443832.635833345
+          },
+          "point_estimate": 59725712.68333334,
+          "standard_error": 320714.8914993506
+        },
+        "median": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 59051815.833333336,
+            "upper_bound": 59864245.16666667
+          },
+          "point_estimate": 59474182.333333336,
+          "standard_error": 227799.52657230356
+        },
+        "slope": null
+      },
+      "samples_ns": {
+        "sampling_mode": "Flat",
+        "iters": [
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0
+        ],
+        "times": [
+          181430985.0,
+          178856913.0,
+          180282609.0,
+          182104770.0,
+          179060827.0,
+          178154395.0,
+          177248536.0,
+          177302231.0,
+          180869917.0,
+          177647694.0,
+          176858944.0,
+          176690089.0,
+          180124644.0,
+          178848162.0,
+          195961568.0,
+          178690699.0,
+          175570951.0,
+          177062359.0,
+          174633526.0,
+          176142942.0
+        ]
+      }
+    },
+    {
+      "run": "parallel-run-1",
+      "benchmark": {
+        "group_id": "parallel_record_scan_v1/1000000",
+        "function_id": "workers-1",
+        "value_str": "ipv4",
+        "throughput": {
+          "Elements": 1000000
+        },
+        "full_id": "parallel_record_scan_v1/1000000/workers-1/ipv4",
+        "directory_name": "parallel_record_scan_v1_1000000/workers-1/ipv4",
+        "title": "parallel_record_scan_v1/1000000/workers-1/ipv4"
+      },
+      "estimates_ns": {
+        "mean": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 59513409.93583334,
+            "upper_bound": 64118165.3
+          },
+          "point_estimate": 61212653.39999999,
+          "standard_error": 1328278.0241652864
+        },
+        "median": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 59236831.5,
+            "upper_bound": 60335984.0
+          },
+          "point_estimate": 59545600.5,
+          "standard_error": 300702.6638087612
+        },
+        "slope": null
+      },
+      "samples_ns": {
+        "sampling_mode": "Flat",
+        "iters": [
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0
+        ],
+        "times": [
+          179072106.0,
+          175387250.0,
+          176686579.0,
+          179595485.0,
+          178170750.0,
+          181044755.0,
+          178201497.0,
+          177640286.0,
+          177780703.0,
+          177173692.0,
+          182118071.0,
+          179378003.0,
+          175785409.0,
+          185864278.0,
+          260100979.0,
+          189107832.0,
+          183253860.0,
+          177555004.0,
+          177871516.0,
+          180971149.0
+        ]
+      }
+    },
+    {
+      "run": "parallel-run-1",
+      "benchmark": {
+        "group_id": "parallel_record_scan_v1/1000000",
+        "function_id": "workers-1",
+        "value_str": "ipv6",
+        "throughput": {
+          "Elements": 1000000
+        },
+        "full_id": "parallel_record_scan_v1/1000000/workers-1/ipv6",
+        "directory_name": "parallel_record_scan_v1_1000000/workers-1/ipv6",
+        "title": "parallel_record_scan_v1/1000000/workers-1/ipv6"
+      },
+      "estimates_ns": {
+        "mean": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 66824605.800833344,
+            "upper_bound": 67757318.02458335
+          },
+          "point_estimate": 67282283.91666666,
+          "standard_error": 238228.3019551276
+        },
+        "median": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 66575051.33333333,
+            "upper_bound": 67791235.83333333
+          },
+          "point_estimate": 67108593.33333333,
+          "standard_error": 326663.7885057618
+        },
+        "slope": null
+      },
+      "samples_ns": {
+        "sampling_mode": "Flat",
+        "iters": [
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0
+        ],
+        "times": [
+          199669719.0,
+          198839190.0,
+          208248015.0,
+          199780589.0,
+          200331685.0,
+          206340015.0,
+          207456950.0,
+          202562635.0,
+          197979110.0,
+          198328291.0,
+          201820774.0,
+          203863850.0,
+          205643040.0,
+          200830786.0,
+          200794187.0,
+          199447924.0,
+          203225023.0,
+          202118370.0,
+          203522392.0,
+          196134490.0
+        ]
+      }
+    },
+    {
+      "run": "parallel-run-1",
+      "benchmark": {
+        "group_id": "parallel_record_scan_v1/1000000",
+        "function_id": "workers-16",
+        "value_str": "ipv4",
+        "throughput": {
+          "Elements": 1000000
+        },
+        "full_id": "parallel_record_scan_v1/1000000/workers-16/ipv4",
+        "directory_name": "parallel_record_scan_v1_1000000/workers-16/ipv4",
+        "title": "parallel_record_scan_v1/1000000/workers-16/ipv4"
+      },
+      "estimates_ns": {
+        "mean": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 12987532.224602975,
+            "upper_bound": 13360173.27390714
+          },
+          "point_estimate": 13156175.399682079,
+          "standard_error": 95497.21064403979
+        },
+        "median": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 12964335.379166666,
+            "upper_bound": 13182656.432142857
+          },
+          "point_estimate": 13026338.757177033,
+          "standard_error": 64129.77437544386
+        },
+        "slope": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 12964416.56466138,
+            "upper_bound": 13257259.119874042
+          },
+          "point_estimate": 13086684.782752613,
+          "standard_error": 75015.6380414087
+        }
+      },
+      "samples_ns": {
+        "sampling_mode": "Linear",
+        "iters": [
+          2.0,
+          4.0,
+          6.0,
+          8.0,
+          10.0,
+          12.0,
+          14.0,
+          16.0,
+          18.0,
+          20.0,
+          22.0,
+          24.0,
+          26.0,
+          28.0,
+          30.0,
+          32.0,
+          34.0,
+          36.0,
+          38.0,
+          40.0
+        ],
+        "times": [
+          25327416.0,
+          51147401.0,
+          77834345.0,
+          103999496.0,
+          135573746.0,
+          174993844.0,
+          184372807.0,
+          208599782.0,
+          244110495.0,
+          263916533.0,
+          286791723.0,
+          313252898.0,
+          329287865.0,
+          379878257.0,
+          406899545.0,
+          415914941.0,
+          436088665.0,
+          464975146.0,
+          494634224.0,
+          518251197.0
+        ]
+      }
+    },
+    {
+      "run": "parallel-run-1",
+      "benchmark": {
+        "group_id": "parallel_record_scan_v1/1000000",
+        "function_id": "workers-16",
+        "value_str": "ipv6",
+        "throughput": {
+          "Elements": 1000000
+        },
+        "full_id": "parallel_record_scan_v1/1000000/workers-16/ipv6",
+        "directory_name": "parallel_record_scan_v1_1000000/workers-16/ipv6",
+        "title": "parallel_record_scan_v1/1000000/workers-16/ipv6"
+      },
+      "estimates_ns": {
+        "mean": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 14640944.801941438,
+            "upper_bound": 15747973.931315286
+          },
+          "point_estimate": 15093685.365932679,
+          "standard_error": 289500.0638233501
+        },
+        "median": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 14359132.739285715,
+            "upper_bound": 15240491.7625
+          },
+          "point_estimate": 14578658.40909091,
+          "standard_error": 295725.72629260086
+        },
+        "slope": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 14714207.047010973,
+            "upper_bound": 16942383.237364817
+          },
+          "point_estimate": 15661085.398954704,
+          "standard_error": 603709.3078962207
+        }
+      },
+      "samples_ns": {
+        "sampling_mode": "Linear",
+        "iters": [
+          2.0,
+          4.0,
+          6.0,
+          8.0,
+          10.0,
+          12.0,
+          14.0,
+          16.0,
+          18.0,
+          20.0,
+          22.0,
+          24.0,
+          26.0,
+          28.0,
+          30.0,
+          32.0,
+          34.0,
+          36.0,
+          38.0,
+          40.0
+        ],
+        "times": [
+          28381711.0,
+          57242302.0,
+          85702227.0,
+          121917215.0,
+          155178648.0,
+          172374887.0,
+          201053698.0,
+          240956026.0,
+          263692044.0,
+          287145741.0,
+          319170694.0,
+          374207228.0,
+          393161088.0,
+          436121729.0,
+          429788763.0,
+          458835251.0,
+          492614846.0,
+          583404553.0,
+          765367265.0,
+          609653266.0
+        ]
+      }
+    },
+    {
+      "run": "parallel-run-1",
+      "benchmark": {
+        "group_id": "parallel_record_scan_v1/1000000",
+        "function_id": "workers-2",
+        "value_str": "ipv4",
+        "throughput": {
+          "Elements": 1000000
+        },
+        "full_id": "parallel_record_scan_v1/1000000/workers-2/ipv4",
+        "directory_name": "parallel_record_scan_v1_1000000/workers-2/ipv4",
+        "title": "parallel_record_scan_v1/1000000/workers-2/ipv4"
+      },
+      "estimates_ns": {
+        "mean": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 36935722.808125004,
+            "upper_bound": 41411999.630624995
+          },
+          "point_estimate": 39152827.15,
+          "standard_error": 1143043.345419237
+        },
+        "median": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 34295094.75,
+            "upper_bound": 43009425.375
+          },
+          "point_estimate": 38842240.0,
+          "standard_error": 1705704.0253542885
+        },
+        "slope": null
+      },
+      "samples_ns": {
+        "sampling_mode": "Flat",
+        "iters": [
+          4.0,
+          4.0,
+          4.0,
+          4.0,
+          4.0,
+          4.0,
+          4.0,
+          4.0,
+          4.0,
+          4.0,
+          4.0,
+          4.0,
+          4.0,
+          4.0,
+          4.0,
+          4.0,
+          4.0,
+          4.0,
+          4.0,
+          4.0
+        ],
+        "times": [
+          195388067.0,
+          132993656.0,
+          131534636.0,
+          136986322.0,
+          165413720.0,
+          137374436.0,
+          159733546.0,
+          157337439.0,
+          155943030.0,
+          183015378.0,
+          128227226.0,
+          178710304.0,
+          183317243.0,
+          154642457.0,
+          154794890.0,
+          178661683.0,
+          153862679.0,
+          179758800.0,
+          130328342.0,
+          134202318.0
+        ]
+      }
+    },
+    {
+      "run": "parallel-run-1",
+      "benchmark": {
+        "group_id": "parallel_record_scan_v1/1000000",
+        "function_id": "workers-2",
+        "value_str": "ipv6",
+        "throughput": {
+          "Elements": 1000000
+        },
+        "full_id": "parallel_record_scan_v1/1000000/workers-2/ipv6",
+        "directory_name": "parallel_record_scan_v1_1000000/workers-2/ipv6",
+        "title": "parallel_record_scan_v1/1000000/workers-2/ipv6"
+      },
+      "estimates_ns": {
+        "mean": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 40854442.4571875,
+            "upper_bound": 46207917.485
+          },
+          "point_estimate": 43455274.9125,
+          "standard_error": 1368668.7243376155
+        },
+        "median": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 38277586.25,
+            "upper_bound": 45233828.5
+          },
+          "point_estimate": 43526545.375,
+          "standard_error": 1578703.3058424133
+        },
+        "slope": null
+      },
+      "samples_ns": {
+        "sampling_mode": "Flat",
+        "iters": [
+          4.0,
+          4.0,
+          4.0,
+          4.0,
+          4.0,
+          4.0,
+          4.0,
+          4.0,
+          4.0,
+          4.0,
+          4.0,
+          4.0,
+          4.0,
+          4.0,
+          4.0,
+          4.0,
+          4.0,
+          4.0,
+          4.0,
+          4.0
+        ],
+        "times": [
+          205217044.0,
+          183527995.0,
+          144383564.0,
+          146038741.0,
+          191744980.0,
+          174690104.0,
+          233330107.0,
+          178342633.0,
+          144719086.0,
+          173522259.0,
+          145996342.0,
+          203477318.0,
+          172804590.0,
+          207706517.0,
+          170102135.0,
+          152142912.0,
+          175167560.0,
+          154077778.0,
+          144596408.0,
+          174833920.0
+        ]
+      }
+    },
+    {
+      "run": "parallel-run-1",
+      "benchmark": {
+        "group_id": "parallel_record_scan_v1/1000000",
+        "function_id": "workers-4",
+        "value_str": "ipv4",
+        "throughput": {
+          "Elements": 1000000
+        },
+        "full_id": "parallel_record_scan_v1/1000000/workers-4/ipv4",
+        "directory_name": "parallel_record_scan_v1_1000000/workers-4/ipv4",
+        "title": "parallel_record_scan_v1/1000000/workers-4/ipv4"
+      },
+      "estimates_ns": {
+        "mean": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 18176266.810160227,
+            "upper_bound": 19470946.555882636
+          },
+          "point_estimate": 18835575.84813874,
+          "standard_error": 331540.15469183633
+        },
+        "median": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 18048814.239583336,
+            "upper_bound": 19560363.19047619
+          },
+          "point_estimate": 18992637.046783626,
+          "standard_error": 367907.4376004568
+        },
+        "slope": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 18209297.85902477,
+            "upper_bound": 19602435.988864154
+          },
+          "point_estimate": 18865285.144947734,
+          "standard_error": 353978.59157102887
+        }
+      },
+      "samples_ns": {
+        "sampling_mode": "Linear",
+        "iters": [
+          1.0,
+          2.0,
+          3.0,
+          4.0,
+          5.0,
+          6.0,
+          7.0,
+          8.0,
+          9.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0,
+          16.0,
+          17.0,
+          18.0,
+          19.0,
+          20.0
+        ],
+        "times": [
+          20623972.0,
+          37475759.0,
+          48954841.0,
+          77359263.0,
+          99602591.0,
+          96050778.0,
+          136424006.0,
+          154165575.0,
+          176684244.0,
+          177602277.0,
+          180547230.0,
+          219938165.0,
+          277301136.0,
+          288117349.0,
+          314228574.0,
+          284311169.0,
+          317506393.0,
+          343099886.0,
+          359559217.0,
+          351571292.0
+        ]
+      }
+    },
+    {
+      "run": "parallel-run-1",
+      "benchmark": {
+        "group_id": "parallel_record_scan_v1/1000000",
+        "function_id": "workers-4",
+        "value_str": "ipv6",
+        "throughput": {
+          "Elements": 1000000
+        },
+        "full_id": "parallel_record_scan_v1/1000000/workers-4/ipv6",
+        "directory_name": "parallel_record_scan_v1_1000000/workers-4/ipv6",
+        "title": "parallel_record_scan_v1/1000000/workers-4/ipv6"
+      },
+      "estimates_ns": {
+        "mean": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 20941724.978104606,
+            "upper_bound": 22315572.67298783
+          },
+          "point_estimate": 21661481.656947523,
+          "standard_error": 350683.8543011495
+        },
+        "median": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 21141659.15,
+            "upper_bound": 22270976.57142857
+          },
+          "point_estimate": 21921899.166666664,
+          "standard_error": 265281.15041276166
+        },
+        "slope": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 21320413.446774267,
+            "upper_bound": 22841163.172277883
+          },
+          "point_estimate": 22121033.720557492,
+          "standard_error": 389863.9702526577
+        }
+      },
+      "samples_ns": {
+        "sampling_mode": "Linear",
+        "iters": [
+          1.0,
+          2.0,
+          3.0,
+          4.0,
+          5.0,
+          6.0,
+          7.0,
+          8.0,
+          9.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0,
+          16.0,
+          17.0,
+          18.0,
+          19.0,
+          20.0
+        ],
+        "times": [
+          17806566.0,
+          42191923.0,
+          65755906.0,
+          82166227.0,
+          105936784.0,
+          141589349.0,
+          166524085.0,
+          177489240.0,
+          198174039.0,
+          183066425.0,
+          241862173.0,
+          262154926.0,
+          285027119.0,
+          312981174.0,
+          310243395.0,
+          325491498.0,
+          387705527.0,
+          415002053.0,
+          412503794.0,
+          481333036.0
+        ]
+      }
+    },
+    {
+      "run": "parallel-run-1",
+      "benchmark": {
+        "group_id": "parallel_record_scan_v1/1000000",
+        "function_id": "workers-8",
+        "value_str": "ipv4",
+        "throughput": {
+          "Elements": 1000000
+        },
+        "full_id": "parallel_record_scan_v1/1000000/workers-8/ipv4",
+        "directory_name": "parallel_record_scan_v1_1000000/workers-8/ipv4",
+        "title": "parallel_record_scan_v1/1000000/workers-8/ipv4"
+      },
+      "estimates_ns": {
+        "mean": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 12646100.165763194,
+            "upper_bound": 13111878.506604295
+          },
+          "point_estimate": 12866599.674596885,
+          "standard_error": 119142.92424269943
+        },
+        "median": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 12502936.9875,
+            "upper_bound": 13093304.55
+          },
+          "point_estimate": 12590552.742260061,
+          "standard_error": 176452.61930459377
+        },
+        "slope": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 12620733.282886911,
+            "upper_bound": 12958299.187885506
+          },
+          "point_estimate": 12760964.848780489,
+          "standard_error": 86078.99991451847
+        }
+      },
+      "samples_ns": {
+        "sampling_mode": "Linear",
+        "iters": [
+          2.0,
+          4.0,
+          6.0,
+          8.0,
+          10.0,
+          12.0,
+          14.0,
+          16.0,
+          18.0,
+          20.0,
+          22.0,
+          24.0,
+          26.0,
+          28.0,
+          30.0,
+          32.0,
+          34.0,
+          36.0,
+          38.0,
+          40.0
+        ],
+        "times": [
+          24251816.0,
+          54264305.0,
+          74377939.0,
+          99584742.0,
+          125219061.0,
+          162288259.0,
+          199582837.0,
+          217537462.0,
+          223609267.0,
+          266953603.0,
+          280949306.0,
+          299615229.0,
+          326470408.0,
+          363091862.0,
+          391001943.0,
+          420902752.0,
+          427927871.0,
+          447964927.0,
+          478609682.0,
+          501501753.0
+        ]
+      }
+    },
+    {
+      "run": "parallel-run-1",
+      "benchmark": {
+        "group_id": "parallel_record_scan_v1/1000000",
+        "function_id": "workers-8",
+        "value_str": "ipv6",
+        "throughput": {
+          "Elements": 1000000
+        },
+        "full_id": "parallel_record_scan_v1/1000000/workers-8/ipv6",
+        "directory_name": "parallel_record_scan_v1_1000000/workers-8/ipv6",
+        "title": "parallel_record_scan_v1/1000000/workers-8/ipv6"
+      },
+      "estimates_ns": {
+        "mean": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 14241077.659747925,
+            "upper_bound": 14649911.155409949
+          },
+          "point_estimate": 14436571.973948022,
+          "standard_error": 104866.35717107666
+        },
+        "median": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 14069738.125,
+            "upper_bound": 14643895.211363636
+          },
+          "point_estimate": 14322534.0,
+          "standard_error": 157086.355383576
+        },
+        "slope": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 14134411.921771295,
+            "upper_bound": 14658285.135309203
+          },
+          "point_estimate": 14374599.816027874,
+          "standard_error": 135782.36527343563
+        }
+      },
+      "samples_ns": {
+        "sampling_mode": "Linear",
+        "iters": [
+          2.0,
+          4.0,
+          6.0,
+          8.0,
+          10.0,
+          12.0,
+          14.0,
+          16.0,
+          18.0,
+          20.0,
+          22.0,
+          24.0,
+          26.0,
+          28.0,
+          30.0,
+          32.0,
+          34.0,
+          36.0,
+          38.0,
+          40.0
+        ],
+        "times": [
+          27830749.0,
+          57405398.0,
+          89640817.0,
+          119587485.0,
+          155857749.0,
+          169642742.0,
+          200112059.0,
+          225364188.0,
+          259923273.0,
+          291787863.0,
+          323364740.0,
+          337301148.0,
+          365370704.0,
+          421532953.0,
+          419414843.0,
+          451237268.0,
+          474330137.0,
+          503739011.0,
+          576438723.0,
+          575604110.0
+        ]
+      }
+    },
+    {
+      "run": "parallel-run-2",
+      "benchmark": {
+        "group_id": "parallel_record_scan_v1/100000",
+        "function_id": "adaptive",
+        "value_str": "ipv4",
+        "throughput": {
+          "Elements": 100000
+        },
+        "full_id": "parallel_record_scan_v1/100000/adaptive/ipv4",
+        "directory_name": "parallel_record_scan_v1_100000/adaptive/ipv4",
+        "title": "parallel_record_scan_v1/100000/adaptive/ipv4"
+      },
+      "estimates_ns": {
+        "mean": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 1536136.5206719013,
+            "upper_bound": 1583147.930511513
+          },
+          "point_estimate": 1559609.8090506808,
+          "standard_error": 12032.623684510725
+        },
+        "median": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 1528424.1642857143,
+            "upper_bound": 1597802.9916666667
+          },
+          "point_estimate": 1564823.9529411765,
+          "standard_error": 17211.257507370723
+        },
+        "slope": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 1546852.9823888296,
+            "upper_bound": 1585336.3908076764
+          },
+          "point_estimate": 1565516.343031359,
+          "standard_error": 9861.240764024704
+        }
+      },
+      "samples_ns": {
+        "sampling_mode": "Linear",
+        "iters": [
+          10.0,
+          20.0,
+          30.0,
+          40.0,
+          50.0,
+          60.0,
+          70.0,
+          80.0,
+          90.0,
+          100.0,
+          110.0,
+          120.0,
+          130.0,
+          140.0,
+          150.0,
+          160.0,
+          170.0,
+          180.0,
+          190.0,
+          200.0
+        ],
+        "times": [
+          14735215.0,
+          29151434.0,
+          47782750.0,
+          60283704.0,
+          79250322.0,
+          96170859.0,
+          112513051.0,
+          134366519.0,
+          144548092.0,
+          148966731.0,
+          167385988.0,
+          188630698.0,
+          208517385.0,
+          214922054.0,
+          227799438.0,
+          246985220.0,
+          266742632.0,
+          279271245.0,
+          296508984.0,
+          322900777.0
+        ]
+      }
+    },
+    {
+      "run": "parallel-run-2",
+      "benchmark": {
+        "group_id": "parallel_record_scan_v1/100000",
+        "function_id": "adaptive",
+        "value_str": "ipv6",
+        "throughput": {
+          "Elements": 100000
+        },
+        "full_id": "parallel_record_scan_v1/100000/adaptive/ipv6",
+        "directory_name": "parallel_record_scan_v1_100000/adaptive/ipv6",
+        "title": "parallel_record_scan_v1/100000/adaptive/ipv6"
+      },
+      "estimates_ns": {
+        "mean": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 1712482.2982728872,
+            "upper_bound": 1803856.9249528297
+          },
+          "point_estimate": 1755575.273186835,
+          "standard_error": 23421.142888092814
+        },
+        "median": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 1696087.7691358025,
+            "upper_bound": 1761989.9692982456
+          },
+          "point_estimate": 1727199.9552469137,
+          "standard_error": 19121.1413818172
+        },
+        "slope": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 1726886.7990246867,
+            "upper_bound": 1813384.6749375013
+          },
+          "point_estimate": 1762844.6626403406,
+          "standard_error": 22221.06969829946
+        }
+      },
+      "samples_ns": {
+        "sampling_mode": "Linear",
+        "iters": [
+          9.0,
+          18.0,
+          27.0,
+          36.0,
+          45.0,
+          54.0,
+          63.0,
+          72.0,
+          81.0,
+          90.0,
+          99.0,
+          108.0,
+          117.0,
+          126.0,
+          135.0,
+          144.0,
+          153.0,
+          162.0,
+          171.0,
+          180.0
+        ],
+        "times": [
+          14805726.0,
+          28689835.0,
+          45107841.0,
+          61378423.0,
+          78304029.0,
+          108020158.0,
+          118709286.0,
+          121305987.0,
+          136969906.0,
+          153557245.0,
+          185433905.0,
+          185938133.0,
+          204067091.0,
+          251504565.0,
+          244140791.0,
+          252094008.0,
+          258399760.0,
+          280705586.0,
+          303238935.0,
+          306214028.0
+        ]
+      }
+    },
+    {
+      "run": "parallel-run-2",
+      "benchmark": {
+        "group_id": "parallel_record_scan_v1/100000",
+        "function_id": "sequential",
+        "value_str": "ipv4",
+        "throughput": {
+          "Elements": 100000
+        },
+        "full_id": "parallel_record_scan_v1/100000/sequential/ipv4",
+        "directory_name": "parallel_record_scan_v1_100000/sequential/ipv4",
+        "title": "parallel_record_scan_v1/100000/sequential/ipv4"
+      },
+      "estimates_ns": {
+        "mean": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 5088699.755870762,
+            "upper_bound": 5140088.963808011
+          },
+          "point_estimate": 5113240.972726272,
+          "standard_error": 13101.854793580827
+        },
+        "median": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 5079681.784126984,
+            "upper_bound": 5139018.99754902
+          },
+          "point_estimate": 5100244.318181818,
+          "standard_error": 13491.110854745393
+        },
+        "slope": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 5085615.893600445,
+            "upper_bound": 5150069.11253918
+          },
+          "point_estimate": 5115625.977816492,
+          "standard_error": 16777.36813245295
+        }
+      },
+      "samples_ns": {
+        "sampling_mode": "Linear",
+        "iters": [
+          3.0,
+          6.0,
+          9.0,
+          12.0,
+          15.0,
+          18.0,
+          21.0,
+          24.0,
+          27.0,
+          30.0,
+          33.0,
+          36.0,
+          39.0,
+          42.0,
+          45.0,
+          48.0,
+          51.0,
+          54.0,
+          57.0,
+          60.0
+        ],
+        "times": [
+          15678464.0,
+          30194857.0,
+          45859939.0,
+          61833515.0,
+          76552865.0,
+          93854585.0,
+          108321398.0,
+          122571961.0,
+          135897970.0,
+          151541719.0,
+          168199822.0,
+          181508325.0,
+          197967853.0,
+          213446094.0,
+          228479117.0,
+          247974453.0,
+          261387499.0,
+          275925015.0,
+          297925758.0,
+          305280544.0
+        ]
+      }
+    },
+    {
+      "run": "parallel-run-2",
+      "benchmark": {
+        "group_id": "parallel_record_scan_v1/100000",
+        "function_id": "sequential",
+        "value_str": "ipv6",
+        "throughput": {
+          "Elements": 100000
+        },
+        "full_id": "parallel_record_scan_v1/100000/sequential/ipv6",
+        "directory_name": "parallel_record_scan_v1_100000/sequential/ipv6",
+        "title": "parallel_record_scan_v1/100000/sequential/ipv6"
+      },
+      "estimates_ns": {
+        "mean": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 5880957.859535777,
+            "upper_bound": 6169129.091857668
+          },
+          "point_estimate": 5988399.705958511,
+          "standard_error": 81820.55920014418
+        },
+        "median": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 5854647.458333334,
+            "upper_bound": 5943482.651442308
+          },
+          "point_estimate": 5894024.44047619,
+          "standard_error": 27054.40946199442
+        },
+        "slope": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 5896855.046465833,
+            "upper_bound": 6492796.715247786
+          },
+          "point_estimate": 6121924.089779327,
+          "standard_error": 168966.73567846365
+        }
+      },
+      "samples_ns": {
+        "sampling_mode": "Linear",
+        "iters": [
+          3.0,
+          6.0,
+          9.0,
+          12.0,
+          15.0,
+          18.0,
+          21.0,
+          24.0,
+          27.0,
+          30.0,
+          33.0,
+          36.0,
+          39.0,
+          42.0,
+          45.0,
+          48.0,
+          51.0,
+          54.0,
+          57.0,
+          60.0
+        ],
+        "times": [
+          18040141.0,
+          34761255.0,
+          52648602.0,
+          70233612.0,
+          87562888.0,
+          106867307.0,
+          123493169.0,
+          142752032.0,
+          157607184.0,
+          174798861.0,
+          193450954.0,
+          210833781.0,
+          231928318.0,
+          248111715.0,
+          270631993.0,
+          285124097.0,
+          299468537.0,
+          407591763.0,
+          349509059.0,
+          354751554.0
+        ]
+      }
+    },
+    {
+      "run": "parallel-run-2",
+      "benchmark": {
+        "group_id": "parallel_record_scan_v1/100000",
+        "function_id": "workers-1",
+        "value_str": "ipv4",
+        "throughput": {
+          "Elements": 100000
+        },
+        "full_id": "parallel_record_scan_v1/100000/workers-1/ipv4",
+        "directory_name": "parallel_record_scan_v1_100000/workers-1/ipv4",
+        "title": "parallel_record_scan_v1/100000/workers-1/ipv4"
+      },
+      "estimates_ns": {
+        "mean": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 5833019.419192883,
+            "upper_bound": 5887323.269220727
+          },
+          "point_estimate": 5859549.669965373,
+          "standard_error": 13816.431602378245
+        },
+        "median": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 5831713.641941392,
+            "upper_bound": 5876434.904901961
+          },
+          "point_estimate": 5848654.027777778,
+          "standard_error": 11245.34258749334
+        },
+        "slope": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 5849792.4630792225,
+            "upper_bound": 5915357.33578592
+          },
+          "point_estimate": 5880755.397444831,
+          "standard_error": 16963.739765076953
+        }
+      },
+      "samples_ns": {
+        "sampling_mode": "Linear",
+        "iters": [
+          3.0,
+          6.0,
+          9.0,
+          12.0,
+          15.0,
+          18.0,
+          21.0,
+          24.0,
+          27.0,
+          30.0,
+          33.0,
+          36.0,
+          39.0,
+          42.0,
+          45.0,
+          48.0,
+          51.0,
+          54.0,
+          57.0,
+          60.0
+        ],
+        "times": [
+          17546185.0,
+          34865870.0,
+          51527913.0,
+          70184270.0,
+          87586192.0,
+          105275140.0,
+          123819209.0,
+          143588728.0,
+          156761777.0,
+          173886722.0,
+          194591018.0,
+          209484339.0,
+          227702526.0,
+          244645841.0,
+          264063610.0,
+          285025994.0,
+          299543443.0,
+          324140505.0,
+          333314085.0,
+          352768138.0
+        ]
+      }
+    },
+    {
+      "run": "parallel-run-2",
+      "benchmark": {
+        "group_id": "parallel_record_scan_v1/100000",
+        "function_id": "workers-1",
+        "value_str": "ipv6",
+        "throughput": {
+          "Elements": 100000
+        },
+        "full_id": "parallel_record_scan_v1/100000/workers-1/ipv6",
+        "directory_name": "parallel_record_scan_v1_100000/workers-1/ipv6",
+        "title": "parallel_record_scan_v1/100000/workers-1/ipv6"
+      },
+      "estimates_ns": {
+        "mean": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 6579585.241523406,
+            "upper_bound": 6874926.594274431
+          },
+          "point_estimate": 6690284.810903223,
+          "standard_error": 83712.2337856681
+        },
+        "median": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 6582978.6922514625,
+            "upper_bound": 6653771.7
+          },
+          "point_estimate": 6616867.854166666,
+          "standard_error": 17047.484956439333
+        },
+        "slope": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 6600876.558529983,
+            "upper_bound": 7157338.406292919
+          },
+          "point_estimate": 6791127.146689896,
+          "standard_error": 159921.19271784712
+        }
+      },
+      "samples_ns": {
+        "sampling_mode": "Linear",
+        "iters": [
+          3.0,
+          6.0,
+          9.0,
+          12.0,
+          15.0,
+          18.0,
+          21.0,
+          24.0,
+          27.0,
+          30.0,
+          33.0,
+          36.0,
+          39.0,
+          42.0,
+          45.0,
+          48.0,
+          51.0,
+          54.0,
+          57.0,
+          60.0
+        ],
+        "times": [
+          19202415.0,
+          38810334.0,
+          60002501.0,
+          79353921.0,
+          99990887.0,
+          119522395.0,
+          137141377.0,
+          158901815.0,
+          180969577.0,
+          199244528.0,
+          216403564.0,
+          236690993.0,
+          257768557.0,
+          280613943.0,
+          297144557.0,
+          323709806.0,
+          422921952.0,
+          354783880.0,
+          375698832.0,
+          397849519.0
+        ]
+      }
+    },
+    {
+      "run": "parallel-run-2",
+      "benchmark": {
+        "group_id": "parallel_record_scan_v1/100000",
+        "function_id": "workers-16",
+        "value_str": "ipv4",
+        "throughput": {
+          "Elements": 100000
+        },
+        "full_id": "parallel_record_scan_v1/100000/workers-16/ipv4",
+        "directory_name": "parallel_record_scan_v1_100000/workers-16/ipv4",
+        "title": "parallel_record_scan_v1/100000/workers-16/ipv4"
+      },
+      "estimates_ns": {
+        "mean": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 2116850.6065548137,
+            "upper_bound": 2164410.748188982
+          },
+          "point_estimate": 2139545.107454917,
+          "standard_error": 12157.728703061312
+        },
+        "median": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 2105818.465561224,
+            "upper_bound": 2168670.2787593985
+          },
+          "point_estimate": 2125233.476190476,
+          "standard_error": 14981.585426114862
+        },
+        "slope": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 2134760.6806124365,
+            "upper_bound": 2181623.137143292
+          },
+          "point_estimate": 2158548.669985067,
+          "standard_error": 11893.282217465126
+        }
+      },
+      "samples_ns": {
+        "sampling_mode": "Linear",
+        "iters": [
+          7.0,
+          14.0,
+          21.0,
+          28.0,
+          35.0,
+          42.0,
+          49.0,
+          56.0,
+          63.0,
+          70.0,
+          77.0,
+          84.0,
+          91.0,
+          98.0,
+          105.0,
+          112.0,
+          119.0,
+          126.0,
+          133.0,
+          140.0
+        ],
+        "times": [
+          15302042.0,
+          29284664.0,
+          43829134.0,
+          58613200.0,
+          72205617.0,
+          89464212.0,
+          103933019.0,
+          118174523.0,
+          133883326.0,
+          144229844.0,
+          168236187.0,
+          191908948.0,
+          193326285.0,
+          205935004.0,
+          233460874.0,
+          241155915.0,
+          260376554.0,
+          267792184.0,
+          289392934.0,
+          302603537.0
+        ]
+      }
+    },
+    {
+      "run": "parallel-run-2",
+      "benchmark": {
+        "group_id": "parallel_record_scan_v1/100000",
+        "function_id": "workers-16",
+        "value_str": "ipv6",
+        "throughput": {
+          "Elements": 100000
+        },
+        "full_id": "parallel_record_scan_v1/100000/workers-16/ipv6",
+        "directory_name": "parallel_record_scan_v1_100000/workers-16/ipv6",
+        "title": "parallel_record_scan_v1/100000/workers-16/ipv6"
+      },
+      "estimates_ns": {
+        "mean": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 2292802.8104117634,
+            "upper_bound": 2367616.983350253
+          },
+          "point_estimate": 2327218.40231409,
+          "standard_error": 19151.764280593394
+        },
+        "median": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 2274042.0701754387,
+            "upper_bound": 2335505.3134920634
+          },
+          "point_estimate": 2302594.4814814813,
+          "standard_error": 15484.198110670979
+        },
+        "slope": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 2283198.650148693,
+            "upper_bound": 2354426.9708655355
+          },
+          "point_estimate": 2313187.718873403,
+          "standard_error": 18158.86597109519
+        }
+      },
+      "samples_ns": {
+        "sampling_mode": "Linear",
+        "iters": [
+          6.0,
+          12.0,
+          18.0,
+          24.0,
+          30.0,
+          36.0,
+          42.0,
+          48.0,
+          54.0,
+          60.0,
+          66.0,
+          72.0,
+          78.0,
+          84.0,
+          90.0,
+          96.0,
+          102.0,
+          108.0,
+          114.0,
+          120.0
+        ],
+        "times": [
+          13806900.0,
+          27285130.0,
+          41222539.0,
+          60113728.0,
+          67394009.0,
+          84089666.0,
+          98077836.0,
+          116521474.0,
+          124418104.0,
+          133462111.0,
+          169735564.0,
+          163181336.0,
+          179303223.0,
+          202006021.0,
+          208868679.0,
+          215671271.0,
+          236709524.0,
+          252304601.0,
+          259272857.0,
+          271309557.0
+        ]
+      }
+    },
+    {
+      "run": "parallel-run-2",
+      "benchmark": {
+        "group_id": "parallel_record_scan_v1/100000",
+        "function_id": "workers-2",
+        "value_str": "ipv4",
+        "throughput": {
+          "Elements": 100000
+        },
+        "full_id": "parallel_record_scan_v1/100000/workers-2/ipv4",
+        "directory_name": "parallel_record_scan_v1_100000/workers-2/ipv4",
+        "title": "parallel_record_scan_v1/100000/workers-2/ipv4"
+      },
+      "estimates_ns": {
+        "mean": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 3443245.997046355,
+            "upper_bound": 3581103.3616907094
+          },
+          "point_estimate": 3510310.92992597,
+          "standard_error": 35169.94671851047
+        },
+        "median": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 3424003.673076923,
+            "upper_bound": 3572025.772556391
+          },
+          "point_estimate": 3490938.3666666667,
+          "standard_error": 43497.547303911444
+        },
+        "slope": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 3481163.8691573907,
+            "upper_bound": 3564374.1290672813
+          },
+          "point_estimate": 3525357.0212543556,
+          "standard_error": 21096.722539015722
+        }
+      },
+      "samples_ns": {
+        "sampling_mode": "Linear",
+        "iters": [
+          5.0,
+          10.0,
+          15.0,
+          20.0,
+          25.0,
+          30.0,
+          35.0,
+          40.0,
+          45.0,
+          50.0,
+          55.0,
+          60.0,
+          65.0,
+          70.0,
+          75.0,
+          80.0,
+          85.0,
+          90.0,
+          95.0,
+          100.0
+        ],
+        "times": [
+          19100451.0,
+          32729619.0,
+          50354182.0,
+          68487550.0,
+          87027734.0,
+          114790999.0,
+          113997571.0,
+          134199271.0,
+          167952108.0,
+          172077748.0,
+          199967362.0,
+          202998311.0,
+          222535940.0,
+          250435281.0,
+          262557553.0,
+          290173564.0,
+          293754438.0,
+          315292625.0,
+          338808444.0,
+          356460861.0
+        ]
+      }
+    },
+    {
+      "run": "parallel-run-2",
+      "benchmark": {
+        "group_id": "parallel_record_scan_v1/100000",
+        "function_id": "workers-2",
+        "value_str": "ipv6",
+        "throughput": {
+          "Elements": 100000
+        },
+        "full_id": "parallel_record_scan_v1/100000/workers-2/ipv6",
+        "directory_name": "parallel_record_scan_v1_100000/workers-2/ipv6",
+        "title": "parallel_record_scan_v1/100000/workers-2/ipv6"
+      },
+      "estimates_ns": {
+        "mean": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 3925291.046703938,
+            "upper_bound": 4246423.1564334165
+          },
+          "point_estimate": 4070485.0268419543,
+          "standard_error": 82724.67027703482
+        },
+        "median": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 3861785.0744243423,
+            "upper_bound": 4075305.043803419
+          },
+          "point_estimate": 3952062.3794642854,
+          "standard_error": 63625.37078550102
+        },
+        "slope": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 3894667.511219326,
+            "upper_bound": 4059195.4290886368
+          },
+          "point_estimate": 3965656.963937282,
+          "standard_error": 42131.41221410661
+        }
+      },
+      "samples_ns": {
+        "sampling_mode": "Linear",
+        "iters": [
+          4.0,
+          8.0,
+          12.0,
+          16.0,
+          20.0,
+          24.0,
+          28.0,
+          32.0,
+          36.0,
+          40.0,
+          44.0,
+          48.0,
+          52.0,
+          56.0,
+          60.0,
+          64.0,
+          68.0,
+          72.0,
+          76.0,
+          80.0
+        ],
+        "times": [
+          20696167.0,
+          29100295.0,
+          48686654.0,
+          63299195.0,
+          98745175.0,
+          88888162.0,
+          110541902.0,
+          128556331.0,
+          153558561.0,
+          172556901.0,
+          167980664.0,
+          188396709.0,
+          211261433.0,
+          217572299.0,
+          252746560.0,
+          246488887.0,
+          261865490.0,
+          294328096.0,
+          294285778.0,
+          306683276.0
+        ]
+      }
+    },
+    {
+      "run": "parallel-run-2",
+      "benchmark": {
+        "group_id": "parallel_record_scan_v1/100000",
+        "function_id": "workers-4",
+        "value_str": "ipv4",
+        "throughput": {
+          "Elements": 100000
+        },
+        "full_id": "parallel_record_scan_v1/100000/workers-4/ipv4",
+        "directory_name": "parallel_record_scan_v1_100000/workers-4/ipv4",
+        "title": "parallel_record_scan_v1/100000/workers-4/ipv4"
+      },
+      "estimates_ns": {
+        "mean": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 1958134.507878681,
+            "upper_bound": 2036739.1987132106
+          },
+          "point_estimate": 1997962.0863895777,
+          "standard_error": 20135.658942417605
+        },
+        "median": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 1942190.855952381,
+            "upper_bound": 2073420.8928571427
+          },
+          "point_estimate": 1987388.75,
+          "standard_error": 35597.110117456294
+        },
+        "slope": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 1957743.3288009737,
+            "upper_bound": 2052290.0698484287
+          },
+          "point_estimate": 2004858.493578895,
+          "standard_error": 24293.290539046175
+        }
+      },
+      "samples_ns": {
+        "sampling_mode": "Linear",
+        "iters": [
+          7.0,
+          14.0,
+          21.0,
+          28.0,
+          35.0,
+          42.0,
+          49.0,
+          56.0,
+          63.0,
+          70.0,
+          77.0,
+          84.0,
+          91.0,
+          98.0,
+          105.0,
+          112.0,
+          119.0,
+          126.0,
+          133.0,
+          140.0
+        ],
+        "times": [
+          13991483.0,
+          29015889.0,
+          44988014.0,
+          53781035.0,
+          63865477.0,
+          86268599.0,
+          96218944.0,
+          105112867.0,
+          123675438.0,
+          130858806.0,
+          159719428.0,
+          177573054.0,
+          182963630.0,
+          192872180.0,
+          219050078.0,
+          221311352.0,
+          251427187.0,
+          241887324.0,
+          277967191.0,
+          268979133.0
+        ]
+      }
+    },
+    {
+      "run": "parallel-run-2",
+      "benchmark": {
+        "group_id": "parallel_record_scan_v1/100000",
+        "function_id": "workers-4",
+        "value_str": "ipv6",
+        "throughput": {
+          "Elements": 100000
+        },
+        "full_id": "parallel_record_scan_v1/100000/workers-4/ipv6",
+        "directory_name": "parallel_record_scan_v1_100000/workers-4/ipv6",
+        "title": "parallel_record_scan_v1/100000/workers-4/ipv6"
+      },
+      "estimates_ns": {
+        "mean": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 2190905.7954497584,
+            "upper_bound": 2498136.349853745
+          },
+          "point_estimate": 2325844.0132824257,
+          "standard_error": 79234.11342756929
+        },
+        "median": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 2141501.413690476,
+            "upper_bound": 2337312.260714286
+          },
+          "point_estimate": 2217692.826530612,
+          "standard_error": 44196.03257084739
+        },
+        "slope": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 2233180.168149966,
+            "upper_bound": 2750322.2620387212
+          },
+          "point_estimate": 2481378.267496267,
+          "standard_error": 131808.4929646254
+        }
+      },
+      "samples_ns": {
+        "sampling_mode": "Linear",
+        "iters": [
+          7.0,
+          14.0,
+          21.0,
+          28.0,
+          35.0,
+          42.0,
+          49.0,
+          56.0,
+          63.0,
+          70.0,
+          77.0,
+          84.0,
+          91.0,
+          98.0,
+          105.0,
+          112.0,
+          119.0,
+          126.0,
+          133.0,
+          140.0
+        ],
+        "times": [
+          14895867.0,
+          28722327.0,
+          42133837.0,
+          62005624.0,
+          82355125.0,
+          102001536.0,
+          108824055.0,
+          119826325.0,
+          129239029.0,
+          144737487.0,
+          172177572.0,
+          180032750.0,
+          202379886.0,
+          231060493.0,
+          232318032.0,
+          342121919.0,
+          415366071.0,
+          271482336.0,
+          353796742.0,
+          325026933.0
+        ]
+      }
+    },
+    {
+      "run": "parallel-run-2",
+      "benchmark": {
+        "group_id": "parallel_record_scan_v1/100000",
+        "function_id": "workers-8",
+        "value_str": "ipv4",
+        "throughput": {
+          "Elements": 100000
+        },
+        "full_id": "parallel_record_scan_v1/100000/workers-8/ipv4",
+        "directory_name": "parallel_record_scan_v1_100000/workers-8/ipv4",
+        "title": "parallel_record_scan_v1/100000/workers-8/ipv4"
+      },
+      "estimates_ns": {
+        "mean": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 1513999.619664767,
+            "upper_bound": 1564506.9304761358
+          },
+          "point_estimate": 1536877.6700460992,
+          "standard_error": 12939.89291882229
+        },
+        "median": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 1503236.9619047618,
+            "upper_bound": 1543114.778216374
+          },
+          "point_estimate": 1520259.8366666667,
+          "standard_error": 10279.00579389183
+        },
+        "slope": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 1510606.580052578,
+            "upper_bound": 1549359.9965279114
+          },
+          "point_estimate": 1530336.364773519,
+          "standard_error": 9935.329316752868
+        }
+      },
+      "samples_ns": {
+        "sampling_mode": "Linear",
+        "iters": [
+          10.0,
+          20.0,
+          30.0,
+          40.0,
+          50.0,
+          60.0,
+          70.0,
+          80.0,
+          90.0,
+          100.0,
+          110.0,
+          120.0,
+          130.0,
+          140.0,
+          150.0,
+          160.0,
+          170.0,
+          180.0,
+          190.0,
+          200.0
+        ],
+        "times": [
+          17106895.0,
+          30782564.0,
+          45301886.0,
+          58771140.0,
+          76115420.0,
+          89264586.0,
+          104748774.0,
+          128125809.0,
+          148525719.0,
+          152056539.0,
+          166798956.0,
+          182394514.0,
+          202480586.0,
+          211730840.0,
+          222729853.0,
+          238646830.0,
+          253330324.0,
+          277214557.0,
+          293768250.0,
+          314095432.0
+        ]
+      }
+    },
+    {
+      "run": "parallel-run-2",
+      "benchmark": {
+        "group_id": "parallel_record_scan_v1/100000",
+        "function_id": "workers-8",
+        "value_str": "ipv6",
+        "throughput": {
+          "Elements": 100000
+        },
+        "full_id": "parallel_record_scan_v1/100000/workers-8/ipv6",
+        "directory_name": "parallel_record_scan_v1_100000/workers-8/ipv6",
+        "title": "parallel_record_scan_v1/100000/workers-8/ipv6"
+      },
+      "estimates_ns": {
+        "mean": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 1714878.2736248677,
+            "upper_bound": 2004931.0060540116
+          },
+          "point_estimate": 1825054.4664069428,
+          "standard_error": 81013.36062199021
+        },
+        "median": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 1689430.1493055555,
+            "upper_bound": 1800822.0740740742
+          },
+          "point_estimate": 1717815.0738095238,
+          "standard_error": 28364.459293677966
+        },
+        "slope": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 1721561.3640204696,
+            "upper_bound": 2404474.0059907036
+          },
+          "point_estimate": 1990091.71242741,
+          "standard_error": 196487.27131251866
+        }
+      },
+      "samples_ns": {
+        "sampling_mode": "Linear",
+        "iters": [
+          9.0,
+          18.0,
+          27.0,
+          36.0,
+          45.0,
+          54.0,
+          63.0,
+          72.0,
+          81.0,
+          90.0,
+          99.0,
+          108.0,
+          117.0,
+          126.0,
+          135.0,
+          144.0,
+          153.0,
+          162.0,
+          171.0,
+          180.0
+        ],
+        "times": [
+          14658613.0,
+          31680501.0,
+          44335225.0,
+          59150747.0,
+          76771782.0,
+          99447281.0,
+          120312276.0,
+          126066400.0,
+          137971895.0,
+          150857915.0,
+          182880730.0,
+          186885002.0,
+          197615990.0,
+          217928409.0,
+          226143962.0,
+          243336203.0,
+          294146144.0,
+          274934962.0,
+          323775351.0,
+          605697848.0
+        ]
+      }
+    },
+    {
+      "run": "parallel-run-2",
+      "benchmark": {
+        "group_id": "parallel_record_scan_v1/1000000",
+        "function_id": "adaptive",
+        "value_str": "ipv4",
+        "throughput": {
+          "Elements": 1000000
+        },
+        "full_id": "parallel_record_scan_v1/1000000/adaptive/ipv4",
+        "directory_name": "parallel_record_scan_v1_1000000/adaptive/ipv4",
+        "title": "parallel_record_scan_v1/1000000/adaptive/ipv4"
+      },
+      "estimates_ns": {
+        "mean": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 12483693.676842375,
+            "upper_bound": 12842983.24300662
+          },
+          "point_estimate": 12647949.222895835,
+          "standard_error": 92359.96904798909
+        },
+        "median": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 12375383.828173375,
+            "upper_bound": 12801784.790625
+          },
+          "point_estimate": 12493368.520833332,
+          "standard_error": 96109.84007776596
+        },
+        "slope": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 12399378.538653405,
+            "upper_bound": 12750195.398300782
+          },
+          "point_estimate": 12547514.578745645,
+          "standard_error": 90006.94338540333
+        }
+      },
+      "samples_ns": {
+        "sampling_mode": "Linear",
+        "iters": [
+          2.0,
+          4.0,
+          6.0,
+          8.0,
+          10.0,
+          12.0,
+          14.0,
+          16.0,
+          18.0,
+          20.0,
+          22.0,
+          24.0,
+          26.0,
+          28.0,
+          30.0,
+          32.0,
+          34.0,
+          36.0,
+          38.0,
+          40.0
+        ],
+        "times": [
+          24686662.0,
+          49736462.0,
+          74980030.0,
+          99920523.0,
+          128056353.0,
+          166955893.0,
+          180350772.0,
+          200722709.0,
+          240364664.0,
+          248880640.0,
+          274968751.0,
+          294352890.0,
+          320574623.0,
+          361522981.0,
+          393653133.0,
+          409533897.0,
+          421738167.0,
+          444353776.0,
+          469174749.0,
+          489317509.0
+        ]
+      }
+    },
+    {
+      "run": "parallel-run-2",
+      "benchmark": {
+        "group_id": "parallel_record_scan_v1/1000000",
+        "function_id": "adaptive",
+        "value_str": "ipv6",
+        "throughput": {
+          "Elements": 1000000
+        },
+        "full_id": "parallel_record_scan_v1/1000000/adaptive/ipv6",
+        "directory_name": "parallel_record_scan_v1_1000000/adaptive/ipv6",
+        "title": "parallel_record_scan_v1/1000000/adaptive/ipv6"
+      },
+      "estimates_ns": {
+        "mean": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 13975188.048258191,
+            "upper_bound": 14310110.877084166
+          },
+          "point_estimate": 14123851.159671137,
+          "standard_error": 86344.95689007273
+        },
+        "median": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 13918047.808704454,
+            "upper_bound": 14161891.4375
+          },
+          "point_estimate": 13976586.868055556,
+          "standard_error": 55212.99728200529
+        },
+        "slope": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 13911782.558906447,
+            "upper_bound": 14205192.536359513
+          },
+          "point_estimate": 14020395.251916377,
+          "standard_error": 76756.84483198999
+        }
+      },
+      "samples_ns": {
+        "sampling_mode": "Linear",
+        "iters": [
+          2.0,
+          4.0,
+          6.0,
+          8.0,
+          10.0,
+          12.0,
+          14.0,
+          16.0,
+          18.0,
+          20.0,
+          22.0,
+          24.0,
+          26.0,
+          28.0,
+          30.0,
+          32.0,
+          34.0,
+          36.0,
+          38.0,
+          40.0
+        ],
+        "times": [
+          28039501.0,
+          56683227.0,
+          82830665.0,
+          113223809.0,
+          153471797.0,
+          170103666.0,
+          193332769.0,
+          233976893.0,
+          255828844.0,
+          279098535.0,
+          307348522.0,
+          335302161.0,
+          362210408.0,
+          416954517.0,
+          415551040.0,
+          448417229.0,
+          472066599.0,
+          503361013.0,
+          528387191.0,
+          552210929.0
+        ]
+      }
+    },
+    {
+      "run": "parallel-run-2",
+      "benchmark": {
+        "group_id": "parallel_record_scan_v1/1000000",
+        "function_id": "sequential",
+        "value_str": "ipv4",
+        "throughput": {
+          "Elements": 1000000
+        },
+        "full_id": "parallel_record_scan_v1/1000000/sequential/ipv4",
+        "directory_name": "parallel_record_scan_v1_1000000/sequential/ipv4",
+        "title": "parallel_record_scan_v1/1000000/sequential/ipv4"
+      },
+      "estimates_ns": {
+        "mean": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 53466868.80083334,
+            "upper_bound": 54392305.7275
+          },
+          "point_estimate": 53903287.499999985,
+          "standard_error": 237443.53596165281
+        },
+        "median": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 53274561.0,
+            "upper_bound": 54072249.66666667
+          },
+          "point_estimate": 53600145.33333333,
+          "standard_error": 220569.50057768772
+        },
+        "slope": null
+      },
+      "samples_ns": {
+        "sampling_mode": "Flat",
+        "iters": [
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0
+        ],
+        "times": [
+          164677857.0,
+          157826518.0,
+          162593464.0,
+          158159797.0,
+          159465288.0,
+          160260023.0,
+          167862376.0,
+          164089241.0,
+          159585359.0,
+          160062007.0,
+          158489894.0,
+          166282782.0,
+          160698644.0,
+          158369237.0,
+          161411756.0,
+          161840034.0,
+          161639234.0,
+          160902228.0,
+          169541288.0,
+          160440223.0
+        ]
+      }
+    },
+    {
+      "run": "parallel-run-2",
+      "benchmark": {
+        "group_id": "parallel_record_scan_v1/1000000",
+        "function_id": "sequential",
+        "value_str": "ipv6",
+        "throughput": {
+          "Elements": 1000000
+        },
+        "full_id": "parallel_record_scan_v1/1000000/sequential/ipv6",
+        "directory_name": "parallel_record_scan_v1_1000000/sequential/ipv6",
+        "title": "parallel_record_scan_v1/1000000/sequential/ipv6"
+      },
+      "estimates_ns": {
+        "mean": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 59392440.46333334,
+            "upper_bound": 59989110.01208334
+          },
+          "point_estimate": 59686250.883333325,
+          "standard_error": 152652.2078580951
+        },
+        "median": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 59293318.666666664,
+            "upper_bound": 60165719.83333333
+          },
+          "point_estimate": 59462257.33333333,
+          "standard_error": 312697.8406040638
+        },
+        "slope": null
+      },
+      "samples_ns": {
+        "sampling_mode": "Flat",
+        "iters": [
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0
+        ],
+        "times": [
+          180619519.0,
+          183615095.0,
+          177480527.0,
+          178242732.0,
+          175575826.0,
+          176424357.0,
+          176351808.0,
+          178086811.0,
+          178530812.0,
+          178160070.0,
+          177108708.0,
+          180669647.0,
+          180527666.0,
+          177763016.0,
+          180213117.0,
+          180781475.0,
+          180389183.0,
+          182171135.0,
+          177996896.0,
+          180466653.0
+        ]
+      }
+    },
+    {
+      "run": "parallel-run-2",
+      "benchmark": {
+        "group_id": "parallel_record_scan_v1/1000000",
+        "function_id": "workers-1",
+        "value_str": "ipv4",
+        "throughput": {
+          "Elements": 1000000
+        },
+        "full_id": "parallel_record_scan_v1/1000000/workers-1/ipv4",
+        "directory_name": "parallel_record_scan_v1_1000000/workers-1/ipv4",
+        "title": "parallel_record_scan_v1/1000000/workers-1/ipv4"
+      },
+      "estimates_ns": {
+        "mean": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 61231413.705833346,
+            "upper_bound": 61990694.54
+          },
+          "point_estimate": 61600218.366666675,
+          "standard_error": 193399.81333009203
+        },
+        "median": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 61123179.83333333,
+            "upper_bound": 61800834.66666667
+          },
+          "point_estimate": 61387860.166666664,
+          "standard_error": 199908.23444135726
+        },
+        "slope": null
+      },
+      "samples_ns": {
+        "sampling_mode": "Flat",
+        "iters": [
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0
+        ],
+        "times": [
+          183620349.0,
+          185262622.0,
+          184850312.0,
+          183316911.0,
+          186634960.0,
+          183532598.0,
+          182706203.0,
+          188478585.0,
+          190846789.0,
+          182077657.0,
+          188632378.0,
+          184072028.0,
+          185542386.0,
+          184613838.0,
+          183341415.0,
+          179781988.0,
+          188520868.0,
+          183397664.0,
+          184255133.0,
+          182528418.0
+        ]
+      }
+    },
+    {
+      "run": "parallel-run-2",
+      "benchmark": {
+        "group_id": "parallel_record_scan_v1/1000000",
+        "function_id": "workers-1",
+        "value_str": "ipv6",
+        "throughput": {
+          "Elements": 1000000
+        },
+        "full_id": "parallel_record_scan_v1/1000000/workers-1/ipv6",
+        "directory_name": "parallel_record_scan_v1_1000000/workers-1/ipv6",
+        "title": "parallel_record_scan_v1/1000000/workers-1/ipv6"
+      },
+      "estimates_ns": {
+        "mean": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 69171324.86458334,
+            "upper_bound": 75977947.36749999
+          },
+          "point_estimate": 72115228.65,
+          "standard_error": 1760510.643984749
+        },
+        "median": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 68289400.83333334,
+            "upper_bound": 70752544.5
+          },
+          "point_estimate": 69233109.66666666,
+          "standard_error": 751988.9873647275
+        },
+        "slope": null
+      },
+      "samples_ns": {
+        "sampling_mode": "Flat",
+        "iters": [
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0
+        ],
+        "times": [
+          198938097.0,
+          258372545.0,
+          205165712.0,
+          201350278.0,
+          299463245.0,
+          225173490.0,
+          205650249.0,
+          207042059.0,
+          204570693.0,
+          238646242.0,
+          212532043.0,
+          211432697.0,
+          209648122.0,
+          207674016.0,
+          217857665.0,
+          207724642.0,
+          203246499.0,
+          200930981.0,
+          211983224.0,
+          199511220.0
+        ]
+      }
+    },
+    {
+      "run": "parallel-run-2",
+      "benchmark": {
+        "group_id": "parallel_record_scan_v1/1000000",
+        "function_id": "workers-16",
+        "value_str": "ipv4",
+        "throughput": {
+          "Elements": 1000000
+        },
+        "full_id": "parallel_record_scan_v1/1000000/workers-16/ipv4",
+        "directory_name": "parallel_record_scan_v1_1000000/workers-16/ipv4",
+        "title": "parallel_record_scan_v1/1000000/workers-16/ipv4"
+      },
+      "estimates_ns": {
+        "mean": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 12737325.42387488,
+            "upper_bound": 13035165.548590554
+          },
+          "point_estimate": 12872884.061968071,
+          "standard_error": 76538.55745434867
+        },
+        "median": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 12678739.06845238,
+            "upper_bound": 12835246.5625
+          },
+          "point_estimate": 12759807.40625,
+          "standard_error": 42735.63495556546
+        },
+        "slope": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 12689155.180337524,
+            "upper_bound": 12942629.31971061
+          },
+          "point_estimate": 12798354.026829269,
+          "standard_error": 64603.415014949416
+        }
+      },
+      "samples_ns": {
+        "sampling_mode": "Linear",
+        "iters": [
+          2.0,
+          4.0,
+          6.0,
+          8.0,
+          10.0,
+          12.0,
+          14.0,
+          16.0,
+          18.0,
+          20.0,
+          22.0,
+          24.0,
+          26.0,
+          28.0,
+          30.0,
+          32.0,
+          34.0,
+          36.0,
+          38.0,
+          40.0
+        ],
+        "times": [
+          25776917.0,
+          51029258.0,
+          75818888.0,
+          101850912.0,
+          128454759.0,
+          166742168.0,
+          186464250.0,
+          204196805.0,
+          241905101.0,
+          253349950.0,
+          280427536.0,
+          304137455.0,
+          324833281.0,
+          355182357.0,
+          399857503.0,
+          410043234.0,
+          426997606.0,
+          453565615.0,
+          486116501.0,
+          513000689.0
+        ]
+      }
+    },
+    {
+      "run": "parallel-run-2",
+      "benchmark": {
+        "group_id": "parallel_record_scan_v1/1000000",
+        "function_id": "workers-16",
+        "value_str": "ipv6",
+        "throughput": {
+          "Elements": 1000000
+        },
+        "full_id": "parallel_record_scan_v1/1000000/workers-16/ipv6",
+        "directory_name": "parallel_record_scan_v1_1000000/workers-16/ipv6",
+        "title": "parallel_record_scan_v1/1000000/workers-16/ipv6"
+      },
+      "estimates_ns": {
+        "mean": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 14201725.530042687,
+            "upper_bound": 14608412.934862794
+          },
+          "point_estimate": 14389580.25376157,
+          "standard_error": 104326.86694947029
+        },
+        "median": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 14102671.875,
+            "upper_bound": 14314460.07142857
+          },
+          "point_estimate": 14181402.431623932,
+          "standard_error": 76459.63033871754
+        },
+        "slope": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 14108260.47698496,
+            "upper_bound": 14599564.505539833
+          },
+          "point_estimate": 14324289.940418119,
+          "standard_error": 129542.7351453882
+        }
+      },
+      "samples_ns": {
+        "sampling_mode": "Linear",
+        "iters": [
+          2.0,
+          4.0,
+          6.0,
+          8.0,
+          10.0,
+          12.0,
+          14.0,
+          16.0,
+          18.0,
+          20.0,
+          22.0,
+          24.0,
+          26.0,
+          28.0,
+          30.0,
+          32.0,
+          34.0,
+          36.0,
+          38.0,
+          40.0
+        ],
+        "times": [
+          28026283.0,
+          56901380.0,
+          85248241.0,
+          119270270.0,
+          156669617.0,
+          172061130.0,
+          200066897.0,
+          243175823.0,
+          255534868.0,
+          281794660.0,
+          309796646.0,
+          339379504.0,
+          368327006.0,
+          416874990.0,
+          421818992.0,
+          449825223.0,
+          480446183.0,
+          508161987.0,
+          530031085.0,
+          602651062.0
+        ]
+      }
+    },
+    {
+      "run": "parallel-run-2",
+      "benchmark": {
+        "group_id": "parallel_record_scan_v1/1000000",
+        "function_id": "workers-2",
+        "value_str": "ipv4",
+        "throughput": {
+          "Elements": 1000000
+        },
+        "full_id": "parallel_record_scan_v1/1000000/workers-2/ipv4",
+        "directory_name": "parallel_record_scan_v1_1000000/workers-2/ipv4",
+        "title": "parallel_record_scan_v1/1000000/workers-2/ipv4"
+      },
+      "estimates_ns": {
+        "mean": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 34905498.6755,
+            "upper_bound": 37828333.26100001
+          },
+          "point_estimate": 36368641.11999999,
+          "standard_error": 745804.466163983
+        },
+        "median": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 32676637.7,
+            "upper_bound": 38644783.7
+          },
+          "point_estimate": 37433476.8,
+          "standard_error": 1750134.4786737068
+        },
+        "slope": null
+      },
+      "samples_ns": {
+        "sampling_mode": "Flat",
+        "iters": [
+          5.0,
+          5.0,
+          5.0,
+          5.0,
+          5.0,
+          5.0,
+          5.0,
+          5.0,
+          5.0,
+          5.0,
+          5.0,
+          5.0,
+          5.0,
+          5.0,
+          5.0,
+          5.0,
+          5.0,
+          5.0,
+          5.0,
+          5.0
+        ],
+        "times": [
+          161481402.0,
+          186293126.0,
+          162588034.0,
+          212330294.0,
+          187856487.0,
+          201514698.0,
+          192816411.0,
+          163564757.0,
+          203084716.0,
+          162485706.0,
+          164783882.0,
+          160908991.0,
+          186478281.0,
+          163201620.0,
+          187984950.0,
+          190566239.0,
+          193631426.0,
+          197902807.0,
+          194509599.0,
+          162880686.0
+        ]
+      }
+    },
+    {
+      "run": "parallel-run-2",
+      "benchmark": {
+        "group_id": "parallel_record_scan_v1/1000000",
+        "function_id": "workers-2",
+        "value_str": "ipv6",
+        "throughput": {
+          "Elements": 1000000
+        },
+        "full_id": "parallel_record_scan_v1/1000000/workers-2/ipv6",
+        "directory_name": "parallel_record_scan_v1_1000000/workers-2/ipv6",
+        "title": "parallel_record_scan_v1/1000000/workers-2/ipv6"
+      },
+      "estimates_ns": {
+        "mean": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 40954921.9628125,
+            "upper_bound": 46055063.525
+          },
+          "point_estimate": 43392416.7875,
+          "standard_error": 1305636.284536671
+        },
+        "median": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 40453582.125,
+            "upper_bound": 44051638.375
+          },
+          "point_estimate": 43374710.875,
+          "standard_error": 987687.416756117
+        },
+        "slope": null
+      },
+      "samples_ns": {
+        "sampling_mode": "Flat",
+        "iters": [
+          4.0,
+          4.0,
+          4.0,
+          4.0,
+          4.0,
+          4.0,
+          4.0,
+          4.0,
+          4.0,
+          4.0,
+          4.0,
+          4.0,
+          4.0,
+          4.0,
+          4.0,
+          4.0,
+          4.0,
+          4.0,
+          4.0,
+          4.0
+        ],
+        "times": [
+          206205826.0,
+          176285302.0,
+          145848314.0,
+          146925086.0,
+          188648930.0,
+          173594267.0,
+          174258915.0,
+          173403420.0,
+          172874715.0,
+          146275510.0,
+          142681594.0,
+          143453133.0,
+          170670255.0,
+          175167376.0,
+          176127805.0,
+          152958402.0,
+          172874625.0,
+          192736420.0,
+          206324858.0,
+          234078590.0
+        ]
+      }
+    },
+    {
+      "run": "parallel-run-2",
+      "benchmark": {
+        "group_id": "parallel_record_scan_v1/1000000",
+        "function_id": "workers-4",
+        "value_str": "ipv4",
+        "throughput": {
+          "Elements": 1000000
+        },
+        "full_id": "parallel_record_scan_v1/1000000/workers-4/ipv4",
+        "directory_name": "parallel_record_scan_v1_1000000/workers-4/ipv4",
+        "title": "parallel_record_scan_v1/1000000/workers-4/ipv4"
+      },
+      "estimates_ns": {
+        "mean": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 21644201.172838535,
+            "upper_bound": 24596062.70867119
+          },
+          "point_estimate": 22983759.452467497,
+          "standard_error": 755262.9468964533
+        },
+        "median": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 20697304.55681818,
+            "upper_bound": 24252184.444444444
+          },
+          "point_estimate": 22520310.64285714,
+          "standard_error": 1138119.2411046105
+        },
+        "slope": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 20250346.51712345,
+            "upper_bound": 22296837.375874825
+          },
+          "point_estimate": 21092598.387804877,
+          "standard_error": 526043.9754122255
+        }
+      },
+      "samples_ns": {
+        "sampling_mode": "Linear",
+        "iters": [
+          1.0,
+          2.0,
+          3.0,
+          4.0,
+          5.0,
+          6.0,
+          7.0,
+          8.0,
+          9.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0,
+          16.0,
+          17.0,
+          18.0,
+          19.0,
+          20.0
+        ],
+        "times": [
+          34077472.0,
+          50990898.0,
+          72459709.0,
+          95032786.0,
+          131058849.0,
+          142429537.0,
+          160333639.0,
+          163877505.0,
+          219160193.0,
+          258270127.0,
+          228273511.0,
+          252593598.0,
+          274820710.0,
+          309901420.0,
+          368929902.0,
+          330279548.0,
+          318807924.0,
+          344764456.0,
+          377019934.0,
+          412155099.0
+        ]
+      }
+    },
+    {
+      "run": "parallel-run-2",
+      "benchmark": {
+        "group_id": "parallel_record_scan_v1/1000000",
+        "function_id": "workers-4",
+        "value_str": "ipv6",
+        "throughput": {
+          "Elements": 1000000
+        },
+        "full_id": "parallel_record_scan_v1/1000000/workers-4/ipv6",
+        "directory_name": "parallel_record_scan_v1_1000000/workers-4/ipv6",
+        "title": "parallel_record_scan_v1/1000000/workers-4/ipv6"
+      },
+      "estimates_ns": {
+        "mean": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 21397317.372593775,
+            "upper_bound": 22427776.95624334
+          },
+          "point_estimate": 21918374.793254487,
+          "standard_error": 262579.7061876753
+        },
+        "median": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 21387901.361842103,
+            "upper_bound": 22633228.75
+          },
+          "point_estimate": 22144581.427807488,
+          "standard_error": 279069.06907011685
+        },
+        "slope": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 21530215.34757644,
+            "upper_bound": 22685176.345713567
+          },
+          "point_estimate": 22116817.037630662,
+          "standard_error": 293401.3483115679
+        }
+      },
+      "samples_ns": {
+        "sampling_mode": "Linear",
+        "iters": [
+          1.0,
+          2.0,
+          3.0,
+          4.0,
+          5.0,
+          6.0,
+          7.0,
+          8.0,
+          9.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0,
+          16.0,
+          17.0,
+          18.0,
+          19.0,
+          20.0
+        ],
+        "times": [
+          22746194.0,
+          41397178.0,
+          67944793.0,
+          86215401.0,
+          114695729.0,
+          135709159.0,
+          155312378.0,
+          159478606.0,
+          182701207.0,
+          194203027.0,
+          243898458.0,
+          279368541.0,
+          273376859.0,
+          309200233.0,
+          328653787.0,
+          390230259.0,
+          375981788.0,
+          404077584.0,
+          403217097.0,
+          453311374.0
+        ]
+      }
+    },
+    {
+      "run": "parallel-run-2",
+      "benchmark": {
+        "group_id": "parallel_record_scan_v1/1000000",
+        "function_id": "workers-8",
+        "value_str": "ipv4",
+        "throughput": {
+          "Elements": 1000000
+        },
+        "full_id": "parallel_record_scan_v1/1000000/workers-8/ipv4",
+        "directory_name": "parallel_record_scan_v1_1000000/workers-8/ipv4",
+        "title": "parallel_record_scan_v1/1000000/workers-8/ipv4"
+      },
+      "estimates_ns": {
+        "mean": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 12475330.64340581,
+            "upper_bound": 12809661.74282247
+          },
+          "point_estimate": 12633759.978948388,
+          "standard_error": 85395.16217857713
+        },
+        "median": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 12408487.125816993,
+            "upper_bound": 12831230.32528409
+          },
+          "point_estimate": 12531763.712406015,
+          "standard_error": 101754.93267871751
+        },
+        "slope": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 12533693.953481762,
+            "upper_bound": 12800323.525744304
+          },
+          "point_estimate": 12649172.205574913,
+          "standard_error": 68175.7558184236
+        }
+      },
+      "samples_ns": {
+        "sampling_mode": "Linear",
+        "iters": [
+          2.0,
+          4.0,
+          6.0,
+          8.0,
+          10.0,
+          12.0,
+          14.0,
+          16.0,
+          18.0,
+          20.0,
+          22.0,
+          24.0,
+          26.0,
+          28.0,
+          30.0,
+          32.0,
+          34.0,
+          36.0,
+          38.0,
+          40.0
+        ],
+        "times": [
+          24269828.0,
+          48251063.0,
+          74481186.0,
+          98933066.0,
+          122932529.0,
+          164037311.0,
+          182085096.0,
+          198367676.0,
+          235490156.0,
+          260091598.0,
+          278694761.0,
+          299315984.0,
+          327057498.0,
+          350270878.0,
+          392275324.0,
+          415824543.0,
+          421987482.0,
+          446600798.0,
+          477046422.0,
+          502938482.0
+        ]
+      }
+    },
+    {
+      "run": "parallel-run-2",
+      "benchmark": {
+        "group_id": "parallel_record_scan_v1/1000000",
+        "function_id": "workers-8",
+        "value_str": "ipv6",
+        "throughput": {
+          "Elements": 1000000
+        },
+        "full_id": "parallel_record_scan_v1/1000000/workers-8/ipv6",
+        "directory_name": "parallel_record_scan_v1_1000000/workers-8/ipv6",
+        "title": "parallel_record_scan_v1/1000000/workers-8/ipv6"
+      },
+      "estimates_ns": {
+        "mean": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 14008931.127727007,
+            "upper_bound": 14620500.031905938
+          },
+          "point_estimate": 14285263.212700525,
+          "standard_error": 157784.42055013956
+        },
+        "median": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 13867121.404166667,
+            "upper_bound": 14231863.916666668
+          },
+          "point_estimate": 13939841.395721924,
+          "standard_error": 105779.13074131294
+        },
+        "slope": {
+          "confidence_interval": {
+            "confidence_level": 0.95,
+            "lower_bound": 13905046.747789238,
+            "upper_bound": 14294958.899760166
+          },
+          "point_estimate": 14050053.913763067,
+          "standard_error": 100955.05620680563
+        }
+      },
+      "samples_ns": {
+        "sampling_mode": "Linear",
+        "iters": [
+          2.0,
+          4.0,
+          6.0,
+          8.0,
+          10.0,
+          12.0,
+          14.0,
+          16.0,
+          18.0,
+          20.0,
+          22.0,
+          24.0,
+          26.0,
+          28.0,
+          30.0,
+          32.0,
+          34.0,
+          36.0,
+          38.0,
+          40.0
+        ],
+        "times": [
+          28437025.0,
+          54948220.0,
+          83173955.0,
+          117618053.0,
+          156623455.0,
+          167981693.0,
+          212722670.0,
+          263090766.0,
+          256413876.0,
+          276686550.0,
+          306845383.0,
+          332462557.0,
+          364964579.0,
+          412863385.0,
+          416039923.0,
+          443719852.0,
+          473693623.0,
+          501414721.0,
+          527313932.0,
+          550139236.0
+        ]
+      }
+    }
+  ]
+}

@@ -101,3 +101,45 @@ fn retained_strings_keep_their_source_generation_after_publication() {
     assert!(categories.contains("compat"));
     assert!(snapshot.lookup_exists("203.0.113.7".parse().unwrap()));
 }
+
+#[test]
+fn reader_only_parallel_scan_retains_borrows_without_derive_or_send_records() {
+    use std::num::NonZeroUsize;
+    use std::sync::Mutex;
+    // PhantomData<Rc<()>> proves decoded records need neither Send nor Sync.
+    struct LocalCategory<'a>(&'a str, std::marker::PhantomData<std::rc::Rc<()>>);
+    impl<'a> MmdbDecode<'a> for LocalCategory<'a> {
+        fn decode(value: &ValueRef<'a>) -> libmaxminddb_rs::Result<Self> {
+            Ok(Self(Category::decode(value)?.0, std::marker::PhantomData))
+        }
+    }
+    let reader = Reader::from_bytes(DATABASE).unwrap();
+    for workers in [1, 2, 4] {
+        let records = Mutex::new(Vec::new());
+        reader
+            .visit_borrowed_records_parallel_with_workers(
+                NonZeroUsize::new(workers).unwrap(),
+                |network, category: LocalCategory<'_>| {
+                    records.lock().unwrap().push((network, category.0));
+                    Ok(())
+                },
+            )
+            .unwrap();
+        let records = records.into_inner().unwrap();
+        assert!(records.iter().any(|(_, category)| *category == "compat"));
+        for (network, category) in records {
+            assert_eq!(
+                reader.lookup_value(network.addr()).unwrap().get("category"),
+                Some(&ValueRef::Utf8(category))
+            );
+        }
+    }
+    let count = std::sync::atomic::AtomicUsize::new(0);
+    reader
+        .visit_borrowed_records_parallel(|_, _: Category<'_>| {
+            count.fetch_add(1, std::sync::atomic::Ordering::Relaxed);
+            Ok(())
+        })
+        .unwrap();
+    assert!(count.into_inner() > 0);
+}
