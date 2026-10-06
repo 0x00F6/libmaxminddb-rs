@@ -186,3 +186,12 @@ required-features = ["reader", "writer"]
 [[example]]
 name = "editor_merge"
 required-features = ["reader", "writer", "derive"]
+
+[[example]]
+name = "unique_fields_scan_records"
+required-features = ["reader", "writer", "derive"]
+
+[[bench]]
+name = "record_scan"
+harness = false
+required-features = ["reader", "writer", "derive"]

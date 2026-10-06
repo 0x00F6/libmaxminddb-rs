@@ -466,6 +466,26 @@ Changes in these areas deserve extra review:
   readers succeed. Dataset/workload SHA-256 and protocol identify compatible result groups.
 
 
+## Full database scans
+
+- `Reader::visit_records` and `Reader::visit_borrowed_records` belong exclusively
+  to the `reader` feature. Do not add a writer or derive dependency to either API.
+- Share checked range traversal through `visit_record_offsets`. Keep lookup
+  acceleration and prepared-tree layout independent of this control-plane scan.
+- Scan stored leaf ranges rather than IP addresses. Skip no-data pointers;
+  normalize only IPv4 networks below `::/96`. Do not infer writer insertion
+  boundaries or silently deduplicate different networks with the same payload.
+- Borrow strings and bytes from the reader. Generic ValueRef containers,
+  caller-owned fields and inventory collections may allocate; document that
+  boundary instead of describing the full inventory as allocation-free.
+- Reject ancestor cycles and internal nodes after 32/128 address bits. Bound
+  total range expansion to `256 * (node_count + 1)` entries, with a saturating
+  budget. On any failure, collected results are partial and must not be
+  published as a complete inventory.
+- The `record-scan-v1` benchmark verifies identical record counts/checksums
+  before timing; fixture generation/opening and allocator samples are outside
+  Criterion timing. Compare generic and typed scans on the same borrowed input.
+
 ## Atomic reader publication
 
 - `ReloadableReader` uses `arc-swap` 1.9.2 or newer under the reader feature.

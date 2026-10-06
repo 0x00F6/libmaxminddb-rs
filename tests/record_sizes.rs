@@ -156,6 +156,16 @@ fn check_db(base: &[u8], expected: &[(&str, Option<&str>)], miss: &[&str]) {
         };
         let reader = Reader::from_bytes(&bytes).unwrap();
         assert_eq!(reader.metadata().record_size, record_size);
+        let mut scanned = 0;
+        reader
+            .visit_records(|network, value| {
+                assert_eq!(reader.lookup_value(network.addr())?, value);
+                assert_eq!(reader.lookup_value(network.broadcast())?, value);
+                scanned += 1;
+                Ok(())
+            })
+            .unwrap();
+        assert!(scanned > 0);
         for (ip, want) in expected {
             assert_eq!(
                 &name_of(&reader, ip).unwrap(),

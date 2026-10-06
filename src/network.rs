@@ -1,4 +1,4 @@
 //! Network types.
 
-/// Network type accepted by the writer.
+/// CIDR network accepted by the writer and returned by reader scans.
 pub type IpNetwork = ipnet::IpNet;

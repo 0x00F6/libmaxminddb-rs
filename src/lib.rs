@@ -44,6 +44,11 @@
 //! [`Reader::lookup_borrowed_opt`] returns `None` for both misses and decode
 //! failures.
 //!
+//! [`Reader::visit_records`] scans stored network ranges without enumerating
+//! IP addresses; [`Reader::visit_borrowed_records`] uses the same checked
+//! traversal and decodes directly into borrowed user records. Both require
+//! only the reader feature and retain this reader as the owner of source bytes.
+//!
 //! # Cargo features
 //!
 //! - `reader`: search and decode MMDB files, including mmap support.

@@ -20,6 +20,7 @@ This directory provides practical, self-contained examples demonstrating how to 
 | **[`geolite2_country.rs`](geolite2_country.rs)** | Downloads GeoLite2 Country when needed and performs a borrowed typed lookup. | `Reader::open`, `lookup_borrowed`, `MmdbDecode` |
 | **[`geolite2_city.rs`](geolite2_city.rs)** | Downloads GeoLite2 City when needed and prints a borrowed city record. | `Reader::open`, `lookup_borrowed`, `MmdbDecode` |
 | **[`geolite2_asn.rs`](geolite2_asn.rs)** | Downloads GeoLite2 ASN under a distinct filename and performs a borrowed ASN lookup. | `Reader::open`, `lookup_borrowed`, `MmdbDecode` |
+| **[`unique_fields_scan_records.rs`](unique_fields_scan_records.rs)** | Build an in-memory IPv4/IPv6 database with DeepMerge and assert generic/borrowed scan results. | `Writer`, `MergeStrategy::DeepMerge`, `visit_records`, `visit_borrowed_records` |
 | **[`deep_merge.rs`](deep_merge.rs)** | Multi-source dataset enrichment with recursive deep merge on overlapping subnets. | `MergeStrategy::DeepMerge`, `Writer::insert` |
 | **[`generate_compat_db.rs`](generate_compat_db.rs)** | Generating standard MMDB fixtures verified across other MMDB language implementations. | `Writer::insert`, `serde_json::json!` |
 
@@ -98,4 +99,24 @@ cargo run --example deep_merge
 ### 10. Generate Compatibility Fixture
 ```bash
 cargo run --example generate_compat_db -- target/compat.mmdb
+```
+
+### 11. Build, Deep-Merge and Scan a Database
+
+The example constructs an in-memory database for three synthetic IPv4/IPv6
+addresses. Assertions verify recursive map merging, array concatenation with
+duplicates, scalar replacement, exact scanned networks and unique file/category
+inventories. The reader uses only the writer's output; the generic scan also
+checks agreement with ordinary lookups. Requires `reader,writer,derive`.
+
+```bash
+cargo run --no-default-features --features reader,writer,derive \
+  --example unique_fields_scan_records
+```
+
+Run the example's merge, borrowing and invalid-schema regression tests:
+
+```bash
+cargo test --no-default-features --features reader,writer,derive \
+  --example unique_fields_scan_records
 ```

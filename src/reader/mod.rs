@@ -361,14 +361,122 @@ impl<'a> Reader<'a> {
         })
     }
 
-    /// Visits every explicit network/value pair without cloning source strings or bytes.
+    /// Visits every reachable network and its decoded value in address order.
     ///
-    /// This is primarily used by the copy-on-write editor. The callback receives
-    /// a borrowed value valid for the duration of the call.
-    #[cfg(feature = "writer")]
-    pub(crate) fn visit_records(
+    /// Only the `reader` feature is required. This walks stored CIDR ranges,
+    /// not individual IP addresses, and skips no-data branches. IPv4 networks
+    /// below `::/96` in an IPv6 database are returned as IPv4 networks; other
+    /// IPv6 ranges keep their stored address family. These are the ranges
+    /// exported by the tree, not necessarily the original writer insertions.
+    ///
+    /// Strings and bytes borrow this reader and may be retained after the
+    /// callback. Generic maps and arrays allocate their container vectors.
+    /// Equal payloads referenced by several ranges are visited for each range;
+    /// callers collecting unique fields should deduplicate those fields.
+    /// For schema-directed decoding, use [`Self::visit_borrowed_records`].
+    ///
+    /// # Errors
+    ///
+    /// The first traversal, decoding or callback error stops the scan. Earlier
+    /// callbacks are not rolled back, so publish collected results only after
+    /// success. Cycles and nodes beyond the address width are rejected. To bound
+    /// expansion of shared subtrees, a scan allows at most
+    /// `256 * (node_count + 1)` tree entries before returning
+    /// [`Error::ResourceLimit`]. Existing value-decoding limits also apply.
+    ///
+    /// # Examples
+    ///
+    /// ```rust
+    /// use libmaxminddb_rs::{Reader, ValueRef};
+    /// use std::collections::BTreeSet;
+    ///
+    /// # fn main() -> Result<(), libmaxminddb_rs::Error> {
+    /// let bytes = include_bytes!(concat!(env!("CARGO_MANIFEST_DIR"), "/tests/fixtures/doc.mmdb"));
+    /// let reader = Reader::from_bytes(bytes)?;
+    /// let mut categories = BTreeSet::new();
+    /// reader.visit_records(|_network, value| {
+    ///     if let Some(ValueRef::Utf8(category)) = value.get("category") {
+    ///         categories.insert(*category);
+    ///     }
+    ///     Ok(())
+    /// })?;
+    /// assert!(categories.contains("compat"));
+    /// # Ok(())
+    /// # }
+    /// ```
+    pub fn visit_records<'s>(
+        &'s self,
+        mut visitor: impl FnMut(crate::IpNetwork, ValueRef<'s>) -> Result<()>,
+    ) -> Result<()> {
+        let decoder = Decoder::new(
+            self.source.bytes(),
+            self.data_section_start,
+            self.metadata_marker,
+        );
+        self.visit_record_offsets(|network, offset| {
+            let (value, _) = decoder.decode_at(offset)?;
+            visitor(network, value)
+        })
+    }
+
+    /// Visits every reachable network using schema-directed borrowed decoding.
+    ///
+    /// This has the same ordering, address-family rules, traversal limits and
+    /// error behavior as [`Self::visit_records`], but decodes directly into `T`
+    /// through [`MmdbDecode`]. Borrowed strings and bytes are not copied.
+    /// Derived records containing only borrowed scalars do not allocate generic
+    /// map/array containers; owning fields such as `Vec` or `String` still
+    /// allocate. A manual `MmdbDecode` implementation may use the generic
+    /// decoder through the trait's default implementation.
+    ///
+    /// This method requires only `reader`. Deriving `MmdbDecode` is optional
+    /// and additionally requires `derive`.
+    ///
+    /// # Examples
+    ///
+    /// ```rust
+    /// # #[cfg(feature = "derive")]
+    /// # fn main() -> Result<(), libmaxminddb_rs::Error> {
+    /// use libmaxminddb_rs::{MmdbDecode, Reader};
+    /// use std::collections::BTreeSet;
+    ///
+    /// #[derive(MmdbDecode)]
+    /// struct Record<'a> { category: &'a str }
+    ///
+    /// let bytes = include_bytes!(concat!(env!("CARGO_MANIFEST_DIR"), "/tests/fixtures/doc.mmdb"));
+    /// let reader = Reader::from_bytes(bytes)?;
+    /// let mut categories = BTreeSet::new();
+    /// reader.visit_borrowed_records(|_network, record: Record<'_>| {
+    ///     categories.insert(record.category);
+    ///     Ok(())
+    /// })?;
+    /// assert!(categories.contains("compat"));
+    /// # Ok(())
+    /// # }
+    /// # #[cfg(not(feature = "derive"))] fn main() {}
+    /// ```
+    pub fn visit_borrowed_records<'s, T>(
+        &'s self,
+        mut visitor: impl FnMut(crate::IpNetwork, T) -> Result<()>,
+    ) -> Result<()>
+    where
+        T: MmdbDecode<'s>,
+    {
+        self.visit_record_offsets(|network, offset| {
+            let mut decoder = RawDecoder::new(
+                self.source.bytes(),
+                self.data_section_start,
+                self.metadata_marker,
+                offset,
+            );
+            visitor(network, T::decode_raw(&mut decoder)?)
+        })
+    }
+
+    /// Shares checked traversal between generic and schema-directed scans.
+    fn visit_record_offsets(
         &self,
-        mut visitor: impl FnMut(crate::IpNetwork, ValueRef<'_>) -> Result<()>,
+        mut visitor: impl FnMut(crate::IpNetwork, usize) -> Result<()>,
     ) -> Result<()> {
         use std::net::{IpAddr, Ipv4Addr, Ipv6Addr};
 
@@ -377,45 +485,57 @@ impl<'a> Reader<'a> {
         } else {
             128_u8
         };
-        let mut stack = Vec::with_capacity(256);
-        stack.push((0_u64, 0_u128, 0_u8));
+        // At most one pending sibling per address bit plus the current node.
+        // A fixed stack avoids heap allocation without changing decoded values.
+        let mut stack = [(0_u64, 0_u128, 0_u8); 129];
+        let mut stack_len = 1;
+        let mut ancestors = [0_u64; 128];
+        let mut remaining = self
+            .metadata
+            .node_count
+            .saturating_add(1)
+            .saturating_mul(256);
 
-        while let Some((node, prefix, depth)) = stack.pop() {
+        while stack_len != 0 {
+            stack_len -= 1;
+            let (node, prefix, depth) = stack[stack_len];
+            if remaining == 0 {
+                return Err(Error::ResourceLimit("MMDB scan tree-entry budget exceeded"));
+            }
+            remaining -= 1;
             if node >= self.metadata.node_count {
                 if node == self.metadata.node_count {
                     continue;
                 }
                 let offset = self.record_to_file_offset(node)?;
-                let decoder = Decoder::new(
-                    self.source.bytes(),
-                    self.data_section_start,
-                    self.metadata_marker,
-                );
-                let (value, _) = decoder.decode_at(offset)?;
                 let network = if bits == 32 {
-                    let address = Ipv4Addr::from(prefix as u32);
-                    crate::IpNetwork::new(IpAddr::V4(address), depth)
-                        .map_err(|_| Error::InvalidDatabase("invalid exported IPv4 prefix"))?
+                    crate::IpNetwork::new(IpAddr::V4(Ipv4Addr::from(prefix as u32)), depth)
                 } else if depth >= 96 && prefix >> 32 == 0 {
-                    let address = Ipv4Addr::from(prefix as u32);
-                    crate::IpNetwork::new(IpAddr::V4(address), depth - 96)
-                        .map_err(|_| Error::InvalidDatabase("invalid exported IPv4 prefix"))?
+                    crate::IpNetwork::new(IpAddr::V4(Ipv4Addr::from(prefix as u32)), depth - 96)
                 } else {
-                    let address = Ipv6Addr::from(prefix);
-                    crate::IpNetwork::new(IpAddr::V6(address), depth)
-                        .map_err(|_| Error::InvalidDatabase("invalid exported IPv6 prefix"))?
-                };
-                visitor(network, value)?;
+                    crate::IpNetwork::new(IpAddr::V6(Ipv6Addr::from(prefix)), depth)
+                }
+                .map_err(|_| Error::InvalidDatabase("invalid scanned network prefix"))?;
+                visitor(network, offset)?;
                 continue;
+            }
+            if ancestors[..usize::from(depth)].contains(&node) {
+                return Err(Error::InvalidDatabase("cyclic search tree"));
             }
             if depth >= bits {
-                continue;
+                return Err(Error::InvalidDatabase("search tree exceeds address width"));
             }
+            // DFS preserves the active ancestor prefix when a right sibling is
+            // popped. Descendant entries are overwritten as the next branch grows.
+            ancestors[usize::from(depth)] = node;
             let left = self.read_record(node, 0)?;
             let right = self.read_record(node, 1)?;
             let shift = u32::from(bits - depth - 1);
-            stack.push((right, prefix | (1_u128 << shift), depth + 1));
-            stack.push((left, prefix, depth + 1));
+            // Expanding an internal node is allowed only before bit 32/128,
+            // so stack_len + 1 remains below the 129-entry capacity.
+            stack[stack_len] = (right, prefix | (1_u128 << shift), depth + 1);
+            stack[stack_len + 1] = (left, prefix, depth + 1);
+            stack_len += 2;
         }
         Ok(())
     }
@@ -1091,6 +1211,75 @@ mod reader_tests {
             6,
             Some(0),
         )
+    }
+
+    #[test]
+    fn scan_rejects_cycles_before_expanding_repeated_branches() {
+        for version in [4, 6] {
+            let reader =
+                crafted_reader(24, 1, node_stream(24, &[(0, 0)]), vec![], version, Some(0));
+            let mut calls = 0;
+            let result = reader.visit_records(|_, _| {
+                calls += 1;
+                Ok(())
+            });
+            assert!(matches!(
+                result,
+                Err(Error::InvalidDatabase("cyclic search tree"))
+            ));
+            assert_eq!(calls, 0);
+        }
+    }
+
+    #[test]
+    fn scan_rejects_nodes_beyond_the_address_width() {
+        for (version, bits) in [(4, 32), (6, 128)] {
+            let count = bits + 1;
+            let nodes: Vec<_> = (0..count).map(|n| (n + 1, count)).collect();
+            let reader =
+                crafted_reader(24, count, node_stream(24, &nodes), vec![], version, Some(0));
+            assert!(matches!(
+                reader.visit_records(|_, _| Ok(())),
+                Err(Error::InvalidDatabase("search tree exceeds address width"))
+            ));
+        }
+    }
+
+    #[test]
+    fn scan_allows_shared_subtrees_but_bounds_exponential_expansion() {
+        for layers in [3, 20] {
+            let pointer = layers + 16;
+            let nodes: Vec<_> = (0..layers)
+                .map(|n| {
+                    let next = if n + 1 < layers { n + 1 } else { pointer };
+                    (next, next)
+                })
+                .collect();
+            let reader = crafted_reader(
+                24,
+                layers,
+                node_stream(24, &nodes),
+                vec![0x42, b'a', b'b'],
+                4,
+                None,
+            );
+            let mut calls = 0;
+            let result = reader.visit_records(|_, value| {
+                assert_eq!(value, ValueRef::Utf8("ab"));
+                calls += 1;
+                Ok(())
+            });
+            if layers == 3 {
+                result.unwrap();
+                assert_eq!(calls, 8);
+            } else {
+                assert!(matches!(
+                    result,
+                    Err(Error::ResourceLimit("MMDB scan tree-entry budget exceeded"))
+                ));
+                assert!(calls <= 256 * (layers + 1));
+            }
+        }
     }
 
     fn ip(s: &str) -> IpAddr {

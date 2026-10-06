@@ -783,7 +783,8 @@ pub fn run_large_sizes_suite() -> Result<(), String> {
     fs::rename(pending, &*RESULTS_PATH).map_err(|e| e.to_string())
 }
 
-fn prepare_ipv6_absent_fixture() -> Result<std::path::PathBuf, String> {
+/// Generates and verifies the million-route IPv6 absent workload before timing.
+pub fn prepare_ipv6_absent_fixture() -> Result<std::path::PathBuf, String> {
     let dir = crate::config::DATA_DIR.join("ipv6-absent-v1");
     // Cargo checks freshness; always regenerate and verify outside benchmark timers.
     crate::workloads::run_command(

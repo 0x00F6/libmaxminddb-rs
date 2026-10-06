@@ -273,6 +273,80 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 }
 ```
 
+## Scan all stored network ranges
+
+`Reader::visit_records` exposes a complete, checked network/value scan with the
+`reader` feature alone. `Reader::visit_borrowed_records` decodes directly into
+`MmdbDecode` types and avoids generic map/array containers for borrowed scalar
+fields. Deriving those types additionally requires `derive`; handwritten trait
+implementations do not.
+
+Build a small synthetic FireHOL-style database, deep-merge records for three
+IPv4/IPv6 addresses, and scan its unique files/categories with assertions
+(requires `reader`, `writer` and `derive`):
+
+```rust
+use libmaxminddb_rs::{MergeStrategy, MetadataBuilder, MmdbDecode, Reader, Writer};
+use serde_json::json;
+use std::collections::BTreeSet;
+
+#[derive(MmdbDecode)]
+struct Record<'a> {
+    files: Vec<&'a str>,
+    categories: Vec<&'a str>,
+}
+
+fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let metadata = MetadataBuilder::new().ip_version(6).build()?;
+    let mut writer = Writer::with_metadata(metadata).merge_strategy(MergeStrategy::DeepMerge);
+    let networks = [
+        "192.0.2.1/32".parse()?,
+        "198.51.100.42/32".parse()?,
+        "2001:db8::1/128".parse()?,
+    ];
+
+    for network in networks {
+        writer.insert(
+            network,
+            &json!({"files": ["base.ipset"], "categories": ["other"]}),
+        )?;
+        writer.insert(
+            network,
+            &json!({"files": ["malware.ipset"], "categories": ["malware", "other"]}),
+        )?;
+    }
+
+    let bytes = writer.finish()?;
+    let reader = Reader::from_bytes(&bytes)?;
+    let mut seen = BTreeSet::new();
+    let mut files = BTreeSet::new();
+    let mut categories = BTreeSet::new();
+
+    reader.visit_borrowed_records(|network, record: Record<'_>| {
+        assert_eq!(record.files, ["base.ipset", "malware.ipset"]);
+        assert_eq!(record.categories, ["other", "malware", "other"]);
+        assert!(seen.insert(network));
+        files.extend(record.files);
+        categories.extend(record.categories);
+        Ok(())
+    })?;
+
+    assert_eq!(seen, BTreeSet::from(networks));
+    assert_eq!(files, BTreeSet::from(["base.ipset", "malware.ipset"]));
+    assert_eq!(categories, BTreeSet::from(["malware", "other"]));
+    println!("Files: {files:?}");
+    println!("Categories: {categories:?}");
+    Ok(())
+}
+```
+
+Run [the complete example](https://github.com/0x00F6/libmaxminddb-rs/blob/main/examples/unique_fields_scan_records.rs) with `cargo run --example unique_fields_scan_records`.
+It builds and scans its own in-memory database. Strings borrow the reader;
+containers and database construction allocate.
+
+Scans visit stored ranges and stop on errors. See [scan details](https://github.com/0x00F6/libmaxminddb-rs/blob/main/docs/record-scan.md) for
+feature requirements, safety limits and benchmarks.
+
 ## 🔄 Hot In-Memory Database Updates
 
 `Editor::from_reader` shares an existing reader and stages updates or deletions.
