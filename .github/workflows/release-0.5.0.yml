@@ -1,0 +1,93 @@
+name: Release 0.5.0
+
+on:
+  workflow_run:
+    workflows: [CI]
+    branches: [main]
+    types: [completed]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release-0.5.0
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    if: >-
+      github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.event == 'push' &&
+      github.event.workflow_run.head_repository.full_name == github.repository
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.workflow_run.head_sha }}
+          fetch-depth: 0
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: '1.98.1'
+      - uses: Swatinem/rust-cache@v2
+      - name: Check release eligibility
+        id: eligibility
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          release_version=$(python3 - <<'PY'
+          import tomllib
+          from pathlib import Path
+          versions = [tomllib.loads(Path(path).read_text())['package']['version']
+                      for path in ('Cargo.toml', 'derive/Cargo.toml')]
+          assert versions[0] == versions[1], 'Crate versions must match'
+          print(versions[0])
+          PY
+          )
+          if [[ "$release_version" != '0.5.0' ]]; then
+            echo 'publish=false' >> "$GITHUB_OUTPUT"
+            echo "Skipping Release 0.5.0: current version is $release_version"
+            exit 0
+          fi
+          test "$(git ls-remote origin refs/heads/main | cut -f1)" = "$(git rev-parse HEAD)"
+          if gh release view v0.5.0 --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            echo 'publish=false' >> "$GITHUB_OUTPUT"
+          else
+            echo 'publish=true' >> "$GITHUB_OUTPUT"
+          fi
+      - name: Publish derive then main crate
+        if: steps.eligibility.outputs.publish == 'true'
+        env:
+          CARGO_REGISTRY_TOKEN: ${{ secrets.CARGO_REGISTRY_TOKEN }}
+        run: |
+          set -euo pipefail
+          test -n "$CARGO_REGISTRY_TOKEN" || { echo 'CARGO_REGISTRY_TOKEN is not configured'; exit 1; }
+          # Cargo handles registry access and confirms each uploaded version.
+          # A rerun can resume after one crate was successfully published.
+          for crate in libmaxminddb-rs-derive libmaxminddb-rs; do
+            if output=$(cargo publish --locked --package "$crate" 2>&1); then
+              printf '%s\n' "$output"
+            elif [[ "$output" == *'already exists on crates.io'* ]]; then
+              echo "$crate 0.5.0 is already published"
+            else
+              printf '%s\n' "$output" >&2
+              exit 1
+            fi
+          done
+      - name: Create tag and GitHub release
+        if: steps.eligibility.outputs.publish == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          if git rev-parse --verify refs/tags/v0.5.0 >/dev/null 2>&1; then
+            test "$(git rev-parse 'v0.5.0^{commit}')" = "$(git rev-parse HEAD)"
+          else
+            git tag -a v0.5.0 -m 'Release v0.5.0'
+            git push origin refs/tags/v0.5.0
+          fi
+          gh release create v0.5.0 --repo "$GITHUB_REPOSITORY" --verify-tag \
+            --title 'v0.5.0 — Parallel borrowed record scans' \
+            --notes-file .github/release-notes-0.5.0.md

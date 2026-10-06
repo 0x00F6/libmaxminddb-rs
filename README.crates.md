@@ -6,7 +6,7 @@ A pure Rust reader and writer for MaxMind DB (MMDB) v2 files. Read IPv4 and IPv6
 
 ```toml
 [dependencies]
-libmaxminddb-rs = "0.4.0"
+libmaxminddb-rs = "0.5.0"
 ```
 
 Default features include the reader, writer, derive macros, SIMD ASCII scanning, and the prepared search tree. For a smaller reader-only build, use `default-features = false` with `features = ["reader", "derive"]`.
@@ -367,7 +367,7 @@ per-record allocations. Prefer worker-local accumulation for throughput.
 Two synthetic IPv4/IPv6 benchmark passes on an 8-CPU Xeon VM measured
 **3.26–3.41x faster scans at 100k ranges** and **4.14–4.26x at 1M ranges**,
 including thread setup. Gains depend on the schema and callback. See
-[scan details](https://github.com/0x00F6/libmaxminddb-rs/blob/feature/parallel-borrowed-record-scan/docs/record-scan.md)
+[scan details](https://github.com/0x00F6/libmaxminddb-rs/blob/v0.5.0/docs/record-scan.md)
 for requirements, safety limits, full results and the small sequential
 generic-IPv6 tradeoff.
 
