@@ -4,6 +4,8 @@ All notable changes to this project are documented here. This project follows [S
 
 ## [Unreleased]
 
+## [0.4.0] - 2026-10-06
+
 - Exposed `Reader::visit_records` with the reader feature alone for checked,
   streaming scans of reachable network/value pairs.
 - Added `Reader::visit_borrowed_records` for schema-directed borrowed scans,

@@ -35,12 +35,20 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
-          python - <<'PY'
+          release_version=$(python3 - <<'PY'
           import tomllib
           from pathlib import Path
-          for path in ('Cargo.toml', 'derive/Cargo.toml'):
-              assert tomllib.loads(Path(path).read_text())['package']['version'] == '0.3.2', path
+          versions = [tomllib.loads(Path(path).read_text())['package']['version']
+                      for path in ('Cargo.toml', 'derive/Cargo.toml')]
+          assert versions[0] == versions[1], 'Crate versions must match'
+          print(versions[0])
           PY
+          )
+          if [[ "$release_version" != '0.3.2' ]]; then
+            echo 'publish=false' >> "$GITHUB_OUTPUT"
+            echo "Skipping Release 0.3.2: current version is $release_version"
+            exit 0
+          fi
           test "$(git ls-remote origin refs/heads/main | cut -f1)" = "$(git rev-parse HEAD)"
           if gh release view v0.3.2 --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
             echo 'publish=false' >> "$GITHUB_OUTPUT"

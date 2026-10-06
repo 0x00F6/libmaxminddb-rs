@@ -8,7 +8,7 @@
 //! traversal, data decoding, metadata, and serialization live in separate
 //! modules. The public entry points are re-exported at the crate root.
 //!
-//! Add `libmaxminddb-rs = "0.1"` to the `[dependencies]` section of `Cargo.toml`.
+//! Add `libmaxminddb-rs = "0.4.0"` to the `[dependencies]` section of `Cargo.toml`.
 //! See the repository README for benchmark methodology and complete examples.
 //!
 //! # Read a record
