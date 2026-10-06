@@ -2,6 +2,22 @@
 
 All notable changes to this project are documented here. This project follows [Semantic Versioning](https://semver.org/).
 
+## [Unreleased]
+
+- Exposed `Reader::visit_records` with the reader feature alone for checked,
+  streaming scans of reachable network/value pairs.
+- Added `Reader::visit_borrowed_records` for schema-directed borrowed scans,
+  retaining source strings without generic map/array materialization.
+- Reject cycles, over-deep trees and excessive DAG expansion during scans;
+  preserve callback errors, prefix semantics and decoder resource limits.
+- Added the self-contained `unique_fields_scan_records` DeepMerge writer/scan
+  example and matching README samples, with IPv4/IPv6 assertions, reader-only
+  API regression coverage, scan fuzzing and deterministic Criterion benchmarks.
+  The example reads only its writer's in-memory output and requires
+  `reader,writer,derive`; scan APIs remain available with `reader` alone.
+- Prepare the shared reader benchmark datasets before `make bench-performance`,
+  including verified million-route IPv6 misses, without requiring competitor tools.
+
 ## [0.3.1] - 2026-10-04
 
 - Fixed escaped Markdown code fences and inline code in the crates.io README.

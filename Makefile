@@ -31,7 +31,7 @@ echo -e "\033[0;90m└────┘└────┘└──────┘�
 endef
 
 .PHONY: help build build-release tests check coverage compatibility fuzz fmt fmt-check clippy audit doc doc-open \
-        bench-reader bench-writer bench-performance bench-compare bench-compare-docker bench-micro \
+        bench-reader bench-writer bench-scan bench-performance bench-compare bench-compare-docker bench-micro \
         flamegraph callgrind perf perf-tree upgrade-deps publish-check release clean --force
 
 # `##@ Emoji Section|ANSI-code` groups help entries; `target: ## text` documents them.
@@ -143,8 +143,15 @@ audit: ## 🔍 Check dependency advisories
 check: fmt-check clippy tests doc ## ✅ Run formatting, lint, tests and documentation checks
 
 ##@ 📈 Benchmark|95
-# Benchmark the reader with fixtures prepared by the comparison harness.
-bench-performance: ## ⚡ Benchmark reader and borrowed lookups
+# Measure full range scans and borrowed scalar decoding on identical fixtures.
+bench-scan: ## 🔎 Benchmark generic and borrowed full-database scans
+	$(CARGO) bench --bench record_scan
+
+# Prepare the same fixtures as the comparison harness without competitor tools.
+bench-performance: ## ⚡ Prepare fixtures and benchmark reader and borrowed lookups
+	@if [[ -z "$${MMDB_BENCH_DIR:-}" ]]; then \
+		$(CARGO) run --quiet --release --manifest-path $(SCRIPTS_MANIFEST) --bin generate_benchmark_workloads; \
+	fi
 	$(CARGO) bench --bench reader --bench lookup_borrowed
 
 # Run the locally measured cross-implementation benchmark harness.
